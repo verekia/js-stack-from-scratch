@@ -1,0 +1,7 @@
+- Install latest Node
+- If Node is already installed, install `nvm` (Node Version Manager), make `nvm` install and use the latest version of Node for you
+- Run `npm init` and answer the questions (`npm init -y` to skip all questions)
+- Create an `index.js` file containing `console.log('Hello world')`
+- Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print Hello world.
+- In `package.json`, add `"start": "node ."` in the `scripts` object
+- Run `npm start`. It should print `Hello world`. You can now only use `npm start` to run your program.
