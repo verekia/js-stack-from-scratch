@@ -7,7 +7,7 @@ class Dog {
   }
 
   bark() {
-    return `Wah wah, I am ${this.name}`
+    return `Wah wah, I am ${this.name}`;
   }
 }
 
@@ -21,7 +21,7 @@ In `src/index.js`, write the following:
 ```javascript
 const Dog = require('./dog');
 
-const toby = new Dog('Toby')
+const toby = new Dog('Toby');
 
 console.log(toby.bark());
 ```

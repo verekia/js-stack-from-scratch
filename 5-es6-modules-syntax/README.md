@@ -11,7 +11,7 @@ export default class {
   }
 
   bark() {
-    return `Wah wah, I am ${this.name}`
+    return `Wah wah, I am ${this.name}`;
   }
 }
 ```
@@ -21,7 +21,7 @@ You might now guess that the name 'Dog' used in the `import` in `index.js` is ac
 ```javascript
 import Cat from './dog';
 
-const toby = new Cat('Toby')
+const toby = new Cat('Toby');
 ```
 Obviously, most of the time you will use the same name as the class / module you're importing.
 A case where you don't do that is how we `const babel = require('gulp-babel')` in our Gulp file.

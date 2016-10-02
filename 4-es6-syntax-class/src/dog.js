@@ -5,7 +5,7 @@ class Dog {
   }
 
   bark() {
-    return `Wah wah, I am ${this.name}`
+    return `Wah wah, I am ${this.name}`;
   }
 }
 
