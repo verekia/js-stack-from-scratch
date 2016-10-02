@@ -1,5 +1,6 @@
 - Install latest Node
 - If Node is already installed, install `nvm` (Node Version Manager), make `nvm` install and use the latest version of Node for you
+- Create a new folder to work in, and `cd` in it.
 - Run `npm init` and answer the questions (`npm init -y` to skip all questions)
 - Create an `index.js` file containing `console.log('Hello world')`
 - Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print Hello world.
