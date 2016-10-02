@@ -1,4 +1,4 @@
-- Create a `static` folder at the root of your project, and add the following `index.html` file to it:
+- Create a `dist` folder at the root of your project, and add the following `index.html` file to it:
 
 ```html
 <!doctype html>
