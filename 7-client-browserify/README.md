@@ -53,6 +53,8 @@ gulp.task('build-client', ['lint'], () =>
 ```
 Feel free to look into each one of these package's documentation for further information.
 
+We also renamed the `build` Gulp task into `build-server` for clarity.
+
 Let's modify the `npm start` script in `package.json` to the following: `"start": "gulp build-client"`. We don't need to run `node .` anymore, since we will open `index.html` to test our project.
 
 - Run `npm start`, open `index.html`, and you should see "Wah wah, I am Browser Toby".
