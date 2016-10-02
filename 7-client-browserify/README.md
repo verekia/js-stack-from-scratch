@@ -34,7 +34,7 @@ Add the following to your `package.json`, under `eslintConfig`:
 ```
 This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaning about undeclared variables.
 
-In order to use multiple files to develop, but serve only one JS file to the client app (saving expensive HTTP requests), we need to "bundle" our app into one file. Browserify is a tool and package that does this. Since we use ES6 syntax, we also want Browserify to compile our ES6 code into ES5 using Babel, which is done with another package called Babelify. We'll need a last package called `vinyl-source-stream` that can read file in a way that makes it possible for Gulp to understand. It's a bit messy to understand, but the following Gulp task should help visualize the general idea:
+In order to use multiple files to develop, but serve only one JS file to the client app (saving expensive HTTP requests), we need to "bundle" our app into one file. Browserify is a tool and package that does this. Since we use ES6 syntax, we also want Browserify to compile our ES6 code into ES5 using Babel, which is done with another package called Babelify. We'll need a last package called `vinyl-source-stream` that can read files in a way that makes it possible for Gulp to understand. It's a bit messy to understand, but the following Gulp task should help visualize the general idea:
 
 ```javascript
 const browserify = require('browserify');
