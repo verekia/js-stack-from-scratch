@@ -48,13 +48,15 @@ gulp.task('build', ['lint'], () => {
 
 ```javascript
 () => {
-  return 1
+  return 1;
 }
 ```
 When we could be using the following:
 ```javascript
 () => 1
 ```
+Because when a function only contains a return statement, you can ommit the curly braces, return statement, and semicolon in ES6.
+
 
 So let's update the Gulp file accordingly:
 ```javascript
