@@ -29,15 +29,13 @@ gulp.task('lint', () => {
   return gulp.src([
     'gulpfile.js',
     'src/**/*.js',
-    '!lib/**',
-    '!node_modules/**',
   ])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
 ```
-Here we tell Gulp that for this task, we want to include `gulpfile.js`, and files located under `src`, but exclude the ones in `lib` and `node_modules` for linting (using the `!` for exclusion).
+Here we tell Gulp that for this task, we want to include `gulpfile.js`, and the JS files located under `src`.
 
 Modify your `build` Gulp task by making the `lint` task a prerequisite to it. It's as simple as passing an array of prerequisite tasks to it, like so:
 ```javascript

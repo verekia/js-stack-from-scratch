@@ -66,8 +66,6 @@ gulp.task('lint', () =>
     'gulpfile.js',
     'src/**/*.js',
     'src/**/*.jsx', // Add this line
-    '!lib/**',
-    '!node_modules/**',
   ])
     .pipe(eslint())
     .pipe(eslint.format())
