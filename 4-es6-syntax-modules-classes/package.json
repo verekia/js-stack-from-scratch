@@ -1,0 +1,25 @@
+{
+  "name": "1-npm-and-package-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp build && node lib/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-preset-latest": "^6.16.0",
+    "color": "^0.11.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2"
+  }
+}
