@@ -4,3 +4,5 @@
 - Add `const Color = require('color');` in `index.js`
 - Use the package like this for instance: `const redHexa = Color({r: 255, g: 0, b: 0}).hexString();`
 - Print `redHexa`, it should show `#FF0000`
+
+- Create a `.gitignore` file and put `node_modules` in it.
