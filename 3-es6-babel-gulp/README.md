@@ -31,3 +31,5 @@ Gulp's API is very straightforward. It defines `gulp.task`s, that can reference 
 
 - In `package.json`, change your `start` script to: `"start": "gulp build && node lib/"`
 - Run `npm start` and it should print the color correctly.
+
+- Add `lib` to your `.gitignore`
