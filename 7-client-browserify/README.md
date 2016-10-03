@@ -62,3 +62,8 @@ Let's modify the `npm start` script in `package.json` to the following: `"start"
 - Run `npm start`, open `index.html`, and you should see "Wah wah, I am Browser Toby".
 
 - Add `dist/client-bundle.js` to your `.gitignore` file.
+
+
+Next section: [8 - React](/8-react)
+
+Back to the [previous section](/6-eslint) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

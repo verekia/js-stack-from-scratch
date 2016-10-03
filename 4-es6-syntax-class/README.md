@@ -36,4 +36,4 @@ As you can see, unlike the NPM-community-made package `color` that we used befor
 
 Next section: [5 - The ES6 modules syntax](/5-es6-modules-syntax)
 
-Back to the [previous section](/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

@@ -28,3 +28,8 @@ const toby = new Cat('Toby');
 Obviously, most of the time you will use the same name as the class / module you're importing.
 A case where you don't do that is how we `const babel = require('gulp-babel')` in our Gulp file.
 Note that in the Gulpfile, we use `require()` because Node does not support the ES6 module syntax. The latest version of Node support most of the ES6 features, but this one in particular isn't there yet.
+
+
+Next section: [6 - ESLint](/6-eslint)
+
+Back to the [previous section](/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
