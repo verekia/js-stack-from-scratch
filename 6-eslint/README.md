@@ -19,11 +19,11 @@ The `plugins` part is to tell ESLint that we use the ES6 import syntax.
 
 We'll create a Gulp task that runs ESLint for us. So we'll install the ESLint Gulp plugin as well:
 
-- Run `npm install --save gulp-eslint`
+- Run `npm install --save-dev gulp-eslint`
 
 Add the following task to your `gulpfile.js`:
 ```javascript
-const eslint = require('gulp-eslint')
+const eslint = require('gulp-eslint');
 
 // [...]
 
@@ -42,20 +42,33 @@ Here we tell Gulp that for this task, we want to include `gulpfile.js`, and the 
 Modify your `build` Gulp task by making the `lint` task a prerequisite to it. It's as simple as passing an array of prerequisite tasks to it, like so:
 ```javascript
 gulp.task('build', ['lint'], () => {
+  // ...
+});
 ```
 
-- Run `npm start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using console.log() in `index.js`. The gulpfile issues are because we are using the following code:
+- Run `npm start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using console.log() in `index.js`.
+
+One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.js`, at the very top, add:
+```javascript```
+/* eslint-disable import/no-extraneous-dependencies */
+```
+This way, ESLint won't apply the rule `import/no-extraneous-dependencies` in this file.
+
+Now we are left with the issue `Unexpected block statement surrounding arrow body (arrow-body-style)`. That's a great one. ESLint is telling us that there is a better way to write the following code:
 
 ```javascript
 () => {
   return 1;
 }
 ```
-When we could be using the following:
+
+It should be rewritten into:
+
 ```javascript
 () => 1
 ```
-Because when a function only contains a return statement, you can ommit the curly braces, return statement, and semicolon in ES6.
+
+Because when a function only contains a return statement, you can omit the curly braces, return statement, and semicolon in ES6.
 
 
 So let's update the Gulp file accordingly:
@@ -79,7 +92,7 @@ gulp.task('lint', () =>
 );
 ```
 
-The last warning left is about console.log(). Let's say that we want this console.log() to be valid in `index.js` instead of triggering a warning. In order to do so, we can add `/* eslint-disable no-console */` at the top of our `index.js` file.
+The last issue warning left is about console.log(). Let's say that we want this console.log() to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
 
 - Run `npm start` and we are now all clear again.
 
