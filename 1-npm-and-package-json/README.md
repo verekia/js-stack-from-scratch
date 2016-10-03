@@ -28,4 +28,4 @@ You want any version of Node > 6.5.0.
 
 Next section: [2 - Installing and using an NPM package](/2-packages)
 
-Back to the [table of contents](/README.md).
+Back to the [table of contents](https://github.com/verekia/modern-js-stack-training).
