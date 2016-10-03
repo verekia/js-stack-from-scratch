@@ -17,3 +17,5 @@ Congratulations, you installed and used an NPM package!
 - Run `npm uninstall --save color`
 
 **Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, etc). For `"devDependencies"`, we will use the `--save-dev` parameter instead of `--save`.
+
+Previous section: [1 - Node, NPM, and package.json](/1-npm-and-package-json)

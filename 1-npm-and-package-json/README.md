@@ -1,3 +1,5 @@
+# 1 - Node, NPM, and package.json
+
 In this section we will set up Node, NPM, and a basic `package.json` file.
 
 First, we need to install Node, which is not only used for back-end JavaScript, but all the tools we need to build a modern Front-End stack.
@@ -24,4 +26,4 @@ You want any version of Node > 6.5.0.
 
 - Run `npm start`. It should print `Hello world`. You can now only use `npm start` to run your program.
 
-[Next section: Installing and using an NPM package](/2-packages)
+Next section: [2 - Installing and using an NPM package](/2-packages)
