@@ -1,3 +1,5 @@
+# 5 - The ES6 modules syntax
+
 Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax).
 
 In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`.

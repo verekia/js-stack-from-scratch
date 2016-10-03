@@ -1,3 +1,5 @@
+# 8 - React
+
 We're now going to render our app using React.
 
 First, let's install React and ReactDOM:

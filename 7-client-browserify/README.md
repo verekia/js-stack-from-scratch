@@ -1,3 +1,5 @@
+# 7 - Client app with Browserify
+
 - Create a `dist` folder at the root of your project, and add the following `index.html` file to it:
 
 ```html

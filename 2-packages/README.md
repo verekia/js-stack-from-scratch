@@ -1,3 +1,5 @@
+# 2 - Installing and using an NPM package
+
 In this section we will install an NPM package.
 
 - Install the community-made package called `color` by running `npm install --save color`.
@@ -18,8 +20,7 @@ Congratulations, you installed and used an NPM package!
 
 **Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, etc). For `"devDependencies"`, we will use the `--save-dev` parameter instead of `--save`.
 
-Previous section: [1 - Node, NPM, and package.json](/1-npm-and-package-json)
 
 Next section: [3 - Setting up ES6 with Babel and Gulp](/3-es6-babel-gulp)
 
-Back to the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/1-npm-and-package-json) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

@@ -1,3 +1,5 @@
+# 9 - Webpack
+
 Webpack is a basically a combination of Gulp and Browserify that can bundle your client app in an optimized way. We're going to replace our Gulp `build-client` task by Webpack.
 
 - Delete your entire `build-client` task in `gulpfile.js` and the associated:

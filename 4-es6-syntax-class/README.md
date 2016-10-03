@@ -1,3 +1,5 @@
+# 4 - Using the ES6 syntax with a class
+
 - Create a new file, `src/dog.js`, containing the following ES6 class:
 
 ```javascript
