@@ -36,16 +36,14 @@ ReactDOM.render(<App dogBark={dogBark} />, document.querySelector('.app'));
 ```
 
 Since we use the JSX syntax here, we will need to tell Babel that it needs to transform it as well.
-Install the following Babel plugin:
-`npm install --save babel-plugin-transform-react-jsx` and change the `babel` entry in your `package.json` file like so:
+Install the React Babel preset, which will teach Babel how to process the JSX syntax:
+`npm install --save babel-preset-react` and change the `babel` entry in your `package.json` file like so:
 
 ```json
 "babel": {
   "presets": [
-    "latest"
-  ],
-  "plugins": [
-    "transform-react-jsx"
+    "latest",
+    "react"
   ]
 },
 ```
