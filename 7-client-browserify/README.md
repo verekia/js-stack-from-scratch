@@ -51,7 +51,7 @@ gulp.task('build-client', ['lint'], () =>
     .pipe(gulp.dest('dist'))
 );
 ```
-Feel free to look into each one of these package's documentation for further information.
+Feel free to look into each one of these package's documentation for further information. Don't worry about not understanding this part perfectly, it will be replaced by Webpack later, in section 9 of this tutorial.
 
 We also renamed the `build` Gulp task into `build-server` for clarity.
 

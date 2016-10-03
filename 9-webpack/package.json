@@ -18,7 +18,8 @@
   },
   "babel": {
     "presets": [
-      "latest"
+      "latest",
+      "react"
     ]
   },
   "keywords": [],
@@ -26,6 +27,7 @@
   "license": "ISC",
   "dependencies": {
     "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "color": "^0.11.3",
@@ -37,6 +39,9 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
-    "vinyl-source-stream": "^1.1.0"
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "vinyl-source-stream": "^1.1.0",
+    "webpack": "^1.13.2"
   }
 }

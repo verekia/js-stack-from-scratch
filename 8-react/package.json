@@ -26,8 +26,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel": "^6.5.2",
-    "babel-plugin-transform-react-jsx": "^6.8.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babelify": "^7.3.0",

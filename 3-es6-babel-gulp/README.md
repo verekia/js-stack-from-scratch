@@ -1,8 +1,7 @@
 We're now going to use ES6 syntax. Babel will compile ES6 files into ES5 files. To run Babel, we are going to use Gulp, a task runner. It is similar to the tasks located under `scripts` in `package.json`, but making your task is cleaner in a JS file than a JSON file, so we'll install Gulp, and the Babel plugin for Gulp too:
-- Run `npm install --save babel`
-- Run `npm install --save babel-preset-latest`
 - Run `npm install --save gulp`
 - Run `npm install --save gulp-babel`
+- Run `npm install --save babel-preset-latest`
 - In `package.json`, add a `babel` field for the babel configuration. Make it use the latest Babel preset like this:
 ```json
 "babel": {
