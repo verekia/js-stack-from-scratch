@@ -18,7 +18,7 @@ Code examples are available for each section, and you can run them all with `npm
 
 [6 - ESLint](/6-eslint)
 
-[7 - Client code with Browserify](/67-client-browserify)
+[7 - Client code with Browserify](/7-client-browserify)
 
 [8 - React](/8-react)
 
