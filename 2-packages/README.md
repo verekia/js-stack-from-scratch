@@ -8,7 +8,7 @@ Open `package.json` to see how `--save` automatically added `color` in  `depende
 
 A `node_modules` folder has also been created to store the package.
 
-- Create a `.gitignore` file and put `node_modules` and `npm-debug.log` in it.
+- Create a `.gitignore` file and put `node_modules` and `npm-debug.log` in it (and `git init` a new repo if you haven't done that yet).
 
 - Add `const Color = require('color');` in `index.js`
 - Use the package like this for instance: `const redHexa = Color({r: 255, g: 0, b: 0}).hexString();`

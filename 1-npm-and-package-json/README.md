@@ -20,11 +20,14 @@ You want any version of Node > 6.5.0.
 - Run `npm init` and answer the questions (`npm init -y` to skip all questions), to generate a `package.json` file automatically.
 - Create an `index.js` file containing `console.log('Hello world')`
 - Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print "Hello world".
+
+Running `node .` to execute our program is a bit too low-level. We are going to use an NPM script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `npm start`, even when our program gets more complicated.
+
 - In `package.json`, add `"start": "node ."` in the `scripts` object.
 
 `package.json` must be a valid JSON file, which means that you cannot have trailing commas. So be careful when editing manually your `package.json` file.
 
-- Run `npm start`. It should print `Hello world`. You can now only use `npm start` to run your program.
+- Run `npm start`. It should print `Hello world`.
 
 Next section: [2 - Installing and using an NPM package](/2-packages)
 
