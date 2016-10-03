@@ -4,7 +4,7 @@ Welcome to my modern JavaScript stack tutorial. This is a minimalistic and strai
 
 A lot of React tutorials completely skip the setup part, which makes newcomers build their learning on weak foundations. Instead of giving beginners a "black box" configuration, the approach I'm taking here is to teach the foundations in the simplest possible way, so you understand what happens in the entire stack of tools.
 
-Code examples are available for each section, and you can run them all with `npm start` (see section 1). I recommending writing everything from scratch yourself for a better understanding.
+Code examples are available for each section, and you can run them all with `npm start` (see section 1). I recommend writing everything from scratch yourself for a better understanding.
 
 [1 - Node, NPM, and package.json](/1-npm-and-package-json)
 
