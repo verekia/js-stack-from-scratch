@@ -13,7 +13,7 @@ We're now going to use ES6 syntax, which is a great improvement over the "old" E
 },
 ```
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Gulp and Babel will take care of creating it. Remove the previous `color`-related code, and replace it with a simple `console.log('Hello ES6');`.
+- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Gulp and Babel will take care of creating it. Remove the previous `color`-related code in `index.js`, and replace it with a simple `console.log('Hello ES6');`.
 
 - Create a `gulpfile.js` containing:
 
@@ -28,7 +28,7 @@ gulp.task('build', () => {
 });
 
 ```
-Gulp's API is very straightforward. It defines `gulp.task`s, that can reference `gulp.src` files, apply a chain of treatments to them (like `babel()` in our case) and outputs the new files to `gulp.dest`.
+Gulp's API is very straightforward. It defines `gulp.task`s, that can reference `gulp.src` files, applies a chain of treatments to them with `.pipe()` (like `babel()` in our case) and outputs the new files to `gulp.dest`. Refer to the [documentation](https://github.com/gulpjs/gulp) for a deeper understanding.
 
 - In `package.json`, change your `start` script to: `"start": "gulp build && node lib/"`
 - Run `npm start` and it should print "Hello ES6".
