@@ -86,6 +86,6 @@ The last warning left is about console.log(). Let's say that we want this consol
 **Note**: This section sets you up with ESLint in the console. It great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
 
 
-[7 - Client app with Browserify](/7-client-browserify)
+Next section: [7 - Client app with Browserify](/7-client-browserify)
 
 Back to the [previous section](/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

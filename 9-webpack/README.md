@@ -60,4 +60,4 @@ We need this file to `export` stuff. But since it is not a file processed by Bab
 - Run `npm start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should still display "The dog says: Wah wah, I am Browser Toby".
 
 
-Back to the [previous section](/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/8-react) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
