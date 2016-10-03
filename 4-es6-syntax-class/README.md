@@ -32,3 +32,8 @@ As you can see, unlike the NPM-community-made package `color` that we used befor
 - Run `npm start` and it should print 'Wah wah, I am Toby'.
 
 - Take a look at the code generated in `lib` to see how your compiled code looks like (`var` instead of `const` for instance).
+
+
+Next section: [5 - The ES6 modules syntax](/5-es6-modules-syntax)
+
+Back to the [previous section](/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
