@@ -24,4 +24,4 @@ You want any version of Node > 6.5.0.
 
 - Run `npm start`. It should print `Hello world`. You can now only use `npm start` to run your program.
 
-[Next section: Installing and using an NPM package](/2-packages/README.md)
+[Next section: Installing and using an NPM package](/2-packages)
