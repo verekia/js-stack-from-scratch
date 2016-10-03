@@ -36,7 +36,7 @@ Add the following to your `package.json`, under `eslintConfig`:
 ```
 This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaning about undeclared variables.
 
-In order to use multiple files to develop, but serve only one JS file to the client app (saving expensive HTTP requests), we need to "bundle" our app into one file. Browserify is a tool and package that does this. Since we use ES6 syntax, we also want Browserify to compile our ES6 code into ES5 using Babel, which is done with another package called Babelify. We'll need a last package called `vinyl-source-stream` that makes it possible for Gulp to understand what comes out from Babelify and name your bundle. It's a bit messy to understand, but the following Gulp task should help visualize the general idea:
+In order to use multiple files to develop, but serve only one JS file to the client app (saving expensive HTTP requests), we need to "bundle" our app into one file. Browserify is a tool and package that does this. Since we use ES6 syntax, we also want Browserify to compile our ES6 code into ES5 using Babel, which is done with another package called Babelify. We'll need a last package called `vinyl-source-stream` that makes it possible for Gulp to understand what comes out from Babelify and name your bundle. It's a bit difficult to understand, but the following Gulp task should help visualize the general idea:
 
 ```javascript
 const browserify = require('browserify');
@@ -54,6 +54,8 @@ gulp.task('build-client', ['lint'], () =>
 );
 ```
 Feel free to look into each one of these package's documentation for further information. Don't worry about not understanding this part perfectly, it will be replaced by Webpack later, in section 9 of this tutorial.
+
+- Don't forget to install the packages with: `npm install --save-dev browserify babelify vinyl-source-stream`
 
 We also renamed the `build` Gulp task into `build-server` for clarity.
 

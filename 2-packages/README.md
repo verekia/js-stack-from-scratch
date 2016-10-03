@@ -1,6 +1,6 @@
 # 2 - Installing and using an NPM package
 
-In this section we will install and use an NPM package.
+In this section we will install and use an NPM package. A "package" is simply a piece of code that someone else wrote, and that you can use in your own code. It can be anything. Here, we're going to try a package that helps you manipulate colors for instance.
 
 - Install the community-made package called `color` by running `npm install --save color`.
 

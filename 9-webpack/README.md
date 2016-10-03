@@ -31,7 +31,7 @@ gulp.task('lint', () =>
 
 We need to teach Webpack how to process ES6 files via Babel (just like we taught Gulp how to process ES6 files with `gulp-babel`). In Webpack, when you need to process files that are not plain old JavaScript, you use *loaders*. So let's install the Babel loader for Webpack:
 
-- Run `npm install --save babel-loader`
+- Run `npm install --save-dev babel-loader`
 
 - Write the following to your `webpack.config.js` file:
 ```javascript
@@ -53,7 +53,7 @@ module.exports = {
 ```
 
 Let's analyze this a bit:
-We need this file to `export` stuff. But since it is not a file processed by Babel, we cannot use the ES6 modules syntax, so we use `module.exports` instead. `entry` and `output` are pretty straightforward configuration parameters. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we use both .js files and .jsx files, we have the following regex: `/\.jsx?$/`.
+We need this file to `export` stuff for Webpack to read. But since it is not a file processed by Babel, we cannot use the ES6 modules syntax, so we use `module.exports` instead. `entry` and `output` are pretty straightforward configuration parameters. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we use both `.js` files and `.jsx` files, we have the following regex: `/\.jsx?$/`.
 
 - Replace the `start` script in `package.json` by `"start": "gulp lint && webpack"`.
 

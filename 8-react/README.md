@@ -28,20 +28,20 @@ const dogBark = new Dog('Browser Toby').bark();
 
 const App = props => (
   <div>
-    The dog says: {props.dogBark}
+    The dog says: {props.message}
   </div>
 );
 
 App.propTypes = {
-  dogBark: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
 };
 
-ReactDOM.render(<App dogBark={dogBark} />, document.querySelector('.app'));
+ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 ```
 
-Since we use the JSX syntax here, we will need to tell Babel that it needs to transform it as well.
+Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
 Install the React Babel preset, which will teach Babel how to process the JSX syntax:
-`npm install --save babel-preset-react` and change the `babel` entry in your `package.json` file like so:
+`npm install --save-dev babel-preset-react` and change the `babel` entry in your `package.json` file like so:
 
 ```json
 "babel": {
