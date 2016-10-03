@@ -8,7 +8,7 @@ First, let's install React and ReactDOM:
 
 These 2 packages go to our `"dependencies"` and not `"devDependencies"` because unlike build tools, the client bundle needs them in production.
 
-And create a container for our app in `dist/index.html`:
+Add a container for our app in `dist/index.html`:
 
 ```html
 <body>
