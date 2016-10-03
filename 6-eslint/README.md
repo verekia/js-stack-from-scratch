@@ -2,9 +2,9 @@
 
 We're going to lint our code to catch potential issues. ESLint is the linter of choice for ES6 code. Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
 
-- Run `npm install --save eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
+- Run `npm install --save-dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
 
-It will add all of these to your `package.json`, as usual.
+As you can see, you can install several packages in one command. It will add all of these to your `package.json`, as usual.
 
 In `package.json`, add an `eslintConfig` field like so:
 ```json
