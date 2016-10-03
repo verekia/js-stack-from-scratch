@@ -17,7 +17,6 @@
   "license": "ISC",
   "dependencies": {
     "babel-preset-latest": "^6.16.0",
-    "color": "^0.11.3",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2"
   }

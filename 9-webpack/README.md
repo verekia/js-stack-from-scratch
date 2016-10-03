@@ -6,7 +6,7 @@ const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream');
 ```
-
+- Run `npm uninstall --save-dev browserify babelify vinyl-source-stream`
 - Run `npm install --save webpack`
 
 - Create an empty `webpack.config.js` file

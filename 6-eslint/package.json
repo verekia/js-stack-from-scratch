@@ -23,7 +23,6 @@
   "license": "ISC",
   "dependencies": {
     "babel-preset-latest": "^6.16.0",
-    "color": "^0.11.3",
     "eslint": "^3.7.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.0",
