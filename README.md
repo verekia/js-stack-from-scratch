@@ -23,3 +23,5 @@ Code examples are available for each section, and you can run them all with `npm
 [8 - React](/8-react)
 
 [9 - Webpack](/9-webpack)
+
+[10 - Redux and Immutable](/10-redux-immutable)
