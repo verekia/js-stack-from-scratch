@@ -57,7 +57,17 @@ Feel free to look into each one of these package's documentation for further inf
 
 - Don't forget to install the packages with: `npm install --save-dev browserify babelify vinyl-source-stream`
 
-We also renamed the `build` Gulp task into `build-server` for clarity.
+Our previous Gulp task, `build`, transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we only need this task compile `server` and `shared`. So we'll rename it to `build-server` for clarity, and will adjust its compilation source to only include those folders. The new `build-client` task will take care of the `client` code:
+```javascript
+gulp.task('build-server', ['lint'], () =>
+  gulp.src([
+    'src/server/**/*.js',
+    'src/shared/**/*.js',
+  ])
+    .pipe(babel())
+    .pipe(gulp.dest('lib'))
+);
+```
 
 Let's modify the `npm start` script in `package.json` to the following: `"start": "gulp build-client"`. We don't need to run `node .` anymore, since we will open `index.html` to test our project.
 
