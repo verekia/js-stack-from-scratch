@@ -62,6 +62,4 @@ We need this file to `export` stuff for Webpack to read. But since it is not a f
 
 - Run `npm start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should still display "The dog says: Wah wah, I am Browser Toby".
 
-Next section: [10 - Redux and Immutable](/10-redux-immutable)
-
 Back to the [previous section](/8-react) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
