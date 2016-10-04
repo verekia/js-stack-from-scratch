@@ -92,7 +92,7 @@ gulp.task('lint', () =>
 );
 ```
 
-The last issue warning left is about console.log(). Let's say that we want this console.log() to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
+The last issue warning left is about `console.log()`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
 
 - Run `npm start` and we are now all clear again.
 
