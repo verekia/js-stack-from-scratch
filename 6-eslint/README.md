@@ -46,7 +46,7 @@ gulp.task('build', ['lint'], () => {
 });
 ```
 
-- Run `npm start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using console.log() in `index.js`.
+- Run `npm start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using `console.log()` in `index.js`.
 
 One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.js`, at the very top, add:
 ```javascript```
