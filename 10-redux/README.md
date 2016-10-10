@@ -6,7 +6,7 @@ In order to demonstrate how to use Redux in the simplest possible way, our app w
 
 We are going to need 2 packages in this part, `redux` and `react-redux`.
 
-- Run `npm install redux react-redux`.
+- Run `npm install --save redux react-redux`.
 
 Lets start by creating 2 folders: `src/client/actions` and `src/client/reducers`.
 
@@ -152,5 +152,7 @@ export default connect(mapStateToProps)(Message);
 `BarkButton` will hook up `Button` with the `makeBark` action and Redux's `dispatch` method, and `BarkMessage` will hook up the app state with `Message`. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
 
 - You can now run `npm start` and open `index.html`. You should see "The dog did not bark" and a button. When you click the button, the message should show "The dog barked".
+
+Next section: [11 - Immutable JS and Redux Actions](/11-immutable-redux-actions)
 
 Back to the [previous section](/9-webpack) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
