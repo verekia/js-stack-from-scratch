@@ -28,4 +28,4 @@ Code examples are available for each section, and you can run them all with `npm
 
 [11 - Immutable JS and Redux Improvements](/11-immutable-redux-improvements)
 
-Next: Testing, Redux and Immutable
+[12 - Testing with Mocha and Chai](/12-testing-mocha-chai)

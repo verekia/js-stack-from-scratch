@@ -95,4 +95,8 @@ export const makeBark = createAction(MAKE_BARK, () => true);
 
 `redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, just like the action we previously wrote, so integrating `redux-actions` is seamless if you follow this model.
 
+- Don't forget to run `npm install --save redux-actions`.
+
+Next section: [12 - Testing with Mocha and Chai](/12-testing-mocha-chai)
+
 Back to the [previous section](/10-redux) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
