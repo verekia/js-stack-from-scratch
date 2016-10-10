@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp lint && gulp test && webpack",
+    "start": "gulp test && webpack",
     "test": "gulp test"
   },
   "eslintConfig": {

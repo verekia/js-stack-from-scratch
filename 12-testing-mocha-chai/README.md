@@ -50,7 +50,7 @@ Our `makeBark` test is very explicit, and the description provided as a string i
 
 Alright, let's run this test!
 
-Just like regular code, we are going to need to transpile this test `state-test.js` from ES6 to ES5. This file also relies on code located under `src/client`, which is currently only built by Webpack. Remember how I made you split the Gulp `build` task into `build-server` and `build-client` back in [Chapter 7](/7-client-browserify)? We'll we're going to undo that! Our tests need the entire codebase to be available in `/lib`, so let's bring back the full `build` task instead of the more-specific `build-server` in `gulpfile.js`:
+Just like regular code, we are going to need to transpile this `state-test.js` from ES6 to ES5. This file also relies on code located under `src/client`, which is currently only built by Webpack. Remember how I made you split the Gulp `build` task into `build-server` and `build-client` back in [Chapter 7](/7-client-browserify)? We'll we're going to undo that! Our tests need the entire codebase to be available in `/lib`, so let's bring back the full `build` task instead of the more-specific `build-server` in `gulpfile.js`:
 
 ```javascript
 gulp.task('build', ['lint'], () =>
@@ -72,7 +72,7 @@ gulp.task('test', ['lint', 'build'], () =>
 
 - Run `npm install --save-dev gulp-mocha` of course.
 
-- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `npm test` to just run your tests. I personally like to run my tests every time I `npm start` to catch bugs early, so you can also replace your `start` script by `gulp lint && gulp test && webpack`.
+- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `npm test` to just run your tests. I personally like to run my tests every time I `npm start` to catch bugs early, so you can also replace your `start` script by `gulp test && webpack`.
 
 - Run `npm test` or `npm start`, and it should print the result for our test, hopefully green.
 
