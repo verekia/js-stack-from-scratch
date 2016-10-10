@@ -2,7 +2,7 @@
 
 In this chapter (which is the most difficult so far) we will be adding Redux to our application and will hook it up with React. Redux manages the state of your application. It is composed of a **store** which is a plain JavaScript object representing the state of your app, **actions** which are typically triggered by users, and **reducers** which can be seen as action handlers. Reducers affect your application state (the *store*), and when the application state is modified, things happen in your app.
 
-In order to demonstrate how to use Redux in the simplest possible way, our app will consist of a message a button. The message says whether the dog has barked (it initially hasn't barked), and the button makes the dog bark, which should update the message.
+In order to demonstrate how to use Redux in the simplest possible way, our app will consist of a message and a button. The message says whether the dog has barked or not (it initially hasn't), and the button makes the dog bark, which should update the message.
 
 We are going to need 2 packages in this part, `redux` and `react-redux`.
 
