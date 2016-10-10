@@ -26,4 +26,6 @@ Code examples are available for each section, and you can run them all with `npm
 
 [10 - Redux](/10-redux)
 
+[11 - Immutable JS and Redux Improvements](/11-immutable-redux-improvements)
+
 Next: Testing, Redux and Immutable
