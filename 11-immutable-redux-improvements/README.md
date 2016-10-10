@@ -12,7 +12,7 @@ obj.a = 2; // Mutates `obj`
 ```
 You would do:
 ```javascript
-const obj = Immutable.Map({ a: 1});
+const obj = Immutable.Map({ a: 1 });
 obj.set('a', 2); // Returns a new object without mutating `obj`
 ```
 
@@ -35,7 +35,7 @@ We are going to use `Map` in our codebase, but ESLint and the Airbnb config will
   ]
 }
 ```
-This makes `Map` and `List` (the 2 Immutable objects you'll use all the time) exceptions to that ESLint rule. This verbose formatting is actually done automatically by NPM, so we have to deal with it.
+This makes `Map` and `List` (the 2 Immutable objects you'll use all the time) exceptions to that ESLint rule. This verbose JSON formatting is actually done automatically by NPM, so we cannot make it more compact unfortunately.
 
 Anyway, back to Immutable:
 
@@ -93,6 +93,6 @@ export const MAKE_BARK = 'MAKE_BARK';
 export const makeBark = createAction(MAKE_BARK, () => true);
 ```
 
-`redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model.
+`redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, just like the action we previously wrote, so integrating `redux-actions` is seamless if you follow this model.
 
 Back to the [previous section](/10-redux) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
