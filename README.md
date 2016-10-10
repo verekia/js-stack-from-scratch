@@ -24,4 +24,6 @@ Code examples are available for each section, and you can run them all with `npm
 
 [9 - Webpack](/9-webpack)
 
+[10 - Redux](/10-redux)
+
 Next: Testing, Redux and Immutable
