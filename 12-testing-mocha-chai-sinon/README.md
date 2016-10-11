@@ -1,4 +1,6 @@
-# 12 - Testing with Mocha and Chai
+# 12 - Testing with Mocha, Chai, and Sinon
+
+## Mocha and Chai
 
 - Create an `src/test` folder. This folder will mirror our application folder structure, so create a `src/test/client` folder as well (feel free to add `server` and `shared` if you want, but we're not going to write tests for these).
 
@@ -81,6 +83,74 @@ gulp.task('test', ['lint', 'build'], () =>
 - In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `npm test` to just run your tests. I personally like to run my tests every time I `npm start` to catch bugs early, so you can also replace your `start` script by `gulp test && webpack`. Linting is run automatically because it's a prerequisite of the Gulp `test` task.
 
 - Run `npm test` or `npm start`, and it should print the result for our test, hopefully green.
+
+## Sinon
+
+In some cases, we want to be able to *fake* things in a unit test. For instance, let's say we have a function, `deleteEverything`, which contains a call to `deleteDatabases()`. Running `deleteDatabases()` causes a lot of side-effects, which we absolutely don't want to happen when running our test suite.
+
+[Sinon](http://sinonjs.org/) is a testing library that offers **Stubs** (and a lot of other things), which allow us to neutralize `deleteDatabases` and simply monitor it without actually calling it. This way we can test if it got called, or which parameters it got called with for instance. This is typically very useful to fake or avoid AJAX calls - which can cause side-effects on the back-end.
+
+In the context of our app, we are going to add a `barkInConsole` method to our `Dog` class in `src/shared/dog.js`:
+
+```javascript
+class Dog {
+  constructor(name) {
+    this.name = name;
+  }
+
+  bark() {
+    return `Wah wah, I am ${this.name}`;
+  }
+
+  barkInConsole() {
+    /* eslint-disable no-console */
+    console.log(this.bark());
+    /* eslint-enable no-console */
+  }
+}
+
+export default Dog;
+```
+
+If we run `barkInConsole` in a unit test, `console.log()` will print things in the terminal. We are going to consider this to be an undesired side-effect in the context of our unit tests. We are interested in knowing if `console.log()` *would have normally been called* though, and we want to test what parameters it *would have been called with*.
+
+- Create a new `src/test/shared/dog-test.js` file, and add write the following:
+
+```javascript
+/* eslint-disable import/no-extraneous-dependencies, no-console */
+
+import chai from 'chai';
+import { stub } from 'sinon';
+import sinonChai from 'sinon-chai';
+import { describe, it } from 'mocha';
+import Dog from '../../shared/dog';
+
+chai.should();
+chai.use(sinonChai);
+
+describe('Shared', () => {
+  describe('Dog', () => {
+    describe('barkInConsole', () => {
+      it('should print a bark string with its name', () => {
+        stub(console, 'log');
+        new Dog('Test Toby').barkInConsole();
+        console.log.should.have.been.calledWith('Wah wah, I am Test Toby');
+        console.log.restore();
+      });
+    });
+  });
+});
+```
+
+Here, we are using *stubs* from Sinon, and a Chai plugin to be able to use Chai assertions on Sinon stubs and such.
+
+- Run `npm install --save-dev sinon sinon-chai`
+
+So what is new here? Well first of all, we call `chai.use(sinonChai)` to activate the Chai plugin. Then, all the magic happens in the `it()` statement: `stub(console, 'log')` is going to neutralize `console.log` and monitor it. When `new Dog('Test Toby').barkInConsole()` is executed, a `console.log` is normally supposed to happen. We test this call to `console.log` with `console.log.should.have.been.calledWith()`, and finally, we `restore` the neutralized `console.log` to make it work normally again.
+
+**Important note**: Stubbing `console.log` is not recommended, because if the test fails, `console.log.restore()` is never called, and therefore `console.log` will remain broken for the rest of the command you executed in your terminal! It won't even print the error message that caused the test to fail, so it leaves you with very little information about what happened. That can be quite confusing. It is a good example to illustrate stubs in this simple app though.
+
+If everything went well in this chapter, you should have 2 passing tests.
 
 Next section: [13 - Type Checking with Flow](/13-flow)
 
