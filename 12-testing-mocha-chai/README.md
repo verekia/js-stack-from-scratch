@@ -56,11 +56,13 @@ Just like regular code, we are going to need to transpile this `state-test.js` f
 gulp.task('build', ['lint'], () =>
   gulp.src([
     'src/**/*.js',
+    'src/**/*.jsx',
   ])
     .pipe(babel())
     .pipe(gulp.dest('lib'))
 );
 ```
+
 - Now we can create the following `test` task, which relies on the `gulp-mocha` plugin:
 
 ```javascript
@@ -75,5 +77,7 @@ gulp.task('test', ['lint', 'build'], () =>
 - In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `npm test` to just run your tests. I personally like to run my tests every time I `npm start` to catch bugs early, so you can also replace your `start` script by `gulp test && webpack`. Linting is run automatically because it's a prerequisite of the Gulp `test` task.
 
 - Run `npm test` or `npm start`, and it should print the result for our test, hopefully green.
+
+Next section: [13 - Type Checking with Flow](/13-flow)
 
 Back to the [previous section](/11-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

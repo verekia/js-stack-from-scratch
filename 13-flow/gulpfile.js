@@ -4,8 +4,9 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
+const flow = require('gulp-flowtype');
 
-gulp.task('build', ['lint'], () =>
+gulp.task('build', ['typecheck', 'lint'], () =>
   gulp.src([
     'src/**/*.js',
     'src/**/*.jsx',
@@ -14,7 +15,7 @@ gulp.task('build', ['lint'], () =>
     .pipe(gulp.dest('lib'))
 );
 
-gulp.task('lint', () =>
+gulp.task('lint', ['typecheck'], () =>
   gulp.src([
     'gulpfile.js',
     'webpack.config.js',
@@ -26,7 +27,15 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError())
 );
 
-gulp.task('test', ['lint', 'build'], () =>
+gulp.task('typecheck', () =>
+  gulp.src([
+    'src/**/*.js',
+    'src/**/*.jsx',
+  ])
+    .pipe(flow())
+);
+
+gulp.task('test', ['typecheck', 'lint', 'build'], () =>
   gulp.src('lib/test/**/*.js')
     .pipe(mocha())
 );
