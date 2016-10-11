@@ -44,7 +44,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-preset-flow": "^1.0.0",
     "immutable": "^3.8.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -56,6 +55,7 @@
   "devDependencies": {
     "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.5",
+    "babel-preset-flow": "^1.0.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "chai": "^3.5.0",
