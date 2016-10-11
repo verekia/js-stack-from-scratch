@@ -12,13 +12,13 @@
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
-This is a minimalistic and straight to the point guide to assembling a JavaScript stack. The goal is to take you from zero to knowing how to set up **ES6, Babel, Gulp, ESLint, React, Redux, Webpack, Immutable, Mocha, Chai, Sinon, and Flow**. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring all these tools together** and giving you the **simplest possible context** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*.
+This is a minimalistic and straight to the point guide to assembling a JavaScript stack. It teaches you how to set up **ES6, Babel, Gulp, ESLint, React, Redux, Webpack, Immutable, Mocha, Chai, Sinon, and Flow**. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring all these tools together** and giving you the **simplest possible context** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*.
 
-Since the goal of this tutorial is to assemble various tools, I do not go into details about how these tools work individually. Refer to their documentation or find other tutorials if you want to acquire deeper knowledge in some of them.
+Since the goal of this tutorial is to assemble various tools, I do not go into details about how these tools work individually. Refer to their documentation or find other tutorials if you want to acquire deeper knowledge with them.
 
-A big chunk of the stack described in this tutorial uses React. A lot of React tutorials completely skip the setup part, which makes newcomers build their learning on weak foundations. Instead of giving beginners a "black box" configuration, the approach I'm taking here is to teach the foundations in the simplest possible way, so you understand what happens in the entire stack of tools.
+A big chunk of the stack described in this tutorial uses React. A lot of React tutorials completely skip the setup part, which makes newcomers build their learning on weak foundations. Instead of giving beginners a "black box" configuration, the approach I'm taking here is to teach the foundations in the simplest possible way, for a deeper understanding.
 
-Code examples are available for each section, and you can run them all with `npm install && npm start` (see section 1). I recommend writing everything from scratch yourself for a better understanding.
+Code examples are available for each section, and you can run them all with `npm install && npm start` (see section 1). I recommend writing everything from scratch yourself by following the **step-by-step instructions**.
 
 [1 - Node, NPM, and package.json](/tutorial/1-npm-and-package-json)
 
