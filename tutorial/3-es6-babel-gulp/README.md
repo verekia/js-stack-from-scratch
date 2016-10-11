@@ -37,6 +37,6 @@ Gulp's API is very straightforward. It defines `gulp.task`s, that can reference 
 - Add `lib` to your `.gitignore`
 
 
-Next section: [4 - Using the ES6 syntax with a class](/4-es6-syntax-class)
+Next section: [4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
 
-Back to the [previous section](/2-packages) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/2-packages) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

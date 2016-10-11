@@ -20,30 +20,30 @@ A big chunk of the stack described in this tutorial uses React. A lot of React t
 
 Code examples are available for each section, and you can run them all with `npm install && npm start` (see section 1). I recommend writing everything from scratch yourself for a better understanding.
 
-[1 - Node, NPM, and package.json](/1-npm-and-package-json)
+[1 - Node, NPM, and package.json](/tutorial/1-npm-and-package-json)
 
-[2 - Installing and using an NPM package](/2-packages)
+[2 - Installing and using an NPM package](/tutorial/2-packages)
 
-[3 - Setting up ES6 with Babel and Gulp](/3-es6-babel-gulp)
+[3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
 
-[4 - Using the ES6 syntax with a class](/4-es6-syntax-class)
+[4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
 
-[5 - The ES6 modules syntax](/5-es6-modules-syntax)
+[5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
 
-[6 - ESLint](/6-eslint)
+[6 - ESLint](/tutorial/6-eslint)
 
-[7 - Client app with Browserify](/7-client-browserify)
+[7 - Client app with Browserify](/tutorial/7-client-browserify)
 
-[8 - React](/8-react)
+[8 - React](/tutorial/8-react)
 
-[9 - Webpack](/9-webpack)
+[9 - Webpack](/tutorial/9-webpack)
 
-[10 - Redux](/10-redux)
+[10 - Redux](/tutorial/10-redux)
 
-[11 - Immutable JS and Redux Improvements](/11-immutable-redux-improvements)
+[11 - Immutable JS and Redux Improvements](/tutorial/11-immutable-redux-improvements)
 
-[12 - Testing with Mocha, Chai, and Sinon](/12-testing-mocha-chai-sinon)
+[12 - Testing with Mocha, Chai, and Sinon](/tutorial/12-testing-mocha-chai-sinon)
 
-[13 - Type Checking with Flow](/13-flow)
+[13 - Type Checking with Flow](/tutorial/13-flow)
 
 Coming up: React Router, Server-Side Rendering, Styling, Git Hooks

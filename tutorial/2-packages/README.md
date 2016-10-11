@@ -23,6 +23,6 @@ Congratulations, you installed and used an NPM package!
 **Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, etc). For `"devDependencies"`, we will use the `--save-dev` parameter instead of `--save`.
 
 
-Next section: [3 - Setting up ES6 with Babel and Gulp](/3-es6-babel-gulp)
+Next section: [3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
 
-Back to the [previous section](/1-npm-and-package-json) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/1-npm-and-package-json) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

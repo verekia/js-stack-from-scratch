@@ -64,6 +64,6 @@ We need this file to `export` stuff for Webpack to read. `entry` and `output` ar
 
 - Run `npm start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should still display "The dog says: Wah wah, I am Browser Toby".
 
-Next section: [10 - Redux](/10-redux)
+Next section: [10 - Redux](/tutorial/10-redux)
 
-Back to the [previous section](/8-react) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

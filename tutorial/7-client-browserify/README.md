@@ -78,6 +78,6 @@ Let's modify the `npm start` script in `package.json` to the following: `"start"
 - Add `dist/client-bundle.js` to your `.gitignore` file.
 
 
-Next section: [8 - React](/8-react)
+Next section: [8 - React](/tutorial/8-react)
 
-Back to the [previous section](/6-eslint) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

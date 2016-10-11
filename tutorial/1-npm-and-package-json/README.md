@@ -29,6 +29,6 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 
 - Run `npm start`. It should print `Hello world`.
 
-Next section: [2 - Installing and using an NPM package](/2-packages)
+Next section: [2 - Installing and using an NPM package](/tutorial/2-packages)
 
 Back to the [table of contents](https://github.com/verekia/modern-js-stack-training).

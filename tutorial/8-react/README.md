@@ -88,6 +88,6 @@ gulp.task('build-client', ['lint'], () =>
 Now after running `npm start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
 
 
-Next section: [9 - Webpack](/9-webpack)
+Next section: [9 - Webpack](/tutorial/9-webpack)
 
-Back to the [previous section](/7-client-browserify) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/7-client-browserify) or the [table of contents](https://github.com/verekia/modern-js-stack-training).

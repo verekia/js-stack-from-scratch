@@ -41,6 +41,6 @@ import babel from 'gulp-babel';
 
 `npm start` should still print "Wah wah, I am Toby".
 
-Next section: [6 - ESLint](/6-eslint)
+Next section: [6 - ESLint](/tutorial/6-eslint)
 
-Back to the [previous section](/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
