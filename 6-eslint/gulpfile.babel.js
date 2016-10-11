@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-const gulp = require('gulp');
-const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
+import gulp from 'gulp';
+import babel from 'gulp-babel';
+import eslint from 'gulp-eslint';
 
 gulp.task('build', ['lint'], () =>
   gulp.src(['src/**/*.js'])
@@ -12,7 +12,7 @@ gulp.task('build', ['lint'], () =>
 
 gulp.task('lint', () =>
   gulp.src([
-    'gulpfile.js',
+    'gulpfile.babel.js',
     'src/**/*.js',
   ])
     .pipe(eslint())

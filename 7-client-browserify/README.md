@@ -39,9 +39,9 @@ This way we can use variables such as `window` or `document` which are always ac
 In a Node environment, you can freely `import` different files and Node will resolve these files using your filesystem. In a browser, there is no filesystem, and therefore your `import`s point to nowhere. In order for our entry point file `app.js` to retrieve the tree of imports it needs, we are going to "bundle" that entire tree of dependencies into one file. Browserify is a tool and package that does this. Since we use ES6 syntax, we also want Browserify to compile our ES6 code into ES5 using Babel, which is done with another package called Babelify. We'll need a last package called `vinyl-source-stream` that makes it possible for Gulp to understand what comes out from Babelify and name your bundle. It's a bit difficult to understand, but the following Gulp task should help visualize the general idea:
 
 ```javascript
-const browserify = require('browserify');
-const babelify = require('babelify');
-const source = require('vinyl-source-stream');
+import browserify from 'browserify';
+import babelify from 'babelify';
+import source from 'vinyl-source-stream';
 
 // [...]
 

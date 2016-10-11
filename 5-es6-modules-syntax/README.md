@@ -27,8 +27,19 @@ const toby = new Cat('Toby');
 ```
 Obviously, most of the time you will use the same name as the class / module you're importing.
 A case where you don't do that is how we `const babel = require('gulp-babel')` in our Gulp file.
-Note that in the Gulpfile, we use `require()` because Node does not support the ES6 module syntax. The latest version of Node support most of the ES6 features, but this one in particular isn't there yet.
 
+So what about those `require()`s in our `gulpfile.js`? Can we use `import` instead? The latest version of Node supports most ES6 features, but not ES6 modules yet. Luckily for us, Gulp is able to call Babel for help. If we rename our `gulpfile.js` to `gulpfile.babel.js`, Babel will take care of passing `import`ed modules to Gulp.
+
+- Rename your `gulpfile.js` to `gulpfile.babel.js`
+
+- Replace your `require()`s by:
+
+```javascript
+import gulp from 'gulp';
+import babel from 'gulp-babel';
+```
+
+`npm start` should still print "Wah wah, I am Toby".
 
 Next section: [6 - ESLint](/6-eslint)
 

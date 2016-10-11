@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-const gulp = require('gulp');
-const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
-const mocha = require('gulp-mocha');
-const flow = require('gulp-flowtype');
+import gulp from 'gulp';
+import babel from 'gulp-babel';
+import eslint from 'gulp-eslint';
+import mocha from 'gulp-mocha';
+import flow from 'gulp-flowtype';
 
 gulp.task('build', ['typecheck', 'lint'], () =>
   gulp.src([
@@ -17,8 +17,8 @@ gulp.task('build', ['typecheck', 'lint'], () =>
 
 gulp.task('lint', ['typecheck'], () =>
   gulp.src([
-    'gulpfile.js',
-    'webpack.config.js',
+    'gulpfile.babel.js',
+    'webpack.config.babel.js',
     'src/**/*.js',
     'src/**/*.jsx',
   ])

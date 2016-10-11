@@ -9,7 +9,7 @@
 - Now we need a Gulp task to run Flow. Run `npm install --save-dev gulp-flowtype` to install the Gulp plugin for Flow, and create the following Gulp `typecheck` task:
 
 ```javascript
-const flow = require('gulp-flowtype');
+import flow from 'gulp-flowtype';
 
 // [...]
 

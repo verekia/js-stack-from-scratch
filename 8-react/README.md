@@ -65,7 +65,7 @@ gulp.task('build-server', ['lint'], () =>
 
 gulp.task('lint', () =>
   gulp.src([
-    'gulpfile.js',
+    'gulpfile.babel.js',
     'src/**/*.js',
     'src/**/*.jsx', // Add this line
   ])

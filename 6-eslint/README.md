@@ -21,15 +21,15 @@ We'll create a Gulp task that runs ESLint for us. So we'll install the ESLint Gu
 
 - Run `npm install --save-dev gulp-eslint`
 
-Add the following task to your `gulpfile.js`:
+Add the following task to your `gulpfile.babel.js`:
 ```javascript
-const eslint = require('gulp-eslint');
+import eslint from 'gulp-eslint';
 
 // [...]
 
 gulp.task('lint', () => {
   return gulp.src([
-    'gulpfile.js',
+    'gulpfile.babel.js',
     'src/**/*.js',
   ])
     .pipe(eslint())
@@ -37,7 +37,7 @@ gulp.task('lint', () => {
     .pipe(eslint.failAfterError());
 });
 ```
-Here we tell Gulp that for this task, we want to include `gulpfile.js`, and the JS files located under `src`.
+Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
 
 Modify your `build` Gulp task by making the `lint` task a prerequisite to it. It's as simple as passing an array of prerequisite tasks to it, like so:
 ```javascript
@@ -48,7 +48,7 @@ gulp.task('build', ['lint'], () => {
 
 - Run `npm start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using `console.log()` in `index.js`.
 
-One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.js`, at the very top, add:
+One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.babel.js`, at the very top, add:
 ```javascript```
 /* eslint-disable import/no-extraneous-dependencies */
 ```

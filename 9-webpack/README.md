@@ -2,24 +2,26 @@
 
 Webpack is a basically a combination of Gulp and Browserify that can bundle your client app in an optimized way. We're going to replace our Gulp `build-client` task by Webpack.
 
-- Delete your entire `build-client` task in `gulpfile.js` and the associated:
+- Delete your entire `build-client` task in `gulpfile.babel.js` and the associated:
 ```javascript
-const browserify = require('browserify');
-const babelify = require('babelify');
-const source = require('vinyl-source-stream');
+import browserify from 'browserify';
+import babelify from 'babelify';
+import source from 'vinyl-source-stream';
 ```
 - Run `npm uninstall --save-dev browserify babelify vinyl-source-stream`
 - Run `npm install --save-dev webpack`
 
-- Create an empty `webpack.config.js` file
+Webpack uses a config file, just like Gulp, called `webpack.config.js`. It is possible to use ES6 imports and exports in it, in the exact same way that we made Gulp rely on Babel to do so: by naming this file `webpack.config.babel.js`.
 
-- While you're at it, add `webpack.config.js` to your Gulp `lint` task:
+- Create an empty `webpack.config.babel.js` file
+
+- While you're at it, add `webpack.config.babel.js` to your Gulp `lint` task:
 
 ```javascript
 gulp.task('lint', () =>
   gulp.src([
-    'gulpfile.js',
-    'webpack.config.js', // Here
+    'gulpfile.babel.js',
+    'webpack.config.babel.js', // Here
     'src/**/*.js',
     'src/**/*.jsx',
   ])
@@ -33,9 +35,9 @@ We need to teach Webpack how to process ES6 files via Babel (just like we taught
 
 - Run `npm install --save-dev babel-loader`
 
-- Write the following to your `webpack.config.js` file:
+- Write the following to your `webpack.config.babel.js` file:
 ```javascript
-module.exports = {
+export default {
   entry: './src/client/app.jsx',
   output: {
     path: './dist',
@@ -56,7 +58,7 @@ module.exports = {
 ```
 
 Let's analyze this a bit:
-We need this file to `export` stuff for Webpack to read. But since it is not a file processed by Babel, we cannot use the ES6 modules syntax, so we use `module.exports` instead. `entry` and `output` are pretty straightforward configuration parameters. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we use both `.js` files and `.jsx` files, we have the following regex: `/\.jsx?$/`. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less filenames like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
+We need this file to `export` stuff for Webpack to read. `entry` and `output` are pretty straightforward configuration parameters. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we use both `.js` files and `.jsx` files, we have the following regex: `/\.jsx?$/`. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less filenames like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
 
 - Replace the `start` script in `package.json` by `"start": "gulp lint && webpack"`.
 

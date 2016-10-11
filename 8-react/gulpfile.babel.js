@@ -1,11 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-const gulp = require('gulp');
-const babel = require('gulp-babel');
-const eslint = require('gulp-eslint');
-const browserify = require('browserify');
-const babelify = require('babelify');
-const source = require('vinyl-source-stream');
+import gulp from 'gulp';
+import babel from 'gulp-babel';
+import eslint from 'gulp-eslint';
+import browserify from 'browserify';
+import babelify from 'babelify';
+import source from 'vinyl-source-stream';
 
 gulp.task('build-server', ['lint'], () =>
   gulp.src([
@@ -18,7 +18,7 @@ gulp.task('build-server', ['lint'], () =>
 
 gulp.task('lint', () =>
   gulp.src([
-    'gulpfile.js',
+    'gulpfile.babel.js',
     'src/**/*.js',
     'src/**/*.jsx',
   ])
