@@ -1,8 +1,8 @@
 # 13 - Flow
 
-[Flow](https://flowtype.org/) is a static type checker. It will analyze your code for inconsistent types and you can add explicit type declarations in your code via annotations.
+[Flow](https://flowtype.org/) is a static type checker. It detects inconsistent types in your code and you can add explicit type declarations in it via annotations.
 
-In order for Babel to undestand and remove Flow annotations during the transpilation process, install the Flow preset for Babel by running `npm install --save-dev babel-preset-flow`. Then, add `"flow"` under `babel.presets` in your `package.json`.
+- In order for Babel to undestand and remove Flow annotations during the transpilation process, install the Flow preset for Babel by running `npm install --save-dev babel-preset-flow`. Then, add `"flow"` under `babel.presets` in your `package.json`.
 
 - Create an empty `.flowconfig` file at the root of your project
 
@@ -30,7 +30,9 @@ gulp.task('test', ['typecheck', 'lint', 'build'], /* ... */);
 gulp.task('lint', ['typecheck'], /* ... */);
 ```
 
-We make `typecheck` a prerequisite of `lint` because linting is more likely to be well supported by your code editor, whereas Flow might not. This way if the `typecheck` task fails in the console, `lint` won't run, saving a bit of time. Alright, we should be able to run Flow now.
+We make `typecheck` a prerequisite of `lint` because linting is more likely to be well supported by your code editor, whereas Flow might not. This way if the `typecheck` task fails in the console, `lint` won't run, saving a bit of time.
+
+Alright, we should be able to run Flow now.
 
 - Add Flow annotations to `src/shared/dog.js` like so:
 
@@ -52,7 +54,7 @@ class Dog {
 export default Dog;
 ```
 
-The `// @flow` comment tells Flow that we want this file to be typechecked. Flow annotations are typically a colon after a function parameter or a function name. Check the documentation for more details.
+The `// @flow` comment tells Flow that we want this file to be typechecked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check the documentation for more details.
 
 Now if you run `npm start`, Flow will work fine, but ESLint is going to complain about that non-standard syntax we're using. Since Babel's parser is all up-and-running with parsing Flow content thanks to the `babel-preset-flow` plugin we installed, it'd be nice if ESLint could rely on Babel's parser instead of trying to understand Flow annotations on its own. That's actually possible using the `babel-eslint` package. Let's do this.
 
