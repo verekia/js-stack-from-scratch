@@ -71,6 +71,8 @@
     "gulp-flowtype": "^1.0.0",
     "gulp-mocha": "^3.0.1",
     "mocha": "^3.1.1",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
     "webpack": "^1.13.2"
   }
 }
