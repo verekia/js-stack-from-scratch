@@ -1,10 +1,14 @@
 # Modern JavaScript Stack Training
 
 ![JS](/img/js.png)
+![NPM](/img/npm.png)
 ![React](/img/react.png)
-![ESLint](/img/eslint.png)
 ![Gulp](/img/gulp.png)
+![Redux](/img/redux.png)
+![ESLint](/img/eslint.png)
 ![Webpack](/img/webpack.png)
+![Mocha](/img/mocha.png)
+![Chai](/img/chai.png)
 
 
 Welcome to my modern JavaScript stack tutorial. This is a minimalistic and straight to the point guide to building a modern Front-End stack **from scratch**, with some bits of Back-End as well. The goal is to take you from zero to knowing how to setup **ES6, Babel, Gulp, ESLint, React, Redux, Webpack, Immutable, Mocha, Chai**. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring all these tools together**, rather than teaching you how to use one of them specifically. To acquire deeper knowledge in one particular tool, refer to the official documentation, or find other tutorials.
