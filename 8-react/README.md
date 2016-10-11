@@ -39,6 +39,8 @@ App.propTypes = {
 ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 ```
 
+**Note**: If you are unfamiliar with React or its PropTypes, learn about React first and come back to this tutorial later. There is going to be quite some React things in the upcoming chapters, so you need a good understanding of it.
+
 Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
 Install the React Babel preset, which will teach Babel how to process the JSX syntax:
 `npm install --save-dev babel-preset-react` and change the `babel` entry in your `package.json` file like so:
