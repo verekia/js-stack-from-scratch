@@ -154,4 +154,4 @@ If everything went well in this chapter, you should have 2 passing tests.
 
 Next section: [13 - Type Checking with Flow](/tutorial/13-flow)
 
-Back to the [previous section](/tutorial/11-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/11-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

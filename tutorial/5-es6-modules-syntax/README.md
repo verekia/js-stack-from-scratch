@@ -43,4 +43,4 @@ import babel from 'gulp-babel';
 
 Next section: [6 - ESLint](/tutorial/6-eslint)
 
-Back to the [previous section](/tutorial/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

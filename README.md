@@ -18,7 +18,7 @@ Since the goal of this tutorial is to assemble various tools, I do not go into d
 
 A big chunk of the stack described in this tutorial uses React. A lot of React tutorials completely skip the setup part, which makes newcomers build their learning on weak foundations. Instead of giving beginners a "black box" configuration, the approach I'm taking here is to teach the foundations in the simplest possible way, for a deeper understanding.
 
-Code examples are available for each section, and you can run them all with `npm install && npm start` (see section 1). I recommend writing everything from scratch yourself by following the **step-by-step instructions**.
+Code examples are available for each section, and you can run them all with `npm install && npm start` (see section 1). I recommend writing everything from scratch yourself by following the **step-by-step instructions** of each chapter.
 
 [1 - Node, NPM, and package.json](/tutorial/1-npm-and-package-json)
 

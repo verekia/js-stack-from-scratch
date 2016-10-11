@@ -90,4 +90,4 @@ Now after running `npm start`, if we open `index.html`, we should see "The dog s
 
 Next section: [9 - Webpack](/tutorial/9-webpack)
 
-Back to the [previous section](/tutorial/7-client-browserify) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/7-client-browserify) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

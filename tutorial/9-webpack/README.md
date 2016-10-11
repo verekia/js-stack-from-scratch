@@ -66,4 +66,4 @@ We need this file to `export` stuff for Webpack to read. `entry` and `output` ar
 
 Next section: [10 - Redux](/tutorial/10-redux)
 
-Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

@@ -25,4 +25,4 @@ Congratulations, you installed and used an NPM package!
 
 Next section: [3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
 
-Back to the [previous section](/tutorial/1-npm-and-package-json) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/1-npm-and-package-json) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

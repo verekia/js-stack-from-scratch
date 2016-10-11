@@ -101,4 +101,4 @@ The last issue warning left is about `console.log()`. Let's say that we want thi
 
 Next section: [7 - Client app with Browserify](/tutorial/7-client-browserify)
 
-Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/modern-js-stack-training).
+Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
