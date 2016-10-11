@@ -81,10 +81,8 @@ gulp.task('build', ['lint'], () =>
 
 gulp.task('lint', () =>
   gulp.src([
-    'gulpfile.js',
+    'gulpfile.babel.js',
     'src/**/*.js',
-    '!lib/**',
-    '!node_modules/**',
   ])
     .pipe(eslint())
     .pipe(eslint.format())
