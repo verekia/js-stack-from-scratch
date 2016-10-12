@@ -46,4 +46,4 @@ Code examples are available for each section, and you can run them all with `npm
 
 [13 - Type Checking with Flow](/tutorial/13-flow)
 
-Coming up: React Router, Server-Side Rendering, Styling, Git Hooks
+Coming up: React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks
