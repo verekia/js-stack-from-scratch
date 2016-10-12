@@ -1,1 +1,2 @@
-console.log('Hello ES6');
+const str = 'ES6';
+console.log(`Hello ${str}`);

@@ -14,7 +14,12 @@ We're now going to use ES6 syntax, which is a great improvement over the "old" E
 ```
 **Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`. Your root folder will get more and more bloated over time, so keep the Babel config in `package.json` until it grows too large.
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Gulp and Babel will take care of creating it. Remove the previous `color`-related code in `index.js`, and replace it with a simple `console.log('Hello ES6');`.
+- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Gulp and Babel will take care of creating it. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
+
+```javascript
+const str = 'ES6';
+console.log(`Hello ${str}`);
+```
 
 - Create a `gulpfile.js` containing:
 
