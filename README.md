@@ -20,6 +20,12 @@ A big chunk of the stack described in this tutorial uses React. A lot of React t
 
 Code examples are available for each section, and you can run them all with `npm install && npm start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** of each chapter.
 
+**Every chapter contains the code of previous chapters**, so if you are simply looking for a boilerplate project containing everything, just clone the last chapter and you're good to go.
+
+Note: The order of chapters is not necessarily the most educational. For instance, testing / type checking could have been done before introducing React. It is quite difficult to move chapters around or edit past ones, since I need to apply those changes to every following chapter. If things settle down, I might reorganize the whole thing in a better way.
+
+## Table of contents
+
 [1 - Node, NPM, and package.json](/tutorial/1-npm-and-package-json)
 
 [2 - Installing and using an NPM package](/tutorial/2-packages)
@@ -46,4 +52,4 @@ Code examples are available for each section, and you can run them all with `npm
 
 [13 - Type Checking with Flow](/tutorial/13-flow)
 
-Coming up: React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks
+Coming up: React Router, Server-Side Rendering, Styling, Enzyme, Yarn, Git Hooks
