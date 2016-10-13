@@ -3,9 +3,8 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
-import browserify from 'browserify';
-import babelify from 'babelify';
-import source from 'vinyl-source-stream';
+import webpack from 'webpack-stream';
+import webpackConfig from './webpack.config.babel';
 
 const paths = {
   allSrcJs: 'src/**/*.js?(x)',
@@ -13,13 +12,11 @@ const paths = {
   sharedSrcJs: 'src/shared/**/*.js?(x)',
   clientEntryPoint: 'src/client/app.jsx',
   gulpFile: 'gulpfile.babel.js',
+  webpackFile: 'webpack.config.babel.js',
 };
 
-gulp.task('build-server', ['lint'], () =>
-  gulp.src([
-    paths.serverSrcJs,
-    paths.sharedSrcJs,
-  ])
+gulp.task('build', ['lint'], () =>
+  gulp.src(paths.allSrcJs)
     .pipe(babel())
     .pipe(gulp.dest('lib'))
 );
@@ -28,6 +25,7 @@ gulp.task('lint', () =>
   gulp.src([
     paths.allSrcJs,
     paths.gulpFile,
+    paths.webpackFile,
   ])
     .pipe(eslint())
     .pipe(eslint.format())
@@ -35,10 +33,8 @@ gulp.task('lint', () =>
 );
 
 gulp.task('main', ['lint'], () =>
-  browserify({ entries: paths.clientEntryPoint, debug: true })
-    .transform(babelify)
-    .bundle()
-    .pipe(source('client-bundle.js'))
+  gulp.src(paths.clientEntryPoint)
+    .pipe(webpack(webpackConfig))
     .pipe(gulp.dest('dist'))
 );
 

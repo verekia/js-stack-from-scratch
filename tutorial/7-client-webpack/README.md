@@ -10,6 +10,7 @@
   <head>
   </head>
   <body>
+    <div class="app"></div>
     <script src="client-bundle.js"></script>
   </body>
 </html>
@@ -26,7 +27,7 @@ import Dog from '../shared/dog';
 
 const browserToby = new Dog('Browser Toby');
 
-document.write(browserToby.bark());
+document.querySelector('.app').innerText = browserToby.bark();
 ```
 
 Add the following to your `package.json`, under `eslintConfig`:
@@ -135,7 +136,7 @@ import webpackConfig from './webpack.config.babel';
 
 The second line just grabs our config file.
 
-Like I said earlier, in the next chapter we are going to use `.jsx` files, so let's set that up right now to have a bit of a head start.
+Like I said earlier, in the next chapter we are going to use `.jsx` files (on the client, and even on the server later on), so let's set that up right now to have a bit of a head start.
 
 - Change the constants to the following:
 
