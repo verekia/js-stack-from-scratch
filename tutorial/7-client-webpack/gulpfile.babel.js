@@ -15,11 +15,8 @@ const paths = {
   webpackFile: 'webpack.config.babel.js',
 };
 
-gulp.task('build-server', ['lint'], () =>
-  gulp.src([
-    paths.serverSrcJs,
-    paths.sharedSrcJs,
-  ])
+gulp.task('build', ['lint'], () =>
+  gulp.src(paths.allSrcJs)
     .pipe(babel())
     .pipe(gulp.dest('lib'))
 );
