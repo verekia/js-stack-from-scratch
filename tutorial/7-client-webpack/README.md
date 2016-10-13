@@ -1,7 +1,5 @@
 # 7 - Client App with Webpack
 
-This chapter is a bit long so bear with me, it's worth it!
-
 ## Structure of our app
 
 - Create a `dist` folder at the root of your project, and add the following `index.html` file to it:
@@ -39,6 +37,18 @@ Add the following to your `package.json`, under `eslintConfig`:
 }
 ```
 This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
+
+Finally, if you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client bundle.
+
+- Run `npm install --save babel-polyfill`
+
+And before anything else in `app.js`, add this import:
+
+```javascript
+import 'babel-polyfill';
+```
+
+Including the polyfill adds about 300KB to your bundle, so don't do this if you're not using any of the features it covers!
 
 ## Webpack
 
@@ -98,7 +108,7 @@ export default {
 
 Let's analyze this a bit:
 
-We need this file to `export` stuff for Webpack to read. `output.filename` is the name of the bundle we want to generate. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we will use both `.js` files and `.jsx` files (for React) in the next chapters, we have the following regex: `/\.jsx?$/`. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less filenames like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
+We need this file to `export` stuff for Webpack to read. `output.filename` is the name of the bundle we want to generate. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we will use both `.js` files and `.jsx` files (for React) in the next chapters, we have the following regex: `/\.jsx?$/`. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less paths like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
 
 Okay so now we have Webpack set up, but we still need a way to *run* it.
 
@@ -140,6 +150,8 @@ const paths = {
 };
 ```
 
+The `.js?(x)` is just a pattern to match `.js` or `.jsx` files.
+
 We now have constants for the different parts of our application, and an entry point file.
 
 - Modify the `main` task like so:
@@ -166,18 +178,6 @@ gulp.task('build-server', ['lint'], () =>
 ```
 
 The new `main` task will take care of the `client` code.
-
-Finally, if you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client bundle.
-
-- Run `npm install --save babel-polyfill`
-
-And before anything else in `src/client/app.js`, add this import:
-
-```javascript
-import 'babel-polyfill';
-```
-
-Including the polyfill adds about 300KB to your bundle, so don't do this if you're not using any of the features it covers!
 
 - Run `npm start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should display "Wah wah, I am Browser Toby".
 
