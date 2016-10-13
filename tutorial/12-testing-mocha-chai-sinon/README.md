@@ -80,7 +80,15 @@ gulp.task('test', ['lint', 'build'], () =>
 
 - Run `npm install --save-dev gulp-mocha` of course.
 
-- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `npm test` to just run your tests. I personally like to run my tests every time I `npm start` to catch bugs early, so you can also replace your `start` script by `gulp test && webpack`. Linting is run automatically because it's a prerequisite of the Gulp `test` task.
+In this chapter, we are using Gulp to lint, build, and test our code (in this order), so we can change our `default` task to run `test` instead of `lint`:
+
+```javascript
+gulp.task('default', ['test']);
+```
+
+Linting is run automatically because it's a prerequisite of the Gulp `test` task.
+
+- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `npm test` to just run your tests. `npm test` is also the standard command that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `npm start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
 
 - Run `npm test` or `npm start`, and it should print the result for our test, hopefully green.
 

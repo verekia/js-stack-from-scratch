@@ -24,3 +24,5 @@ gulp.task('lint', () =>
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
 );
+
+gulp.task('default', ['lint']);

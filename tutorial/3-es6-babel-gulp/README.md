@@ -36,7 +36,13 @@ gulp.task('build', () => {
 ```
 Gulp's API is very straightforward. It defines `gulp.task`s, that can reference `gulp.src` files, applies a chain of treatments to them with `.pipe()` (like `babel()` in our case) and outputs the new files to `gulp.dest`. Refer to the [documentation](https://github.com/gulpjs/gulp) for a deeper understanding.
 
-- In `package.json`, change your `start` script to: `"start": "gulp build && node lib/"`
+You can also add a `default` task that will launch the `build` task, to be able to simply run `gulp` in the CLI:
+
+```javascript
+gulp.task('default', ['build']);
+```
+
+- In `package.json`, change your `start` script to: `"start": "gulp && node lib/"`
 - Run `npm start` and it should print "Hello ES6".
 
 - Add `lib` to your `.gitignore`

@@ -39,3 +39,5 @@ gulp.task('test', ['typecheck', 'lint', 'build'], () =>
   gulp.src('lib/test/**/*.js')
     .pipe(mocha())
 );
+
+gulp.task('default', ['test']);

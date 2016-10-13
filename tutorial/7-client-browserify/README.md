@@ -57,6 +57,12 @@ Feel free to look into each one of these package's documentation for further inf
 
 - Don't forget to install the packages with: `npm install --save-dev browserify babelify vinyl-source-stream`
 
+Also, update the `default` Gulp task to run `build-client` instead of `build`:
+
+```javascript
+gulp.task('default', ['build-client']);
+```
+
 Our previous Gulp task, `build`, transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we only need this task compile `server` and `shared`. So we'll rename it to `build-server` for clarity, and will adjust its compilation source to only include those folders:
 ```javascript
 gulp.task('build-server', ['lint'], () =>
@@ -83,7 +89,7 @@ import 'babel-polyfill';
 
 Including the polyfill adds about 300KB to your bundle, so don't do this if you're not using any of the features it covers!
 
-Alright, let's modify the `npm start` script in `package.json` to the following: `"start": "gulp build-client"`. We don't need to run `node .` anymore, since we will open `index.html` to test our project.
+Alright, let's modify the `npm start` script in `package.json` to the following: `"start": "gulp"`. We don't need to run `node lib/` anymore, since we will open `index.html` to test our project.
 
 - Run `npm start`, open `index.html`, and you should see "Wah wah, I am Browser Toby".
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp build && node lib/",
+    "start": "gulp && node lib/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "babel": {

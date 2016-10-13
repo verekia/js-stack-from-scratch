@@ -60,7 +60,13 @@ export default {
 Let's analyze this a bit:
 We need this file to `export` stuff for Webpack to read. `entry` and `output` are pretty straightforward configuration parameters. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we use both `.js` files and `.jsx` files, we have the following regex: `/\.jsx?$/`. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less filenames like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
 
-- Replace the `start` script in `package.json` by `"start": "gulp lint && webpack"`.
+The only thing Gulp will be doing in this chapter is linting our code, so replace the `default` Gulp task by:
+
+```javascript
+gulp.task('default', ['lint']);
+```
+
+- Replace the `start` script in `package.json` by `"start": "gulp && webpack"`.
 
 - Run `npm start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should still display "The dog says: Wah wah, I am Browser Toby".
 

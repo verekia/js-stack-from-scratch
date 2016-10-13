@@ -34,3 +34,5 @@ gulp.task('build-client', ['lint'], () =>
     .pipe(source('client-bundle.js'))
     .pipe(gulp.dest('dist'))
 );
+
+gulp.task('default', ['build-client']);

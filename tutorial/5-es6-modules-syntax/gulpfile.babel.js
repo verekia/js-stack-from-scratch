@@ -6,3 +6,5 @@ gulp.task('build', () => {
     .pipe(babel())
     .pipe(gulp.dest('lib'));
 });
+
+gulp.task('default', ['build']);
