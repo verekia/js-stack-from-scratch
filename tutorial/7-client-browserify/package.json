@@ -37,5 +37,8 @@
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.16.0"
   }
 }

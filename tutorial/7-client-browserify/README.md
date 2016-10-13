@@ -71,7 +71,19 @@ gulp.task('build-server', ['lint'], () =>
 
 The new `build-client` task will take care of the `client` code.
 
-Let's modify the `npm start` script in `package.json` to the following: `"start": "gulp build-client"`. We don't need to run `node .` anymore, since we will open `index.html` to test our project.
+Finally, if you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client bundle.
+
+- Run `npm install --save babel-polyfill`
+
+And before anything else in `app.js`, add this import:
+
+```javascript
+import 'babel-polyfill';
+```
+
+Including the polyfill adds about 300KB to your bundle, so don't do this if you're not using any of the features it covers!
+
+Alright, let's modify the `npm start` script in `package.json` to the following: `"start": "gulp build-client"`. We don't need to run `node .` anymore, since we will open `index.html` to test our project.
 
 - Run `npm start`, open `index.html`, and you should see "Wah wah, I am Browser Toby".
 

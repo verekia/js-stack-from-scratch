@@ -20,6 +20,8 @@ Add a container for our app in `dist/index.html`:
 Let's rename our `src/client/app.js` file into `src/client/app.jsx` and write some React and JSX code in it:
 
 ```javascript
+import 'babel-polyfill';
+
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Dog from '../shared/dog';
