@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   entry: './src/client/app.jsx',
   output: {
     path: './dist',

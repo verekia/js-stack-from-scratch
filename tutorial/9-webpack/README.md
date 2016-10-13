@@ -18,12 +18,22 @@ Webpack uses a config file, just like Gulp, called `webpack.config.js`. It is po
 - While you're at it, add `webpack.config.babel.js` to your Gulp `lint` task:
 
 ```javascript
+const paths = {
+  allSrcJs: 'src/**/*.js?(x)',
+  serverSrcJs: 'src/server/**/*.js?(x)',
+  sharedSrcJs: 'src/shared/**/*.js?(x)',
+  clientEntryPoint: 'src/client/app.jsx',
+  gulpFile: 'gulpfile.babel.js',
+  webpackFile: 'webpack.config.babel.js',
+};
+
+// [...]
+
 gulp.task('lint', () =>
   gulp.src([
-    'gulpfile.babel.js',
-    'webpack.config.babel.js', // Here
-    'src/**/*.js',
-    'src/**/*.jsx',
+    paths.allSrcJs,
+    paths.gulpFile,
+    paths.webpackFile,
   ])
     .pipe(eslint())
     .pipe(eslint.format())
@@ -36,6 +46,7 @@ We need to teach Webpack how to process ES6 files via Babel (just like we taught
 - Run `npm install --save-dev babel-loader`
 
 - Write the following to your `webpack.config.babel.js` file:
+
 ```javascript
 export default {
   entry: './src/client/app.jsx',
@@ -58,15 +69,23 @@ export default {
 ```
 
 Let's analyze this a bit:
+
 We need this file to `export` stuff for Webpack to read. `entry` and `output` are pretty straightforward configuration parameters. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we use both `.js` files and `.jsx` files, we have the following regex: `/\.jsx?$/`. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less filenames like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
 
-The only thing Gulp will be doing in this chapter is linting our code, so replace the `default` Gulp task by:
+Webpack can do a lot of things. It's like a Browserify on steroids with the capacity to do some build tasks like Gulp as well. It can actually replace Gulp entirely if your project is mostly client-side. Gulp being a more general tool, it is better suited for things like back-end tasks. It is also simpler to understand for newcomers. We have a pretty solid Gulp setup and workflow here, so integrating Webpack to our Gulp build is going to be easy peasy.
+
+- Run `npm install --save-dev webpack-stream` to install the plugin that makes it easy to integrate Webpack into Gulp.
 
 ```javascript
-gulp.task('default', ['lint']);
+return gulp.src('src/entry.js')
+  .pipe(webpack())
+  .pipe(gulp.dest('dist/'));
 ```
 
-- Replace the `start` script in `package.json` by `"start": "gulp && webpack"`.
+// TODO: Gulp changes here
+
+
+
 
 - Run `npm start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should still display "The dog says: Wah wah, I am Browser Toby".
 

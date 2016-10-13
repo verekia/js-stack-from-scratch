@@ -36,46 +36,69 @@ Add the following to your `package.json`, under `eslintConfig`:
 ```
 This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
 
-In a Node environment, you can freely `import` different files and Node will resolve these files using your filesystem. In a browser, there is no filesystem, and therefore your `import`s point to nowhere. In order for our entry point file `app.js` to retrieve the tree of imports it needs, we are going to "bundle" that entire tree of dependencies into one file. Browserify is a tool and package that does this. Since we use ES6 syntax, we also want Browserify to compile our ES6 code into ES5 using Babel, which is done with another package called Babelify. We'll need a last package called `vinyl-source-stream` that makes it possible for Gulp to understand what comes out from Babelify and name your bundle. It's a bit difficult to understand, but the following Gulp task should help visualize the general idea:
+In a Node environment, you can freely `import` different files and Node will resolve these files using your filesystem. In a browser, there is no filesystem, and therefore your `import`s point to nowhere. In order for our entry point file `app.js` to retrieve the tree of imports it needs, we are going to "bundle" that entire tree of dependencies into one file. Browserify is a tool and package that does this. Since we use ES6 syntax, we also want Browserify to compile our ES6 code into ES5 using Babel, which is done with another package called Babelify. We'll need a last package called `vinyl-source-stream` that makes it possible for Gulp to understand what comes out from Babelify and name your bundle. It's a bit difficult to understand, but seeing the code should help visualize the general idea.
+
+- Open your `gulpfile.babel.js`.
+
+We don't need the `main` task to execute `node lib/` anymore, since we will open `index.html` to run our app.
+
+- Remove `import { exec } from 'child_process'`.
+
+- Add the following `import`s:
 
 ```javascript
 import browserify from 'browserify';
 import babelify from 'babelify';
 import source from 'vinyl-source-stream';
+```
+
+- Install the packages with: `npm install --save-dev browserify babelify vinyl-source-stream`
+
+- Modify the `main` task like so:
+
+```javascript
+const paths = {
+  allSrcJs: 'src/**/*.js',
+  clientEntryPoint: 'src/client/app.js',
+  gulpFile: 'gulpfile.babel.js',
+};
 
 // [...]
 
-gulp.task('build-client', ['lint'], () =>
-  browserify({ entries: './src/client/app.js', debug: true })
+gulp.task('main', ['lint'], () =>
+  browserify({ entries: paths.clientEntryPoint, debug: true })
     .transform(babelify)
     .bundle()
     .pipe(source('client-bundle.js'))
     .pipe(gulp.dest('dist'))
 );
 ```
-Feel free to look into each one of these package's documentation for further information. Don't worry about not understanding this part perfectly, it will be replaced by Webpack later, in section 9 of this tutorial.
+Feel free to look into each one of these package's documentation for further information. Don't worry about not understanding this part perfectly, it will be replaced by Webpack later anyway, in section 9 of this tutorial.
 
-- Don't forget to install the packages with: `npm install --save-dev browserify babelify vinyl-source-stream`
-
-Also, update the `default` Gulp task to run `build-client` instead of `build`:
+Our `build` task currently transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we only need this task to compile `server` and `shared`. So we'll rename it to `build-server` for clarity, and will adjust its compilation source to only include those folders:
 
 ```javascript
-gulp.task('default', ['build-client']);
-```
+const paths = {
+  allSrcJs: 'src/**/*.js',
+  serverSrcJs: 'src/server/**/*.js',
+  sharedSrcJs: 'src/shared/**/*.js',
+  clientEntryPoint: 'src/client/app.js',
+  gulpFile: 'gulpfile.babel.js',
+};
 
-Our previous Gulp task, `build`, transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we only need this task compile `server` and `shared`. So we'll rename it to `build-server` for clarity, and will adjust its compilation source to only include those folders:
-```javascript
+// [...]
+
 gulp.task('build-server', ['lint'], () =>
   gulp.src([
-    'src/server/**/*.js',
-    'src/shared/**/*.js',
+    paths.serverSrcJs,
+    paths.sharedSrcJs,
   ])
     .pipe(babel())
     .pipe(gulp.dest('lib'))
 );
 ```
 
-The new `build-client` task will take care of the `client` code.
+The new `main` task will take care of the `client` code.
 
 Finally, if you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client bundle.
 
@@ -88,8 +111,6 @@ import 'babel-polyfill';
 ```
 
 Including the polyfill adds about 300KB to your bundle, so don't do this if you're not using any of the features it covers!
-
-Alright, let's modify the `npm start` script in `package.json` to the following: `"start": "gulp"`. We don't need to run `node lib/` anymore, since we will open `index.html` to test our project.
 
 - Run `npm start`, open `index.html`, and you should see "Wah wah, I am Browser Toby".
 

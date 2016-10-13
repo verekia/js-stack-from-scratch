@@ -56,36 +56,19 @@ Install the React Babel preset, which will teach Babel how to process the JSX sy
 },
 ```
 
-In our Gulpfile, we need to tell Gulp that we now also want to process `.jsx` files, which causes the following tweaks:
+In our Gulpfile, we need to tell Gulp that we now also want to process `.jsx` files, which causes the following tweaks in our `paths` declaration:
+
 ```javascript
-gulp.task('build-server', ['lint'], () =>
-  gulp.src([
-    'src/server/**/*.js',
-    'src/shared/**/*.js',
-  ])
-    .pipe(babel())
-    .pipe(gulp.dest('lib'))
-);
-
-gulp.task('lint', () =>
-  gulp.src([
-    'gulpfile.babel.js',
-    'src/**/*.js',
-    'src/**/*.jsx', // Add this line
-  ])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-);
-
-gulp.task('build-client', ['lint'], () =>
-  browserify({ entries: './src/client/app.jsx', debug: true }) // Change this line
-    .transform(babelify)
-    .bundle()
-    .pipe(source('client-bundle.js'))
-    .pipe(gulp.dest('dist'))
-);
+const paths = {
+  allSrcJs: 'src/**/*.js?(x)',
+  serverSrcJs: 'src/server/**/*.js?(x)',
+  sharedSrcJs: 'src/shared/**/*.js?(x)',
+  clientEntryPoint: 'src/client/app.jsx', // Don't forget this one
+  gulpFile: 'gulpfile.babel.js',
+};
 ```
+
+We are going to have JSX files on the server later on, so let's allow `.jsx` extensions everywhere.
 
 Now after running `npm start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
 

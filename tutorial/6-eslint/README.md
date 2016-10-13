@@ -27,12 +27,17 @@ Add the following task to your `gulpfile.babel.js`:
 ```javascript
 import eslint from 'gulp-eslint';
 
+const paths = {
+  allSrcJs: 'src/**/*.js',
+  gulpFile: 'gulpfile.babel.js',
+};
+
 // [...]
 
 gulp.task('lint', () => {
   return gulp.src([
-    'gulpfile.babel.js',
-    'src/**/*.js',
+      paths.allSrcJs,
+      paths.gulpFile,
   ])
     .pipe(eslint())
     .pipe(eslint.format())
@@ -41,7 +46,7 @@ gulp.task('lint', () => {
 ```
 Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
 
-Modify your `build` Gulp task by making the `lint` task a prerequisite to it. It's as simple as passing an array of prerequisite tasks to it, like so:
+Modify your `build` Gulp task by making the `lint` task a prerequisite to it, like so:
 ```javascript
 gulp.task('build', ['lint'], () => {
   // ...
