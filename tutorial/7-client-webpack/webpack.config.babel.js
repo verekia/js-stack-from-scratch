@@ -1,7 +1,5 @@
-module.exports = {
-  entry: './src/client/app.jsx',
+export default {
   output: {
-    path: './dist',
     filename: 'client-bundle.js',
   },
   module: {

@@ -52,7 +52,7 @@ Our `makeBark` test is very explicit, and the description provided as a string i
 
 Alright, let's run this test!
 
-Just like regular code, we are going to need to transpile this `state-test.js` from ES6 to ES5. This file also relies on code located under `src/client`, which is currently only built by Webpack. Remember how I made you split the Gulp `build` task into `build-server` and `build-client` back in [Chapter 7](/tutorial/7-client-browserify)? We'll we're going to undo that! Our tests need the entire codebase to be available in `/lib`, so let's bring back the full `build` task instead of the more-specific `build-server` in `gulpfile.babel.js`:
+Just like regular code, we are going to need to transpile this `state-test.js` from ES6 to ES5. This file also relies on code located under `src/client`, which is currently only built by Webpack. Remember how I made you split the Gulp `build` task into `build-server` and `build-client` back in [Chapter 7](/tutorial/7-client-webpack)? Well we're going to undo that! Our tests need the entire codebase to be available in `/lib`, so let's bring back the full `build` task instead of the more-specific `build-server` in `gulpfile.babel.js`:
 
 ```javascript
 gulp.task('build', ['lint'], () =>
@@ -160,6 +160,6 @@ So what is new here? Well first of all, we call `chai.use(sinonChai)` to activat
 
 If everything went well in this chapter, you should have 2 passing tests.
 
-Next section: [13 - Type Checking with Flow](/tutorial/13-flow)
+Next section: [12 - Type Checking with Flow](/tutorial/12-flow)
 
-Back to the [previous section](/tutorial/11-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

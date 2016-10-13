@@ -73,6 +73,6 @@ We are going to have JSX files on the server later on, so let's allow `.jsx` ext
 Now after running `npm start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
 
 
-Next section: [9 - Webpack](/tutorial/9-webpack)
+Next section: [9 - Redux](/tutorial/9-redux)
 
-Back to the [previous section](/tutorial/7-client-browserify) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/7-client-webpack) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

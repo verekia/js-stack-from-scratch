@@ -97,6 +97,6 @@ export const makeBark = createAction(MAKE_BARK, () => true);
 
 - Don't forget to run `npm install --save redux-actions`.
 
-Next section: [12 - Testing with Mocha, Chai, and Sinon](/tutorial/12-testing-mocha-chai-sinon)
+Next section: [11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
-Back to the [previous section](/tutorial/10-redux) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/9-redux) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
