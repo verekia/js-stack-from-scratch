@@ -53,3 +53,5 @@ Note: The order of chapters is not necessarily the most educational. For instanc
 [13 - Type Checking with Flow](/tutorial/13-flow)
 
 Coming up: React Router, Server-Side Rendering, Styling, Enzyme, Yarn, Git Hooks
+
+Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
