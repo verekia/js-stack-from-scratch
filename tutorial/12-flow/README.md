@@ -1,4 +1,4 @@
-# 13 - Flow
+# 12 - Flow
 
 [Flow](https://flowtype.org/) is a static type checker. It detects inconsistent types in your code and you can add explicit type declarations in it via annotations.
 

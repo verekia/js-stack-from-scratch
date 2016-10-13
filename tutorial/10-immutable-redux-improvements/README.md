@@ -1,4 +1,4 @@
-# 11 - Immutable JS and Redux Improvements
+# 10 - Immutable JS and Redux Improvements
 
 ## Immutable JS
 

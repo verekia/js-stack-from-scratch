@@ -1,4 +1,4 @@
-# 7 - Client app with Browserify
+# 7 - Client App with Webpack
 
 - Create a `dist` folder at the root of your project, and add the following `index.html` file to it:
 

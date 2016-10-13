@@ -1,4 +1,4 @@
-# 12 - Testing with Mocha, Chai, and Sinon
+# 11 - Testing with Mocha, Chai, and Sinon
 
 ## Mocha and Chai
 
