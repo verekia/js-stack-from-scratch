@@ -29,6 +29,8 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 
 - Run `npm start`. It should print `Hello world`.
 
+**Note**: If you take a look at the given `package.json` of this chapter, you will see an other script: `"test": "npm start"`. We only introduce testing later on in this tutorial, but this script lets me test that the chapter works fine when running `npm install && npm start`. You can ignore this `test` script for now.
+
 Next section: [2 - Installing and using an NPM package](/tutorial/2-packages)
 
 Back to the [table of contents](https://github.com/verekia/js-stack-from-scratch).

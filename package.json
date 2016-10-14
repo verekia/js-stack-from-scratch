@@ -1,0 +1,19 @@
+{
+  "name": "js-stack-from-scratch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd tutorial/1-npm-and-package-json && npm i && npm test && cd ../2-packages && npm i && npm test && cd ../3-es6-babel-gulp && npm i && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verekia/js-stack-from-scratch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/verekia/js-stack-from-scratch/issues"
+  },
+  "homepage": "https://github.com/verekia/js-stack-from-scratch#readme"
+}
