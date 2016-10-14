@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp && webpack",
+    "start": "gulp",
     "test": "gulp test"
   },
   "eslintConfig": {
@@ -64,6 +64,6 @@
     "mocha": "^3.1.1",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
-    "webpack": "^1.13.2"
+    "webpack-stream": "^3.2.0"
   }
 }

@@ -6,31 +6,27 @@
 
 - Create an empty `.flowconfig` file at the root of your project
 
-- Now we need a Gulp task to run Flow. Run `npm install --save-dev gulp-flowtype` to install the Gulp plugin for Flow, and create the following Gulp `typecheck` task:
+- Run `npm install --save-dev gulp-flowtype` to install the Gulp plugin for Flow, and add `flow()` to your `lint` task:
 
 ```javascript
 import flow from 'gulp-flowtype';
 
 // [...]
 
-gulp.task('typecheck', () =>
+gulp.task('lint', () =>
   gulp.src([
-    'src/**/*.js',
-    'src/**/*.jsx',
+    paths.allSrcJs,
+    paths.gulpFile,
+    paths.webpackFile,
   ])
-    .pipe(flow())
+    .pipe(flow({ abort: true })) // Add Flow here
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
 );
 ```
 
-- Make `typecheck` a prerequisite task for `build`, `test`, and `lint`:
-
-```javascript
-gulp.task('build', ['typecheck', 'lint'], /* ... */);
-gulp.task('test', ['typecheck', 'lint', 'build'], /* ... */);
-gulp.task('lint', ['typecheck'], /* ... */);
-```
-
-We make `typecheck` a prerequisite of `lint` because linting is more likely to be well supported by your code editor, whereas Flow might not. This way if the `typecheck` task fails in the console, `lint` won't run, saving a bit of time.
+The `abort` option is to interrupt the Gulp task if Flow detects an issue.
 
 Alright, we should be able to run Flow now.
 

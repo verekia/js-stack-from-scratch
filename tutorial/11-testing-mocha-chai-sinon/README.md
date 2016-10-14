@@ -52,41 +52,33 @@ Our `makeBark` test is very explicit, and the description provided as a string i
 
 Alright, let's run this test!
 
-Just like regular code, we are going to need to transpile this `state-test.js` from ES6 to ES5. This file also relies on code located under `src/client`, which is currently only built by Webpack. Remember how I made you split the Gulp `build` task into `build-server` and `build-client` back in [Chapter 7](/tutorial/7-client-webpack)? Well we're going to undo that! Our tests need the entire codebase to be available in `/lib`, so let's bring back the full `build` task instead of the more-specific `build-server` in `gulpfile.babel.js`:
-
-```javascript
-gulp.task('build', ['lint'], () =>
-  gulp.src([
-    'src/**/*.js',
-    'src/**/*.jsx',
-  ])
-    .pipe(babel())
-    .pipe(gulp.dest('lib'))
-);
-```
-
-- Now we can create the following `test` task, which relies on the `gulp-mocha` plugin:
+- Create the following `test` task, which relies on the `gulp-mocha` plugin:
 
 ```javascript
 import mocha from 'gulp-mocha';
 
+const paths = {
+  // [...]
+  allLibTests: 'lib/test/**/*.js',
+};
+
 // [...]
 
-gulp.task('test', ['lint', 'build'], () =>
-  gulp.src('lib/test/**/*.js')
+gulp.task('test', ['build'], () =>
+  gulp.src(paths.allLibTests)
     .pipe(mocha())
 );
 ```
 
 - Run `npm install --save-dev gulp-mocha` of course.
 
-In this chapter, we are using Gulp to lint, build, and test our code (in this order), so we can change our `default` task to run `test` instead of `lint`:
+As you can see, tests are run on transpiled code in `lib`, which is why `build` is a prerequisite task of `test`. `build` also has a prerequisite, `lint`, and finally, we are making `test` a prerequisite of `main`, which gives us the following task cascade for the `default` task: `lint` > `build` > `test` > `main`.
+
+- Change the prerequisite of `main` to `test`:
 
 ```javascript
-gulp.task('default', ['test']);
+gulp.task('main', ['test'], () => /* ... */ );
 ```
-
-Linting is run automatically because it's a prerequisite of the Gulp `test` task.
 
 - In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `npm test` to just run your tests. `npm test` is also the standard command that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `npm start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
 
