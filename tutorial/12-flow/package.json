@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp",
-    "test": "gulp test"
+    "test": "gulp test",                                  "tutorial-test": "gulp main"
   },
   "eslintConfig": {
     "extends": [
