@@ -27,12 +27,17 @@ Add the following task to your `gulpfile.babel.js`:
 ```javascript
 import eslint from 'gulp-eslint';
 
+const paths = {
+  allSrcJs: 'src/**/*.js',
+  gulpFile: 'gulpfile.babel.js',
+};
+
 // [...]
 
 gulp.task('lint', () => {
   return gulp.src([
-    'gulpfile.babel.js',
-    'src/**/*.js',
+      paths.allSrcJs,
+      paths.gulpFile,
   ])
     .pipe(eslint())
     .pipe(eslint.format())
@@ -41,7 +46,7 @@ gulp.task('lint', () => {
 ```
 Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
 
-Modify your `build` Gulp task by making the `lint` task a prerequisite to it. It's as simple as passing an array of prerequisite tasks to it, like so:
+Modify your `build` Gulp task by making the `lint` task a prerequisite to it, like so:
 ```javascript
 gulp.task('build', ['lint'], () => {
   // ...
@@ -99,6 +104,6 @@ The last issue warning left is about `console.log()`. Let's say that we want thi
 **Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
 
 
-Next section: [7 - Client app with Browserify](/tutorial/7-client-browserify)
+Next section: [7 - Client app with Webpack](/tutorial/7-client-webpack)
 
 Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

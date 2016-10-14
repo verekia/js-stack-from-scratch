@@ -38,19 +38,17 @@ Note: The order of chapters is not necessarily the most educational. For instanc
 
 [6 - ESLint](/tutorial/6-eslint)
 
-[7 - Client app with Browserify](/tutorial/7-client-browserify)
+[7 - Client app with Webpack](/tutorial/7-client-webpack)
 
 [8 - React](/tutorial/8-react)
 
-[9 - Webpack](/tutorial/9-webpack)
+[9 - Redux](/tutorial/9-redux)
 
-[10 - Redux](/tutorial/10-redux)
+[10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
-[11 - Immutable JS and Redux Improvements](/tutorial/11-immutable-redux-improvements)
+[11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
-[12 - Testing with Mocha, Chai, and Sinon](/tutorial/12-testing-mocha-chai-sinon)
-
-[13 - Type Checking with Flow](/tutorial/13-flow)
+[12 - Type Checking with Flow](/tutorial/12-flow)
 
 Coming up: React Router, Server-Side Rendering, Styling, Enzyme, Yarn, Minification, Git Hooks
 

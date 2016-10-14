@@ -26,24 +26,49 @@ console.log(`Hello ${str}`);
 ```javascript
 const gulp = require('gulp');
 const babel = require('gulp-babel');
+const exec = require('child_process').exec;
+
+const paths = {
+  allSrcJs: 'src/**/*.js',
+};
 
 gulp.task('build', () => {
-  return gulp.src(['src/**/*.js'])
+  return gulp.src(paths.allSrcJs)
     .pipe(babel())
     .pipe(gulp.dest('lib'));
 });
 
+gulp.task('main', ['build'], (callback) => {
+  exec('node lib/', (error, stdout) => {
+    console.log(stdout);
+    return callback(error);
+  });
+});
+
+gulp.task('watch', () => {
+  gulp.watch(paths.allSrcJs, ['main']);
+});
+
+gulp.task('default', ['watch', 'main']);
 ```
-Gulp's API is very straightforward. It defines `gulp.task`s, that can reference `gulp.src` files, applies a chain of treatments to them with `.pipe()` (like `babel()` in our case) and outputs the new files to `gulp.dest`. Refer to the [documentation](https://github.com/gulpjs/gulp) for a deeper understanding.
 
-You can also add a `default` task that will launch the `build` task, to be able to simply run `gulp` in the CLI:
+Let's take a moment to understand all this.
 
-```javascript
-gulp.task('default', ['build']);
-```
+The API of Gulp itself is pretty straightforward. It defines `gulp.task`s, that can reference `gulp.src` files, applies a chain of treatments to them with `.pipe()` (like `babel()` in our case) and outputs the new files to `gulp.dest`. It can also `gulp.watch` for changes on your filesystem. Gulp tasks can run prerequisite tasks before them, by passing an array (like `['build']`) as a second parameter to `gulp.task`. Refer to the [documentation](https://github.com/gulpjs/gulp) for a more thorough presentation.
 
-- In `package.json`, change your `start` script to: `"start": "gulp && node lib/"`
-- Run `npm start` and it should print "Hello ES6".
+First we define a `paths` object to store all our different file paths and keep things DRY.
+
+Then we define 4 tasks: `build`, `main`, `watch`, and `default`.
+
+- `build` is where Babel is called to transform all of our source files and write the transformed ones to `lib`.
+- `main` is the equivalent of running `node .` in the previous chapter, except this time, we want to run it on `lib/index.js`. Since `index.js` is the default file Node looks for, we can simply write `node lib/`. The `require('child_process').exec` and `exec` part in the task is a native Node function that executes a shell command. We forward `stdout` to `console.log()` and return a potential error using `gulp.task`'s callback function. Don't worry if this part is not super clear to you, remember that this task is basically just running `node lib/`.
+- `watch` runs the `main` task when filesystem changes happen in the specified files.
+- `default` is a special task that will be run if you simply call `gulp` from the CLI. In our case we want it to run both `watch` and `main` (for the first execution).
+
+Alright! Let's see if this works.
+
+- In `package.json`, change your `start` script to: `"start": "gulp"`
+- Run `npm start`. It should print "Hello ES6" and start watching for changes. Try writing bad code in `src/index.js` to see Gulp automatically showing you the error when you save.
 
 - Add `lib` to your `.gitignore`
 

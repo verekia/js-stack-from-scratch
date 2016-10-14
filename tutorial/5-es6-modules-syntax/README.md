@@ -37,9 +37,12 @@ So what about those `require()`s in our `gulpfile.js`? Can we use `import` inste
 ```javascript
 import gulp from 'gulp';
 import babel from 'gulp-babel';
+import { exec } from 'child_process';
 ```
 
-`npm start` should still print "Wah wah, I am Toby".
+Note the syntactic sugar to extract `exec` directly from `child_process`. Pretty elegant!
+
+- `npm start` should still print "Wah wah, I am Toby".
 
 Next section: [6 - ESLint](/tutorial/6-eslint)
 
