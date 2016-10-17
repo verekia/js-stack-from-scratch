@@ -26,6 +26,8 @@ Code examples are available for each section, and you can run them all with `npm
 
 Note: The order of chapters is not necessarily the most educational. For instance, testing / type checking could have been done before introducing React. It is quite difficult to move chapters around or edit past ones, since I need to apply those changes to every following chapter. If things settle down, I might reorganize the whole thing in a better way.
 
+The code of this tutorial works on Linux, macOS, and Windows.
+
 ## Table of contents
 
 [1 - Node, NPM, and package.json](/tutorial/1-npm-and-package-json)
