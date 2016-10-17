@@ -4,7 +4,7 @@ In this section we will set up Node, NPM, and a basic `package.json` file.
 
 First, we need to install Node, which is not only used for back-end JavaScript, but all the tools we need to build a modern Front-End stack.
 
-Refer to the [download page](https://nodejs.org/en/download/current/) or the [package manager installations page](https://nodejs.org/en/download/package-manager/) for the latest instructions.
+Head to the [download page](https://nodejs.org/en/download/current/) for macOS or Windows binaries, or the [package manager installations page](https://nodejs.org/en/download/package-manager/) for Linux distributions.
 
 For instance, on **Ubuntu / Debian**, you would run the following commands to install Node:
 
