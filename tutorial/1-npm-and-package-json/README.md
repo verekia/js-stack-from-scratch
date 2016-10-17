@@ -6,6 +6,8 @@ First, we need to install Node, which is not only used for back-end JavaScript, 
 
 Refer to the [download page](https://nodejs.org/en/download/current/) or the [package manager installations page](https://nodejs.org/en/download/package-manager/) for the latest instructions.
 
+For instance, on **Ubuntu / Debian**, you would run the following commands to install Node:
+
 ```bash
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
