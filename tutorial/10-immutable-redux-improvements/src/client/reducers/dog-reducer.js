@@ -1,7 +1,7 @@
-import { Map } from 'immutable';
+import Immutable from 'immutable';
 import { MAKE_BARK } from '../actions/dog-actions';
 
-const initialState = Map({
+const initialState = Immutable.Map({
   hasBarked: false,
 });
 
