@@ -57,3 +57,5 @@ The code of this tutorial works on Linux, macOS, and Windows.
 Coming up: React Router, Server-Side Rendering, Styling, Enzyme, Yarn, Minification, Git Hooks
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
+
+License: ISC
