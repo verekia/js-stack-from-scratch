@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "test": "cd tutorial/1-npm-and-package-json && npm i && npm run tutorial-test && cd ../2-packages && npm i && npm run tutorial-test && cd ../3-es6-babel-gulp && npm i && npm run tutorial-test && cd ../4-es6-syntax-class && npm i && npm run tutorial-test && cd ../5-es6-modules-syntax && npm i && npm run tutorial-test && cd ../6-eslint && npm i && npm run tutorial-test && cd ../7-client-webpack && npm i && npm run tutorial-test && cd ../8-react && npm i && npm run tutorial-test && cd ../9-redux && npm i && npm run tutorial-test && cd ../10-immutable-redux-improvements && npm i && npm run tutorial-test && cd ../11-testing-mocha-chai-sinon && npm i && npm run tutorial-test && cd ../12-flow && npm i && npm run tutorial-test"
+    "test": "cd tutorial/1-npm-and-package-json && yarn && yarn run tutorial-test && cd ../2-packages && yarn && yarn run tutorial-test && cd ../3-es6-babel-gulp && yarn && yarn run tutorial-test && cd ../4-es6-syntax-class && yarn && yarn run tutorial-test && cd ../5-es6-modules-syntax && yarn && yarn run tutorial-test && cd ../6-eslint && yarn && yarn run tutorial-test && cd ../7-client-webpack && yarn && yarn run tutorial-test && cd ../8-react && yarn && yarn run tutorial-test && cd ../9-redux && yarn && yarn run tutorial-test && cd ../10-immutable-redux-improvements && yarn && yarn run tutorial-test && cd ../11-testing-mocha-chai-sinon && yarn && yarn run tutorial-test && cd ../12-flow && yarn && yarn run tutorial-test"
+  },
+  "devDependencies": {
+    "yarn": "^0.16.1"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
