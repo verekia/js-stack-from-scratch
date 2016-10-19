@@ -1,8 +1,7 @@
 {
-  "name": "js-training",
+  "name": "js-stack-from-scratch",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1",                                                      "tutorial-test": "gulp main"
@@ -34,9 +33,6 @@
     ],
     "compact": false
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "immutable": "^3.8.1",
@@ -60,5 +56,8 @@
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
     "webpack-stream": "^3.2.0"
-  }
+  },
+  "repository": "verekia/js-stack-from-scratch",
+  "author": "Jonathan Verrecchia - @verekia",
+  "license": "ISC"
 }
