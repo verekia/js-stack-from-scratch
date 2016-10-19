@@ -24,10 +24,10 @@ gulp.task('lint', () =>
     paths.gulpFile,
     paths.webpackFile,
   ])
-    .pipe(flow({ abort: true }))
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
+    .pipe(flow({ abort: true }))
 );
 
 gulp.task('build', ['lint'], () =>
