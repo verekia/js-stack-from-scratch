@@ -85,6 +85,16 @@ const Message = ({ message }: { message: string }) => <div>{message}</div>;
 
 As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
 
+Another case you will encounter is that in `src/client/reducers/dog-reducer.js`, Flow will complain about Immutable not having a default export. This issue is discussed in [#863 on Immutable](https://github.com/facebook/immutable-js/issues/863), which highlights 2 workarounds:
+
+```javascript
+import { Map as ImmutableMap } from 'immutable';
+// or
+import * as Immutable from 'immutable';
+```
+
+Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components.
+
 **Note**: If Flow detects type errors in your `node_modules` folder, add an `[ignore]` section in your `.flowconfig` to ignore the packages causing issues specifically (do not ignore the entire `node_modules` directory). It could look like this:
 ```
 [ignore]
