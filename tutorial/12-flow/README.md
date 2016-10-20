@@ -73,7 +73,7 @@ Now that ESLint and Babel are able to share a common parser, we can actually get
 
 Now if you type `name:string` as an annotation, ESLint should complain that you forgot a space after the colon for instance.
 
-**Note**: The `"parser": "babel-eslint"` property that I made you write in `package.json` is actually included in the `"plugin:flowtype/recommended"` config, so you can now remove it for a more minimal `package.json`. Leaving it there is more explicit though, so that's up to your personal preference.
+**Note**: The `"parser": "babel-eslint"` property that I made you write in `package.json` is actually included in the `"plugin:flowtype/recommended"` config, so you can now remove it for a more minimal `package.json`. Leaving it there is more explicit though, so that's up to your personal preference. Since this tutorial is about the most minimal setup, I removed it.
 
 - You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `npm test` or `npm start`, and add type annotations everywhere Flow asks you to do so.
 
@@ -93,7 +93,7 @@ import { Map as ImmutableMap } from 'immutable';
 import * as Immutable from 'immutable';
 ```
 
-Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components.
+Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components. I'm personally going for `import * as Immutable from 'immutable'` since it's shorter and won't require refactoring the code when this issue gets fixed.
 
 **Note**: If Flow detects type errors in your `node_modules` folder, add an `[ignore]` section in your `.flowconfig` to ignore the packages causing issues specifically (do not ignore the entire `node_modules` directory). It could look like this:
 ```
