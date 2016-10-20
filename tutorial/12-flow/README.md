@@ -73,9 +73,9 @@ Now that ESLint and Babel are able to share a common parser, we can actually get
 
 Now if you type `name:string` as an annotation, ESLint should complain that you forgot a space after the colon for instance.
 
-- You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `npm test` or `npm start`, and add type annotations everywhere Flow asks you to do so.
+**Note**: The `"parser": "babel-eslint"` property that I made you write in `package.json` is actually included in the `"plugin:flowtype/recommended"` config, so you can now remove it for a more minimal `package.json`. Leaving it there is more explicit though, so that's up to your personal preference.
 
-**Note**: The `"parser": "babel-eslint"` that I made you write in `package.json` is actually included in the `"plugin:flowtype/recommended"` config, so you can now remove it for a more minimal `package.json`.
+- You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `npm test` or `npm start`, and add type annotations everywhere Flow asks you to do so.
 
 One counterintuitive case is the following, for `src/client/component/message.jsx`:
 
