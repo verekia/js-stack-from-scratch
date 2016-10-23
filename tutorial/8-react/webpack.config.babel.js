@@ -2,6 +2,7 @@ export default {
   output: {
     filename: 'client-bundle.js',
   },
+  devtool: 'source-map',
   module: {
     loaders: [
       {

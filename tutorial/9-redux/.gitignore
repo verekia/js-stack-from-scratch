@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 lib
 dist/client-bundle.js
+dist/client-bundle.js.map
