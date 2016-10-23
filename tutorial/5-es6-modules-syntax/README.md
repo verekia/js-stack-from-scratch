@@ -42,7 +42,7 @@ import { exec } from 'child_process';
 
 Note the syntactic sugar to extract `exec` directly from `child_process`. Pretty elegant!
 
-- `npm start` should still print "Wah wah, I am Toby".
+- `yarn start` should still print "Wah wah, I am Toby".
 
 Next section: [6 - ESLint](/tutorial/6-eslint)
 

@@ -41,7 +41,7 @@ This way we can use variables such as `window` or `document` which are always ac
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client code.
 
-- Run `npm install --save babel-polyfill`
+- Run `yarn add babel-polyfill`
 
 And before anything else in `app.js`, add this import:
 
@@ -84,7 +84,7 @@ gulp.task('lint', () =>
 
 We need to teach Webpack how to process ES6 files via Babel (just like we taught Gulp how to process ES6 files with `gulp-babel`). In Webpack, when you need to process files that are not plain old JavaScript, you use *loaders*. So let's install the Babel loader for Webpack:
 
-- Run `npm install --save-dev babel-loader`
+- Run `yarn add --dev babel-loader`
 
 - Write the following to your `webpack.config.babel.js` file:
 
@@ -126,7 +126,7 @@ We don't need the `main` task to execute `node lib/` anymore, since we will open
 
 Similarly to Gulp plugins, the `webpack-stream` package lets us integrate Webpack into Gulp very easily.
 
-- Install the package with: `npm install --save-dev webpack-stream`
+- Install the package with: `yarn add --dev webpack-stream`
 
 - Add the following `import`s:
 
@@ -168,7 +168,7 @@ gulp.task('main', ['lint'], () =>
 
 **Note**: Our `build` task currently transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we could make this task only compile `server` and `shared` (since Webpack takes care of `client`). However, in the Testing chapter, we are going to need Gulp to also compile the `client` code to test it outside of Webpack. So until you reach that chapter, there is a bit of useless duplicated build being done. I'm sure we can all agree that it's fine for now.
 
-- Run `npm start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should display "Wah wah, I am Browser Toby".
+- Run `yarn start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should display "Wah wah, I am Browser Toby".
 
 - Add `dist/client-bundle.js` to your `.gitignore` file.
 
