@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tutorial-test": "npm start"
+    "tutorial-test": "yarn start"
   },
   "dependencies": {
     "color": "^0.11.3"
