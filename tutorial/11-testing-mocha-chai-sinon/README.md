@@ -8,7 +8,7 @@
 
 We are going to use [Mocha](http://mochajs.org/) as our main testing framework. Mocha is easy to use, has tons of features, and is currently the [most popular JavaScript testing framework](http://stateofjs.com/2016/testing/). It is very flexible and modular. In particular, it lets you use any assertion library you want. [Chai](http://chaijs.com/) is a great assertion library that has a lot of [plugins](http://chaijs.com/plugins/) available and lets you choose between different assertion styles.
 
-- Let's install Mocha and Chai by running `npm install --save-dev mocha chai`
+- Let's install Mocha and Chai by running `yarn --dev mocha chai`
 
 In `state-test.js`, write the following:
 
@@ -70,7 +70,7 @@ gulp.task('test', ['build'], () =>
 );
 ```
 
-- Run `npm install --save-dev gulp-mocha` of course.
+- Run `yarn add --dev gulp-mocha` of course.
 
 As you can see, tests are run on transpiled code in `lib`, which is why `build` is a prerequisite task of `test`. `build` also has a prerequisite, `lint`, and finally, we are making `test` a prerequisite of `main`, which gives us the following task cascade for the `default` task: `lint` > `build` > `test` > `main`.
 
@@ -80,9 +80,9 @@ As you can see, tests are run on transpiled code in `lib`, which is why `build` 
 gulp.task('main', ['test'], () => /* ... */ );
 ```
 
-- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `npm test` to just run your tests. `npm test` is also the standard command that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `npm start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
+- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `yarn test` to just run your tests. `test` is also the standard script that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `yarn start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
 
-- Run `npm test` or `npm start`, and it should print the result for our test, hopefully green.
+- Run `yarn test` or `yarn start`, and it should print the result for our test, hopefully green.
 
 ## Sinon
 
@@ -144,7 +144,7 @@ describe('Shared', () => {
 
 Here, we are using *stubs* from Sinon, and a Chai plugin to be able to use Chai assertions on Sinon stubs and such.
 
-- Run `npm install --save-dev sinon sinon-chai` to install these libraries.
+- Run `yarn add --dev sinon sinon-chai` to install these libraries.
 
 So what is new here? Well first of all, we call `chai.use(sinonChai)` to activate the Chai plugin. Then, all the magic happens in the `it()` statement: `stub(console, 'log')` is going to neutralize `console.log` and monitor it. When `new Dog('Test Toby').barkInConsole()` is executed, a `console.log` is normally supposed to happen. We test this call to `console.log` with `console.log.should.have.been.calledWith()`, and finally, we `restore` the neutralized `console.log` to make it work normally again.
 

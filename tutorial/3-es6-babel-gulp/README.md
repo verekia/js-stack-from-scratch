@@ -1,9 +1,9 @@
 # 3 - Setting up ES6 with Babel and Gulp
 
 We're now going to use ES6 syntax, which is a great improvement over the "old" ES5 syntax. All browsers and JS environments understand ES5 well, but not ES6. So we're going to use a tool called Babel to transform ES6 files into ES5 files. To run Babel, we are going to use Gulp, a task runner. It is similar to the tasks located under `scripts` in `package.json`, but writing your task in a JS file is simpler and clearer than a JSON file, so we'll install Gulp, and the Babel plugin for Gulp too:
-- Run `npm install --save-dev gulp`
-- Run `npm install --save-dev gulp-babel`
-- Run `npm install --save-dev babel-preset-latest`
+- Run `yarn add --dev gulp`
+- Run `yarn add --dev gulp-babel`
+- Run `yarn add --dev babel-preset-latest`
 - In `package.json`, add a `babel` field for the babel configuration. Make it use the latest Babel preset like this:
 ```json
 "babel": {
@@ -68,7 +68,7 @@ Then we define 4 tasks: `build`, `main`, `watch`, and `default`.
 Alright! Let's see if this works.
 
 - In `package.json`, change your `start` script to: `"start": "gulp"`
-- Run `npm start`. It should print "Hello ES6" and start watching for changes. Try writing bad code in `src/index.js` to see Gulp automatically showing you the error when you save.
+- Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try writing bad code in `src/index.js` to see Gulp automatically showing you the error when you save.
 
 - Add `lib` to your `.gitignore`
 

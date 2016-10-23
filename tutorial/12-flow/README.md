@@ -2,11 +2,11 @@
 
 [Flow](https://flowtype.org/) is a static type checker. It detects inconsistent types in your code and you can add explicit type declarations in it via annotations.
 
-- In order for Babel to undestand and remove Flow annotations during the transpilation process, install the Flow preset for Babel by running `npm install --save-dev babel-preset-flow`. Then, add `"flow"` under `babel.presets` in your `package.json`.
+- In order for Babel to undestand and remove Flow annotations during the transpilation process, install the Flow preset for Babel by running `yarn add --dev babel-preset-flow`. Then, add `"flow"` under `babel.presets` in your `package.json`.
 
 - Create an empty `.flowconfig` file at the root of your project
 
-- Run `npm install --save-dev gulp-flowtype` to install the Gulp plugin for Flow, and add `flow()` to your `lint` task:
+- Run `yarn add --dev gulp-flowtype` to install the Gulp plugin for Flow, and add `flow()` to your `lint` task:
 
 ```javascript
 import flow from 'gulp-flowtype';
@@ -59,23 +59,23 @@ export default Dog;
 
 The `// @flow` comment tells Flow that we want this file to be typechecked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check the documentation for more details.
 
-Now if you run `npm start`, Flow will work fine, but ESLint is going to complain about that non-standard syntax we're using. Since Babel's parser is all up-and-running with parsing Flow content thanks to the `babel-preset-flow` plugin we installed, it'd be nice if ESLint could rely on Babel's parser instead of trying to understand Flow annotations on its own. That's actually possible using the `babel-eslint` package. Let's do this.
+Now if you run `yarn start`, Flow will work fine, but ESLint is going to complain about that non-standard syntax we're using. Since Babel's parser is all up-and-running with parsing Flow content thanks to the `babel-preset-flow` plugin we installed, it'd be nice if ESLint could rely on Babel's parser instead of trying to understand Flow annotations on its own. That's actually possible using the `babel-eslint` package. Let's do this.
 
-- Run `npm install --save-dev babel-eslint`
+- Run `yarn add --dev babel-eslint`
 
 - In `package.json`, under `eslintConfig`, add the following property: `"parser": "babel-eslint"`
 
-`npm start` should now both lint and typecheck your code fine.
+`yarn start` should now both lint and typecheck your code fine.
 
 Now that ESLint and Babel are able to share a common parser, we can actually get ESLint to lint our Flow annotations via the `eslint-plugin-flowtype` plugin.
 
-- Run `npm install --save-dev eslint-plugin-flowtype` and add `"flowtype"` under `eslintConfig.plugins` in `package.json`, and add `"plugin:flowtype/recommended"` under `eslintConfig.extends` in an array next to `"airbnb"`.
+- Run `yarn add --dev eslint-plugin-flowtype` and add `"flowtype"` under `eslintConfig.plugins` in `package.json`, and add `"plugin:flowtype/recommended"` under `eslintConfig.extends` in an array next to `"airbnb"`.
 
 Now if you type `name:string` as an annotation, ESLint should complain that you forgot a space after the colon for instance.
 
 **Note**: The `"parser": "babel-eslint"` property that I made you write in `package.json` is actually included in the `"plugin:flowtype/recommended"` config, so you can now remove it for a more minimal `package.json`. Leaving it there is more explicit though, so that's up to your personal preference. Since this tutorial is about the most minimal setup, I removed it.
 
-- You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `npm test` or `npm start`, and add type annotations everywhere Flow asks you to do so.
+- You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `yarn test` or `yarn start`, and add type annotations everywhere Flow asks you to do so.
 
 One counterintuitive case is the following, for `src/client/component/message.jsx`:
 
