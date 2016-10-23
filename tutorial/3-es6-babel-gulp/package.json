@@ -19,5 +19,8 @@
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
-  "license": "ISC"
+  "license": "MIT",
+  "dependencies": {
+    "del": "^2.2.2"
+  }
 }
