@@ -59,13 +59,15 @@ Webpack uses a config file, just like Gulp, called `webpack.config.js`. It is po
 
 - Create an empty `webpack.config.babel.js` file
 
-- While you're at it, add `webpack.config.babel.js` to your Gulp `lint` task:
+- While you're at it, add `webpack.config.babel.js` to your Gulp `lint` task, and a few more `paths` constants:
 
 ```javascript
 const paths = {
   allSrcJs: 'src/**/*.js',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
+  libDir: 'lib',
+  distDir: 'dist',
 };
 
 // [...]
@@ -150,6 +152,8 @@ const paths = {
   clientEntryPoint: 'src/client/app.js',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
+  libDir: 'lib',
+  distDir: 'dist',
 };
 ```
 
@@ -160,16 +164,24 @@ We now have constants for the different parts of our application, and an entry p
 - Modify the `main` task like so:
 
 ```javascript
-gulp.task('main', ['lint'], () =>
+gulp.task('main', ['lint', 'clean'], () =>
   gulp.src(paths.clientEntryPoint)
     .pipe(webpack(webpackConfig))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest(paths.distDir))
 );
 ```
 
-**Note**: Our `build` task currently transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we could make this task only compile `server` and `shared` (since Webpack takes care of `client`). However, in the Testing chapter, we are going to need Gulp to also compile the `client` code to test it outside of Webpack. So until you reach that chapter, there is a bit of useless duplicated build being done. I'm sure we can all agree that it's fine for now.
+**Note**: Our `build` task currently transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we could make this task only compile `server` and `shared` (since Webpack takes care of `client`). However, in the Testing chapter, we are going to need Gulp to also compile the `client` code to test it outside of Webpack. So until you reach that chapter, there is a bit of useless duplicated build being done. I'm sure we can all agree that it's fine for now. We actually aren't even going to be using the `build` task and `lib` folder anymore until that chapter, since all we care about right now is the client bundle.
 
 - Run `yarn start`, you should now see Webpack building your `client-bundle.js` file, and opening `index.html` in your browser should display "Wah wah, I am Browser Toby".
+
+One last thing: unlike our `lib` folder, the `dist/client-bundle.js` and `dist/client-bundle.js.map` files are not being cleaned up by our `clean` task before each build.
+
+- Add `clientBundle: 'dist/client-bundle.js?(.map)'` to our `paths` configuration, and tweak the `clean` task like so:
+
+```javascript
+gulp.task('clean', () => del([paths.libDir, paths.clientBundle]));
+```
 
 - Add this to your `.gitignore` file:
 ```

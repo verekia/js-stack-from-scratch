@@ -49,6 +49,7 @@
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "chai": "^3.5.0",
+    "del": "^2.2.2",
     "eslint": "^3.7.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.0",

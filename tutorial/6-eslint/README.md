@@ -24,31 +24,35 @@ We'll create a Gulp task that runs ESLint for us. So we'll install the ESLint Gu
 - Run `yarn add --dev gulp-eslint`
 
 Add the following task to your `gulpfile.babel.js`:
+
 ```javascript
 import eslint from 'gulp-eslint';
 
 const paths = {
   allSrcJs: 'src/**/*.js',
   gulpFile: 'gulpfile.babel.js',
+  libDir: 'lib',
 };
 
 // [...]
 
 gulp.task('lint', () => {
   return gulp.src([
-      paths.allSrcJs,
-      paths.gulpFile,
+    paths.allSrcJs,
+    paths.gulpFile,
   ])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
 ```
+
 Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
 
 Modify your `build` Gulp task by making the `lint` task a prerequisite to it, like so:
+
 ```javascript
-gulp.task('build', ['lint'], () => {
+gulp.task('build', ['lint', 'clean'], () => {
   // ...
 });
 ```
@@ -56,9 +60,11 @@ gulp.task('build', ['lint'], () => {
 - Run `yarn start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using `console.log()` in `index.js`.
 
 One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.babel.js`, at the very top, add:
+
 ```javascript```
 /* eslint-disable import/no-extraneous-dependencies */
 ```
+
 This way, ESLint won't apply the rule `import/no-extraneous-dependencies` in this file.
 
 Now we are left with the issue `Unexpected block statement surrounding arrow body (arrow-body-style)`. That's a great one. ESLint is telling us that there is a better way to write the following code:
@@ -77,23 +83,25 @@ It should be rewritten into:
 
 Because when a function only contains a return statement, you can omit the curly braces, return statement, and semicolon in ES6.
 
-
 So let's update the Gulp file accordingly:
-```javascript
-gulp.task('build', ['lint'], () =>
-  gulp.src(['src/**/*.js'])
-    .pipe(babel())
-    .pipe(gulp.dest('lib'))
-);
 
+```javascript
 gulp.task('lint', () =>
   gulp.src([
-    'gulpfile.babel.js',
-    'src/**/*.js',
+    paths.allSrcJs,
+    paths.gulpFile,
   ])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
+);
+
+gulp.task('clean', () => del(paths.libDir));
+
+gulp.task('build', ['lint', 'clean'], () =>
+  gulp.src(paths.allSrcJs)
+    .pipe(babel())
+    .pipe(gulp.dest(paths.libDir))
 );
 ```
 
