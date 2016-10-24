@@ -21,25 +21,33 @@ const str = 'ES6';
 console.log(`Hello ${str}`);
 ```
 
+We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`.
+
 - Create a `gulpfile.js` containing:
 
 ```javascript
 const gulp = require('gulp');
 const babel = require('gulp-babel');
+const del = require('del');
 const exec = require('child_process').exec;
 
 const paths = {
   allSrcJs: 'src/**/*.js',
+  libDir: 'lib',
 };
 
-gulp.task('build', () => {
+gulp.task('clean', () => {
+  return del(paths.libDir);
+});
+
+gulp.task('build', ['clean'], () => {
   return gulp.src(paths.allSrcJs)
     .pipe(babel())
-    .pipe(gulp.dest('lib'));
+    .pipe(gulp.dest(paths.libDir));
 });
 
 gulp.task('main', ['build'], (callback) => {
-  exec('node lib/', (error, stdout) => {
+  exec(`node ${paths.libDir}`, (error, stdout) => {
     console.log(stdout);
     return callback(error);
   });
@@ -50,6 +58,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', ['watch', 'main']);
+
 ```
 
 Let's take a moment to understand all this.
@@ -58,16 +67,19 @@ The API of Gulp itself is pretty straightforward. It defines `gulp.task`s, that 
 
 First we define a `paths` object to store all our different file paths and keep things DRY.
 
-Then we define 4 tasks: `build`, `main`, `watch`, and `default`.
+Then we define 5 tasks: `build`, `clean`, `main`, `watch`, and `default`.
 
-- `build` is where Babel is called to transform all of our source files and write the transformed ones to `lib`.
-- `main` is the equivalent of running `node .` in the previous chapter, except this time, we want to run it on `lib/index.js`. Since `index.js` is the default file Node looks for, we can simply write `node lib/`. The `require('child_process').exec` and `exec` part in the task is a native Node function that executes a shell command. We forward `stdout` to `console.log()` and return a potential error using `gulp.task`'s callback function. Don't worry if this part is not super clear to you, remember that this task is basically just running `node lib/`.
+- `build` is where Babel is called to transform all of our source files located under `src` and write the transformed ones to `lib`.
+- `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting files is `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use the `del` package to delete files in a way that integrates well with Gulp's stream (this is the [recommended](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) way to delete files with Gulp). Run `yarn add --dev del` to install that package.
+- `main` is the equivalent of running `node .` in the previous chapter, except this time, we want to run it on `lib/index.js`. Since `index.js` is the default file Node looks for, we can simply write `node lib` (we use the `libDir` variable to keep things dry). The `require('child_process').exec` and `exec` part in the task is a native Node function that executes a shell command. We forward `stdout` to `console.log()` and return a potential error using `gulp.task`'s callback function. Don't worry if this part is not super clear to you, remember that this task is basically just running `node lib`.
 - `watch` runs the `main` task when filesystem changes happen in the specified files.
 - `default` is a special task that will be run if you simply call `gulp` from the CLI. In our case we want it to run both `watch` and `main` (for the first execution).
 
+**Note**: You might be wondering how come we're using some ES6 code in this Gulp file, since it doesn't get transpiled into ES5 by Babel. This is because we're using a version of Node that supports ES6 features out of the box (make sure you are running Node > 6.5.0 by running `node -v`).
+
 Alright! Let's see if this works.
 
-- In `package.json`, change your `start` script to: `"start": "gulp"`
+- In `package.json`, change your `start` script to: `"start": "gulp"`.
 - Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try writing bad code in `src/index.js` to see Gulp automatically showing you the error when you save.
 
 - Add `lib` to your `.gitignore`

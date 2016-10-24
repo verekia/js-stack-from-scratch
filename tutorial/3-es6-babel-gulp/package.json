@@ -14,13 +14,11 @@
   },
   "devDependencies": {
     "babel-preset-latest": "^6.16.0",
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
-  "license": "MIT",
-  "dependencies": {
-    "del": "^2.2.2"
-  }
+  "license": "MIT"
 }

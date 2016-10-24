@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-const exec = require('child_process').exec;
 const del = require('del');
+const exec = require('child_process').exec;
 
 const paths = {
   allSrcJs: 'src/**/*.js',
@@ -9,7 +9,7 @@ const paths = {
 };
 
 gulp.task('clean', () => {
-  return del(paths.lib);
+  return del(paths.libDir);
 });
 
 gulp.task('build', ['clean'], () => {
