@@ -183,11 +183,7 @@ One last thing: unlike our `lib` folder, the `dist/client-bundle.js` and `dist/c
 gulp.task('clean', () => del([paths.libDir, paths.clientBundle]));
 ```
 
-- Add this to your `.gitignore` file:
-```
-dist/client-bundle.js
-dist/client-bundle.js.map
-```
+- Add `/dist/client-bundle.js*` to your `.gitignore` file:
 
 Next section: [8 - React](/tutorial/8-react)
 

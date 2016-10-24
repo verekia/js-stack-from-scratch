@@ -85,7 +85,7 @@ Alright! Let's see if this works.
 - In `package.json`, change your `start` script to: `"start": "gulp"`.
 - Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try writing bad code in `src/index.js` to see Gulp automatically showing you the error when you save.
 
-- Add `lib` to your `.gitignore`
+- Add `/lib/` to your `.gitignore`
 
 
 Next section: [4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)

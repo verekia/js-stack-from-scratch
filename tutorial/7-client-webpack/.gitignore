@@ -1,6 +1,5 @@
-node_modules
+node_modules/
 npm-debug.log
 yarn-error.log
-lib
-dist/client-bundle.js
-dist/client-bundle.js.map
+/lib/
+/dist/client-bundle.js*
