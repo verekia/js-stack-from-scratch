@@ -180,7 +180,10 @@ One last thing: unlike our `lib` folder, the `dist/client-bundle.js` and `dist/c
 - Add `clientBundle: 'dist/client-bundle.js?(.map)'` to our `paths` configuration, and tweak the `clean` task like so:
 
 ```javascript
-gulp.task('clean', () => del([paths.libDir, paths.clientBundle]));
+gulp.task('clean', () => del([
+  paths.libDir,
+  paths.clientBundle,
+]));
 ```
 
 - Add `/dist/client-bundle.js*` to your `.gitignore` file:

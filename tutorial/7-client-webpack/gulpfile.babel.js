@@ -30,7 +30,10 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError())
 );
 
-gulp.task('clean', () => del([paths.libDir, paths.clientBundle]));
+gulp.task('clean', () => del([
+  paths.libDir,
+  paths.clientBundle,
+]));
 
 gulp.task('build', ['lint', 'clean'], () =>
   gulp.src(paths.allSrcJs)
