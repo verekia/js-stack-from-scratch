@@ -5,7 +5,15 @@
   "scripts": {
     "start": "gulp",
     "test": "gulp test",
-    "tutorial-test": "gulp main"
+    "prod": "yarn run prod:build && yarn run prod:start",
+    "prod:build": "NODE_ENV=production gulp production",
+    "prod:start": "NODE_ENV=production pm2 start lib/server",
+    "prod:show": "pm2 show 0",
+    "prod:stop": "pm2 stop all",
+    "prod:restart": "pm2 restart all",
+    "prod:delete": "pm2 delete all",
+    "prod:list": "pm2 list",
+    "tutorial-test": "gulp development:one-build && yarn run prod"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +50,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
+    "express": "^4.14.0",
     "immutable": "^3.8.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -69,7 +78,10 @@
     "gulp-eslint": "^3.0.1",
     "gulp-flowtype": "^1.0.0",
     "gulp-mocha": "^3.0.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-uglify": "^2.0.0",
     "mocha": "^3.1.2",
+    "pm2": "^2.0.19",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "webpack-stream": "^3.2.0"
