@@ -1,14 +1,14 @@
 # JavaScript Stack from Scratch
 
-![JS](/img/yarn.png)
-![React](/img/react.png)
-![Gulp](/img/gulp.png)
-![Redux](/img/redux.png)
-![ESLint](/img/eslint.png)
-![Webpack](/img/webpack.png)
-![Mocha](/img/mocha.png)
-![Chai](/img/chai.png)
-![Flow](/img/flow.png)
+[![JS](/img/yarn.png)](https://yarnpkg.com/)
+[![React](/img/react.png)](https://facebook.github.io/react/)
+[![Gulp](/img/gulp.png)](http://gulpjs.com/)
+[![Redux](/img/redux.png)](http://redux.js.org/)
+[![ESLint](/img/eslint.png)](http://eslint.org/)
+[![Webpack](/img/webpack.png)](https://webpack.github.io/)
+[![Mocha](/img/mocha.png)](https://mochajs.org/)
+[![Chai](/img/chai.png)](http://chaijs.com/)
+[![Flow](/img/flow.png)](https://flowtype.org/)
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch)
 
