@@ -20,20 +20,20 @@ const SRC = 'src';
 const LIB = 'lib';
 const PUBLIC = 'public';
 const PUBLIC_JS = `${PUBLIC}/js`;
-const ALL_JS_TESTS = '**/*.test.js';
 const ALL_JS_OR_JSX = '**/*.js?(x)';
+const ALL_JS_OR_JSX_TESTS = '**/*.test.js?(x)';
 
 const paths = {
   clientSrcFiles: `${SRC}/${CLIENT}/${ALL_JS_OR_JSX}`,
   serverSrcFiles: `${SRC}/${SERVER}/${ALL_JS_OR_JSX}`,
   sharedSrcFiles: `${SRC}/${SHARED}/${ALL_JS_OR_JSX}`,
+  clientSrcTestFiles: `${SRC}/${CLIENT}/${ALL_JS_OR_JSX_TESTS}`,
+  serverSrcTestFiles: `${SRC}/${SERVER}/${ALL_JS_OR_JSX_TESTS}`,
+  sharedSrcTestFiles: `${SRC}/${SHARED}/${ALL_JS_OR_JSX_TESTS}`,
 
   clientLibDir: `${LIB}/${CLIENT}`,
   serverLibDir: `${LIB}/${SERVER}`,
   sharedLibDir: `${LIB}/${SHARED}`,
-  clientLibTestFiles: `${LIB}/${CLIENT}/${ALL_JS_TESTS}`,
-  serverLibTestFiles: `${LIB}/${SERVER}/${ALL_JS_TESTS}`,
-  sharedLibTestFiles: `${LIB}/${SHARED}/${ALL_JS_TESTS}`,
 
   clientEntryPointFile: `${SRC}/${CLIENT}/app.jsx`,
   clientBundleFiles: `${PUBLIC_JS}/client-bundle.js?(.map)`,
@@ -139,34 +139,22 @@ const buildTask = (type) => {
 const testTask = (type) => {
   let testFiles;
   if (type === CLIENT) {
-    testFiles = [paths.clientLibTestFiles, paths.sharedLibTestFiles];
+    testFiles = [paths.clientSrcTestFiles, paths.sharedSrcTestFiles];
   } else if (type === SERVER) {
-    testFiles = [paths.serverLibTestFiles, paths.sharedLibTestFiles];
+    testFiles = [paths.serverSrcTestFiles, paths.sharedSrcTestFiles];
   } else if (type === SHARED) {
     testFiles = [
-      paths.clientLibTestFiles,
-      paths.serverLibTestFiles,
-      paths.sharedLibTestFiles,
+      paths.clientSrcTestFiles,
+      paths.serverSrcTestFiles,
+      paths.sharedSrcTestFiles,
     ];
   }
   return gulp.src(testFiles).pipe(mocha());
 };
 
-gulp.task(`test:${CLIENT}`, [
-  `build:${CLIENT}`,
-  `build:${SHARED}`,
-], () => testTask(CLIENT));
-
-gulp.task(`test:${SERVER}`, [
-  `build:${SERVER}`,
-  `build:${SHARED}`,
-], () => testTask(SERVER));
-
-gulp.task(`test:${SHARED}`, [
-  `build:${CLIENT}`,
-  `build:${SERVER}`,
-  `build:${SHARED}`,
-], () => testTask(SHARED));
+gulp.task(`test:${CLIENT}`, () => testTask(CLIENT));
+gulp.task(`test:${SERVER}`, () => testTask(SERVER));
+gulp.task(`test:${SHARED}`, () => testTask(SHARED));
 
 gulp.task('test', [`test:${CLIENT}`, `test:${SERVER}`, `test:${SHARED}`]);
 
