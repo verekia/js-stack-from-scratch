@@ -1,6 +1,6 @@
 # JavaScript Stack from Scratch
 
-[![JS](/img/yarn.png)](https://yarnpkg.com/)
+[![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
 [![Gulp](/img/gulp.png)](http://gulpjs.com/)
 [![Redux](/img/redux.png)](http://redux.js.org/)
