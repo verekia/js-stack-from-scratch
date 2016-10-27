@@ -7,6 +7,7 @@ import flow from 'gulp-flowtype';
 import mocha from 'gulp-mocha';
 import nodemon from 'gulp-nodemon';
 import del from 'del';
+import runSequence from 'run-sequence';
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 
@@ -58,6 +59,19 @@ const allSharedFiles = [
 
 
 /**
+ * Clean
+ */
+
+gulp.task(`clean:${CLIENT}`, () => del([paths.clientLibDir, paths.clientBundleFiles]));
+gulp.task(`clean:${SERVER}`, () => del(paths.serverLibDir));
+gulp.task(`clean:${SHARED}`, () => del(paths.sharedLibDir));
+
+gulp.task('clean', (callback) => {
+  runSequence(`clean:${CLIENT}`, `clean:${SERVER}`, `clean:${SHARED}`, callback);
+});
+
+
+/**
  * Lint
  */
 
@@ -83,25 +97,8 @@ const lintTask = (type) => {
   gulp.task(`lint:${type}`, () => lintTask(type));
 });
 
-
-/**
- * Clean
- */
-
-const cleanTask = (type) => {
-  let filesToDelete;
-  if (type === CLIENT) {
-    filesToDelete = [paths.clientLibDir, paths.clientBundleFiles];
-  } else if (type === SERVER) {
-    filesToDelete = paths.serverLibDir;
-  } else if (type === SHARED) {
-    filesToDelete = paths.sharedLibDir;
-  }
-  return del(filesToDelete);
-};
-
-[CLIENT, SERVER, SHARED].forEach((type) => {
-  gulp.task(`clean:${type}`, () => cleanTask(type));
+gulp.task('lint', (callback) => {
+  runSequence(`lint:${CLIENT}`, `lint:${SERVER}`, `lint:${SHARED}`, callback);
 });
 
 
@@ -128,7 +125,11 @@ const buildTask = (type) => {
 };
 
 [CLIENT, SERVER, SHARED].forEach((type) => {
-  gulp.task(`build:${type}`, [`lint:${type}`, `clean:${type}`], () => buildTask(type));
+  gulp.task(`build:${type}`, () => buildTask(type));
+});
+
+gulp.task('build', (callback) => {
+  runSequence(`build:${CLIENT}`, `build:${SERVER}`, `build:${SHARED}`, callback);
 });
 
 
@@ -152,38 +153,63 @@ const testTask = (type) => {
   return gulp.src(testFiles).pipe(mocha());
 };
 
-gulp.task(`test:${CLIENT}`, () => testTask(CLIENT));
-gulp.task(`test:${SERVER}`, () => testTask(SERVER));
-gulp.task(`test:${SHARED}`, () => testTask(SHARED));
+[CLIENT, SERVER, SHARED].forEach((type) => {
+  gulp.task(`test:${type}`, () => testTask(type));
+});
 
-gulp.task('test', [`test:${CLIENT}`, `test:${SERVER}`, `test:${SHARED}`]);
+gulp.task('test', (callback) => {
+  runSequence(`test:${CLIENT}`, `test:${SERVER}`, `test:${SHARED}`, callback);
+});
 
 /**
  * Main
  */
 
-gulp.task('main:client', ['test:client'], () =>
+gulp.task(`main:${CLIENT}`, () =>
   gulp.src(paths.clientEntryPointFile)
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest(paths.publicJsDir))
 );
 
-gulp.task('main:server', [`test:${SERVER}`], () =>
+gulp.task(`main:${SERVER}`, [`full-sequence:${SERVER}`], () =>
   nodemon({
     script: paths.serverLibDir,
     watch: allServerFiles,
-    task: `test:${SERVER}`,
+    tasks: `full-sequence:${SERVER}`,
   })
 );
 
+
+/**
+ * Sequences
+ */
+
+gulp.task(`full-sequence:${CLIENT}`, (callback) => {
+  runSequence(`clean:${CLIENT}`, `lint:${CLIENT}`, `test:${CLIENT}`,
+    `build:${CLIENT}`, `main:${CLIENT}`, callback);
+});
+
+gulp.task(`full-sequence:${SERVER}`, (callback) => {
+  runSequence(`clean:${SERVER}`, `lint:${SERVER}`, `test:${SERVER}`,
+    `build:${SERVER}`, callback);
+});
+
+gulp.task(`full-sequence:${SHARED}`, (callback) => {
+  runSequence(`clean:${SHARED}`, `lint:${SHARED}`, `test:${SHARED}`,
+    `build:${SHARED}`, callback);
+});
+
+gulp.task('full-sequence', (callback) => {
+  runSequence('clean', 'lint', 'test', 'build', callback);
+});
 
 /**
  * Watchers
  */
 
 gulp.task('watch', () => {
-  gulp.watch(allClientFiles, [`main:${CLIENT}`]);
-  gulp.watch(allSharedFiles, [`test:${SHARED}`]);
+  gulp.watch(allClientFiles, [`full-sequence:${CLIENT}`]);
+  gulp.watch(allSharedFiles, [`full-sequence:${SHARED}`]);
 });
 
 gulp.task('env-check:development', () => {
@@ -193,19 +219,19 @@ gulp.task('env-check:development', () => {
   }
 });
 
-gulp.task('development:one-build', [
-  'env-check:development',
-  `main:${CLIENT}`,
-  `test:${SERVER}`,
-  `test:${SHARED}`,
-]);
+gulp.task('development:one-build', (callback) => {
+  runSequence('env-check:development', 'full-sequence', callback);
+});
 
-gulp.task('development:watch-server', [
-  'env-check:development',
-  `main:${CLIENT}`,
-  `main:${SERVER}`,
-  `test:${SHARED}`,
-]);
+gulp.task('development:watch-server', (callback) => {
+  runSequence(
+    'env-check:development',
+    `full-sequence:${CLIENT}`,
+    `full-sequence:${SHARED}`,
+    `main:${SERVER}`,
+    callback
+  );
+});
 
 /**
  * Production
@@ -218,16 +244,15 @@ gulp.task('env-check:production', () => {
   }
 });
 
-gulp.task('production', [
-  'env-check:production',
-  `main:${CLIENT}`,
-  `test:${SERVER}`,
-  `test:${SHARED}`,
-]);
+gulp.task('production', (callback) => {
+  runSequence('env-check:production', 'full-sequence', callback);
+});
 
 
 /**
  * Default `gulp` task triggered by `yarn start`
  */
 
-gulp.task('default', ['development:watch-server', 'watch']);
+gulp.task('default', (callback) => {
+  runSequence('development:watch-server', 'watch', callback);
+});

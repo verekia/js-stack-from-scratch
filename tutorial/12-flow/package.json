@@ -82,6 +82,7 @@
     "gulp-uglify": "^2.0.0",
     "mocha": "^3.1.2",
     "pm2": "^2.0.19",
+    "run-sequence": "^1.2.2",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "webpack-stream": "^3.2.0"
