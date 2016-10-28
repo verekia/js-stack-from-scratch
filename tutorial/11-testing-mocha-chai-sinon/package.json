@@ -4,7 +4,7 @@
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "start": "gulp",
-    "test": "gulp test",
+    "test": "gulp lint test",
     "tutorial-test": "gulp main"
   },
   "eslintConfig": {

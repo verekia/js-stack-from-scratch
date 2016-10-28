@@ -2,15 +2,13 @@
 
 ## Mocha and Chai
 
-- Create an `src/test` folder. This folder will mirror our application folder structure, so create a `src/test/client` folder as well (feel free to add `server` and `shared` if you want, but we're not going to write tests for these).
-
-- In `src/test/client`, create a `state-test.js` file, which we are going to use to test our Redux application life cycle.
+- In `src/client/reducers`, create a `dog-reducer.test.js` file, which we are going to use to test if our reducer is doing its job when dispatching the `makeBark` action.
 
 We are going to use [Mocha](http://mochajs.org/) as our main testing framework. Mocha is easy to use, has tons of features, and is currently the [most popular JavaScript testing framework](http://stateofjs.com/2016/testing/). It is very flexible and modular. In particular, it lets you use any assertion library you want. [Chai](http://chaijs.com/) is a great assertion library that has a lot of [plugins](http://chaijs.com/plugins/) available and lets you choose between different assertion styles.
 
 - Let's install Mocha and Chai by running `yarn --dev mocha chai`
 
-In `state-test.js`, write the following:
+In `dog-reducer.test.js`, write the following:
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies, no-unused-expressions */
@@ -19,34 +17,33 @@ import { createStore } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { should } from 'chai';
 import { describe, it, beforeEach } from 'mocha';
-import dogReducer from '../../client/reducers/dog-reducer';
-import { makeBark } from '../../client/actions/dog-actions';
+import dogReducer from './dog-reducer';
+import { makeBark } from '../actions/dog-actions';
 
 should();
 let store;
 
-describe('App State', () => {
-  describe('Dog', () => {
-    beforeEach(() => {
-      store = createStore(combineReducers({
-        dog: dogReducer,
-      }));
-    });
-    describe('makeBark', () => {
-      it('should make hasBarked go from false to true', () => {
-        store.getState().getIn(['dog', 'hasBarked']).should.be.false;
-        store.dispatch(makeBark());
-        store.getState().getIn(['dog', 'hasBarked']).should.be.true;
-      });
+describe('Dog Reducer', () => {
+  beforeEach(() => {
+    store = createStore(combineReducers({
+      dog: dogReducer,
+    }));
+  });
+  describe('makeBark', () => {
+    it('should make hasBarked go from false to true', () => {
+      store.getState().getIn(['dog', 'hasBarked']).should.be.false;
+      store.dispatch(makeBark());
+      store.getState().getIn(['dog', 'hasBarked']).should.be.true;
     });
   });
 });
 ```
+
 Alright, let's analyze this whole thing.
 
 First, notice how we import the `should` assertion style from `chai`. This lets us assert things using a syntax like `mynumber.should.equal(3)`, pretty neat. In order to be able to call `should` on any object, we need to run the function `should()` before anything. Some of these assertion are *expressions*, like `mybook.should.be.true`, which will make ESLint grumpy, so we've added an ESLint comment at the top to disable the `no-unused-expressions` rule in this file.
 
-Mocha tests work like a tree. In our case, we want to test the `makeBark` function which should affect the `dog` attribute of the application state, so it makes sense to use the following hierarchy of tests: `App State > Dog > makeBark`, that we declare using `describe()`. `it()` is the actual test function and `beforeEach()` is a function that is executed before each `it()` test. In our case, we want a fresh new store before running each test. We declare a `store` variable at the top of the file because it should be useful in every test of this file.
+`describe()` is used to name sections for our tests. You can nest them like a tree. In our case, 2 levels-deep (`Dog Reducer` and `makeBark`) is enough. `it()` is the actual test function and `beforeEach()` is a function that is executed before each `it()` test. In this example, we initialize a fresh new store before running each test. We declare a `store` variable at the top of the file because it should be useful in every test of this file.
 
 Our `makeBark` test is very explicit, and the description provided as a string in `it()` makes it even clearer: we test that `hasBarked` go from `false` to `true` after calling `makeBark`.
 
@@ -59,28 +56,30 @@ import mocha from 'gulp-mocha';
 
 const paths = {
   // [...]
-  allLibTests: 'lib/test/**/*.js',
+  allTests: 'src/**/*.test.js?(x)',
 };
 
 // [...]
 
-gulp.task('test', ['build'], () =>
-  gulp.src(paths.allLibTests)
+gulp.task('test', () =>
+  gulp.src(paths.allTests)
     .pipe(mocha())
 );
 ```
 
 - Run `yarn add --dev gulp-mocha` of course.
 
-As you can see, tests are run on transpiled code in `lib`, which is why `build` is a prerequisite task of `test`. `build` also has a prerequisite, `lint`, and finally, we are making `test` a prerequisite of `main`, which gives us the following task cascade for the `default` task: `lint` > `build` > `test` > `main`.
-
-- Change the prerequisite of `main` to `test`:
+- Add `test` as a prerequisite of `build`, and make `build` the prerequisite of `main`:
 
 ```javascript
-gulp.task('main', ['test'], () => /* ... */ );
+gulp.task('build', ['lint', 'test', 'clean'], () => /* ... */)
+
+// [...]
+
+gulp.task('main', ['build'], () => /* ...*/)
 ```
 
-- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `yarn test` to just run your tests. `test` is also the standard script that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `yarn start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
+- In `package.json`, replace the current `"test"` script by: `"test": "gulp lint test"`. This way you can use `yarn test` to just run your tests and linter. `test` is also the standard `package.json` script that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `yarn start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
 
 - Run `yarn test` or `yarn start`, and it should print the result for our test, hopefully green.
 
@@ -114,7 +113,7 @@ export default Dog;
 
 If we run `barkInConsole` in a unit test, `console.log()` will print things in the terminal. We are going to consider this to be an undesired side-effect in the context of our unit tests. We are interested in knowing if `console.log()` *would have normally been called* though, and we want to test what parameters it *would have been called with*.
 
-- Create a new `src/test/shared/dog-test.js` file, and add write the following:
+- Create a new `src/shared/dog.test.js` file, and add write the following:
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies, no-console */
@@ -123,20 +122,18 @@ import chai from 'chai';
 import { stub } from 'sinon';
 import sinonChai from 'sinon-chai';
 import { describe, it } from 'mocha';
-import Dog from '../../shared/dog';
+import Dog from './dog';
 
 chai.should();
 chai.use(sinonChai);
 
-describe('Shared', () => {
-  describe('Dog', () => {
-    describe('barkInConsole', () => {
-      it('should print a bark string with its name', () => {
-        stub(console, 'log');
-        new Dog('Test Toby').barkInConsole();
-        console.log.should.have.been.calledWith('Wah wah, I am Test Toby');
-        console.log.restore();
-      });
+describe('Dog', () => {
+  describe('barkInConsole', () => {
+    it('should print a bark string with its name', () => {
+      stub(console, 'log');
+      new Dog('Test Toby').barkInConsole();
+      console.log.should.have.been.calledWith('Wah wah, I am Test Toby');
+      console.log.restore();
     });
   });
 });
