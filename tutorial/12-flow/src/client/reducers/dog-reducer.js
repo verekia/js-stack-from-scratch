@@ -7,7 +7,7 @@ const initialState = Immutable.Map({
   hasBarked: false,
 });
 
-const dogReducer = (state: Object = initialState, action: {type: string}) => {
+const dogReducer = (state: Object = initialState, action: {type: string, [key: string]: any}) => {
   switch (action.type) {
     case MAKE_BARK:
       return state.set('hasBarked', action.payload);
