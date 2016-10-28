@@ -32,23 +32,23 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError())
 );
 
+gulp.task('test', () =>
+  gulp.src(paths.allTests)
+    .pipe(mocha())
+);
+
 gulp.task('clean', () => del([
   paths.libDir,
   paths.clientBundle,
 ]));
 
-gulp.task('build', ['lint', 'clean'], () =>
+gulp.task('build', ['lint', 'test', 'clean'], () =>
   gulp.src(paths.allSrcJs)
     .pipe(babel())
     .pipe(gulp.dest(paths.libDir))
 );
 
-gulp.task('test', ['build'], () =>
-  gulp.src(paths.allTests)
-    .pipe(mocha())
-);
-
-gulp.task('main', ['test'], () =>
+gulp.task('main', ['build'], () =>
   gulp.src(paths.clientEntryPoint)
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest(paths.distDir))
