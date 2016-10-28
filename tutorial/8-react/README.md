@@ -4,7 +4,7 @@ We're now going to render our app using React.
 
 First, let's install React and ReactDOM:
 
-- Run `npm install --save react react-dom`
+- Run `yarn add react react-dom`
 
 These 2 packages go to our `"dependencies"` and not `"devDependencies"` because unlike build tools, the client bundle needs them in production.
 
@@ -42,7 +42,7 @@ clientEntryPoint: 'src/client/app.jsx',
 
 Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
 Install the React Babel preset, which will teach Babel how to process the JSX syntax:
-`npm install --save-dev babel-preset-react` and change the `babel` entry in your `package.json` file like so:
+`yarn add --dev babel-preset-react` and change the `babel` entry in your `package.json` file like so:
 
 ```json
 "babel": {
@@ -53,7 +53,7 @@ Install the React Babel preset, which will teach Babel how to process the JSX sy
 },
 ```
 
-Now after running `npm start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
+Now after running `yarn start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
 
 
 Next section: [9 - Redux](/tutorial/9-redux)

@@ -18,7 +18,7 @@ obj.set('a', 2); // Returns a new object without mutating `obj`
 
 This approach follows the **functional programming** paradigm, which works really well with Redux. Your reducer functions actually *have* to be pure functions that don't alter the state passed as parameter, but return a brand new state object instead. Let's use Immutable to enforce this.
 
-- Run `npm install --save immutable`
+- Run `yarn add immutable`
 
 We are going to use `Map` in our codebase, but ESLint and the Airbnb config will complain about using a capitalized name without it being a class. Add the following to your `package.json` under `eslintConfig`:
 
@@ -35,7 +35,7 @@ We are going to use `Map` in our codebase, but ESLint and the Airbnb config will
   ]
 }
 ```
-This makes `Map` and `List` (the 2 Immutable objects you'll use all the time) exceptions to that ESLint rule. This verbose JSON formatting is actually done automatically by NPM, so we cannot make it more compact unfortunately.
+This makes `Map` and `List` (the 2 Immutable objects you'll use all the time) exceptions to that ESLint rule. This verbose JSON formatting is actually done automatically by Yarn/NPM, so we cannot make it more compact unfortunately.
 
 Anyway, back to Immutable:
 
@@ -78,7 +78,7 @@ The app should still behave exactly the way it did before.
 As you can see from the code snippet above, our state object still contains a plain old `dog` object attribute, which isn't immutable. It is fine this way, but if you want to only manipulate immutable objects, you could install the `redux-immutable` package to replace Redux's `combineReducers` function.
 
 **Optional**:
-- Run `npm install --save redux-immutable`
+- Run `yarn add redux-immutable`
 - Replace your `combineReducers` function in `app.jsx` to use the one imported from `redux-immutable` instead.
 - In `bark-message.js` replace `state.dog.get('hasBarked')` by `state.getIn(['dog', 'hasBarked'])`.
 
@@ -95,7 +95,7 @@ export const makeBark = createAction(MAKE_BARK, () => true);
 
 `redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, just like the action we previously wrote, so integrating `redux-actions` is seamless if you follow this model.
 
-- Don't forget to run `npm install --save redux-actions`.
+- Don't forget to run `yarn add redux-actions`.
 
 Next section: [11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
 

@@ -1,12 +1,12 @@
 # 9 - Redux
 
-In this chapter (which is the most difficult so far) we will be adding [Redux](http://redux.js.org/) to our application and will hook it up with React. Redux manages the state of your application. It is composed of a **store** which is a plain JavaScript object representing the state of your app, **actions** which are typically triggered by users, and **reducers** which can be seen as action handlers. Reducers affect your application state (the *store*), and when the application state is modified, things happen in your app.
+In this chapter (which is the most difficult so far) we will be adding [Redux](http://redux.js.org/) to our application and will hook it up with React. Redux manages the state of your application. It is composed of a **store** which is a plain JavaScript object representing the state of your app, **actions** which are typically triggered by users, and **reducers** which can be seen as action handlers. Reducers affect your application state (the *store*), and when the application state is modified, things happen in your app. A good visual demonstration of Redux can be found <a href="http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9">here</a>.
 
 In order to demonstrate how to use Redux in the simplest possible way, our app will consist of a message and a button. The message says whether the dog has barked or not (it initially hasn't), and the button makes the dog bark, which should update the message.
 
 We are going to need 2 packages in this part, `redux` and `react-redux`.
 
-- Run `npm install --save redux react-redux`.
+- Run `yarn add redux react-redux`.
 
 Lets start by creating 2 folders: `src/client/actions` and `src/client/reducers`.
 
@@ -151,7 +151,7 @@ export default connect(mapStateToProps)(Message);
 
 `BarkButton` will hook up `Button` with the `makeBark` action and Redux's `dispatch` method, and `BarkMessage` will hook up the app state with `Message`. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
 
-- You can now run `npm start` and open `index.html`. You should see "The dog did not bark" and a button. When you click the button, the message should show "The dog barked".
+- You can now run `yarn start` and open `index.html`. You should see "The dog did not bark" and a button. When you click the button, the message should show "The dog barked".
 
 Next section: [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
 

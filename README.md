@@ -1,14 +1,14 @@
 # JavaScript Stack from Scratch
 
-![JS](/img/js.png)
-![React](/img/react.png)
-![Gulp](/img/gulp.png)
-![Redux](/img/redux.png)
-![ESLint](/img/eslint.png)
-![Webpack](/img/webpack.png)
-![Mocha](/img/mocha.png)
-![Chai](/img/chai.png)
-![Flow](/img/flow.png)
+[![Yarn](/img/yarn.png)](https://yarnpkg.com/)
+[![React](/img/react.png)](https://facebook.github.io/react/)
+[![Gulp](/img/gulp.png)](http://gulpjs.com/)
+[![Redux](/img/redux.png)](http://redux.js.org/)
+[![ESLint](/img/eslint.png)](http://eslint.org/)
+[![Webpack](/img/webpack.png)](https://webpack.github.io/)
+[![Mocha](/img/mocha.png)](https://mochajs.org/)
+[![Chai](/img/chai.png)](http://chaijs.com/)
+[![Flow](/img/flow.png)](https://flowtype.org/)
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch)
 
@@ -20,7 +20,7 @@ Since the goal of this tutorial is to assemble various tools, I do not go into d
 
 A big chunk of the stack described in this tutorial uses React. A lot of React tutorials completely skip the setup part, which makes newcomers build their learning on weak foundations. Instead of giving beginners a "black box" configuration, the approach I'm taking here is to set up the foundations in the simplest possible way, for a thorough understanding.
 
-Code examples are available for each section, and you can run them all with `npm install && npm start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** of each chapter.
+Code examples are available for each chapter, and you can run them all with `yarn && yarn start` or `npm install && npm start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** of each chapter.
 
 **Every chapter contains the code of previous chapters**, so if you are simply looking for a boilerplate project containing everything, just clone the last chapter and you're good to go.
 
@@ -30,9 +30,9 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 ## Table of contents
 
-[1 - Node, NPM, and package.json](/tutorial/1-npm-and-package-json)
+[1 - Node, NPM, Yarn, and package.json](/tutorial/1-node-npm-yarn-package-json)
 
-[2 - Installing and using an NPM package](/tutorial/2-packages)
+[2 - Installing and using a package](/tutorial/2-packages)
 
 [3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
 
@@ -54,8 +54,8 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 [12 - Type Checking with Flow](/tutorial/12-flow)
 
-Coming up: React Router, Server-Side Rendering, Styling, Enzyme, Yarn, Minification, Git Hooks
+Coming up: Production / development environments, Express, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
-License: ISC
+License: MIT

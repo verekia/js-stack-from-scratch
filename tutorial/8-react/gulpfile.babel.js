@@ -3,6 +3,7 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
+import del from 'del';
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 
@@ -11,15 +12,12 @@ const paths = {
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
   clientEntryPoint: 'src/client/app.jsx',
+  clientBundle: 'dist/client-bundle.js?(.map)',
   gulpFile: 'gulpfile.babel.js',
   webpackFile: 'webpack.config.babel.js',
+  libDir: 'lib',
+  distDir: 'dist',
 };
-
-gulp.task('build', ['lint'], () =>
-  gulp.src(paths.allSrcJs)
-    .pipe(babel())
-    .pipe(gulp.dest('lib'))
-);
 
 gulp.task('lint', () =>
   gulp.src([
@@ -32,10 +30,21 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError())
 );
 
-gulp.task('main', ['lint'], () =>
+gulp.task('clean', () => del([
+  paths.libDir,
+  paths.clientBundle,
+]));
+
+gulp.task('build', ['lint', 'clean'], () =>
+  gulp.src(paths.allSrcJs)
+    .pipe(babel())
+    .pipe(gulp.dest(paths.libDir))
+);
+
+gulp.task('main', ['lint', 'clean'], () =>
   gulp.src(paths.clientEntryPoint)
     .pipe(webpack(webpackConfig))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest(paths.distDir))
 );
 
 gulp.task('watch', () => {
