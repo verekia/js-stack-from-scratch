@@ -12,7 +12,7 @@ const paths = {
   allSrcJs: 'src/**/*.js?(x)',
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
-  allLibTests: 'lib/test/**/*.js',
+  allTests: 'src/**/*.test.js?(x)',
   clientEntryPoint: 'src/client/app.jsx',
   clientBundle: 'dist/client-bundle.js?(.map)',
   gulpFile: 'gulpfile.babel.js',
@@ -44,7 +44,7 @@ gulp.task('build', ['lint', 'clean'], () =>
 );
 
 gulp.task('test', ['build'], () =>
-  gulp.src(paths.allLibTests)
+  gulp.src(paths.allTests)
     .pipe(mocha())
 );
 
