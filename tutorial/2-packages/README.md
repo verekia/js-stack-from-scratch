@@ -23,7 +23,7 @@ Congratulations, you installed and used a package!
 
 - Run `yarn remove color`
 
-**Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, etc). For `"devDependencies"`, we will use `yarn add [package] --dev` in addition to `yarn add [package]`.
+**Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, etc). For `"devDependencies"`, we will use `yarn add --dev [package]`.
 
 
 Next section: [3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
