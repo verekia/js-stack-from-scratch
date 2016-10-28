@@ -83,6 +83,8 @@ gulp.task('main', ['build'], () => /* ...*/)
 
 - Run `yarn test` or `yarn start`, and it should print the result for our test, hopefully green.
 
+**Note**: You might wonder how Mocha is able to evaluate ES6 code here. The `gulp-mocha` documentation states that it can be made possible by adding the [Babel Require Hook](https://babeljs.io/docs/usage/require/) at the top of our Gulpfile, via `require('babel-register');`. Okay, that sounds pretty good, but we haven't even done that, so what's going on here? The magic that is happening is that `babel-register` is automatically called because our Gulpfile is named `gulpfile.babel.js`, so we don't even need to require `babel-register`. You can actually see the require hook being applied automatically every time you run Gulp in your console, as it prints: `Requiring external module babel-register`. Pretty neat.
+
 ## Sinon
 
 In some cases, we want to be able to *fake* things in a unit test. For instance, let's say we have a function, `deleteEverything`, which contains a call to `deleteDatabases()`. Running `deleteDatabases()` causes a lot of side-effects, which we absolutely don't want to happen when running our test suite.

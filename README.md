@@ -42,7 +42,7 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 [6 - ESLint](/tutorial/6-eslint)
 
-[7 - Client app with Webpack](/tutorial/7-client-webpack)
+[7 - Express Server and Webpack Client](/tutorial/7-express-server-webpack-client)
 
 [8 - React](/tutorial/8-react)
 

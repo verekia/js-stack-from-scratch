@@ -6,27 +6,28 @@
 
 - Create an empty `.flowconfig` file at the root of your project
 
-- Run `yarn add --dev gulp-flowtype` to install the Gulp plugin for Flow, and add `flow()` to your `lint` task:
+- Run `yarn add --dev gulp-flowtype` to install the Gulp plugin for Flow, and create a `typecheck` task:
 
 ```javascript
 import flow from 'gulp-flowtype';
 
 // [...]
 
-gulp.task('lint', () =>
-  gulp.src([
-    paths.allSrcJs,
-    paths.gulpFile,
-    paths.webpackFile,
-  ])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-    .pipe(flow({ abort: true })) // Add Flow here
+gulp.task('typecheck', () =>
+  gulp.src(paths.allSrcJs)
+    .pipe(flow({ abort: true }))
 );
 ```
 
 The `abort` option is to interrupt the Gulp task if Flow detects an issue.
+
+- Add `typecheck` in the prerequisites of `build`:
+
+```javascript
+gulp.task('build', ['typecheck', 'lint', 'test', 'clean'], () => /* ... */)
+```
+
+- Add `typecheck` in your `test` script of `package.json` as well: `"test": "gulp typecheck lint test"`.
 
 Alright, we should be able to run Flow now.
 

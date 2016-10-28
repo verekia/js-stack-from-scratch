@@ -112,6 +112,6 @@ The last issue warning left is about `console.log()`. Let's say that we want thi
 **Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
 
 
-Next section: [7 - Client app with Webpack](/tutorial/7-client-webpack)
+Next section: [7 - Express Server and Webpack Client](/tutorial/7-express-server-webpack-client)
 
 Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

@@ -1,10 +1,25 @@
-# 7 - Client App with Webpack
+# 7 - Express Server and Webpack Client
 
 ## Structure of our app
 
-- Create a `dist` folder at the root of your project, and add the following `index.html` file to it:
+We are now going to turn our command-line-only app into a web app by splitting it between server code and client code. Since we're using JavaScript, we're actually even going to be able to share some code between the two. This chapter is a bit dense, but I promise it's worth it!
 
-```html
+- In your `src` folder, create the following subfolders: `server`, `shared`, `client`, and move your current `index.js` into `server`, and `dog.js` into `shared`. Create `app.js` in `client`. You'll need to change the `import Dog from './dog';` in `server/index.js` to `import Dog from '../shared/dog';` though, or ESLint will detect errors for unresolved modules.
+
+## The Express Server
+
+- Create a `src/server/templates/master-layout.js` file and add the following `index.html` file to it:
+
+
+
+
+// Jen etais la
+
+
+
+
+
+```javascript
 <!doctype html>
 <html>
   <head>
@@ -16,9 +31,9 @@
 </html>
 ```
 
-In your `src` folder, create the following subfolders: `server`, `shared`, `client`, and move your current `index.js` into `server`, and `dog.js` into `shared`. Create `app.js` in `client`.
 
-We are not going to do any Node back-end yet, but this separation will help you see more clearly where things belong. You'll need to change the `import Dog from './dog';` in `server/index.js` to `import Dog from '../shared/dog';` though, or ESLint will detect errors for unresolved modules.
+
+We are not going to do any Node back-end yet, but this separation will help you see more clearly where things belong.
 
 Write this in `client/app.js`:
 

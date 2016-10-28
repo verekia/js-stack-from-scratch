@@ -13,7 +13,7 @@ const paths = {
   allSrcJs: 'src/**/*.js?(x)',
   serverSrcJs: 'src/server/**/*.js?(x)',
   sharedSrcJs: 'src/shared/**/*.js?(x)',
-  allLibTests: 'lib/test/**/*.js',
+  allTests: 'src/**/*.test.js?(x)',
   clientEntryPoint: 'src/client/app.jsx',
   clientBundle: 'dist/client-bundle.js?(.map)',
   gulpFile: 'gulpfile.babel.js',
@@ -21,6 +21,11 @@ const paths = {
   libDir: 'lib',
   distDir: 'dist',
 };
+
+gulp.task('typecheck', () =>
+  gulp.src(paths.allSrcJs)
+    .pipe(flow({ abort: true }))
+);
 
 gulp.task('lint', () =>
   gulp.src([
@@ -31,7 +36,11 @@ gulp.task('lint', () =>
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
-    .pipe(flow({ abort: true }))
+);
+
+gulp.task('test', () =>
+  gulp.src(paths.allTests)
+    .pipe(mocha())
 );
 
 gulp.task('clean', () => del([
@@ -39,18 +48,13 @@ gulp.task('clean', () => del([
   paths.clientBundle,
 ]));
 
-gulp.task('build', ['lint', 'clean'], () =>
+gulp.task('build', ['typecheck', 'lint', 'test', 'clean'], () =>
   gulp.src(paths.allSrcJs)
     .pipe(babel())
     .pipe(gulp.dest(paths.libDir))
 );
 
-gulp.task('test', ['build'], () =>
-  gulp.src(paths.allLibTests)
-    .pipe(mocha())
-);
-
-gulp.task('main', ['test'], () =>
+gulp.task('main', ['build'], () =>
   gulp.src(paths.clientEntryPoint)
     .pipe(webpack(webpackConfig))
     .pipe(gulp.dest(paths.distDir))
