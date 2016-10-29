@@ -17,11 +17,11 @@ Here is what I think is a good workflow:
 ```md
 ## Translations
 
-- [Language name](http://github.com/yourprofile/your-translated-fork) by [@yourgithubusername](http://yourwebsite.com)
+- [Language](http://github.com/yourprofile/your-fork) by [@yourgithubusername](http://yourwebsite.com)
 or
-- [Language name](http://github.com/yourprofile/your-translated-fork) by [@yourgithubusername](http://twitter.com/yourprofile)
+- [Language](http://github.com/yourprofile/your-fork) by [@yourgithubusername](http://twitter.com/yourprofile)
 or
-- [Language name](http://github.com/yourprofile/your-translated-fork) by [@yourgithubusername](http://github.com/yourprofile)
+- [Language](http://github.com/yourprofile/your-fork) by [@yourgithubusername](http://github.com/yourprofile)
 ```
 
 Since I want to reward you for your good work as much as possible, you can put any link you like on your Github username (to your personal website, Twitter profile, or Github profile for instance).
