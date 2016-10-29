@@ -24,7 +24,7 @@ or
 - [Language](http://github.com/yourprofile/your-fork) by [@You](http://github.com/yourprofile)
 ```
 
-Since I want to reward you for your good work as much as possible, you can put any link you like on your Github username (to your personal website, Twitter profile, or Github profile for instance).
+Since I want to reward you for your good work as much as possible, you can put any link you like on your name (to your personal website, Twitter profile, or Github profile for instance).
 
 - After your original one-shot translation, if you want to update your repo with the latest change from the main English repo, [sync your fork](https://help.github.com/articles/syncing-a-fork/) with my repo. To make it easy to see what changed since your initial translation, you can use Github's feature to [compare commits](https://help.github.com/articles/comparing-commits-across-time/#comparing-commits). Set the **base** to the last commit from the English repo you used to translate, and compare it to **master**, like so:
 
