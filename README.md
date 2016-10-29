@@ -60,7 +60,7 @@ Production / development environments, Express, React Router, Server-Side Render
 
 ## Translations
 
-- [Chinese](https://github.com/pd4d10/js-stack-from-scratch) by @pd4d10
+- [Chinese](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
 
 If you translate this tutorial, I will put a link to your repo here!
 
