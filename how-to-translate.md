@@ -10,7 +10,7 @@ Here is what I think is a good workflow:
 
 - Translate the `README.md` files.
 
-- Add a note somewhere explaining on the main `README.md` that this is a translation, with a link to the English repository.
+- Add a note somewhere explaining on the main `README.md` that this is a translation, with a link to the English repository. If you don't plan to make the translation evolve over time, you can maybe add a little note saying to refer to the English one for an up-to-date version of the tutorial. I'll leave that up to your preference.
 
 - Submit a Pull Request to the English repo to add a link to your forked repository under the Translations section of the main `README.md`. It could look like this:
 
