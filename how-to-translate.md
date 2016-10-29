@@ -30,4 +30,4 @@ Since I want to reward you for your good work as much as possible, you can put a
 
 https://github.com/verekia/js-stack-from-scratch/compare/dfab78b581a3da800daeb3686b900dd9ea972da0...master
 
-That should give you a easy-to-read diff to see exactly what changed in the `README.md` files since your translation!
+That should give you a easy-to-read diff to see exactly what changed in `README.md` files since your translation!
