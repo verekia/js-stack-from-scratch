@@ -62,7 +62,7 @@ Production / development environments, Express, React Router, Server-Side Render
 
 If you translate this tutorial, I will put a link to your repo here!
 
-Please read the [translation recommendations](/how-to-translate) to get started.
+Please read the [translation recommendations](/how-to-translate.md) to get started.
 
 
 ## Credits
