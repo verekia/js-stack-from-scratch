@@ -54,7 +54,18 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 [12 - Type Checking with Flow](/tutorial/12-flow)
 
-Coming up: Production / development environments, Express, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
+## Coming up next
+
+Production / development environments, Express, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
+
+## Translations
+
+If you translate this tutorial, I will put a link to your repo here!
+
+Please read the [translation recommendations](/how-to-translate) to get started.
+
+
+## Credits
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
