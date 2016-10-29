@@ -2,7 +2,7 @@
 
 Thank you for your interest in translating my tutorial! Here are a few recommendations to get started.
 
-This tutorial is in constant evolution to provide the best learning experience to readers. Both the code and the `README.md` files will change over time. It is great if you do a one-shot translation that won't evolve, but it would be even better if you could try to keep up with the original English version as it changes!
+This tutorial is in constant evolution to provide the best learning experience to readers. Both the code and `README.md` files will change over time. It is great if you do a one-shot translation that won't evolve, but it would be even better if you could try to keep up with the original English version as it changes!
 
 Here is what I think is a good workflow:
 
@@ -17,11 +17,11 @@ Here is what I think is a good workflow:
 ```md
 ## Translations
 
-- [Language name](#) by [@yourgithubusername](http://yourwebsite.com)
+- [Language name](http://github.com/yourprofile/your-translated-fork) by [@yourgithubusername](http://yourwebsite.com)
 or
-- [Language name](#) by [@yourgithubusername](http://twitter.com/yourprofile)
+- [Language name](http://github.com/yourprofile/your-translated-fork) by [@yourgithubusername](http://twitter.com/yourprofile)
 or
-- [Language name](#) by [@yourgithubusername](http://github.com/yourprofile)
+- [Language name](http://github.com/yourprofile/your-translated-fork) by [@yourgithubusername](http://github.com/yourprofile)
 ```
 
 Since I want to reward you for your good work as much as possible, you can put any link you like on your Github username (to your personal website, Twitter profile, or Github profile for instance).
