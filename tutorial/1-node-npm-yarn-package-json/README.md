@@ -29,7 +29,13 @@ You want any version of Node > 6.5.0.
 
 Running `node .` to execute our program is a bit too low-level. We are going to use an NPM/Yarn script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `yarn start`, even when our program gets more complicated.
 
-- In `package.json`, add `"start": "node ."` in the `scripts` object.
+- In `package.json`, add a `scripts` object to the root object like so:
+
+```
+	"scripts": {
+		"start": "node ."
+	}
+```
 
 `package.json` must be a valid JSON file, which means that you cannot have trailing commas. So be careful when editing manually your `package.json` file.
 
