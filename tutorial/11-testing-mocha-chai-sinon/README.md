@@ -8,7 +8,7 @@
 
 We are going to use [Mocha](http://mochajs.org/) as our main testing framework. Mocha is easy to use, has tons of features, and is currently the [most popular JavaScript testing framework](http://stateofjs.com/2016/testing/). It is very flexible and modular. In particular, it lets you use any assertion library you want. [Chai](http://chaijs.com/) is a great assertion library that has a lot of [plugins](http://chaijs.com/plugins/) available and lets you choose between different assertion styles.
 
-- Let's install Mocha and Chai by running `yarn --dev mocha chai`
+- Let's install Mocha and Chai by running `yarn add --dev mocha chai`
 
 In `state-test.js`, write the following:
 
