@@ -32,9 +32,9 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 - In `package.json`, add a `scripts` object to the root object like so:
 
 ```
-	"scripts": {
-		"start": "node ."
-	}
+"scripts": {
+  "start": "node ."
+}
 ```
 
 `package.json` must be a valid JSON file, which means that you cannot have trailing commas. So be careful when editing manually your `package.json` file.
