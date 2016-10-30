@@ -103,6 +103,6 @@ Until Immutable officially adresses the issue, just pick whichever looks better 
 ```
 In my case, the `linter-flow` plugin for Atom was detecting type errors in the `node_modules/gulp-flowtype` directory, which contains files annotated with `// @flow`.
 
-You now have a bullet-proof code that is linted, typechecked, and tested, good job!
+You now have bullet-proof code that is linted, typechecked, and tested, good job!
 
 Back to the [previous section](/tutorial/11-testing-mocha-chai-sinon) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
