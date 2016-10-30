@@ -24,7 +24,7 @@ const str = 'ES6';
 console.log(`Hello ${str}`);
 ```
 
-We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`.
+We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`. Note that template strings are created using *back quotes*.
 
 - Create a `gulpfile.js` containing:
 
