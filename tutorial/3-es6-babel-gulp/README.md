@@ -5,6 +5,7 @@ We're now going to use ES6 syntax, which is a great improvement over the "old" E
 - Run `yarn add --dev gulp`
 - Run `yarn add --dev gulp-babel`
 - Run `yarn add --dev babel-preset-latest`
+- Run `yarn add --dev del`
 - In `package.json`, add a `babel` field for the babel configuration. Make it use the latest Babel preset like this:
 
 ```json
