@@ -20,7 +20,7 @@ You don't need to use this entire stack if you build a simple web page with a fe
 
 Since the goal of this tutorial is to assemble various tools, I do not go into details about how these tools work individually. Refer to their documentation or find other tutorials if you want to acquire deeper knowledge in them.
 
-A big chunk of the stack described in this tutorial uses React. A lot of React tutorials completely skip the setup part, which makes newcomers build their learning on weak foundations. Instead of giving beginners a "black box" configuration, the approach I'm taking here is to set up the foundations in the simplest possible way, for a thorough understanding.
+A big chunk of the stack described in this tutorial uses React. If you are beginning and just want to learn React, [create-react-app](https://github.com/facebookincubator/create-react-app) will get you up and running with a React environment very quickly with a premade configuration. I would for instance recommend this approach to someone who arrives in a team that's using React and needs to catch up with a learning playground. In this tutorial you won't use a premade configuration, because I want you to understand everything that's happening under the hood.
 
 Code examples are available for each chapter, and you can run them all with `yarn && yarn start` or `npm install && npm start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** of each chapter.
 
