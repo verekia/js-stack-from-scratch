@@ -49,7 +49,7 @@ And before anything else in `app.js`, add this import:
 import 'babel-polyfill';
 ```
 
-Including the polyfill adds about 300KB to your bundle, so don't do this if you're not using any of the features it covers!
+Including the polyfill adds some weight to your bundle, so add it only if you use the features it covers. In order to provide some solid boilerplate code with this tutorial, I am including it and it will appear in code samples in the next chapters.
 
 ## Webpack
 
