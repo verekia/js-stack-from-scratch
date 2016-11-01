@@ -56,32 +56,6 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 [12 - Type Checking with Flow](/tutorial/12-flow)
 
-## Содержание
-
-[1 - Node, NPM, Yarn, и package.json](/tutorial/1-node-npm-yarn-package-json)
-
-[2 - Установка и использование пакетов](/tutorial/2-packages)
-
-[3 - Настройка ES6 с Babel и Gulp](/tutorial/3-es6-babel-gulp)
-
-[4 - Использование ES6 синтактиса ~с классами~](/tutorial/4-es6-syntax-class)
-
-[5 - Синтаксис модулей ES6](/tutorial/5-es6-modules-syntax)
-
-[6 - ESLint](/tutorial/6-eslint)
-
-[7 - Клиентское приложение ~на основе Webpack~](/tutorial/7-client-webpack)
-
-[8 - React](/tutorial/8-react)
-
-[9 - Redux](/tutorial/9-redux)
-
-[10 - Immutable JS and ~Redux Improvements~](/tutorial/10-immutable-redux-improvements)
-
-[11 - Тестировние с Mocha, Chai, и Sinon](/tutorial/11-testing-mocha-chai-sinon)
-
-[12 - ~Типизация с~ Flow](/tutorial/12-flow)
-
 ## Coming up next
 
 Production / development environments, Express, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
