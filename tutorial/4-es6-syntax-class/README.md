@@ -1,6 +1,6 @@
-# 4 - Using the ES6 syntax with a class
+# 4 - Использование ES6 синтактиса ~~и классов~~
 
-- Create a new file, `src/dog.js`, containing the following ES6 class:
+- Создайте новый файл, `src/dog.js`, содержащий сделующий ES6 класс:
 
 ```javascript
 class Dog {
@@ -16,11 +16,11 @@ class Dog {
 module.exports = Dog;
 ```
 
-It should not look surprising to you if you've done OOP in the past in any language. It's relatively recent for JavaScript though. The class is exposed to the outside world via the `module.exports` assignment.
+Это не должно вас смущать, если вы сталкивались с ООП в любом другом языке программирования. Хотя в JavaScript  классы появились относительно недавно. Класс взаимодействует с окружающим миром, путем определения `module.exports`.
 
-Typical ES6 code uses classes, `const` and `let`, "template strings" (with back ticks) like the one in `bark()`, and arrow functions (`(param) => { console.log('Hi'); }`), even though we're not using any in this example.
+Обычно в ES6 коде присутствуют классы, `const` и `let`, "шаблонные строки" (в обратных кавычках) как в функции `bark()` и стрелочные функции (`(param) => { console.log('Hi'); }`), хотя мы их не используем в нашем примере.
 
-In `src/index.js`, write the following:
+В `src/index.js`, напишите следующее:
 
 ```javascript
 const Dog = require('./dog');
@@ -29,13 +29,13 @@ const toby = new Dog('Toby');
 
 console.log(toby.bark());
 ```
-As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
+Как вы можете видеть в отличие от ~~community-made~~ пакета `color`, который мы использовали ранее, когда мы подключаем один из наших файлов, мы используем `./` в `require()`.
 
-- Run `yarn start` and it should print 'Wah wah, I am Toby'.
+- Запустите `yarn start` и должно отобразиться 'Wah wah, I am Toby'.
 
-- Take a look at the code generated in `lib` to see how your compiled code looks like (`var` instead of `const` for instance).
+- Посмотрите на код сгенерированный в директории `lib`, чтобы увидеть как он выглядит в скомпилированном виде (`var` вместо `const` например).
 
 
-Next section: [5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
+Следующий раздел: [5 - Синтаксис модулей ES6](/tutorial/5-es6-modules-syntax)
 
-Back to the [previous section](/tutorial/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/3-es6-babel-gulp) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
