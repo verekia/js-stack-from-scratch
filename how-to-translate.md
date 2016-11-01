@@ -6,7 +6,7 @@ This tutorial is in constant evolution to provide the best learning experience t
 
 Here is what I think is a good workflow:
 
-- Check if there is already a translation issue open for your language. If that's the case, get in touch with the folks who opened it and consider collaborating. All maintainers will be mentioned on the English repo, so team work is encouraged!
+- Check if there is already a translation issue open for your language. If that's the case, get in touch with the folks who opened it and consider collaborating. All maintainers will be mentioned on the English repo, so team work is encouraged! You can open issues on their translation fork project to offer your help on certain chapters for instance.
 
 - Fork the main [English repository](https://github.com/verekia/js-stack-from-scratch).
 
