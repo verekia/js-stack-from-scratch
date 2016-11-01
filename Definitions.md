@@ -17,4 +17,12 @@ https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/template_strings
 arrow functions - стрелочные функции
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 
+CommonJS
 
+Gulp
+
+Node
+
+Babel
+
+синтаксический сахар - syntactic sugar

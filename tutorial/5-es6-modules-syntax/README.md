@@ -1,10 +1,10 @@
-# 5 - The ES6 modules syntax
+# 5 - Синтаксис модулей ES6
 
-Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax).
+Здесь мы просто заменим `const Dog = require('./dog')` на `import Dog from './dog'`, что является более новым синтаксисом ES6 модулей (по сравнению с синтаксисом "CommonJS" модулей).
 
-In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`.
+В `dog.js`, мы также заменим `module.exports = Dog` на `export default Dog`.
 
-Note that in `dog.js`, the name `Dog` is only used in the `export`. Therefore it could be possible to export directly an anonymous class like this instead:
+Заметьте, что в `dog.js` переменная `Dog` используется только в `export`. Поэтому, вместо этого, можно напрямую экспортировать анонимный класс таким образом: 
 
 ```javascript
 export default class {
@@ -18,21 +18,21 @@ export default class {
 }
 ```
 
-You might now guess that the name 'Dog' used in the `import` in `index.js` is actually completely up to you. This would work just fine:
+Вы возможно уже догадались, что имя 'Dog' используется в `import` в `index.js` совершенно по вашему усмотрению. Вполне будет работать:
 
 ```javascript
 import Cat from './dog';
 
 const toby = new Cat('Toby');
 ```
-Obviously, most of the time you will use the same name as the class / module you're importing.
-A case where you don't do that is how we `const babel = require('gulp-babel')` in our Gulp file.
+Очевидно, что в основном вы будете всегда использовать тоже имя что и имя класса/модуля которого вы импортируете.
+Случай, когда вы не будете делать так, это когда мы ~~использовали~~ `const babel = require('gulp-babel')` в нашем Gulp файле.
 
-So what about those `require()`s in our `gulpfile.js`? Can we use `import` instead? The latest version of Node supports most ES6 features, but not ES6 modules yet. Luckily for us, Gulp is able to call Babel for help. If we rename our `gulpfile.js` to `gulpfile.babel.js`, Babel will take care of passing `import`ed modules to Gulp.
+Так что насчет тех `require()` в нашем `gulpfile.js`? Можем мы использовать `import` вместо них? Последняя версия Node поддерживает большую часть возможностей ES6, но не ES6 модули пока-что. К счастью для нас, Gulp способен призывать Babel на помощь. Если мы переименуем наш `gulpfile.js` в `gulpfile.babel.js`, Babel позаботится о передаче импортируемых через `import` модулей в Gulp.
 
-- Rename your `gulpfile.js` to `gulpfile.babel.js`
+- Переименуйте ваш `gulpfile.js` в `gulpfile.babel.js`
 
-- Replace your `require()`s by:
+- Замените все `require()` на:
 
 ```javascript
 import gulp from 'gulp';
@@ -41,10 +41,10 @@ import del from 'del';
 import { exec } from 'child_process';
 ```
 
-Note the syntactic sugar to extract `exec` directly from `child_process`. Pretty elegant!
+Обратите внимение на "синтаксический сахар", позволяющий получать `exec` напрямую из `child_process`. Довольно элегантно!
 
-- `yarn start` should still print "Wah wah, I am Toby".
+- `yarn start` должно по прежнему выводить "Wah wah, I am Toby".
 
-Next section: [6 - ESLint](/tutorial/6-eslint)
+Следующий раздел: [6 - ESLint](/tutorial/6-eslint)
 
-Back to the [previous section](/tutorial/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/4-es6-syntax-class) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
