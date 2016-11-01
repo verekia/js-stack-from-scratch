@@ -5,6 +5,7 @@ We're now going to use ES6 syntax, which is a great improvement over the "old" E
 - Run `yarn add --dev gulp`
 - Run `yarn add --dev gulp-babel`
 - Run `yarn add --dev babel-preset-latest`
+- Run `yarn add --dev del` (for the `clean` task, as you will see below)
 - In `package.json`, add a `babel` field for the babel configuration. Make it use the latest Babel preset like this:
 
 ```json
@@ -73,7 +74,7 @@ First we define a `paths` object to store all our different file paths and keep 
 Then we define 5 tasks: `build`, `clean`, `main`, `watch`, and `default`.
 
 - `build` is where Babel is called to transform all of our source files located under `src` and write the transformed ones to `lib`.
-- `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use the `del` package to delete files in a way that integrates well with Gulp's stream (this is the [recommended](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) way to delete files with Gulp). Run `yarn add --dev del` to install that package.
+- `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use the `del` package to delete files in a way that integrates well with Gulp's stream (this is the [recommended](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) way to delete files with Gulp).
 - `main` is the equivalent of running `node .` in the previous chapter, except this time, we want to run it on `lib/index.js`. Since `index.js` is the default file Node looks for, we can simply write `node lib` (we use the `libDir` variable to keep things DRY). The `require('child_process').exec` and `exec` part in the task is a native Node function that executes a shell command. We forward `stdout` to `console.log()` and return a potential error using `gulp.task`'s callback function. Don't worry if this part is not super clear to you, remember that this task is basically just running `node lib`.
 - `watch` runs the `main` task when filesystem changes happen in the specified files.
 - `default` is a special task that will be run if you simply call `gulp` from the CLI. In our case we want it to run both `watch` and `main` (for the first execution).
