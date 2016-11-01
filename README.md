@@ -64,7 +64,7 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 [3 - Настройка ES6 с Babel и Gulp](/tutorial/3-es6-babel-gulp)
 
-[4 - Использование ES6 синтактиса ~с классами~](/tutorial/4-es6-syntax-class)
+[4 - Использование ES6 синтактиса ~~с классами~~](/tutorial/4-es6-syntax-class)
 
 [5 - Синтаксис модулей ES6](/tutorial/5-es6-modules-syntax)
 
