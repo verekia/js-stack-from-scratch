@@ -36,6 +36,6 @@ As you can see, unlike the community-made package `color` that we used before, w
 - Take a look at the code generated in `lib` to see how your compiled code looks like (`var` instead of `const` for instance).
 
 
-Next section: [5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
+Next section: [5 - The ES6 modules syntax](/tutorial/05-es6-modules-syntax)
 
-Back to the [previous section](/tutorial/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/03-es6-babel-gulp) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

@@ -45,6 +45,6 @@ Note the syntactic sugar to extract `exec` directly from `child_process`. Pretty
 
 - `yarn start` should still print "Wah wah, I am Toby".
 
-Next section: [6 - ESLint](/tutorial/6-eslint)
+Next section: [6 - ESLint](/tutorial/06-eslint)
 
-Back to the [previous section](/tutorial/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/04-es6-syntax-class) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

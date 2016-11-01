@@ -155,4 +155,4 @@ export default connect(mapStateToProps)(Message);
 
 Next section: [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
-Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/08-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

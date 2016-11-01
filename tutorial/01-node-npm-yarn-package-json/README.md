@@ -50,6 +50,6 @@ yarn-error.log
 
 **Note**: If you take a look at the `package.json` files I provide, you will see a `tutorial-test` script in every chapter. Those scripts let me test that the chapter works fine when running `yarn && yarn start`. You can delete them in your own projects.
 
-Next section: [2 - Installing and using a package](/tutorial/2-packages)
+Next section: [2 - Installing and using a package](/tutorial/02-packages)
 
 Back to the [table of contents](https://github.com/verekia/js-stack-from-scratch).

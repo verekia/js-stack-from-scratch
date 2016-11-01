@@ -188,6 +188,6 @@ gulp.task('clean', () => del([
 
 - Add `/dist/client-bundle.js*` to your `.gitignore` file:
 
-Next section: [8 - React](/tutorial/8-react)
+Next section: [8 - React](/tutorial/08-react)
 
-Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/06-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
