@@ -32,23 +32,23 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 ## Table of contents
 
-[1 - Node, NPM, Yarn, and package.json](/tutorial/1-node-npm-yarn-package-json)
+[1 - Node, NPM, Yarn, and package.json](/tutorial/01-node-npm-yarn-package-json)
 
-[2 - Installing and using a package](/tutorial/2-packages)
+[2 - Installing and using a package](/tutorial/02-packages)
 
-[3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
+[3 - Setting up ES6 with Babel and Gulp](/tutorial/03-es6-babel-gulp)
 
-[4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
+[4 - Using the ES6 syntax with a class](/tutorial/04-es6-syntax-class)
 
-[5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
+[5 - The ES6 modules syntax](/tutorial/05-es6-modules-syntax)
 
-[6 - ESLint](/tutorial/6-eslint)
+[6 - ESLint](/tutorial/06-eslint)
 
-[7 - Client app with Webpack](/tutorial/7-client-webpack)
+[7 - Client app with Webpack](/tutorial/07-client-webpack)
 
-[8 - React](/tutorial/8-react)
+[8 - React](/tutorial/08-react)
 
-[9 - Redux](/tutorial/9-redux)
+[9 - Redux](/tutorial/09-redux)
 
 [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
