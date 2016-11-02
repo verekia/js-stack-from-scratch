@@ -186,7 +186,7 @@ gulp.task('clean', () => del([
 ]));
 ```
 
-- Add `/dist/client-bundle.*` to your `.gitignore` file:
+- Add `/dist/client-bundle.js*` to your `.gitignore` file:
 
 Next section: [8 - React](/tutorial/8-react)
 
