@@ -5,6 +5,9 @@ We're now going to use ES6 syntax, which is a great improvement over the "old" E
 - Run `yarn add --dev gulp`
 - Run `yarn add --dev gulp-babel`
 - Run `yarn add --dev babel-preset-latest`
+
+## Babel
+
 - In `package.json`, add a `babel` field for the babel configuration. Make it use the latest Babel preset like this:
 
 ```json
@@ -25,6 +28,8 @@ console.log(`Hello ${str}`);
 ```
 
 We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`.
+
+## Gulp
 
 - Create a `gulpfile.js` containing:
 
@@ -72,6 +77,8 @@ First we define a `paths` object to store all our different file paths and keep 
 
 Then we define 5 tasks: `build`, `clean`, `main`, `watch`, and `default`.
 
+## Our Gulp tasks
+
 - `build` is where Babel is called to transform all of our source files located under `src` and write the transformed ones to `lib`.
 - `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use the `del` package to delete files in a way that integrates well with Gulp's stream (this is the [recommended](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) way to delete files with Gulp). Run `yarn add --dev del` to install that package.
 - `main` is the equivalent of running `node .` in the previous chapter, except this time, we want to run it on `lib/index.js`. Since `index.js` is the default file Node looks for, we can simply write `node lib` (we use the `libDir` variable to keep things DRY). The `require('child_process').exec` and `exec` part in the task is a native Node function that executes a shell command. We forward `stdout` to `console.log()` and return a potential error using `gulp.task`'s callback function. Don't worry if this part is not super clear to you, remember that this task is basically just running `node lib`.
@@ -87,8 +94,7 @@ Alright! Let's see if this works.
 
 - Add `/lib/` to your `.gitignore`
 
-
-# 4 - Using the ES6 syntax with a class
+## Creating an ES6 class
 
 - Create a new file, `src/dog.js`, containing the following ES6 class:
 
@@ -119,21 +125,14 @@ const toby = new Dog('Toby');
 
 console.log(toby.bark());
 ```
+
 As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
 
 - Run `yarn start` and it should print 'Wah wah, I am Toby'.
 
 - Take a look at the code generated in `lib` to see how your compiled code looks like (`var` instead of `const` for instance).
 
-
-Next section: [5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
-
-Back to the [previous section](/tutorial/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
-
-
-
-
-# 5 - The ES6 modules syntax
+## The ES6 modules syntax
 
 Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax).
 
@@ -160,8 +159,8 @@ import Cat from './dog';
 
 const toby = new Cat('Toby');
 ```
-Obviously, most of the time you will use the same name as the class / module you're importing.
-A case where you don't do that is how we `const babel = require('gulp-babel')` in our Gulp file.
+
+Obviously, most of the time you will use the same name as the class / module you're importing. A good use case of renaming imports is how we do `const babel = require('gulp-babel')` in our Gulp file for instance.
 
 So what about those `require()`s in our `gulpfile.js`? Can we use `import` instead? The latest version of Node supports most ES6 features, but not ES6 modules yet. Luckily for us, Gulp is able to call Babel for help. If we rename our `gulpfile.js` to `gulpfile.babel.js`, Babel will take care of passing `import`ed modules to Gulp.
 
@@ -179,6 +178,6 @@ Note the syntactic sugar to extract `exec` directly from `child_process`. Pretty
 
 - `yarn start` should still print "Wah wah, I am Toby".
 
-Next section: [6 - ESLint](/tutorial/6-eslint)
+Next section: [3 - ESLint](/tutorial/3-eslint)
 
-Back to the [previous section](/tutorial/2-packages) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/1-node-npm-yarn-package-json) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

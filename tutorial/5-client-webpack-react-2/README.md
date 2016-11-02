@@ -1,4 +1,4 @@
-# 7 - Express Server and Webpack Client
+# 5 - Client App with Webpack and React
 
 ## Structure of our app
 
@@ -13,7 +13,7 @@ We are now going to turn our command-line-only app into a web app by splitting i
 
 
 
-// Jen etais la
+// TODO
 
 
 
