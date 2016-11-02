@@ -32,9 +32,7 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 [1 - Node, NPM, Yarn, and package.json](/tutorial/1-node-npm-yarn-package-json)
 
-[2 - Installing and using a package](/tutorial/2-packages)
-
-[3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
+[2 - Setting up ES6 with Babel and Gulp](/tutorial/2-gulp-babel-es6-class-import)
 
 [4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
 
@@ -55,6 +53,10 @@ The code of this tutorial works on Linux, macOS, and Windows.
 [12 - Type Checking with Flow](/tutorial/12-flow)
 
 Coming up: Production / development environments, Express, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
+
+## Changelog
+
+2016-11-01: Major reorganization of the code. Less chapters. Mocha is now compiled on the fly by Babel instead of relying on the `lib` build. Replaced `dist/index.html` by a minimal Express server.
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
