@@ -61,7 +61,7 @@ gulp.task('build', ['lint', 'clean'], () => {
 
 One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.babel.js`, at the very top, add:
 
-```javascript```
+```javascript
 /* eslint-disable import/no-extraneous-dependencies */
 ```
 
