@@ -1,12 +1,12 @@
 # 6 - ESLint
 
-We're going to lint our code to catch potential issues. ESLint is the linter of choice for ES6 code. Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
+Мы собираемся контролировать качество кода (англ. lint - прим. переводчика) чтобы перехватывать потенциальные проблемы. ESLint - предпочтительный анализатор кода (англ. linter - прим. переводчика) для ES6. Вместо того чтобы самим определять правила для нашего кода, мы воспользуемся конфигурацией, созданной Airbnb. В этой конфигурации используется несколько плагинов, поэтому мы их тоже установим.
 
-- Run `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
+- Запустите `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
 
-As you can see, you can install several packages in one command. It will add all of these to your `package.json`, as usual.
+Как вы видите, вы можете установить несколько пакетов одной командой. Как обычно, они все добавятся в ваш `package.json`.
 
-In `package.json`, add an `eslintConfig` field like so:
+В `package.json`, добавьте свойство `eslintConfig` с таким содержанием:
 ```json
 "eslintConfig": {
   "extends": "airbnb",
@@ -15,15 +15,15 @@ In `package.json`, add an `eslintConfig` field like so:
   ]
 },
 ```
-The `plugins` part is to tell ESLint that we use the ES6 import syntax.
+В разделе `plugins` мы сообщаем ESLint что используем синтакисис ES6 `import`.
 
-**Note**: An `.eslintrc.js` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
+**Замечание**: Вместо свойства `eslintConfig` в `package.json` можно использовать файл `.eslintrc.js` в корне вашего проекта. Так же как и с конфигурацией Babel, мы стараемся избегать загромождения корневой директории большим количеством файлов, но если у вас сложная конфигурация ESLint, рассмотрите такую альтернативу.
 
-We'll create a Gulp task that runs ESLint for us. So we'll install the ESLint Gulp plugin as well:
+Мы создадим задачу для Gulp, которая запускает ESLint для нас. Поэтому установим также плагин ESLint для Gulp:
 
-- Run `yarn add --dev gulp-eslint`
+- запустите `yarn add --dev gulp-eslint`
 
-Add the following task to your `gulpfile.babel.js`:
+Добавьте следующую задачу в ваш `gulpfile.babel.js`:
 
 ```javascript
 import eslint from 'gulp-eslint';
@@ -47,9 +47,9 @@ gulp.task('lint', () => {
 });
 ```
 
-Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
+Здесь мы говорм Gulp, что для этой задачи мы хотим подключить `gulpfile.babel.js` и JS файлы, расположенные в src`.
 
-Modify your `build` Gulp task by making the `lint` task a prerequisite to it, like so:
+Откорректируйте задачу `build` так, чтобы `lint` предваряла ее запуск:
 
 ```javascript
 gulp.task('build', ['lint', 'clean'], () => {
@@ -57,9 +57,10 @@ gulp.task('build', ['lint', 'clean'], () => {
 });
 ```
 
-- Run `yarn start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using `console.log()` in `index.js`.
+- Запустите `yarn start`. Вы должны увидеть набор ошибок кода (англ. linting errors - прим. переводчика) в этом Gulp-файле и предупреждений об использовании `console.log()` в `index.js`.
 
 One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.babel.js`, at the very top, add:
+Один из видов ошибок будет: `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)` ('gulp' должен подключаться в разделе `dependencies`, а не `devDependencies`). Вообще-то это неверная ошибка. 
 
 ```javascript```
 /* eslint-disable import/no-extraneous-dependencies */

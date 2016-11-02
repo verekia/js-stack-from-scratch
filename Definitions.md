@@ -26,3 +26,13 @@ Node
 Babel
 
 синтаксический сахар - syntactic sugar
+
+lint - статический анализ, контроль качества кода
+https://ru.wikipedia.org/wiki/Lint
+
+linter - статический анализатор кода.
+
+Gulpfile
+
+linting errors
+
