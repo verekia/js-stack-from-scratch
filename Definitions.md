@@ -36,3 +36,14 @@ Gulpfile
 
 linting errors
 
+bundle - сборка
+
+polyfill
+https://remysharp.com/2010/10/08/what-is-a-polyfill
+
+TRANSPILING - транспилияция (трансляция)
+https://www.stevefenton.co.uk/2012/11/compiling-vs-transpiling/
+
+tutorial - руководство
+
+entry point file - файл, указывающий на начальную точку сборки

@@ -1,8 +1,9 @@
-# 7 - Client App with Webpack
+# 7 - Клиентское приложение ~на основе Webpack~
 
-## Structure of our app
+## Структура нашего приложения
 
 - Create a `dist` folder at the root of your project, and add the following `index.html` file to it:
+- Создайте директорию `dist` в корне вашего проекта, и добавьте туда файл `index.html` со следующим содержанием:
 
 ```html
 <!doctype html>
@@ -16,11 +17,12 @@
 </html>
 ```
 
-In your `src` folder, create the following subfolders: `server`, `shared`, `client`, and move your current `index.js` into `server`, and `dog.js` into `shared`. Create `app.js` in `client`.
+В директории `src` создайте следующие поддиректории: `server`, `shared`, `client` и переместите текущий `index.js`  в папку `server`, а `dog.js` в `shared`. Создайте `app.js` в директории `client`.
 
 We are not going to do any Node back-end yet, but this separation will help you see more clearly where things belong. You'll need to change the `import Dog from './dog';` in `server/index.js` to `import Dog from '../shared/dog';` though, or ESLint will detect errors for unresolved modules.
+Мы пока что не собираемся создавать на Node серверную часть, но это разделение поможет более ясно понять что к чему относится. Вам нужно заменить `import Dog from './dog';` в `server/index.js` на `import Dog from '../shared/dog';`, иначе ESLint обнаружит ошибки неразрешаемых модулей.
 
-Write this in `client/app.js`:
+Напишите в `client/app.js`:
 
 ```javascript
 import Dog from '../shared/dog';
@@ -30,36 +32,36 @@ const browserToby = new Dog('Browser Toby');
 document.querySelector('.app').innerText = browserToby.bark();
 ```
 
-Add the following to your `package.json`, under `eslintConfig`:
+Добавьте следующее в `package.json`, после `eslintConfig`:
 
 ```json
 "env": {
   "browser": true
 }
 ```
-This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
+Таким образом мы сможем использовать такие переменные как `window` или `document`, которые всегда доступны в браузере, без предупреждений ESLint о необъявленных переменных.
 
-If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client code.
+Если вы желаете использовать самые последние возможности ES6 в клиентском коде, такие как `Promise` (обещания - прим. пер.), вам нужно включить [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) в ваш код.
 
-- Run `yarn add babel-polyfill`
+- Запустите `yarn add babel-polyfill`
 
-And before anything else in `app.js`, add this import:
+И вставьте в самое начало `app.js` импорт этого модуля:
 
 ```javascript
 import 'babel-polyfill';
 ```
 
-Including the polyfill adds some weight to your bundle, so add it only if you use the features it covers. In order to provide some solid boilerplate code with this tutorial, I am including it and it will appear in code samples in the next chapters.
+Включение ~~полифила~~ (англ. polyfill) прибавляет объема вашей сборке, поэтому подключайте  его только когда применяете конструкции, которые он охватывает. Для того, чтобы показать более полный шаблон кода в этом руководстве, я его применяю, и он появится примерах в следующих частях.
 
 ## Webpack
 
-In a Node environment, you can freely `import` different files and Node will resolve these files using your filesystem. In a browser, there is no filesystem, and therefore your `import`s point to nowhere. In order for our entry point file `app.js` to retrieve the tree of imports it needs, we are going to "bundle" that entire tree of dependencies into one file. Webpack is a tool that does this.
+В среде Node вы можете свободно использовать `import` для различных файлов и Node разрешит (англ. resolve) их посредством файловой системы. В браузере файловая система отсутствует, следовательно `import` ведет в никуда. Для того чтобы `app.js`, являющийся точкой входа для приложения, получил всю древовидную структуру импортируемых файлов, мы собираемся "собрать" все это дерево зависимостей в один файл. Webpack - нужный для этого инструмент.
 
-Webpack uses a config file, just like Gulp, called `webpack.config.js`. It is possible to use ES6 imports and exports in it, in the exact same way that we made Gulp rely on Babel to do so: by naming this file `webpack.config.babel.js`.
+Webpack, как и Gulp, использует конфигурационные файлы вида `webpack.config.js`. В них возможно использование ES6 импорта и экспорта точно таким же способом, как мы делали с Gulp относительно Babel: обозначая этот файл как `webpack.config.babel.js`.
 
-- Create an empty `webpack.config.babel.js` file
+- Создайте пустой файл `webpack.config.babel.js`
 
-- While you're at it, add `webpack.config.babel.js` to your Gulp `lint` task, and a few more `paths` constants:
+- Пока вы в нем, добавьте `webpack.config.babel.js` в задачу `lint` в Gulp, и еще несколько констант с путями (`paths` - англ):
 
 ```javascript
 const paths = {
@@ -84,11 +86,11 @@ gulp.task('lint', () =>
 );
 ```
 
-We need to teach Webpack how to process ES6 files via Babel (just like we taught Gulp how to process ES6 files with `gulp-babel`). In Webpack, when you need to process files that are not plain old JavaScript, you use *loaders*. So let's install the Babel loader for Webpack:
+Мы должы научить Webpack обрабатывать ES6 файлы с помощью Babel (точно так же как мы показали Gulp как это делать через `gulp-babel`). Для Webpack, когда нужно обработать файлы, не являющиеся простым старым JavaScript, мы используем *загрузчики* (loaders). Давайте установим загрузчик Babel для Webpack:
 
-- Run `yarn add --dev babel-loader`
+- Запустите `yarn add --dev babel-loader`
 
-- Write the following to your `webpack.config.babel.js` file:
+- Напишите следующее в `webpack.config.babel.js` файле:
 
 ```javascript
 export default {
@@ -111,38 +113,39 @@ export default {
 };
 ```
 
-Let's analyze this a bit:
+Давайте это немного проанализируем:
 
-We need this file to `export` stuff for Webpack to read. `output.filename` is the name of the bundle we want to generate. `devtool: 'source-map'` will enable source maps for a better debugging experience in your browser. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we will use both `.js` files and `.jsx` files (for React) in the next chapters, we have the following regex: `/\.jsx?$/`. The `node_modules` folder is excluded because there is no transpilation to do there. This way, when your code `import`s packages located in `node_modules`, Babel doesn't bother processing those files, which reduces build time. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less paths like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
+Этот файл нужен чтобы сообщить Webpack некоторую информацию. `output.filename` - имя файла генерируемой сборки. `devtool: 'source-map'` - позволяет использовать source maps (карты кода) для упрощения отладки в браузере. В `module.loaders` есть свойство `test` с регулярным выражением, определяющим какие файлы должны обрабатываться загрузчиком `babel-loader`. Поскольку мы будем использовать как `.js` так и `.jsx` файлы (для React) в следующих частях, наше выражение выглядит как `/\.jsx?$/`. Директория `node_modules` исключена (exclude) поскольку ее не нужно транспилировать. Таким образом, когда код импортирует (`import`) пакеты, расположенные в `node_modules`, Babel не тратит время на обработку этих файлов. Раздел `resolve` сообщает Webpack файлы какого типа мы хотим подключать через `import`, позволяя тем самым опускать расширения в именах файлов, например как в `import Foo from './foo'`, где `foo` может быть `foo.js` или `foo.jsx`.
 
-Okay so now we have Webpack set up, but we still need a way to *run* it.
+И так, мы настроили Webpack, но нам до сих пор требуется способ *запустить* его.
 
-## Integrating Webpack to Gulp
+## Подключение Webpack к Gulp
 
-Webpack can do a lot of things. It can actually replace Gulp entirely if your project is mostly client-side. Gulp being a more general tool, it is better suited for things like linting, tests, and back-end tasks though. It is also simpler to understand for newcomers than a complex Webpack config. We have a pretty solid Gulp setup and workflow here, so integrating Webpack to our Gulp build is going to be easy peasy.
+Webpack может делать множество вещей. Он даже может полностью заменить Gulp, если проект в основном выполняется на стороне клиента. Gulp в свою очередь, как более общий инструмент, больше подходит для таких вещей как анализ кода (linting), тестирование, запуск задач на стороне сервера. Он так же проще в понимании для новичков чем чем сложное конфигурирование Webpack. У нас уже довольно хорошо настроен рабочий процесс на базе Gulp, так что интеграция Webpack в процес сборки пройдет проще простого.
 
-Let's create the Gulp task to run Webpack. Open your `gulpfile.babel.js`.
+Давайте создадим в Gulp задачу по запуску Webpack. Откройте `gulpfile.babel.js`.
 
-We don't need the `main` task to execute `node lib/` anymore, since we will open `index.html` to run our app.
+We don't need the `main` task to execute `node lib/` anymore, since we will open `index.html` to run our app. 
+Поскольку мы ~~will open~~ `index.html` чтобы запускать наше приложение, нам больше не требуется задача `main` чтобы выполнять `node lib/`.
 
-- Remove `import { exec } from 'child_process'`.
+- Уберите `import { exec } from 'child_process'`.
 
-Similarly to Gulp plugins, the `webpack-stream` package lets us integrate Webpack into Gulp very easily.
+Аналогично плагинам для Gulp, пакет `webpack-stream` позволяет очень просто интегрировать Webpack в Gulp.
 
-- Install the package with: `yarn add --dev webpack-stream`
+- Устанавливаем пакет: `yarn add --dev webpack-stream`
 
-- Add the following `import`s:
+- Добавляем следующие `import`:
 
 ```javascript
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 ```
 
-The second line just grabs our config file.
+Вторая строчка просто подключает наш конфигурационный файл.
 
-Like I said earlier, in the next chapter we are going to use `.jsx` files (on the client, and even on the server later on), so let's set that up right now to have a bit of a head start.
+Как было сказанно ранее, в следующей части мы собираемся использовать `.jsx` файлы (на клиенте и даже позже на сервере), так что давайте настроим это сейчас, чтобы затем иметь фору.
 
-- Change the constants to the following:
+- Измените константы следующим образом:
 
 ```javascript
 const paths = {
@@ -157,11 +160,11 @@ const paths = {
 };
 ```
 
-The `.js?(x)` is just a pattern to match `.js` or `.jsx` files.
+Здесь `.js?(x)` - просто шаблон, соответсвующий `.js` и `.jsx` файлам.
 
-We now have constants for the different parts of our application, and an entry point file.
+Теперь у нас есть константы для различных частей приложения и файл, указывающий на начальную точку сборки (entry point file).
 
-- Modify the `main` task like so:
+- Измените задачу `main` так:
 
 ```javascript
 gulp.task('main', ['lint', 'clean'], () =>
@@ -171,13 +174,13 @@ gulp.task('main', ['lint', 'clean'], () =>
 );
 ```
 
-**Note**: Our `build` task currently transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we could make this task only compile `server` and `shared` (since Webpack takes care of `client`). However, in the Testing chapter, we are going to need Gulp to also compile the `client` code to test it outside of Webpack. So until you reach that chapter, there is a bit of useless duplicated build being done. I'm sure we can all agree that it's fine for now. We actually aren't even going to be using the `build` task and `lib` folder anymore until that chapter, since all we care about right now is the client bundle.
+**Замечание**: Задача `build` сейчас транспилирует код ES6 в ES5 для каждого `.js` файла, расположенного в `src`. Поскольку мы разделили код на  `server`, `shared` и `client`, то мы могли бы компилировать только `server` и `shared` (поскольку Webpack позаботится о `client`). Тем не менее, в разделе Тестирование нам потребуется Gulp для компиляции клиентского кода чтобы тестировать его вне Webpack. Так что пока-что мы не дойдем до этого раздела, будет ~~несколько избыточное дублирование в~~ `build`. Давайте договоримся, что пока это нормально. Вообще мы даже не будем использовать `build` и директорию `lib` пока не доберемся до этой части, так что все что нас сейчас волнует - это клиентская сборка.
 
-- Run `yarn start`, you should now see Webpack building your `client-bundle.js` file. Opening `index.html` in your browser should display "Wah wah, I am Browser Toby".
+- Запустите `yarn start`, вы должны увидеть построенный Webpack файл `client-bundle.js`. Откройте `index.html` в браузере. Должно отобразиться "Wah wah, I am Browser Toby".
 
-One last thing: unlike our `lib` folder, the `dist/client-bundle.js` and `dist/client-bundle.js.map` files are not being cleaned up by our `clean` task before each build.
+Одна последняя вещь: в отличие от директории `lib`, файлы `dist/client-bundle.js` и `dist/client-bundle.js.map` не очищаются задачей `clean` перед каждой сборкой.
 
-- Add `clientBundle: 'dist/client-bundle.js?(.map)'` to our `paths` configuration, and tweak the `clean` task like so:
+- Добавьте `clientBundle: 'dist/client-bundle.js?(.map)'` в нашу конфигурацию путей (`paths`), и настройте задачу `clean` следующим образом:
 
 ```javascript
 gulp.task('clean', () => del([
@@ -186,8 +189,8 @@ gulp.task('clean', () => del([
 ]));
 ```
 
-- Add `/dist/client-bundle.js*` to your `.gitignore` file:
+- Добавьте `/dist/client-bundle.js*` в файл `.gitignore`:
 
-Next section: [8 - React](/tutorial/8-react)
+Следующий раздел: [8 - React](/tutorial/8-react)
 
-Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/6-eslint) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
