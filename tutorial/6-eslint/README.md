@@ -59,16 +59,15 @@ gulp.task('build', ['lint', 'clean'], () => {
 
 - Запустите `yarn start`. Вы должны увидеть набор ошибок кода (англ. linting errors - прим. переводчика) в этом Gulp-файле и предупреждений об использовании `console.log()` в `index.js`.
 
-One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.babel.js`, at the very top, add:
-Один из видов ошибок будет: `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)` ('gulp' должен подключаться в разделе `dependencies`, а не `devDependencies`). Вообще-то это неверная ошибка. 
+Один из видов ошибок будет: `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)` ('gulp' должен подключаться в разделе `dependencies`, а не `devDependencies`). Вообще-то это неверная ошибка. ESLint не может знать какие JS файлы будут входить только в ~~скомпилированное приложение~~ (англ. build - прим. переводчика ) а какие нет. Поэтому мы немного поможем ESLint используя комментарии в коде. В `gulpfile.babel.js`, в самом верху, добавьте:
 
 ```javascript```
 /* eslint-disable import/no-extraneous-dependencies */
 ```
 
-This way, ESLint won't apply the rule `import/no-extraneous-dependencies` in this file.
+Таким образом, ESLint не будет применять правило `import/no-extraneous-dependencies` в этом файле.
 
-Now we are left with the issue `Unexpected block statement surrounding arrow body (arrow-body-style)`. That's a great one. ESLint is telling us that there is a better way to write the following code:
+Теперь у нас осталась проблема с `Unexpected block statement surrounding arrow body (arrow-body-style)` (Неожиданное определение блока, окружающего тело стрелочной функции). Это важно. ESLint сообщает нам, что существует лучший способ написать следующий код:
 
 ```javascript
 () => {
@@ -76,15 +75,15 @@ Now we are left with the issue `Unexpected block statement surrounding arrow bod
 }
 ```
 
-It should be rewritten into:
+Это нужно переписать так:
 
 ```javascript
 () => 1
 ```
 
-Because when a function only contains a return statement, you can omit the curly braces, return statement, and semicolon in ES6.
+Потому что, когда в ES6 функция содержит только возвращаемое выражение, вы можете опустить фигурные скобки, оператор return и точку с запятой.
 
-So let's update the Gulp file accordingly:
+Так что давайте обновим Gulp-файл соответственно:
 
 ```javascript
 gulp.task('lint', () =>
@@ -106,13 +105,13 @@ gulp.task('build', ['lint', 'clean'], () =>
 );
 ```
 
-The last issue left is about `console.log()`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
+Последняя оставшаяся проблема связана с `console.log()`. Давайте скажем, что мы хотим в этом примере, чтобы использование `console.log()` в `index.js` было правомерным, а не вызывало предупреждение. Как вы, возможно, догадались мы поместим `/* eslint-disable no-console */` в начале нашего `index.js` файла.
 
-- Run `yarn start` and we are now all clear again.
+- Запустите `yarn start` - теперь все снова без ошибок.
 
-**Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
+**Замечание**: В этой части мы работали с ESLint через консоль. Это хорошо для поиска ошибок во время компиляции / перед ~~публикацией~~, но вы, так же, возможно, захотите интегрировать его в вашу IDE. НЕ ИСПОЛЬЗУЙТЕ встроенный в вашу среду анализатор кода для ES6. Сконфигурируйте ее так, чтобы для этого использовались модули, расположенные в директории `node_modules`. В этом случае будут использоваться все настройки вашего проекта, правила Airbnb и так далее. Иначе, вы получите лишь усредненный ES6 анализатор.
 
 
-Next section: [7 - Client app with Webpack](/tutorial/7-client-webpack)
+Следующий раздел: [7 - Клиентское приложение ~на основе Webpack~](/tutorial/7-client-webpack)
 
-Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/5-es6-modules-syntax) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
