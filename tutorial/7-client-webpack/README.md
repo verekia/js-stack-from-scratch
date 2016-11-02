@@ -177,7 +177,21 @@ gulp.task('main', ['lint', 'clean'], () =>
 
 One last thing: unlike our `lib` folder, the `dist/client-bundle.js` and `dist/client-bundle.js.map` files are not being cleaned up by our `clean` task before each build.
 
-- Add `clientBundle: 'dist/client-bundle.js?(.map)'` to our `paths` configuration, and tweak the `clean` task like so:
+- Add `clientBundle: 'dist/client-bundle.js?(.map)'` to our `paths` configuration:
+```
+  const paths = {
+    allSrcJs: 'src/**/*.js?(x)',
+    serverSrcJs: 'src/server/**/*.js?(x)',
+    sharedSrcJs: 'src/shared/**/*.js?(x)',
+    clientEntryPoint: 'src/client/app.js',
+    gulpFile: 'gulpfile.babel.js',
+    webpackFile: 'webpack.config.babel.js',
+    libDir: 'lib',
+    distDir: 'dist',
+    clientBundle: 'dist/client-bundle.js?(.map)',
+  };
+```
+- And tweak the `clean` task like so:
 
 ```javascript
 gulp.task('clean', () => del([
