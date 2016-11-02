@@ -2,7 +2,7 @@
 
 ## Mocha and Chai
 
-- Create an `src/test` folder. This folder will mirror our application folder structure, so create a `src/test/client` folder as well (feel free to add `server` and `shared` if you want, but we're not going to write tests for these).
+- Create a `src/test` folder. This folder will mirror our application folder structure, so create a `src/test/client` folder as well (feel free to add `server` and `shared` if you want, but we're not going to write tests for these).
 
 - In `src/test/client`, create a `state-test.js` file, which we are going to use to test our Redux application life cycle.
 
@@ -52,7 +52,7 @@ Our `makeBark` test is very explicit, and the description provided as a string i
 
 Alright, let's run this test!
 
-- Create the following `test` task, which relies on the `gulp-mocha` plugin:
+- In `gulpfile.babel.js`, create the following `test` task, which relies on the `gulp-mocha` plugin:
 
 ```javascript
 import mocha from 'gulp-mocha';
