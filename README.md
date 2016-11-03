@@ -14,6 +14,7 @@
 
 ## Перевод еще полностью не завершен. Это не окончательная версия!
 перевод терминов см. [Definitions.md](Definitions.md)
+[вопросы, замечания, предложения](issues)
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
