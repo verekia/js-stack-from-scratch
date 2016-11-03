@@ -37,6 +37,7 @@ Add the following to your `package.json`, under `eslintConfig`:
   "browser": true
 }
 ```
+
 This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client code.

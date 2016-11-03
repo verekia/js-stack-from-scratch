@@ -96,11 +96,13 @@ import * as Immutable from 'immutable';
 Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components. I'm personally going for `import * as Immutable from 'immutable'` since it's shorter and won't require refactoring the code when this issue gets fixed.
 
 **Note**: If Flow detects type errors in your `node_modules` folder, add an `[ignore]` section in your `.flowconfig` to ignore the packages causing issues specifically (do not ignore the entire `node_modules` directory). It could look like this:
-```
+
+```flowconfig
 [ignore]
 
 .*/node_modules/gulp-flowtype/.*
 ```
+
 In my case, the `linter-flow` plugin for Atom was detecting type errors in the `node_modules/gulp-flowtype` directory, which contains files annotated with `// @flow`.
 
 You now have bullet-proof code that is linted, typechecked, and tested, good job!

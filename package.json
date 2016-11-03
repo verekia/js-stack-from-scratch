@@ -4,7 +4,7 @@
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "test": "yarn run mdlint && cd tutorial/1-node-npm-yarn-package-json && yarn && yarn run tutorial-test && cd ../2-packages && yarn && yarn run tutorial-test && cd ../3-es6-babel-gulp && yarn && yarn run tutorial-test && cd ../4-es6-syntax-class && yarn && yarn run tutorial-test && cd ../5-es6-modules-syntax && yarn && yarn run tutorial-test && cd ../6-eslint && yarn && yarn run tutorial-test && cd ../7-client-webpack && yarn && yarn run tutorial-test && cd ../8-react && yarn && yarn run tutorial-test && cd ../9-redux && yarn && yarn run tutorial-test && cd ../10-immutable-redux-improvements && yarn && yarn run tutorial-test && cd ../11-testing-mocha-chai-sinon && yarn && yarn run tutorial-test && cd ../12-flow && yarn && yarn run tutorial-test",
-    "mdlint": "markdownlint -c .mdlintrc README.md how-to-translate.md tutorial/1-node-npm-yarn-package-json/README.md"
+    "mdlint": "markdownlint -c .mdlintrc README.md how-to-translate.md tutorial/1-node-npm-yarn-package-json/README.md tutorial/2-packages/README.md tutorial/3-es6-babel-gulp/README.md tutorial/4-es6-syntax-class/README.md tutorial/5-es6-modules-syntax/README.md tutorial/6-eslint/README.md tutorial/7-client-webpack/README.md tutorial/8-react/README.md tutorial/9-redux/README.md tutorial/10-immutable-redux-improvements/README.md tutorial/11-testing-mocha-chai-sinon/README.md tutorial/12-flow/README.md"
   },
   "devDependencies": {
     "markdownlint-cli": "^0.2.0",

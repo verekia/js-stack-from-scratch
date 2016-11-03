@@ -88,7 +88,6 @@ Alright! Let's see if this works.
 
 - Add `/lib/` to your `.gitignore`
 
-
 Next section: [4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
 
 Back to the [previous section](/tutorial/2-packages) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

@@ -7,6 +7,7 @@ We're going to lint our code to catch potential issues. ESLint is the linter of 
 As you can see, you can install several packages in one command. It will add all of these to your `package.json`, as usual.
 
 In `package.json`, add an `eslintConfig` field like so:
+
 ```json
 "eslintConfig": {
   "extends": "airbnb",
@@ -15,6 +16,7 @@ In `package.json`, add an `eslintConfig` field like so:
   ]
 },
 ```
+
 The `plugins` part is to tell ESLint that we use the ES6 import syntax.
 
 **Note**: An `.eslintrc.js` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
@@ -110,7 +112,6 @@ The last issue left is about `console.log()`. Let's say that we want this `conso
 - Run `yarn start` and we are now all clear again.
 
 **Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
-
 
 Next section: [7 - Client app with Webpack](/tutorial/7-client-webpack)
 

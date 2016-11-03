@@ -20,6 +20,7 @@ export const makeBark = () => ({
   payload: true,
 });
 ```
+
 Here we define an action type, `MAKE_BARK`, and a function (also known as *action creator*) that triggers a `MAKE_BARK` action called `makeBark`. Both are exported because we'll need them both in other files. This action implements the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which is why it has `type` and `payload` attributes.
 
 - In `reducers`, create `dog-reducer.js`:

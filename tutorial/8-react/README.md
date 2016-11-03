@@ -55,7 +55,6 @@ Install the React Babel preset, which will teach Babel how to process the JSX sy
 
 Now after running `yarn start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
 
-
 Next section: [9 - Redux](/tutorial/9-redux)
 
 Back to the [previous section](/tutorial/7-client-webpack) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

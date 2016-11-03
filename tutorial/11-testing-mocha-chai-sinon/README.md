@@ -42,6 +42,7 @@ describe('App State', () => {
   });
 });
 ```
+
 Alright, let's analyze this whole thing.
 
 First, notice how we import the `should` assertion style from `chai`. This lets us assert things using a syntax like `mynumber.should.equal(3)`, pretty neat. In order to be able to call `should` on any object, we need to run the function `should()` before anything. Some of these assertion are *expressions*, like `mybook.should.be.true`, which will make ESLint grumpy, so we've added an ESLint comment at the top to disable the `no-unused-expressions` rule in this file.
@@ -51,7 +52,6 @@ Mocha tests work like a tree. In our case, we want to test the `makeBark` functi
 Our `makeBark` test is very explicit, and the description provided as a string in `it()` makes it even clearer: we test that `hasBarked` go from `false` to `true` after calling `makeBark`.
 
 Alright, let's run this test!
-
 
 - In `gulpfile.babel.js`, create the following `test` task, which relies on the `gulp-mocha` plugin:
 
