@@ -12,6 +12,7 @@ For instance, on **Ubuntu / Debian**, you would run the following commands to in
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
+
 You want any version of Node > 6.5.0.
 
 `npm`, the default package manager for Node, comes automatically with Node, so you don't have to install it yourself.
@@ -31,7 +32,7 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 
 - In `package.json`, add a `scripts` object to the root object like so:
 
-```
+```json
 "scripts": {
   "start": "node ."
 }
@@ -43,7 +44,7 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 
 - Create a `.gitignore` file and add the following to it:
 
-```
+```gitignore
 npm-debug.log
 yarn-error.log
 ```
