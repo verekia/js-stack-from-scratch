@@ -52,7 +52,8 @@ Our `makeBark` test is very explicit, and the description provided as a string i
 
 Alright, let's run this test!
 
-- Create the following `test` task, which relies on the `gulp-mocha` plugin:
+
+- In `gulpfile.babel.js`, create the following `test` task, which relies on the `gulp-mocha` plugin:
 
 ```javascript
 import mocha from 'gulp-mocha';
