@@ -12,6 +12,9 @@
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch)
 
+## Перевод еще полностью не завершен. Это не окончательная версия!
+перевод терминов см. [Definitions.md](Definitions.md)
+
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
 This is a minimalistic and straight-to-the-point guide to assembling a JavaScript stack. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*.
