@@ -20,6 +20,7 @@ export const makeBark = () => ({
   payload: true,
 });
 ```
+
 Here we define an action type, `MAKE_BARK`, and a function (also known as *action creator*) that triggers a `MAKE_BARK` action called `makeBark`. Both are exported because we'll need them both in other files. This action implements the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which is why it has `type` and `payload` attributes.
 
 - In `reducers`, create `dog-reducer.js`:
@@ -157,9 +158,6 @@ Next section: [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-
 
 Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
 
-
-# 10 - Immutable JS and Redux Improvements
-
 ## Immutable JS
 
 Unlike the previous chapter, this one is rather easy, and consists in minor improvements.
@@ -170,7 +168,9 @@ First, we are going to add **Immutable JS** to our codebase. Immutable is a libr
 const obj = { a: 1 };
 obj.a = 2; // Mutates `obj`
 ```
+
 You would do:
+
 ```javascript
 const obj = Immutable.Map({ a: 1 });
 obj.set('a', 2); // Returns a new object without mutating `obj`
@@ -195,6 +195,7 @@ We are going to use `Map` in our codebase, but ESLint and the Airbnb config will
   ]
 }
 ```
+
 This makes `Map` and `List` (the 2 Immutable objects you'll use all the time) exceptions to that ESLint rule. This verbose JSON formatting is actually done automatically by Yarn/NPM, so we cannot make it more compact unfortunately.
 
 Anyway, back to Immutable:
@@ -238,6 +239,7 @@ The app should still behave exactly the way it did before.
 As you can see from the code snippet above, our state object still contains a plain old `dog` object attribute, which isn't immutable. It is fine this way, but if you want to only manipulate immutable objects, you could install the `redux-immutable` package to replace Redux's `combineReducers` function.
 
 **Optional**:
+
 - Run `yarn add redux-immutable`
 - Replace your `combineReducers` function in `app.jsx` to use the one imported from `redux-immutable` instead.
 - In `bark-message.js` replace `state.dog.get('hasBarked')` by `state.getIn(['dog', 'hasBarked'])`.

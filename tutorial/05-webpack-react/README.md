@@ -10,14 +10,7 @@ We are now going to turn our command-line-only app into a web app by splitting i
 
 - Create a `src/server/templates/master-layout.js` file and add the following `index.html` file to it:
 
-
-
-
 // TODO
-
-
-
-
 
 ```javascript
 <!doctype html>
@@ -30,8 +23,6 @@ We are now going to turn our command-line-only app into a web app by splitting i
   </body>
 </html>
 ```
-
-
 
 We are not going to do any Node back-end yet, but this separation will help you see more clearly where things belong.
 
@@ -52,6 +43,7 @@ Add the following to your `package.json`, under `eslintConfig`:
   "browser": true
 }
 ```
+
 This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client code.
@@ -203,8 +195,7 @@ gulp.task('clean', () => del([
 
 - Add `/dist/client-bundle.*` to your `.gitignore` file.
 
-
-# 8 - React
+## 8 - React
 
 We're now going to render our app using React.
 
@@ -261,13 +252,6 @@ Install the React Babel preset, which will teach Babel how to process the JSX sy
 
 Now after running `yarn start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
 
-
 Next section: [9 - Redux](/tutorial/9-redux)
-
-Back to the [previous section](/tutorial/7-express-server-webpack-client) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
-
-
-
-Next section: [8 - React](/tutorial/8-react)
 
 Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

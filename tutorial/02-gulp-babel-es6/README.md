@@ -67,7 +67,6 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', ['watch', 'main']);
-
 ```
 
 Let's take a moment to understand all this.

@@ -14,6 +14,7 @@ For instance, on **Ubuntu / Debian**, you would run the following commands to in
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
+
 You want any version of Node > 6.5.0.
 
 `npm`, the default package manager for Node, comes automatically with Node, so you don't have to install it yourself.
@@ -37,7 +38,7 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 
 - In `package.json`, add a `scripts` object to the root object like so:
 
-```
+```json
 "scripts": {
   "start": "node ."
 }
@@ -49,13 +50,12 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 
 - Create a `.gitignore` file and add the following to it:
 
-```
+```gitignore
 npm-debug.log
 yarn-error.log
 ```
 
 **Note**: If you take a look at the `package.json` files I provide, you will see a `tutorial-test` script in every chapter. Those scripts let me test that the chapter works fine when running `yarn && yarn start`. You can delete them in your own projects.
-
 
 ## Installing and using a package
 
@@ -88,8 +88,7 @@ Congratulations, you installed and used a package!
 
 - Run `yarn remove color`
 
-**Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, tests, etc). To install `"devDependencies"`, we will use the `--save-dev` parameter instead of `--save`.
-
+**Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, tests, etc). For `"devDependencies"`, we will use `yarn add --dev [package]` to install packages.
 
 Next section: [2 - Setting up ES6 with Babel and Gulp](/tutorial/2-gulp-babel-es6-class-import)
 
