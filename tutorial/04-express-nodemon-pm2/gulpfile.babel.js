@@ -3,11 +3,12 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import eslint from 'gulp-eslint';
+import nodemon from 'gulp-nodemon';
 import del from 'del';
-import { exec } from 'child_process';
 
 const paths = {
   allSrcJs: 'src/**/*.js',
+  allServerFiles: ['src/server/**/*.js', 'src/shared/**/*.js'],
   gulpFile: 'gulpfile.babel.js',
   libDir: 'lib',
 };
@@ -30,12 +31,13 @@ gulp.task('build', ['lint', 'clean'], () =>
     .pipe(gulp.dest(paths.libDir))
 );
 
-gulp.task('main', ['build'], (callback) => {
-  exec(`node ${paths.libDir}`, (error, stdout) => {
-    console.log(stdout);
-    return callback(error);
-  });
-});
+gulp.task(`main`, [`build`], () =>
+  nodemon({
+    script: paths.serverLibDir,
+    watch: allServerFiles,
+    tasks: 'build',
+  })
+);
 
 gulp.task('watch', () => {
   gulp.watch(paths.allSrcJs, ['main']);
