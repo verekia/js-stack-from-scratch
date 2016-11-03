@@ -14,6 +14,8 @@
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
+*This is v2.0.0: See the [Change Log](/CHANGELOG.md)*.
+
 This is a minimalistic and straight-to-the-point guide to assembling a JavaScript stack. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*.
 
 You don't need to use this entire stack if you build a simple web page with a few JS interactions of course (a combination of Browserify/Webpack + Babel + jQuery is enough to be able to write ES6 code in different files with CLI compilation), but if you want to build a web app that scales, and need help setting things up, this tutorial will work great for you.
@@ -67,10 +69,6 @@ Production / development environments, Express, React Router, Server-Side Render
 If you want to add your translation, please read the [translation recommendations](/how-to-translate.md) to get started!
 
 ## Credits
-
-## Changelog
-
-2016-11-01: Major reorganization of the code. Less chapters. Mocha is now compiled on the fly by Babel instead of relying on the `lib` build. Replaced `dist/index.html` by a minimal Express server.
 
 Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
