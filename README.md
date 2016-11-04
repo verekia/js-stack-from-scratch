@@ -60,7 +60,7 @@
 
 [9 - Redux](/tutorial/9-redux)
 
-[10 - Immutable JS and ~Redux Improvements~](/tutorial/10-immutable-redux-improvements)
+[10 - Immutable JS и улучшения Redux](/tutorial/10-immutable-redux-improvements)
 
 [11 - Тестировние с Mocha, Chai, и Sinon](/tutorial/11-testing-mocha-chai-sinon)
 

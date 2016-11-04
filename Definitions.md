@@ -58,3 +58,4 @@ repo/repository - репозиторий
 commit - фиксировать гл.
 commit - коммит сущ.
 
+reducer functions - reducer-функции
