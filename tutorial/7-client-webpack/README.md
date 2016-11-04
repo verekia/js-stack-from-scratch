@@ -193,4 +193,4 @@ gulp.task('clean', () => del([
 
 Следующий раздел: [8 - React](/tutorial/8-react)
 
-Назад в [предыдущий раздел](/tutorial/6-eslint) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/6-eslint) или [Содержание](/README.md).

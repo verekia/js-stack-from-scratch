@@ -52,4 +52,4 @@ yarn-error.log
 
 Следующий раздел: [2 - Installing and using a package](/tutorial/2-packages)
 
-Назад в [Содержание](/).
+Назад в [Содержание](/README.md).

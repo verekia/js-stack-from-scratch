@@ -38,4 +38,4 @@ console.log(toby.bark());
 
 Следующий раздел: [5 - Синтаксис модулей ES6](/tutorial/5-es6-modules-syntax)
 
-Назад в [предыдущий раздел](/tutorial/3-es6-babel-gulp) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/3-es6-babel-gulp) или [Содержание](/README.md).

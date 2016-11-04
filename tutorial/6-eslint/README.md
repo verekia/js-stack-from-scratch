@@ -47,7 +47,7 @@ gulp.task('lint', () => {
 });
 ```
 
-Здесь мы говорм Gulp, что для этой задачи мы хотим подключить `gulpfile.babel.js` и JS файлы, расположенные в src`.
+Здесь мы говорм Gulp, что для этой задачи мы хотим подключить `gulpfile.babel.js` и JS файлы, расположенные в `src`.
 
 Откорректируйте задачу `build` так, чтобы `lint` предваряла ее запуск:
 
@@ -61,7 +61,7 @@ gulp.task('build', ['lint', 'clean'], () => {
 
 Один из видов ошибок будет: `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)` ('gulp' должен подключаться в разделе `dependencies`, а не `devDependencies`). Вообще-то это неверная ошибка. ESLint не может знать какие JS файлы будут входить только в ~~скомпилированное приложение~~ (англ. build - прим. переводчика ) а какие нет. Поэтому мы немного поможем ESLint используя комментарии в коде. В `gulpfile.babel.js`, в самом верху, добавьте:
 
-```javascript```
+```javascript
 /* eslint-disable import/no-extraneous-dependencies */
 ```
 
@@ -114,4 +114,4 @@ gulp.task('build', ['lint', 'clean'], () =>
 
 Следующий раздел: [7 - Клиентское приложение ~на основе Webpack~](/tutorial/7-client-webpack)
 
-Назад в [предыдущий раздел](/tutorial/5-es6-modules-syntax) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/5-es6-modules-syntax) или [Содержание](/README.md).

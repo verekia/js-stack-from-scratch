@@ -47,4 +47,4 @@ import { exec } from 'child_process';
 
 Следующий раздел: [6 - ESLint](/tutorial/6-eslint)
 
-Назад в [предыдущий раздел](/tutorial/4-es6-syntax-class) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/4-es6-syntax-class) или [Содержание](/README.md).

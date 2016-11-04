@@ -59,4 +59,4 @@ clientEntryPoint: 'src/client/app.jsx',
 
 Следующий раздел: [9 - Redux](/tutorial/9-redux)
 
-Назад в [предыдущий раздел](/tutorial/7-client-webpack) или [Содержание](https://github.com/verekia/js-stack-from-scratch).
+Назад в [предыдущий раздел](/tutorial/7-client-webpack) или [Содержание](/README.md).
