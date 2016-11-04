@@ -27,28 +27,26 @@ gulp.task('lint:server', () =>
     .pipe(eslint.failAfterError())
 );
 
-gulp.task('clean:server', () => {
-  del.sync(paths.serverLibDir);
-});
+gulp.task('clean:server', () =>
+  del.sync(paths.serverLibDir)
+);
 
-gulp.task('build:server', () => {
+gulp.task('build:server', () =>
   gulp.src(paths.allServerSrcFiles)
   .pipe(babel())
-  .pipe(gulp.dest(paths.serverLibDir));
-});
+  .pipe(gulp.dest(paths.serverLibDir))
+);
 
 gulp.task('sequence:build:server', callback =>
   runSequence('lint:server', 'clean:server', 'build:server', callback)
 );
 
-gulp.task('main:server', ['sequence:build:server'], () => {
-  console.log('before nodemon');
+gulp.task('main:server', ['sequence:build:server'], () =>
   nodemon({
     script: paths.serverLibDir,
     watch: paths.allServerSrcFiles,
     tasks: 'sequence:build:server',
-  });
-  console.log('after nodemon');
-});
+  })
+);
 
 gulp.task('default', ['main:server']);
