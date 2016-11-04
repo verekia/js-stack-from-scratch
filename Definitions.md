@@ -47,3 +47,8 @@ https://www.stevefenton.co.uk/2012/11/compiling-vs-transpiling/
 tutorial - руководство
 
 entry point file - файл, указывающий на начальную точку сборки
+
+back-end - серверная часть
+
+trailing commas - завершающая запятая (/пробел)
+http://www.multitran.ru/c/m.exe?t=6766895_1_2&s1=trailing%20space

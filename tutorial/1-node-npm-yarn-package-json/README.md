@@ -1,35 +1,35 @@
 # 1 - Node, NPM, Yarn, and package.json
 
-In this section we will set up Node, NPM, Yarn, and a basic `package.json` file.
+В этой части мы настроим Node, NPM, Yarn, и простой `package.json`.
 
-First, we need to install Node, which is not only used for back-end JavaScript, but all the tools we need to build a modern Front-End stack.
+Прежде всего, нам нужно установить Node, который необходим не только для серверной части (back-end), но и для всех тех инструментов, которые входят в состав современных технологий для создания клиентской части (Front-End).
 
-Head to the [download page](https://nodejs.org/en/download/current/) for macOS or Windows binaries, or the [package manager installations page](https://nodejs.org/en/download/package-manager/) for Linux distributions.
+Зайдите на [страницу загрузки](https://nodejs.org/en/download/current/) дистрибутива для macOS или Windows, или установите [через менеджер пакетов](https://nodejs.org/en/download/package-manager/) для Linux.
 
-For instance, on **Ubuntu / Debian**, you would run the following commands to install Node:
+Например, на **Ubuntu / Debian**, чтобы установить Node нужно выполнить следующие команды:
 
 ```bash
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
-You want any version of Node > 6.5.0.
+Вам подойдет любая версия Node > 6.5.0.
 
-`npm`, the default package manager for Node, comes automatically with Node, so you don't have to install it yourself.
+`npm` - стандартный менеджер пакетов для Node, устанавливается автоматически, так что вам не нужно делать это вручную.
 
-**Note**: If Node is already installed, install `nvm` ([Node Version Manager](https://github.com/creationix/nvm)), make `nvm` install and use the latest version of Node for you.
+**Замечание**: Если Node уже установлен, установите `nvm` ([Node Version Manager](https://github.com/creationix/nvm))(Менеджер версий Node), выполните `nvm` install и пользуйтесь последней версией Node.
 
-[Yarn](https://yarnpkg.com/) is another package manager which is much faster than NPM, has offline support, and fetches dependencies [more predictably](https://yarnpkg.com/en/docs/yarn-lock). Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and is becoming the new package manager of choice of the JavaScript community. We are going to use Yarn in this tutorial. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --dev`.
+[Yarn](https://yarnpkg.com/) - еще один менеджер пакетов. Он намного быстрее чем NPM, поддерживает работу офлайн и [лучше предугадывает](https://yarnpkg.com/en/docs/yarn-lock) подгрузку нужных зависимостей. С момента его [выхода](https://code.facebook.com/posts/1840075619545360) в Октябре 2016, он был очень быстро принят сообществом и постепенно становится лучшим решением для JavaScript. Мы будем использовать Yarn в этом руководстве. Если вы предпочетаете оставаться с NPM, просто замените все команды `yarn add` и `yarn add --dev` на `npm install --save` и `npm install --dev` в этом пособии.
 
-- Install Yarn by following the [instructions](https://yarnpkg.com/en/docs/install). You can likely install it with `npm install -g yarn` or `sudo npm install -g yarn` (yeah, we're using NPM to install Yarn, much like you would use Internet Explorer or Safari to install Chrome!).
+- Установите Yarn следуя [инструкциям](https://yarnpkg.com/en/docs/install). Проще всего это сделать через `npm install -g yarn` или `sudo npm install -g yarn` (ага, мы используем NPM чтобы установить Yarn, прям как использовать Internet Explorer или Safari чтобы установить Chrome!).
 
-- Create a new folder to work in, and `cd` in it.
-- Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.
-- Create an `index.js` file containing `console.log('Hello world')`.
-- Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print "Hello world".
+- Создайте новую директорию для работы и зайдите (`cd`) в нее.
+- Запустите `yarn init` и ответьте на вопросы (`yarn init -y` чтобы пропустить вопросы), чтобы создать файл `package.json` автоматически.
+- Создайте файл `index.js` содержащий `console.log('Hello world')`.
+- Запустите `node .` в этой директории (`index.js` - файл по умолчанию, который Node будет запускать в текущей папке). Должно выйти "Hello world".
 
-Running `node .` to execute our program is a bit too low-level. We are going to use an NPM/Yarn script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `yarn start`, even when our program gets more complicated.
+Команда `node .` - слегка низкоуровневая для запуска программ. Вместо этого, мы будем использовать NPM/Yarn скрипты чтобы запускать выполнение нужного кода. Это даст нам хороший уровень абстракции, позволяющий всегда использовать `yarn start`, даже когда наша программа станет более сложной.
 
-- In `package.json`, add a `scripts` object to the root object like so:
+- В `package.json`, в корневом объекте создайте объект `scripts`, чтоб было так:
 
 ```
 "scripts": {
@@ -37,19 +37,19 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 }
 ```
 
-`package.json` must be a valid JSON file, which means that you cannot have trailing commas. So be careful when editing manually your `package.json` file.
+`package.json` должен быть действительным JSON файлом, что значит, что он не может содержать завершающие запятые (trailing commas). Так что будьте внимательны, редактируя его вручную.
 
-- Run `yarn start`. It should print `Hello world`.
+- Запустите `yarn start`. Должно выйти `Hello world`.
 
-- Create a `.gitignore` file and add the following to it:
+- Создайте файл `.gitignore` и добавьте туда следующее:
 
 ```
 npm-debug.log
 yarn-error.log
 ```
 
-**Note**: If you take a look at the `package.json` files I provide, you will see a `tutorial-test` script in every chapter. Those scripts let me test that the chapter works fine when running `yarn && yarn start`. You can delete them in your own projects.
+**Замечание**: Если вы посмотрите на файлы `package.json`, которые я прилагаю к этому руководству, вы увидете там скрипт `tutorial-test`. Он есть в каждой части. Этот скрипт позволяет мне тестировать, что код правильно работает при запуске  `yarn && yarn start`. Вы можете удалять его из ваших проектов.
 
-Next section: [2 - Installing and using a package](/tutorial/2-packages)
+Следующий раздел: [2 - Installing and using a package](/tutorial/2-packages)
 
-Back to the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Назад в [Содержание](https://github.com/verekia/js-stack-from-scratch).
