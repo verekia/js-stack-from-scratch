@@ -28,7 +28,9 @@
     "eslint-plugin-react": "^6.4.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
-    "gulp-eslint": "^3.0.1"
+    "gulp-eslint": "^3.0.1",
+    "gulp-nodemon": "^2.2.1",
+    "run-sequence": "^1.2.2"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
