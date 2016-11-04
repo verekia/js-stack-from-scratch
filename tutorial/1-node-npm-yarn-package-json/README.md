@@ -52,4 +52,4 @@ yarn-error.log
 
 Следующий раздел: [2 - Installing and using a package](/tutorial/2-packages)
 
-Назад в [Содержание](https://github.com/verekia/js-stack-from-scratch).
+Назад в [Содержание](/tutorial).
