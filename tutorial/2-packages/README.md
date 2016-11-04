@@ -27,4 +27,4 @@ Congratulations, you installed and used a package!
 
 Next section: [3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
 
-Back to the [previous section](/tutorial/1-node-npm-yarn-package-json) or the [table of contents](https://github.com/verekia/js-stack-from-scratchhttps://github.com/nagamalli9999/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/1-node-npm-yarn-package-json) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

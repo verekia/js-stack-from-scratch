@@ -115,4 +115,4 @@ The last issue left is about `console.log()`. Let's say that we want this `conso
 
 Next section: [7 - Client app with Webpack](/tutorial/7-client-webpack)
 
-Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/js-stack-from-scratchhttps://github.com/nagamalli9999/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

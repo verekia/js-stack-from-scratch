@@ -48,4 +48,4 @@ Note the syntactic sugar to extract `exec` directly from `child_process`. Pretty
 
 Next section: [6 - ESLint](/tutorial/6-eslint)
 
-Back to the [previous section](/tutorial/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/js-stack-from-scratchhttps://github.com/nagamalli9999/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

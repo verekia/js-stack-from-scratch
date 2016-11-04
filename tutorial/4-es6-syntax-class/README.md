@@ -38,4 +38,4 @@ As you can see, unlike the community-made package `color` that we used before, w
 
 Next section: [5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
 
-Back to the [previous section](/tutorial/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/js-stack-from-scratchhttps://github.com/nagamalli9999/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
