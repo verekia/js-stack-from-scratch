@@ -6,7 +6,7 @@
 
 - запустите `yarn add react react-dom`
 
-Эти 2 пакета будут включены в раздел `"dependencies"` а не `"devDependencies"` потому что, в отличие от инструментов разработки, они должны быть в итоговой клиентской сборке (production).
+Эти два пакета будут включены в раздел `"dependencies"`, а не `"devDependencies"`, потому что, в отличие от инструментов разработки, они должны быть в итоговой клиентской сборке (production).
 
 Давайте переименуем файл `src/client/app.js` в `src/client/app.jsx` и напишем там немного кода на React и JSX:
 
@@ -32,7 +32,7 @@ App.propTypes = {
 ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 ```
 
-**Замечание**: Если вы не знакомы с React или его PropTypes, ознакомьтесь сначала с ним и затем возвращайтесь в это руководство позже. В следующих частях мы будем использовать React, поэтому вам понадобится хорошее понимание его.
+**Примечание**: Если вы не знакомы с React или его PropTypes, ознакомьтесь сначала с ним и затем возвращайтесь в это руководство. В следующих главах мы будем использовать React, поэтому вам понадобится хорошее (его) понимание этой библиотеки.
 
 В Gulp файле, измените в `clientEntryPoint` расширение на `.jsx`:
 
@@ -40,9 +40,9 @@ ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 clientEntryPoint: 'src/client/app.jsx',
 ```
 
-Поскольку мы используем синтакс JSX, то нам так же нужен Babel для его обработки.
+Поскольку мы используем синтакс JSX, нам так же нужен Babel для его обработки.
 Установите React Babel preset, который научит Babel обрабатывать JSX синтакс:
-`yarn add --dev babel-preset-react` и откорректируйте раздел `babel` в `package.json` таким образом:
+`yarn add --dev babel-preset-react` и откорректируйте раздел `babel` в `package.json` следующим образом:
 
 ```json
 "babel": {
@@ -53,7 +53,7 @@ clientEntryPoint: 'src/client/app.jsx',
 },
 ```
 
-Теперь, после запуска `yarn start`, если мы откроем `index.html`, то должны увидеть "The dog says: Wah wah, I am Browser Toby" сгенерированное React.
+Теперь, после запуска `yarn start`, открыв `index.html`, мы должны увидеть "The dog says: Wah wah, I am Browser Toby" сгенерированное React.
 
 
 
