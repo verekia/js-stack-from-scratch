@@ -19,7 +19,7 @@ In `package.json`, add an `eslintConfig` field like so:
 
 The `plugins` part is to tell ESLint that we use the ES6 import syntax.
 
-**Note**: An `.eslintrc.js`, `.eslintrc.json`, or `. eslintrc.yaml` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
+**Note**: An `.eslintrc.js`, `.eslintrc.json`, or `.eslintrc.yaml` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
 
 We'll create a Gulp task that runs ESLint for us. So we'll install the ESLint Gulp plugin as well:
 
