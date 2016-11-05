@@ -8,7 +8,7 @@
 
 Эти два пакета будут включены в раздел `"dependencies"`, а не `"devDependencies"`, потому что, в отличие от инструментов разработки, они должны быть в итоговой клиентской сборке (production).
 
-Давайте переименуем файл `src/client/app.js` в `src/client/app.jsx` и напишем там немного кода на React и JSX:
+Давайте переименуем файл `src/client/app.js` в `src/client/app.jsx` и напишем в нем немного кода на React и JSX:
 
 ```javascript
 import 'babel-polyfill';
