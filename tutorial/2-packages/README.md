@@ -19,7 +19,6 @@
 
 Поздравляю! Вы установили и применили пакет!
 
-`color` is just used in this section to teach you how to use a simple package. - это надо оставить?
 `color` здесь просто пример, чтобы научить вас использовать пакеты. Больше он нам не нужен, можно его удалить:
 
 - Выполните `yarn remove color`
