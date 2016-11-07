@@ -27,6 +27,8 @@ Task Runner - менеджер задач.
 
 Node - сервер Node
 
+plain JavaScript object - простой JavaScript объект
+
 Babel
 
 синтаксический сахар - syntactic sugar
