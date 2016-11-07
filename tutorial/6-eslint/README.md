@@ -114,4 +114,4 @@ gulp.task('build', ['lint', 'clean'], () =>
 
 Следующий раздел: [7 - Клиентское приложение ~на основе Webpack~](/tutorial/7-client-webpack)
 
-Назад в [предыдущий раздел](/tutorial/5-es6-modules-syntax) или [Содержание](/README.md).
+Назад в [предыдущий раздел](/tutorial/5-es6-modules-syntax) или [Содержание](/../../).
