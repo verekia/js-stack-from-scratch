@@ -28,4 +28,4 @@
 
 Следующий раздел: [3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
 
-Назад в [предыдущий раздел](/tutorial/1-node-npm-yarn-package-json) или [Содержание](/README.md).
+Назад в [предыдущий раздел](/tutorial/1-node-npm-yarn-package-json) или [Содержание](/../../).

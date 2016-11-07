@@ -1,11 +1,11 @@
-# 3 - Setting up ES6 with Babel and Gulp
+# 3 - Настройка ES6 с Babel и Gulp]
 
-We're now going to use ES6 syntax, which is a great improvement over the "old" ES5 syntax. All browsers and JS environments understand ES5 well, but not ES6. So we're going to use a tool called Babel to transform ES6 files into ES5 files. To run Babel, we are going to use Gulp, a task runner. It is similar to the tasks located under `scripts` in `package.json`, but writing your task in a JS file is simpler and clearer than a JSON file, so we'll install Gulp, and the Babel plugin for Gulp too:
+Мы начинаем использовать синтаксис ES6, представляющий значительное продвижение относительно "старого" ES5. Все браузеры и JS окружения хорошо понимают ES5, но не ES6. Поэтому мы будем использовать инструмент, называемый Babel, чтобы преобразовать файлы ES6 в ES5 формат. Чтобы запускать Babel, мы будем использовать Gulp - менеджер задач. Это похоже на создание задач, расположенных в `scripts` файла `package.json`, но написание задач в JS файле проще и понятнее чем в JSON, поэтому установим Gulp и плагин Babel для него.
 
-- Run `yarn add --dev gulp`
-- Run `yarn add --dev gulp-babel`
-- Run `yarn add --dev babel-preset-latest`
-- In `package.json`, add a `babel` field for the babel configuration. Make it use the latest Babel preset like this:
+- Запустите `yarn add --dev gulp`
+- Запустите `yarn add --dev gulp-babel`
+- Запустите `yarn add --dev babel-preset-latest`
+- В `package.json`, добавьте поле `babel` для конфигурации Babel. Укажем следующим образом, что хотим использовать новейшую конфигурацию Babel:
 
 ```json
 "babel": {
@@ -15,18 +15,18 @@ We're now going to use ES6 syntax, which is a great improvement over the "old" E
 },
 ```
 
-**Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`. Your root folder will get more and more bloated over time, so keep the Babel config in `package.json` until it grows too large.
+**Примечание**: Файл `.babelrc` в корне проекта так же может быть использован вместо свойства `babel` в `package.json`. Но поскольку корневая директория вашего проекта будет все больше и больше раздуваться с течением времени, лучше храните конфигурацию Babel в `package.json`, до тех пор, пока она не станет слишком большой.
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Gulp and Babel will take care of creating it. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
+- Переместите файл `index.js` в директорию `src`. Там вы будете писать ES6 код. А папка `lib` будет местом, куда ваш код будет компилироваться в ES5. Gulp и Babel позаботятся о ее создании. Уберите предыдущий, относящийся к `color`, код из `index.js`, и замените его на нечто простое, например такое:
 
 ```javascript
 const str = 'ES6';
 console.log(`Hello ${str}`);
 ```
 
-We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`. Note that template strings are created using **backquotes**.
+Мы здесь использовали *шаблонную строку* - возможость ES6 внедрять с помощью `${}` переменные прямо в строки без использования конкантенации. Обратите внимание, что шаблонные строки пишутся в **\`обратных кавычках\`**
 
-- Create a `gulpfile.js` containing:
+- Создайте `gulpfile.js`, содержащий:
 
 ```javascript
 const gulp = require('gulp');
@@ -64,30 +64,32 @@ gulp.task('default', ['watch', 'main']);
 
 ```
 
-Let's take a moment to understand all this.
+Давайте приостановимся и разберемся с этим.
 
-The API of Gulp itself is pretty straightforward. It defines `gulp.task`s, that can reference `gulp.src` files, applies a chain of treatments to them with `.pipe()` (like `babel()` in our case) and outputs the new files to `gulp.dest`. It can also `gulp.watch` for changes on your filesystem. Gulp tasks can run prerequisite tasks before them, by passing an array (like `['build']`) as a second parameter to `gulp.task`. Refer to the [documentation](https://github.com/gulpjs/gulp) for a more thorough presentation.
+Gulp сам по себе имеет довольно понятный API. Он определяет задачи `gulp.task`, которые могут брать файы из `gulp.src`, применять к ним цепочки обработчиков - `.pipe()` (как `babel()` в нашем случае), и сохранять новые файлы в `gulp.dest`. Так же от может отслеживать (`gulp.watch`) изменения в файловой системе. Одни задачи Gulp могут предварять запуск других, если указать их в массиве (как `['build']`) в качестве второго аргумента в `gulp.task`. В [документации](https://github.com/gulpjs/gulp) все изложено более основательно.
 
-First we define a `paths` object to store all our different file paths and keep things DRY.
+Сначала мы определили объект `paths`, что бы хранить в одном месте все нужные пути и использовать принцип "не повторяйся" (DRY).
 
-Then we define 5 tasks: `build`, `clean`, `main`, `watch`, and `default`.
+Затем мы определили пять задач: `build` *(создать)*, `clean` *(очистить)*, `main` *(основная)*, `watch` *(наблюдать)*, and `default` *(по умолчанию)*.
 
-- `build` is where Babel is called to transform all of our source files located under `src` and write the transformed ones to `lib`.
-- `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use the `del` package to delete files in a way that integrates well with Gulp's stream (this is the [recommended](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) way to delete files with Gulp). Run `yarn add --dev del` to install that package.
-- `main` is the equivalent of running `node .` in the previous chapter, except this time, we want to run it on `lib/index.js`. Since `index.js` is the default file Node looks for, we can simply write `node lib` (we use the `libDir` variable to keep things DRY). The `require('child_process').exec` and `exec` part in the task is a native Node function that executes a shell command. We forward `stdout` to `console.log()` and return a potential error using `gulp.task`'s callback function. Don't worry if this part is not super clear to you, remember that this task is basically just running `node lib`.
-- `watch` runs the `main` task when filesystem changes happen in the specified files.
-- `default` is a special task that will be run if you simply call `gulp` from the CLI. In our case we want it to run both `watch` and `main` (for the first execution).
+- `build` вызывает Babel, чтобы преобразовать все исходные файлы из `src`, и записывает результат в `lib`.
+- We use the `del` package to delete files in a way that integrates well with Gulp's stream (this is the [recommended](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) way to delete files with Gulp). Run `yarn add --dev del` to install that package.
 
-**Note**: You might be wondering how come we're using some ES6 code in this Gulp file, since it doesn't get transpiled into ES5 by Babel. This is because we're using a version of Node that supports ES6 features out of the box (make sure you are running Node > 6.5.0 by running `node -v`).
+- `clean` - задача, которая просто удаляет всю нашу автоматически сгенерированную директорию `lib` перед каждым `build`. Как правило, полезно избавляться от старых скомпилированых файлов (которые могут остаться после переименования или удаления чего-то в `src`) или для того, чтобы быть уверенным, что директория `lib` всегда синхронна с `src`, даже если `build` не завершился успешно, а вы этого не заметили. Мы используем пакет `del` чтобы удалять файлы путем, наиболее подходящим для задач Gulp (это [рекомендованый](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) для Gulp способ)
+- `main` - аналогично запуску `node .` из предыдущией части, за исключением, что теперь мы используем `lib/index.js`. Мы можем просто писать `node lib`, потому что по умолчанию Node найдет и запустит `index.js` из указанной папки (мы используем переменную `libDir` чтоб соответствовать принципу DRY). `require('child_process').exec` и `exec` - это функции самого Node, вызывающие консольные команды. Мы перенаправим `stdout` в `console.log()` и возвратим возможную ошибку через функцию обратного вызова (callback), которая передается в `gulp.task` в качестве аргумента. Не переживайте если эта команда не совсем ясна для вас, помните, что эта задача просто лишь запускает `node lib`.
+- `watch` запускает задчу `main`, когда происходят изменения файловой системы для указанных файлов.
+- `default` - это специальная задача, которая запускается, если вы просто вызываете `gulp` из CLI (коммандной строки). В нашем случае мы хотим сначала запустить `main` (один раз), а затем `watch`.
 
-Alright! Let's see if this works.
+**Примечание**: Возможно вы удивитесь, что мы используем синтаксис ES6 в этом Gulp файле, хотя он не транспилируется в ES5 со помощью Babel. Это потому, что мы используем версию Node, которая поддерживает возможности ES6 из коробки (убедитесь, Что вы используете версию Node > 6.5.0, запустив `node -v`).
 
-- In `package.json`, change your `start` script to: `"start": "gulp"`.
-- Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try writing bad code in `src/index.js` to see Gulp automatically showing you the error when you save.
+Отлично! Посмотрим как это работает.
 
-- Add `/lib/` to your `.gitignore`
+- В `package.json`, замените скрипт `start` на: `"start": "gulp"`.
+- Запустите `yarn start`. Должно вывестись "Hello ES6" и запустится автоматическое отслеживание изменений. Попробуйте ввести неверный код в `src/index.js` и увидите после сохранения, как  Gulp автоматически указывает на ошибку.
+
+- Добавьте `/lib/` в `.gitignore`
 
 
-Next section: [4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
+Следующий раздел: [4 - Использование ES6 классов](/tutorial/4-es6-syntax-class)
 
-Back to the [previous section](/tutorial/2-packages) or the [table of contents](/README.md).
+Назад в [предыдущий раздел](/tutorial/2-packages)или [Содержание](/../../)..

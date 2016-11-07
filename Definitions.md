@@ -19,9 +19,13 @@ https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Functions/Arrow_f
 
 CommonJS
 
-Gulp
+Gulp - сборщик проектов
+https://habrahabr.ru/post/208890/
 
-Node
+Task Runner - менеджер задач.
+(диспетчер запуска задач)
+
+Node - сервер Node
 
 Babel
 

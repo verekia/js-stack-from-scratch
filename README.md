@@ -48,7 +48,7 @@
 
 [3 - Настройка ES6 с Babel и Gulp](/tutorial/3-es6-babel-gulp)
 
-[4 - Использование ES6 синтактиса ~~и классов~~](/tutorial/4-es6-syntax-class)
+[4 - Использование ES6 классов](/tutorial/4-es6-syntax-class)
 
 [5 - Синтаксис модулей ES6](/tutorial/5-es6-modules-syntax)
 
