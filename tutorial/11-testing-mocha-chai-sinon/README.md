@@ -1,16 +1,16 @@
-# 11 - Testing with Mocha, Chai, and Sinon
+# 11 - Тестировние с Mocha, Chai, и Sinon
 
 ## Mocha and Chai
 
-- Create an `src/test` folder. This folder will mirror our application folder structure, so create a `src/test/client` folder as well (feel free to add `server` and `shared` if you want, but we're not going to write tests for these).
+- Создайте директорию `src/test`. Эта папка будет отражать структуру директорий нашего приложения, поэтому создайте также `src/test/client` (можете так же добавить `server` и `shared`, если хотите, но мы не будем писать тесты для них).
 
-- In `src/test/client`, create a `state-test.js` file, which we are going to use to test our Redux application life cycle.
+- В `src/test/client`, создайте файл `state-test.js` , в котором мы будем тестировать жизненный цикл нашего Redux приложеия.
 
-We are going to use [Mocha](http://mochajs.org/) as our main testing framework. Mocha is easy to use, has tons of features, and is currently the [most popular JavaScript testing framework](http://stateofjs.com/2016/testing/). It is very flexible and modular. In particular, it lets you use any assertion library you want. [Chai](http://chaijs.com/) is a great assertion library that has a lot of [plugins](http://chaijs.com/plugins/) available and lets you choose between different assertion styles.
+Мы будем использовать [Mocha](http://mochajs.org/) в качесве основного фреймворка для тестирования. Mocha прост в использовании, имеет множество возможностей, и на данный момент [самый популярный фреймворк для тестирования](http://stateofjs.com/2016/testing/). Он модульный и очень гибкий. В частности, он позволяет использовать любые библиотеки утверждений (assertion) на ваше пожелание. [Chai](http://chaijs.com/) - замечательная библиотека утверждений, имеющая много доступных [плагинов](http://chaijs.com/plugins/) и позволяющая вам выбирать между различными стилями утверждений.
 
-- Let's install Mocha and Chai by running `yarn add --dev mocha chai`
+- Установим Mocha и Chai выполним `yarn add --dev mocha chai`
 
-In `state-test.js`, write the following:
+В `state-test.js`, напишите следующее:
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies, no-unused-expressions */
@@ -42,17 +42,17 @@ describe('App State', () => {
   });
 });
 ```
-Alright, let's analyze this whole thing.
+Хорошо, давайте все это проанализируем.
 
-First, notice how we import the `should` assertion style from `chai`. This lets us assert things using a syntax like `mynumber.should.equal(3)`, pretty neat. In order to be able to call `should` on any object, we need to run the function `should()` before anything. Some of these assertion are *expressions*, like `mybook.should.be.true`, which will make ESLint grumpy, so we've added an ESLint comment at the top to disable the `no-unused-expressions` rule in this file.
+Во-первых, заметьте, что мы импортировали стиль утверждений `should` из пакета `chai`. Это позволит нам делать утверждения, используя синтаксис вида `mynumber.should.equal(3)` (что в Русском переводе можно представить как: `моечисло.должно.ровняться(3)` - прим. пер.), довольно изящно. Для того, что бы мы могли вызывать `should` на любом объекте, мы должны прежде всего запустить функцию `should()`. Некоторые из этих утверждений являются *выражениями*, как `mybook.should.be.true`, что заставляет ESLint сердиться, так что мы добавили для него комментарий в начале чтобы отключить правило `no-unused-expressions` для этого файла.
 
-Mocha tests work like a tree. In our case, we want to test the `makeBark` function which should affect the `dog` attribute of the application state, so it makes sense to use the following hierarchy of tests: `App State > Dog > makeBark`, that we declare using `describe()`. `it()` is the actual test function and `beforeEach()` is a function that is executed before each `it()` test. In our case, we want a fresh new store before running each test. We declare a `store` variable at the top of the file because it should be useful in every test of this file.
+Тесты Mocha устроены наподобие дерева. В нашем случае, мы хотим протестировать функцию `makeBark`, которая должна воздействовать на атрибут `dog` состояния нашего приложения, поэтому имеет смысл использовать следующую иерархию тестов: `App State > Dog > makeBark`, что мы и описали используя `describe()`. `it()`  - это собственно, тестирующая функция, а `beforeEach()` - это функция, вызываемая перед каждым вызовом теста `it()`. В нашем случае мы хотим иметь новую чистую версию хранилища перед запуском каждого теста. Мы обявили переменную `store` в начале файла, поскольку она нам пригодится в кадом тесте.
 
-Our `makeBark` test is very explicit, and the description provided as a string in `it()` makes it even clearer: we test that `hasBarked` go from `false` to `true` after calling `makeBark`.
+Тест `makeBark` вполне понятен, а строка с описанием в `it()` делает его еще яснее: мы проверяем, что `hasBarked` меняется с `false` на `true` после вызова  `makeBark`.
 
-Alright, let's run this test!
+Отлично, запустим этот тест!
 
-- Create the following `test` task, which relies on the `gulp-mocha` plugin:
+- Создайте следующую задачу `test`, которая основывается на плагине `gulp-mocha`:
 
 ```javascript
 import mocha from 'gulp-mocha';
@@ -70,27 +70,29 @@ gulp.task('test', ['build'], () =>
 );
 ```
 
-- Run `yarn add --dev gulp-mocha` of course.
+- Конечно же, выполните `yarn add --dev gulp-mocha`.
 
-As you can see, tests are run on transpiled code in `lib`, which is why `build` is a prerequisite task of `test`. `build` also has a prerequisite, `lint`, and finally, we are making `test` a prerequisite of `main`, which gives us the following task cascade for the `default` task: `lint` > `build` > `test` > `main`.
+Как вы можете видеть, тесты запускаются на транспилированом коде из папки `lib`, вот почему задачу `test` предваряет запуск `build`. `build`,  в свою очередь, предваряется задачей `lint`, а сам `test` мы будем запускать перед `main`, что в итоге даст нам следующий каскад задач для `default`: `lint` > `build` > `test` > `main`.
 
-- Change the prerequisite of `main` to `test`:
+`build` also has a prerequisite, `lint`, and finally, we are making `test` a prerequisite of `main`, which gives us the following task cascade for the `default` task: `lint` > `build` > `test` > `main`.
+
+- Установите в `main` предварительный запуск команды `test`:
 
 ```javascript
 gulp.task('main', ['test'], () => /* ... */ );
 ```
 
-- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `yarn test` to just run your tests. `test` is also the standard script that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `yarn start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
+- В `package.json`, текущее значение скрипта `"test"` на следующее: `"test": "gulp test"`. Таким образом мы можем использовать `yarn test` чтобы просто запустить наши тесты. Так же `test` - это стандартный скрипт, который автоматически запускается такими инструментами, как, например, сервисы непрерывной интеграции (continuous integration services, CI), так что всегда добавляйте запуск тестов через него. `yarn start` также запустит тестирование перед построением сборки Webpack, так что сборка сгенерируется только если все тесты будут пройдены.
 
-- Run `yarn test` or `yarn start`, and it should print the result for our test, hopefully green.
+- Запустите `yarn test` или `yarn start`, и должны будут выйти результаты ваших тестов, предпочтительно зеленые.
 
 ## Sinon
 
-In some cases, we want to be able to *fake* things in a unit test. For instance, let's say we have a function, `deleteEverything`, which contains a call to `deleteDatabases()`. Running `deleteDatabases()` causes a lot of side-effects, which we absolutely don't want to happen when running our test suite.
+В некоторых случаях, мы хотим иметь возможность *эмулировать* некоторые вещи в юнит тестах. Например, давайте скажем, у нас есть функция `deleteEverything`, которая содержит вызов `deleteDatabases()`. Запуск `deleteDatabases()` вызовет много побочных эффектов, которые нам абсолютно не желательны, во время тестирования.
 
-[Sinon](http://sinonjs.org/) is a testing library that offers **Stubs** (and a lot of other things), which allow us to neutralize `deleteDatabases` and simply monitor it without actually calling it. This way we can test if it got called, or which parameters it got called with for instance. This is typically very useful to fake or avoid AJAX calls - which can cause side-effects on the back-end.
+[Sinon](http://sinonjs.org/) - библиотека тестирования, предлагающая **Заглушки** (и многие другие вещи), позволяет нейтрализовать `deleteDatabases` и просто мониторить ее не запуская на самом деле. Таким образом, к примеру, мы можем тестировать была ли она запущена или с какими параметрами она была запущена. Обычно, это очень полезно эмуляции или исключения AJAX вызовов, которые могут вызвать побочные эффекты на сервере. 
 
-In the context of our app, we are going to add a `barkInConsole` method to our `Dog` class in `src/shared/dog.js`:
+В рамках нашего приложения, мы добавим метод `barkInConsole` в класс `Dog` в файле `src/shared/dog.js`:
 
 ```javascript
 class Dog {
@@ -111,10 +113,9 @@ class Dog {
 
 export default Dog;
 ```
+Если мы запустим `barkInConsole` в нашем юнит тесте, то `console.log()` выведет что-то в терминал. Давайте мы будем это рассматривать, как нежелательный побочный эффект в рамках нашего юнит теста. Тем не менее мы желаем, знать была ли `console.log()` *нормально запущена*, и какие параметры были *переданы ей при вызове*.
 
-If we run `barkInConsole` in a unit test, `console.log()` will print things in the terminal. We are going to consider this to be an undesired side-effect in the context of our unit tests. We are interested in knowing if `console.log()` *would have normally been called* though, and we want to test what parameters it *would have been called with*.
-
-- Create a new `src/test/shared/dog-test.js` file, and add write the following:
+- Создайте новый файл `src/test/shared/dog-test.js` и добавьте туда следующее:
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies, no-console */
@@ -142,16 +143,16 @@ describe('Shared', () => {
 });
 ```
 
-Here, we are using *stubs* from Sinon, and a Chai plugin to be able to use Chai assertions on Sinon stubs and such.
+Тут мы используем *заглушки* от Sinon и плагин для Chai, посволяющий использовать его утверждения на таких заглушках и им подобных.
 
-- Run `yarn add --dev sinon sinon-chai` to install these libraries.
+- Запустите `yarn add --dev sinon sinon-chai` чтобы установить эти библиотеки.
 
-So what is new here? Well first of all, we call `chai.use(sinonChai)` to activate the Chai plugin. Then, all the magic happens in the `it()` statement: `stub(console, 'log')` is going to neutralize `console.log` and monitor it. When `new Dog('Test Toby').barkInConsole()` is executed, a `console.log` is normally supposed to happen. We test this call to `console.log` with `console.log.should.have.been.calledWith()`, and finally, we `restore` the neutralized `console.log` to make it work normally again.
+Что здесь нового? Ну прежде всего, мы вызываем `chai.use(sinonChai)`, чтобы активировать плагин для Chai. Затем, вся магия происходит внутри `it()`: `stub(console, 'log')` нейтрализует `console.log` и следит за ней. Когда `new Dog('Test Toby').barkInConsole()` выполнен, `console.log` должна была бы сработать. Мы проверяем этот вызов `console.log` с помощью `console.log.should.have.been.calledWith()`, а затем, восстанавливаем с помощью `restore` нейтрализированную `console.log`, чтобы позволить ей дальше работать нормльно.
 
-**Important note**: Stubbing `console.log` is not recommended, because if the test fails, `console.log.restore()` is never called, and therefore `console.log` will remain broken for the rest of the command you executed in your terminal! It won't even print the error message that caused the test to fail, so it leaves you with very little information about what happened. That can be quite confusing. It is a good example to illustrate stubs in this simple app though.
+**Важное замечание**: Заглушать `console.log` не рекомендуется, потому, что если тест провалится, то `console.log.restore()` никогда не запустится, и следовательно `console.log` останется неисправной для всех остальных команд, выполняемых в терминале. При этом даже не выйдет сообщения об ошибке прохождения теста, так что вы останетесь с очень малой информацией о том, что же произошло. Это может оказаться достаточно не приятно. Тем не менее, это хороший пример, иллюстрирующий применение заглушек в этом простом приложении.
 
-If everything went well in this chapter, you should have 2 passing tests.
+Если в этом разделе прошло хорошо, то у вас должно быть два пройденых теста.
 
-Next section: [12 - Type Checking with Flow](/tutorial/12-flow)
+Следующий раздел:  [12 - Типизация с Flow](/tutorial/12-flow)
 
-Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](/README.md).
+Назад в [предыдущий раздел](/tutorial/10-immutable-redux-improvements) или [Содержание](/../../).

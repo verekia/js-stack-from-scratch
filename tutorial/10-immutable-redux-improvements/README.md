@@ -99,5 +99,5 @@ export const makeBark = createAction(MAKE_BARK, () => true);
 
 Следующий раздел: [11 - Тестировние с Mocha, Chai, и Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
-Назад в [предыдущий раздел](/tutorial/9-redux) или [Содержание](/README.md).
+Назад в [предыдущий раздел](/tutorial/9-redux) или [Содержание](/../../).
 

@@ -64,7 +64,7 @@
 
 [11 - Тестировние с Mocha, Chai, и Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
-[12 - ~Типизация с~ Flow](/tutorial/12-flow)
+[12 - Типизация с Flow](/tutorial/12-flow)
 
 ## Далее следует
 
