@@ -93,11 +93,10 @@ export const MAKE_BARK = 'MAKE_BARK';
 export const makeBark = createAction(MAKE_BARK, () => true);
 ```
 
-`redux-actions` основывается на молели [Flux Standard Action](https://github.com/acdlite/flux-standard-action),так же, как и действия, которые мы создавали до этого, так что интеграция `redux-actions` будет бесшовной, если вы придерживаетесь этой модели.
+`redux-actions` основывается на модели [Flux Standard Action](https://github.com/acdlite/flux-standard-action),так же, как и действия, которые мы создавали до этого, так что интеграция `redux-actions` будет бесшовной, если вы придерживаетесь этой модели.
 
 - Не забудьте запустить `yarn add redux-actions`.
 
 Следующий раздел: [11 - Тестировние с Mocha, Chai, и Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
 Назад в [предыдущий раздел](/tutorial/9-redux) или [Содержание](/../../).
-
