@@ -107,4 +107,4 @@ In my case, the `linter-flow` plugin for Atom was detecting type errors in the `
 
 You now have bullet-proof code that is linted, typechecked, and tested, good job!
 
-Back to the [previous section](/tutorial/11-testing-mocha-chai-sinon) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/11-testing-mocha-chai-sinon) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

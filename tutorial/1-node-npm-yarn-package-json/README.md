@@ -53,4 +53,4 @@ yarn-error.log
 
 Next section: [2 - Installing and using a package](/tutorial/2-packages)
 
-Back to the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
