@@ -3,15 +3,16 @@
   "version": "1.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "start": "gulp",
+    "start": "watch 'yarn run main' src",
+    "lint": "eslint src/**/*.js",
+    "clean": "rimraf lib",
+    "build": "babel src -d lib",
+    "main": "yarn run lint && yarn run clean && yarn run build && node lib",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tutorial-test": "gulp main"
+    "tutorial-test": "yarn run main"
   },
   "eslintConfig": {
-    "extends": "airbnb",
-    "plugins": [
-      "import"
-    ]
+    "extends": "airbnb"
   },
   "babel": {
     "presets": [
@@ -19,16 +20,15 @@
     ]
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-preset-latest": "^6.16.0",
     "del": "^2.2.2",
-    "eslint": "^3.8.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^2.0.1",
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-import": "^2.1.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-eslint": "^3.0.1"
+    "eslint-plugin-react": "^6.6.0",
+    "rimraf": "^2.5.4"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",

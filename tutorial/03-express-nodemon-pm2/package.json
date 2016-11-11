@@ -30,6 +30,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
     "gulp-nodemon": "^2.2.1",
+    "pm2": "^2.1.4",
     "run-sequence": "^1.2.2"
   },
   "repository": "verekia/js-stack-from-scratch",

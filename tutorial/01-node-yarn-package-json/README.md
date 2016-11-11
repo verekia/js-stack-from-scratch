@@ -44,6 +44,8 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 }
 ```
 
+`start` is the name we give to the *task* that will run our program. We are going to create a lot of different tasks in this `scripts` object throughout this tutorial. `start`, `stop`, `test`, are examples of standard names that you can run directly with `yarn start`, `yarn stop`, or `yarn test`. If you use non-standard task names, like `makecoffee`, you need to add `run` to the command like so: `yarn run makecoffee`.
+
 `package.json` must be a valid JSON file, which means that you cannot have trailing commas. So be careful when editing manually your `package.json` file.
 
 - Run `yarn start`. It should print `Hello world`.
