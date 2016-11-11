@@ -6,7 +6,7 @@ We're now going to use some ES6 syntax, which is a great improvement over the "o
 
 > 💡 **[Babel](https://babeljs.io/)** is a compiler that transforms ES6 code (and other things like React's JSX syntax) into ES5 code. It is very modular and can be used in tons of different [environments](https://babeljs.io/docs/setup/). It is by far the preferred ES5 compiler of the React community.
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Gulp and Babel will take care of creating it. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
+- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Babel will take care of creating it. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
 
 ```javascript
 const str = 'ES6';
@@ -17,17 +17,22 @@ We're using a *template string* here, which is an ES6 feature that lets us injec
 
 - Run `yarn add --dev babel-cli` to install the CLI interface for Babel.
 
-- Add a `build` script in your `package.json`:
+- To run our program, we now need to execute `node lib` instead of `node .` (`index.js` is the default file Node looks for, which is why we can omit `index.js`). Add a `build` script in your `package.json`, and tweak your `start` script to run `build` before `node lib`:
 
 ```json
-"build": "babel src -d lib"
+"scripts": {
+  "start": "yarn run build && node lib",
+  "build": "babel src -d lib"
+},
 ```
 
-We simply tell Babel to compile an ES6 `src` directory into an ES5 `lib` directory.
+We simply tell Babel to compile an ES6 `src` directory into an ES5 `lib` directory with the `-d` flag.
+
+If you try to run `yarn start` now, it should print the correct output, but you can see that the generated `lib/index.js` did not change much compared to `src/index.js`. That's because we didn't give Babel any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
 
 - Run `yarn add --dev babel-preset-latest` to install a Babel preset package containing configurations for the most recent ECMAScript features supported by Babel.
 
-- In `package.json`, add a `babel` field for the babel configuration. Make it use the latest Babel preset like this:
+- In `package.json`, add a `babel` field for the Babel configuration. Make it use the `latest` Babel preset like this:
 
 ```json
 "babel": {
@@ -39,13 +44,13 @@ We simply tell Babel to compile an ES6 `src` directory into an ES5 `lib` directo
 
 **Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`. Your root folder will get more and more bloated over time, so keep the Babel config in `package.json` until it grows too large.
 
-- Running `yarn run build` should generate `index.js` in `lib`.
+- Try running `yarn start` again. The `lib/index.js` file should now have been correctly transformed into ES5 code.
 
 - Add `/lib/` to your `.gitignore`.
 
 ## A few more tasks
 
-We now have the basic compilation working. To make this environment a bit more usable, we are going to add a few more `script` tasks:
+We now have the basic compilation working. To make this environment a bit more usable, we are going to add a few more `scripts` tasks:
 
 ```json
 "scripts": {
@@ -57,20 +62,23 @@ We now have the basic compilation working. To make this environment a bit more u
 },
 ```
 
-Then we define 5 tasks: `build`, `clean`, `main`, `watch`, and `default`.
+### `clean` with `rimraf`
 
-- `build` is where Babel is called to transform all of our source files located under `src` and write the transformed ones to `lib`.
-- `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use `rimraf` instead of a plain `rm -rf` in order to support Windows environments.
-- `main` is the equivalent of running `node .` in the previous chapter, except this time, we want to run it on `lib/index.js`. Since `index.js` is the default file Node looks for, we can simply write `node lib` (we use the `libDir` variable to keep things DRY). The `require('child_process').exec` and `exec` part in the task is a native Node function that executes a shell command. We forward `stdout` to `console.log()` and return a potential error using `gulp.task`'s callback function. Don't worry if this part is not super clear to you, remember that this task is basically just running `node lib`.
-- `watch` runs the `main` task when filesystem changes happen in the specified files.
-- `default` is a special task that will be run if you simply call `gulp` from the CLI. In our case we want it to run both `watch` and `main` (for the first execution).
+`clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use `rimraf` instead of a plain `rm -rf` in order to support Windows environments as well.
 
-**Note**: You might be wondering how come we're using some ES6 code in this Gulp file, since it doesn't get transpiled into ES5 by Babel. This is because we're using a version of Node that supports ES6 features out of the box (make sure you are running Node > 6.5.0 by running `node -v`).
+- Run `yarn add --dev rimraf`.
 
-Alright! Let's see if this works.
+### `main` and `watch`
 
-- In `package.json`, change your `start` script to: `"start": "gulp"`.
-- Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try writing bad code in `src/index.js` to see Gulp automatically showing you the error when you save.
+`main` is going to be... the *main* task of our workflow. It performs every operation needed for the build (many more will be added later), and runs the program.
+
+`watch` is going to trigger `main` every time a file changes in `src`. We use the `watch` package to monitor file changes, which you need to install:
+
+- Run `yarn add --dev watch`.
+
+Alright, we're now good to go.
+
+- Run `yarn start`. It should clean, build, print "Hello ES6" and start watching for changes. Try modifying `src/index.js` to make sure the  whole task flow is triggered again.
 
 ## ES6
 
