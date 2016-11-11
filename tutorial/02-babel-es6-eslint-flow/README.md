@@ -57,7 +57,7 @@ We now have the basic compilation working. To make this environment a bit more u
   "start": "yarn run watch",
   "clean": "rimraf lib",
   "build": "babel src -d lib",
-  "watch": "watch 'yarn run main' src",
+  "watch": "watch 'yarn run main' src --interval=1",
   "main": "yarn run clean && yarn run build && node lib"
 },
 ```
@@ -70,11 +70,13 @@ We now have the basic compilation working. To make this environment a bit more u
 
 ### `main` and `watch`
 
-`main` is going to be... the *main* task of our workflow. It performs every operation needed for the build (many more will be added later), and runs the program.
+`main` is going to be... well the *main* task of our workflow. It performs every operation needed for the build (many more will be added later), and runs the program.
 
-`watch` is going to trigger `main` every time a file changes in `src`. We use the `watch` package to monitor file changes, which you need to install:
+`watch` is going to trigger `main` every time a file changes in `src`. We use the `[watch](https://www.npmjs.com/package/watch)` package to monitor file changes, which you need to install:
 
 - Run `yarn add --dev watch`.
+
+**Note**: The `interval` option is the duration in seconds between file change checks. The default value is a bit too slow to my taste, so I use `1` second, which seems reasonable. You can use decimal numbers like `0.5` as well.
 
 Alright, we're now good to go.
 
@@ -159,13 +161,13 @@ We're going to lint our code to catch potential issues. ESLint is the linter of 
 Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2016-11-11, they recommend using the following commands in your terminal:
 
 ```bash
-export PKG=eslint-config-airbnb;
+export PKG=eslint-config-airbnb
 npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev "$PKG@latest"
 ```
 
 **Note**: I've replaced `npm install` by `yarn add` in this command.
 
-It should install everything you need and add `eslint-config-airbnb`,  `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file.
+It should install everything you need and add `eslint-config-airbnb`,  `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file automatically.
 
 In `package.json`, add an `eslintConfig` field like so:
 
