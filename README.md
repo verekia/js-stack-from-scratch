@@ -27,8 +27,6 @@ Code examples are available for each chapter, and you can run them all with `yar
 
 **Every chapter contains the code of previous chapters**, so if you are simply looking for a boilerplate project containing everything, just clone the last chapter and you're good to go.
 
-Note: The order of chapters is not necessarily the most educational. For instance, testing / type checking could have been done before introducing React. It is quite difficult to move chapters around or edit past ones, since I need to apply those changes to every following chapter. If things settle down, I might reorganize the whole thing in a better way.
-
 The code of this tutorial works on Linux, macOS, and Windows.
 
 ## Table of contents
@@ -51,9 +49,9 @@ React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
 
 ## Translations
 
-- (**v1**) [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
-- (**v1**) [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
-- (**v1**) [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
+- (**Tutorial v1.0.0**) [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
+- (**Tutorial v1.0.0**) [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
+- (**Tutorial v1.0.0**) [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
 
 If you want to add your translation, please read the [translation recommendations](/how-to-translate.md) to get started!
 

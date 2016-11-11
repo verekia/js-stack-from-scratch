@@ -1,10 +1,12 @@
-# 01 - Node, NPM, Yarn, and package.json
+# 01 - Node, NVM, NPM, Yarn, and `package.json`
 
 In this section we will set up Node, NPM, Yarn, a basic `package.json` file, and try a package.
 
-## Installing Node and NPM
+## Node
 
-First, we need to install Node, which is not only used for back-end JavaScript, but all the tools we need to build a modern Front-End stack.
+> 💡 **Node.js** is a JavaScript runtime environment. It is mostly used for Back-End development, but also for general scripting. In the context of Front-End development, it can be used to perform a whole bunch of tasks like linting, testing, and assembling files.
+
+We're going to use Node for basically everything in this tutorial, so you're going to need it.
 
 Head to the [download page](https://nodejs.org/en/download/current/) for macOS or Windows binaries, or the [package manager installations page](https://nodejs.org/en/download/package-manager/) for Linux distributions.
 
@@ -17,15 +19,29 @@ sudo apt-get install -y nodejs
 
 You want any version of Node > 6.5.0.
 
-`npm`, the default package manager for Node, comes automatically with Node, so you don't have to install it yourself.
+## NVM
 
-**Note**: If Node is already installed, or if you want more flexibility, install `nvm` ([Node Version Manager](https://github.com/creationix/nvm)), make `nvm` install and use the latest version of Node for you.
+If Node is already installed, or if you want more flexibility, install `nvm` ([Node Version Manager](https://github.com/creationix/nvm)), make `nvm` install and use the latest version of Node for you.
+
+## NPM
+
+> 💡 **NPM** is the default package manager for Node. It is automatically installed alongside with Node. Package managers are used to install and manage packages (modules of code that you or someone else wrote).
+
+We are going to use a lot of packages in this tutorial, but we won't be using NPM
 
 ## Yarn
 
-[Yarn](https://yarnpkg.com/) is another package manager which is much faster than NPM, has offline support, and fetches dependencies [more predictably](https://yarnpkg.com/en/docs/yarn-lock). Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and is becoming the new package manager of choice of the JavaScript community. We are going to use Yarn in this tutorial. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --dev`.
+> 💡 **[Yarn](https://yarnpkg.com/)** is another package manager which is much faster than NPM, has offline support, and fetches dependencies [more predictably](https://yarnpkg.com/en/docs/yarn-lock).
+
+Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and is becoming the new package manager of choice of the JavaScript community. We are going to use Yarn in this tutorial. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --dev`.
 
 - Install Yarn by following the [instructions](https://yarnpkg.com/en/docs/install). You can likely install it with `npm install -g yarn` or `sudo npm install -g yarn` (yeah, we're using NPM to install Yarn, much like you would use Internet Explorer or Safari to install Chrome!).
+
+
+
+
+
+
 
 ## package.json, Hello World, start script
 
