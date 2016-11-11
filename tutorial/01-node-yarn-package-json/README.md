@@ -35,7 +35,7 @@ Since it [came out](https://code.facebook.com/posts/1840075619545360) in October
 
 ## `package.json`
 
-> 💡 **`[package.json](https://yarnpkg.com/en/docs/package-json)`** is the file used to describe and configure your JavaScript project. It contains general information (your project's name, version, contributors, license, etc), configuration for tools you use, and even a section to run tasks.
+> 💡 `**[package.json](https://yarnpkg.com/en/docs/package-json)**` is the file used to describe and configure your JavaScript project. It contains general information (your project's name, version, contributors, license, etc), configuration for tools you use, and even a section to run tasks.
 
 - Create a new folder to work in, and `cd` in it.
 - Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.
