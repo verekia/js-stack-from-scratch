@@ -4,7 +4,6 @@
 
 [![Yarn](/img/yarn.png)](https://yarnpkg.com/)
 [![React](/img/react.png)](https://facebook.github.io/react/)
-[![Gulp](/img/gulp.png)](http://gulpjs.com/)
 [![Redux](/img/redux.png)](http://redux.js.org/)
 [![ESLint](/img/eslint.png)](http://eslint.org/)
 [![Webpack](/img/webpack.png)](https://webpack.github.io/)
@@ -34,31 +33,11 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 ## Table of contents
 
-[1 - Node, NPM, Yarn, and package.json](/tutorial/1-node-npm-yarn-package-json)
-
-[2 - Setting up ES6 with Babel and Gulp](/tutorial/2-gulp-babel-es6-class-import)
-
-[4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
-
-[5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
-
-[6 - ESLint](/tutorial/6-eslint)
-
-[7 - Express Server and Webpack Client](/tutorial/7-express-server-webpack-client)
-
-[8 - React](/tutorial/8-react)
-
-[9 - Redux](/tutorial/9-redux)
-
-[10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
-
-[11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
-
-[12 - Type Checking with Flow](/tutorial/12-flow)
+- [01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json)
 
 ## Coming up next
 
-Production / development environments, Express, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
+Production / development environments, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
 
 ## Translations
 
