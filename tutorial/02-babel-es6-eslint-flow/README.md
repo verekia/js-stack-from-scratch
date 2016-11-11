@@ -44,7 +44,7 @@ If you try to run `yarn start` now, it should print the correct output, but you 
 
 **Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`. Your root folder will get more and more bloated over time, so keep the Babel config in `package.json` until it grows too large.
 
-- Try running `yarn start` again. The `lib/index.js` file should now have been correctly transformed into ES5 code.
+- Try running `yarn start` again. The `lib/index.js` file should now have been correctly transformed into ES5 code (`var` everywhere!).
 
 - Add `/lib/` to your `.gitignore`.
 
@@ -120,8 +120,6 @@ As you can see, unlike the community-made package `color` that we used before, w
 
 - Run `yarn start` and it should print 'Wah wah, I am Toby'.
 
-- Take a look at the code generated in `lib` to see how your compiled code looks like (`var` instead of `const` for instance).
-
 ### The ES6 modules syntax
 
 Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax).
@@ -177,8 +175,6 @@ In `package.json`, add an `eslintConfig` field like so:
 },
 ```
 
-The `plugins` part is to tell ESLint that we use the ES6 import syntax.
-
 **Note**: An `.eslintrc.js`, `.eslintrc.json`, or `. eslintrc.yaml` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
 
 We'll create an NPM/Yarn script to runs ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
@@ -191,67 +187,16 @@ Add the following script to your `package.json`:
 "lint": "eslint src/**/*.js"
 ```
 
-Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
-
-Modify your `build` Gulp task by making the `lint` task a prerequisite to it, like so:
-
-```javascript
-gulp.task('build', ['lint', 'clean'], () => {
-  // ...
-});
+And update your `main` task:
+```json
+"main": "yarn run lint && yarn run clean && yarn run build && node lib"
 ```
 
-- Run `yarn start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using `console.log()` in `index.js`.
+Here we just tell ESLint that the files we want to lint are all the `.js` files under `src`, pretty explicit.
 
-One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.babel.js`, at the very top, add:
+- Run `yarn start`, and you should see a warning for using `console.log()` in `index.js`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. Add `/* eslint-disable no-console */` at the top of our `index.js` file to allow the use of `console` in this file.
 
-```javascript
-/* eslint-disable import/no-extraneous-dependencies */
-```
-
-This way, ESLint won't apply the rule `import/no-extraneous-dependencies` in this file.
-
-Now we are left with the issue `Unexpected block statement surrounding arrow body (arrow-body-style)`. That's a great one. ESLint is telling us that there is a better way to write the following code:
-
-```javascript
-() => {
-  return 1;
-}
-```
-
-It should be rewritten into:
-
-```javascript
-() => 1
-```
-
-Because when a function only contains a return statement, you can omit the curly braces, return statement, and semicolon in ES6.
-
-So let's update the Gulp file accordingly:
-
-```javascript
-gulp.task('lint', () =>
-  gulp.src([
-    paths.allSrcJs,
-    paths.gulpFile,
-  ])
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-);
-
-gulp.task('clean', () => del(paths.libDir));
-
-gulp.task('build', ['lint', 'clean'], () =>
-  gulp.src(paths.allSrcJs)
-    .pipe(babel())
-    .pipe(gulp.dest(paths.libDir))
-);
-```
-
-The last issue left is about `console.log()`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
-
-- Run `yarn start` and we are now all clear again.
+- Run `yarn start` and we are now all clear!
 
 **Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
 
