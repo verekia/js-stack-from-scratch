@@ -39,14 +39,10 @@ Since it [came out](https://code.facebook.com/posts/1840075619545360) in October
 
 > 💡 **`package.json`** is the file used to describe and configure your JavaScript project. It contains general information (your project's name, version, contributors, license, etc), configuration for tools you use, and even a section to run tasks.
 
-▶️ Create a new folder to work in, and `cd` in it.
-
-▶️ Run `yarn init` and answer the questions (`yarn init -y` to skip all questions),
-to generate a `package.json` file automatically.
-
-▶️ Create an `index.js` file containing `console.log('Hello world')`.
-
-▶️ Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print "Hello world".
+- Create a new folder to work in, and `cd` in it.
+- Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.
+- Create an `index.js` file containing `console.log('Hello world')`.
+- Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print "Hello world".
 
 Running `node .` to execute our program is a bit too low-level. We are going to use an NPM/Yarn script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `yarn start`, even when our program gets more complicated.
 
