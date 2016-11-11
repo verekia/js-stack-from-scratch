@@ -35,14 +35,20 @@ Since it [came out](https://code.facebook.com/posts/1840075619545360) in October
 
 - Install Yarn by following the [instructions](https://yarnpkg.com/en/docs/install). You can likely install it with `npm install -g yarn` or `sudo npm install -g yarn` (yeah, we're using NPM to install Yarn, much like you would use Internet Explorer or Safari to install Chrome!).
 
-## package.json, Hello World, start script
+## package.json
 
 > 💡 **`package.json`** is the file used to describe and configure your JavaScript project. It contains general information (your project's name, version, contributors, license, etc), configuration for tools you use, and even a section to run tasks.
 
 - Create a new folder to work in, and `cd` in it.
 - Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.
+
+
+## Hello World
+
 - Create an `index.js` file containing `console.log('Hello world')`.
 - Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print "Hello world".
+
+## `start` script
 
 Running `node .` to execute our program is a bit too low-level. We are going to use an NPM/Yarn script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `yarn start`, even when our program gets more complicated.
 
@@ -59,6 +65,8 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 `package.json` must be a valid JSON file, which means that you cannot have trailing commas. So be careful when editing manually your `package.json` file.
 
 - Run `yarn start`. It should print `Hello world`.
+
+## `.gitignore`
 
 - Create a `.gitignore` file and add the following to it:
 
@@ -98,7 +106,7 @@ Congratulations, you installed and used a package!
 
 - Run `yarn remove color`
 
-**Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, tests, etc). For `"devDependencies"`, we will use `yarn add --dev [package]` to install packages.
+**Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. **Dependencies** are libraries you need for your application to function (React, Redux, Lodash, jQuery, etc). You install them with `yarn add [package]`. **Dev Dependencies** are libraries used during development or to build your application (Webpack, SASS, linters, testing frameworks, etc). You install those with `yarn add --dev [package]`.
 
 Next section: [02 - Babel, ES6, ESLint, Flow](/tutorial/02-babel-es6-eslint-flow)
 
