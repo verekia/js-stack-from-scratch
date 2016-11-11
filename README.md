@@ -33,17 +33,27 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 ## Table of contents
 
-- [01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json)
+[01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json)
+
+[02 - Babel, ES6, ESLint, Flow](/tutorial/02-babel-es6-eslint-flow)
+
+[03 - Express, Nodemon, PM2](/tutorial/03-express-nodemon-pm2)
+
+[04 - Webpack, React](/tutorial/04-webpack-react)
+
+[05 - Redux, Immutable](/tutorial/05-redux-immutable)
+
+[06 - Mocha, Chai, Sinon](/tutorial/06-mocha-chai-sinon)
 
 ## Coming up next
 
-Production / development environments, React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
+React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
 
 ## Translations
 
-- [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
-- [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
-- [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
+- (**v1**) [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
+- (**v1**) [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
+- (**v1**) [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
 
 If you want to add your translation, please read the [translation recommendations](/how-to-translate.md) to get started!
 
