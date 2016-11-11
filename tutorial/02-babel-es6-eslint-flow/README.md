@@ -84,6 +84,8 @@ Alright, we're now good to go.
 
 ## ES6
 
+> 💡 **[ES6](http://es6-features.org/)**: The most significant improvement of the JavaScript language. There are too many ES6 features to list them here but typical ES6 code uses classes with `class`, `const` and `let`, template strings, and arrow functions (`(param) => { console.log('Hi'); }`).
+
 ### Creating an ES6 class
 
 - Create a new file, `src/dog.js`, containing the following ES6 class:
@@ -103,8 +105,6 @@ module.exports = Dog;
 ```
 
 It should not look surprising to you if you've done OOP in the past in any language. It's relatively recent for JavaScript though. The class is exposed to the outside world via the `module.exports` assignment.
-
-Typical ES6 code uses classes, `const` and `let`, "template strings" (with back ticks) like the one in `bark()`, and arrow functions (`(param) => { console.log('Hi'); }`), even though we're not using any in this example.
 
 In `src/index.js`, write the following:
 
@@ -202,23 +202,16 @@ Here we just tell ESLint that the files we want to lint are all the `.js` files 
 
 ## Flow
 
-[Flow](https://flowtype.org/) is a static type checker. It detects inconsistent types in your code and you can add explicit type declarations in it via annotations.
+> 💡 **[Flow](https://flowtype.org/)**: A static type checker by Facebook. It detects inconsistent types in your code. For instance, it will give you an error if you try to use a string where should be using a number.
 
 - In order for Babel to understand and remove Flow annotations during the transpilation process, install the Flow preset for Babel by running `yarn add --dev babel-preset-flow`. Then, add `"flow"` under `babel.presets` in your `package.json`.
 
 - Create an empty `.flowconfig` file at the root of your project
 
-- Run `yarn add --dev gulp-flowtype` to install the Gulp plugin for Flow, and create a `typecheck` task:
+- Run `yarn add --dev flow-bin` to install Flow, and create a `typecheck` task:
 
-```javascript
-import flow from 'gulp-flowtype';
-
-// [...]
-
-gulp.task('typecheck', () =>
-  gulp.src(paths.allSrcJs)
-    .pipe(flow({ abort: true }))
-);
+```json
+"typecheck": "flow"
 ```
 
 The `abort` option is to interrupt the Gulp task if Flow detects an issue.
