@@ -1,6 +1,6 @@
-# 01 - Node, NVM, NPM, Yarn, and `package.json`
+# 01 - Node, Yarn, and `package.json`
 
-In this section we will set up Node, NPM, Yarn, a basic `package.json` file, and try a package.
+In this section we will set up Node, Yarn, a basic `package.json` file, and try a package.
 
 ## Node
 
@@ -21,29 +21,23 @@ You want any version of Node > 6.5.0.
 
 ## NVM
 
-If Node is already installed, or if you want more flexibility, install `nvm` ([Node Version Manager](https://github.com/creationix/nvm)), make `nvm` install and use the latest version of Node for you.
+If Node is already installed, or if you want more flexibility, install NVM ([Node Version Manager](https://github.com/creationix/nvm)), and make NVM install and use the latest version of Node for you.
 
 ## NPM
 
-> 💡 **NPM** is the default package manager for Node. It is automatically installed alongside with Node. Package managers are used to install and manage packages (modules of code that you or someone else wrote).
-
-We are going to use a lot of packages in this tutorial, but we won't be using NPM
+NPM is the default package manager for Node. It is automatically installed alongside with Node. Package managers are used to install and manage packages (modules of code that you or someone else wrote). We are going to use a lot of packages in this tutorial, but we'll use Yarn, another package manager.
 
 ## Yarn
 
-> 💡 **[Yarn](https://yarnpkg.com/)** is another package manager which is much faster than NPM, has offline support, and fetches dependencies [more predictably](https://yarnpkg.com/en/docs/yarn-lock).
+> 💡 **[Yarn](https://yarnpkg.com/)** is a Node.js package manager which is much faster than NPM, has offline support, and fetches dependencies [more predictably](https://yarnpkg.com/en/docs/yarn-lock).
 
-Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and is becoming the new package manager of choice of the JavaScript community. We are going to use Yarn in this tutorial. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --dev`.
+Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and is becoming the new package manager of choice of the JavaScript community. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --dev`.
 
 - Install Yarn by following the [instructions](https://yarnpkg.com/en/docs/install). You can likely install it with `npm install -g yarn` or `sudo npm install -g yarn` (yeah, we're using NPM to install Yarn, much like you would use Internet Explorer or Safari to install Chrome!).
 
-
-
-
-
-
-
 ## package.json, Hello World, start script
+
+> 💡 **`package.json`** is the file used to describe and configure your JavaScript project. It contains general information (your project's name, version, contributors, license, etc), configuration for tools you use, and even a section to run tasks.
 
 - Create a new folder to work in, and `cd` in it.
 - Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.
@@ -106,6 +100,6 @@ Congratulations, you installed and used a package!
 
 **Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. `"dependencies"` is more general than `"devDependencies"`, which are packages that you only need during development, not production (typically, build-related packages, linters, tests, etc). For `"devDependencies"`, we will use `yarn add --dev [package]` to install packages.
 
-Next section: [2 - Setting up ES6 with Babel and Gulp](/tutorial/2-gulp-babel-es6-class-import)
+Next section: [02 - Babel, ES6, ESLint, Flow](/tutorial/02-babel-es6-eslint-flow)
 
-Back to the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
