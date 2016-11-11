@@ -1,4 +1,4 @@
-# 1 - Node, NPM, Yarn, and package.json
+# 01 - Node, NPM, Yarn, and package.json
 
 In this section we will set up Node, NPM, Yarn, a basic `package.json` file, and try a package.
 
@@ -56,8 +56,6 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 npm-debug.log
 yarn-error.log
 ```
-
-**Note**: If you take a look at the `package.json` files I provide, you will see a `tutorial-test` script in every chapter. Those scripts let me test that the chapter works fine when running `yarn && yarn start`. You can delete them in your own projects.
 
 ## Installing and using a package
 

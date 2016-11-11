@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "start": "node .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tutorial-test": "yarn start"
+    "start": "node ."
   },
   "dependencies": {
     "color": "^0.11.3"
