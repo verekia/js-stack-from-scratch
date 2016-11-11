@@ -4,7 +4,7 @@ In this section we will set up Node, Yarn, a basic `package.json` file, and try 
 
 ## Node
 
-> 💡 **Node.js** is a JavaScript runtime environment. It is mostly used for Back-End development, but also for general scripting. In the context of Front-End development, it can be used to perform a whole bunch of tasks like linting, testing, and assembling files.
+> 💡 **[Node.js](https://nodejs.org/)** is a JavaScript runtime environment. It is mostly used for Back-End development, but also for general scripting. In the context of Front-End development, it can be used to perform a whole bunch of tasks like linting, testing, and assembling files.
 
 We're going to use Node for basically everything in this tutorial, so you're going to need it.
 
@@ -37,7 +37,7 @@ Since it [came out](https://code.facebook.com/posts/1840075619545360) in October
 
 ## package.json
 
-> 💡 **`package.json`** is the file used to describe and configure your JavaScript project. It contains general information (your project's name, version, contributors, license, etc), configuration for tools you use, and even a section to run tasks.
+> 💡 **`[package.json](https://yarnpkg.com/en/docs/package-json)`** is the file used to describe and configure your JavaScript project. It contains general information (your project's name, version, contributors, license, etc), configuration for tools you use, and even a section to run tasks.
 
 - Create a new folder to work in, and `cd` in it.
 - Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.
@@ -106,7 +106,13 @@ Congratulations, you installed and used a package!
 
 - Run `yarn remove color`
 
-**Note**: There are 2 kinds of package dependencies, `"dependencies"` and `"devDependencies"`. **Dependencies** are libraries you need for your application to function (React, Redux, Lodash, jQuery, etc). You install them with `yarn add [package]`. **Dev Dependencies** are libraries used during development or to build your application (Webpack, SASS, linters, testing frameworks, etc). You install those with `yarn add --dev [package]`.
+## Two kinds of dependencies
+
+There are two kinds of package dependencies, `"dependencies"` and `"devDependencies"`:
+
+**Dependencies** are libraries you need for your application to function (React, Redux, Lodash, jQuery, etc). You install them with `yarn add [package]`.
+
+**Dev Dependencies** are libraries used during development or to build your application (Webpack, SASS, linters, testing frameworks, etc). You install those with `yarn add --dev [package]`.
 
 Next section: [02 - Babel, ES6, ESLint, Flow](/tutorial/02-babel-es6-eslint-flow)
 
