@@ -142,7 +142,7 @@ Obviously, most of the time you will use the same name as the class / module you
 
 - `yarn start` should still print "Wah wah, I am Toby".
 
-# 6 - ESLint
+## ESLint
 
 We're going to lint our code to catch potential issues. ESLint is the linter of choice for ES6 code. Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
 
@@ -152,6 +152,7 @@ Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/esli
 export PKG=eslint-config-airbnb;
 npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev "$PKG@latest"
 ```
+
 **Note**: I've replaced `npm install` by `yarn add` in this command.
 
 It should install everything you need and add `eslint-config-airbnb`,  `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file.
@@ -242,7 +243,7 @@ The last issue left is about `console.log()`. Let's say that we want this `conso
 
 **Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
 
-# 12 - Flow
+## Flow
 
 [Flow](https://flowtype.org/) is a static type checker. It detects inconsistent types in your code and you can add explicit type declarations in it via annotations.
 
@@ -353,7 +354,6 @@ In my case, the `linter-flow` plugin for Atom was detecting type errors in the `
 You now have bullet-proof code that is linted, typechecked, and tested, good job!
 
 Back to the [previous section](/tutorial/11-testing-mocha-chai-sinon) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
-
 
 Next section: [4 - Express Server](/tutorial/4-express-server)
 

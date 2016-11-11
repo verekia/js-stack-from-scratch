@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "test": "yarn run mdlint && cd tutorial/1-node-npm-yarn-package-json && yarn && yarn run tutorial-test && cd ../2-packages && yarn && yarn run tutorial-test && cd ../3-es6-babel-gulp && yarn && yarn run tutorial-test && cd ../4-es6-syntax-class && yarn && yarn run tutorial-test && cd ../5-es6-modules-syntax && yarn && yarn run tutorial-test && cd ../6-eslint && yarn && yarn run tutorial-test && cd ../7-client-webpack && yarn && yarn run tutorial-test && cd ../8-react && yarn && yarn run tutorial-test && cd ../9-redux && yarn && yarn run tutorial-test && cd ../10-immutable-redux-improvements && yarn && yarn run tutorial-test && cd ../11-testing-mocha-chai-sinon && yarn && yarn run tutorial-test && cd ../12-flow && yarn && yarn run tutorial-test",
+    "test": "yarn run mdlint && cd tutorial/01-node-yarn-package-json && yarn && yarn start && cd ../02-babel-es6-eslint-flow && yarn && yarn run main && cd ../3-es6-babel-gulp && yarn && yarn run tutorial-test && cd ../4-es6-syntax-class && yarn && yarn run tutorial-test && cd ../5-es6-modules-syntax && yarn && yarn run tutorial-test && cd ../6-eslint && yarn && yarn run tutorial-test && cd ../7-client-webpack && yarn && yarn run tutorial-test && cd ../8-react && yarn && yarn run tutorial-test && cd ../9-redux && yarn && yarn run tutorial-test && cd ../10-immutable-redux-improvements && yarn && yarn run tutorial-test && cd ../11-testing-mocha-chai-sinon && yarn && yarn run tutorial-test && cd ../12-flow && yarn && yarn run tutorial-test",
     "mdlint": "node mdlint.js"
   },
   "devDependencies": {
