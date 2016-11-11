@@ -56,17 +56,21 @@ We now have the basic compilation working. To make this environment a bit more u
 "scripts": {
   "start": "yarn run watch",
   "clean": "rimraf lib",
+  "prebuild": "yarn run clean",
   "build": "babel src -d lib",
+  "lint": "eslint src/**/*.js",
   "watch": "watch 'yarn run main' src --interval=1",
-  "main": "yarn run clean && yarn run build && node lib"
+  "main": "yarn run lint && yarn run build && node lib"
 },
 ```
 
-### `clean` with `rimraf`
+### `clean` with `rimraf`, and `prebuild`
 
 `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use `rimraf` instead of a plain `rm -rf` in order to support Windows environments as well.
 
 - Run `yarn add --dev rimraf`.
+
+Tasks that are prefixed by `pre` or `post` will respectively be called after and before said task. `clean` is related to `build` and we want to run it before every build, so it's a good candidate for a `pre` task. `prebuild` simply calls `yarn run clean`.
 
 ### `main` and `watch`
 
@@ -213,8 +217,6 @@ Here we just tell ESLint that the files we want to lint are all the `.js` files 
 ```json
 "typecheck": "flow"
 ```
-
-The `abort` option is to interrupt the Gulp task if Flow detects an issue.
 
 - Add `typecheck` in the prerequisites of `build`:
 

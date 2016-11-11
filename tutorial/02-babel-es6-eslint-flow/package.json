@@ -4,11 +4,12 @@
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "start": "yarn run watch",
-    "lint": "eslint src/**/*.js",
     "clean": "rimraf lib",
+    "prebuild": "yarn run clean",
     "build": "babel src -d lib",
-    "watch": "watch 'yarn run main' src",
-    "main": "yarn run lint && yarn run clean && yarn run build && node lib"
+    "lint": "eslint src/**/*.js",
+    "watch": "watch 'yarn run main' src --interval=1",
+    "main": "yarn run lint && yarn run build && node lib"
   },
   "eslintConfig": {
     "extends": "airbnb"
