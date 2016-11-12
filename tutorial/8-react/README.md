@@ -32,7 +32,7 @@ App.propTypes = {
 ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 ```
 
-**Примечание**: Если вы не знакомы с React или его PropTypes, ознакомьтесь сначала с ним и затем возвращайтесь в это руководство. В следующих главах мы будем использовать React, поэтому вам понадобится хорошее (его) понимание этой библиотеки.
+**Примечание**: Если вы не знакомы с React или его PropTypes (типы параметров), ознакомьтесь сначала с ним и затем возвращайтесь в это руководство. В следующих главах мы будем использовать React, поэтому вам понадобится хорошее его понимание.
 
 В Gulp файле, измените в `clientEntryPoint` расширение на `.jsx`:
 
@@ -40,9 +40,9 @@ ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 clientEntryPoint: 'src/client/app.jsx',
 ```
 
-Поскольку мы используем синтакс JSX, нам так же нужен Babel для его обработки.
-Установите React Babel preset, который научит Babel обрабатывать JSX синтакс:
-`yarn add --dev babel-preset-react` и откорректируйте раздел `babel` в `package.json` следующим образом:
+Поскольку мы используем синтаксис JSX, нам так же нужен Babel для его обработки.
+Установите React Babel preset, который научит Babel обрабатывать JSX синтаксис
+`yarn add --dev babel-preset-react`, и откорректируйте раздел `babel` в `package.json` следующим образом:
 
 ```json
 "babel": {
@@ -53,7 +53,7 @@ clientEntryPoint: 'src/client/app.jsx',
 },
 ```
 
-Теперь, после запуска `yarn start`, открыв `index.html`, мы должны увидеть "The dog says: Wah wah, I am Browser Toby" сгенерированное React.
+Теперь, после запуска `yarn start`, открыв `index.html`, мы должны увидеть "The dog says: Wah wah, I am Browser Toby", сгенерированное React.
 
 
 
