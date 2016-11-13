@@ -77,7 +77,7 @@ Now if you type `name:string` as an annotation, ESLint should complain that you 
 
 - You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `yarn test` or `yarn start`, and add type annotations everywhere Flow asks you to do so.
 
-One counterintuitive case is the following, for `src/client/component/message.jsx`:
+One counterintuitive case is the following, for `src/client/components/message.jsx`:
 
 ```javascript
 const Message = ({ message }: { message: string }) => <div>{message}</div>;
