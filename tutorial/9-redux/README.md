@@ -26,6 +26,7 @@ export const makeBark = () => ({
   payload: true,
 });
 ```
+
 Тут мы определяем тип действия - `MAKE_BARK`, и функцию `makeBark` (именуемую *генератор действий*), которая запускает действие `MAKE_BARK`. Мы их экспортируем т.к. они нам понадобятся в других файлах. Это действие построено на основе модели [Flux Standard Action](https://github.com/acdlite/flux-standard-action), вот почему оно имеет атрибуты `type` и `payload`.
 
 - В `reducers`, создайте `dog-reducer.js`:
@@ -161,4 +162,4 @@ export default connect(mapStateToProps)(Message);
 
 Следующий раздел: [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
-Назад в [предыдущий раздел](/tutorial/8-react) или [Содержание](/../../).
+Назад в [предыдущий раздел](/tutorial/8-react) или [Содержание](/../../#Содержание).

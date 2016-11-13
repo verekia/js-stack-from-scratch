@@ -1,12 +1,6 @@
 # 9 - Redux
 
-В этой части (которая наиболее сложная из пройденных), мы добавим в наше приложение [Redux](http://redux.js.org/) ([документация на Русском](https://www.gitbook.com/book/rajdee/redux-in-russian/details)) и подключим его к React. Redux управляет состоянием приложения. Он включает в себя такие понятия, как:  
-
-- **хранилище** (store) - простой JavaScript объект, представляющий состояние вашего приложения;
-- **действия** (actions), которые обычно запускаются пользователем;
-- **редюсеры** (reducers), которые можно рассматривать как обработчики действий.
-
-Редюсеры воздествуют на состояние приложения (**хранилище**), и когда состояние приложения изменяется, что-то происходит в вашем приложении. Хорошая визуальная демонстрация Redux находится [здесь](http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9).
+In this chapter (which is the most difficult so far) we will be adding [Redux](http://redux.js.org/) to our application and will hook it up with React. Redux manages the state of your application. It is composed of a **store** which is a plain JavaScript object representing the state of your app, **actions** which are typically triggered by users, and **reducers** which can be seen as action handlers. Reducers affect your application state (the *store*), and when the application state is modified, things happen in your app. A good visual demonstration of Redux can be found [here](http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9).
 
 In order to demonstrate how to use Redux in the simplest possible way, our app will consist of a message and a button. The message says whether the dog has barked or not (it initially hasn't), and the button makes the dog bark, which should update the message.
 
@@ -26,6 +20,7 @@ export const makeBark = () => ({
   payload: true,
 });
 ```
+
 Here we define an action type, `MAKE_BARK`, and a function (also known as *action creator*) that triggers a `MAKE_BARK` action called `makeBark`. Both are exported because we'll need them both in other files. This action implements the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which is why it has `type` and `payload` attributes.
 
 - In `reducers`, create `dog-reducer.js`:
@@ -161,4 +156,4 @@ export default connect(mapStateToProps)(Message);
 
 Next section: [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
-Back to the [previous section](/tutorial/8-react) or the [table of contents](/README.md).
+Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

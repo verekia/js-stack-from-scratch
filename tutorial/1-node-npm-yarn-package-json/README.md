@@ -31,7 +31,7 @@ sudo apt-get install -y nodejs
 
 - В файле `package.json`, в корневом объекте создайте объект `scripts`, чтобы было так:
 
-```
+```json
 "scripts": {
   "start": "node ."
 }
@@ -43,7 +43,7 @@ sudo apt-get install -y nodejs
 
 - Создайте файл `.gitignore` и добавьте туда следующее:
 
-```
+```gitignore
 npm-debug.log
 yarn-error.log
 ```
@@ -52,4 +52,4 @@ yarn-error.log
 
 Следующий раздел: [2 - Installing and using a package](/tutorial/2-packages)
 
-Назад в [Содержание](/README.md).
+Назад в [Содержание](/../../#Содержание).
