@@ -54,9 +54,16 @@ clientEntryPoint: 'src/client/app.jsx',
 ```
 
 Теперь, после запуска `yarn start`, открыв `index.html`, мы должны увидеть "The dog says: Wah wah, I am Browser Toby", сгенерированное React.
+<<<<<<< HEAD
 
 
 
 Следующий раздел: [9 - Redux](/tutorial/9-redux)
 
 Назад в [предыдущий раздел](/tutorial/7-client-webpack) или [Содержание](/../../).
+=======
+
+Следующий раздел: [9 - Redux](/tutorial/9-redux)
+
+Назад в [предыдущий раздел](/tutorial/7-client-webpack) или [Содержание](/../../#Содержание).
+>>>>>>> e923dbc5abecc22fea32add1421c59678ff2ebf1

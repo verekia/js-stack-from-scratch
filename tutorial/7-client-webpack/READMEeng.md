@@ -37,6 +37,7 @@ Add the following to your `package.json`, under `eslintConfig`:
   "browser": true
 }
 ```
+
 This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client code.
@@ -190,4 +191,4 @@ gulp.task('clean', () => del([
 
 Next section: [8 - React](/tutorial/8-react)
 
-Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
