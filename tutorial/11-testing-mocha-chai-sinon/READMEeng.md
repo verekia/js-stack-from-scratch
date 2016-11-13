@@ -42,6 +42,7 @@ describe('App State', () => {
   });
 });
 ```
+
 Alright, let's analyze this whole thing.
 
 First, notice how we import the `should` assertion style from `chai`. This lets us assert things using a syntax like `mynumber.should.equal(3)`, pretty neat. In order to be able to call `should` on any object, we need to run the function `should()` before anything. Some of these assertion are *expressions*, like `mybook.should.be.true`, which will make ESLint grumpy, so we've added an ESLint comment at the top to disable the `no-unused-expressions` rule in this file.
@@ -52,7 +53,7 @@ Our `makeBark` test is very explicit, and the description provided as a string i
 
 Alright, let's run this test!
 
-- Create the following `test` task, which relies on the `gulp-mocha` plugin:
+- In `gulpfile.babel.js`, create the following `test` task, which relies on the `gulp-mocha` plugin:
 
 ```javascript
 import mocha from 'gulp-mocha';
@@ -154,4 +155,4 @@ If everything went well in this chapter, you should have 2 passing tests.
 
 Next section: [12 - Type Checking with Flow](/tutorial/12-flow)
 
-Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](/README.md).
+Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
