@@ -25,7 +25,6 @@
 
 **Примечание**: Существует два вида зависимостей для подключения пакетов: `"dependencies"` и `"devDependencies"`. `"dependencies"` - более общее понятие, чем `"devDependencies"`, так как последние используються только для разработки, а не выпуска (production) приложения (обычно это пакеты связанные с процессом построения, анализаторы кода и т.п.). Для `"devDependencies"`, будем использовать `yarn add --dev [package]`. (прим. пер. `npm install [package] --save-dev`)
 
-
 Следующий раздел: [3 - Setting up ES6 with Babel and Gulp](/tutorial/3-es6-babel-gulp)
 
-Назад в [предыдущий раздел](/tutorial/1-node-npm-yarn-package-json) или [Содержание](/../../).
+Назад в [предыдущий раздел](/tutorial/1-node-npm-yarn-package-json) или [Содержание](/../../#Содержание).
