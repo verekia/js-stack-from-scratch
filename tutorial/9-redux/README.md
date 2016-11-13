@@ -162,8 +162,4 @@ export default connect(mapStateToProps)(Message);
 
 Следующий раздел: [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
-<<<<<<< HEAD
-Назад в [предыдущий раздел](/tutorial/8-react) или [Содержание](/../../).
-=======
 Назад в [предыдущий раздел](/tutorial/8-react) или [Содержание](/../../#Содержание).
->>>>>>> e923dbc5abecc22fea32add1421c59678ff2ebf1

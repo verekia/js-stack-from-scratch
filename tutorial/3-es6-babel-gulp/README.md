@@ -5,10 +5,7 @@
 - Запустите `yarn add --dev gulp`
 - Запустите `yarn add --dev gulp-babel`
 - Запустите `yarn add --dev babel-preset-latest`
-<<<<<<< HEAD
-=======
 - Запустите `yarn add --dev del` (для задачи `clean` - очистки, как вы увидете ниже)
->>>>>>> e923dbc5abecc22fea32add1421c59678ff2ebf1
 - В `package.json` добавьте поле `babel` для конфигурации Babel. Укажем, что хотим использовать новейшую конфигурацию Babel, следующим образом:
 
 ```json
