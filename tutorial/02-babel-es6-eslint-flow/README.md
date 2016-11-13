@@ -160,16 +160,15 @@ Obviously, most of the time you will use the same name as the class / module you
 
 We're going to lint our code to catch potential issues. ESLint is the linter of choice for ES6 code. Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
 
-Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2016-11-11, they recommend using the following commands in your terminal:
+Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2016-11-11, they recommend using the following command in your terminal:
 
 ```bash
-export PKG=eslint-config-airbnb
-npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev "$PKG@latest"
+npm info eslint-config-airbnb@latest peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev eslint-config-airbnb@latest
 ```
 
-**Note**: I've replaced `npm install` by `yarn add` in this command.
-
 It should install everything you need and add `eslint-config-airbnb`,  `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file automatically.
+
+**Note**: I've replaced `npm install` by `yarn add` in this command. Also, this won't work on Windows, so take a look at the `package.json` file of this repository and just install all the ESLint-related dependencies manually using `yarn add --dev packagename@^#.#.#` with `#.#.#` being the versions given in `package.json` for each package.
 
 In `package.json`, add an `eslintConfig` field like so:
 
@@ -218,13 +217,11 @@ Here we just tell ESLint that the files we want to lint are all the `.js` files 
 "typecheck": "flow"
 ```
 
-- Add `typecheck` in the prerequisites of `build`:
+- Add `typecheck` in the task chain of your `main` script:
 
-```javascript
-gulp.task('build', ['typecheck', 'lint', 'test', 'clean'], () => /* ... */)
+```json
+"main": "yarn run typecheck && yarn run lint && yarn run build && node lib"
 ```
-
-- Add `typecheck` in your `test` script of `package.json` as well: `"test": "gulp typecheck lint test"`.
 
 Alright, we should be able to run Flow now.
 
