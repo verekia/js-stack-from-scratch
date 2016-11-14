@@ -213,7 +213,7 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
 
 - Run `yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype`.
 
-`flow-bin` is the binary to run Flow in our `scripts` tasks, `babel-preset-flow` is the preset for Babel to understand Flow annotations, `babel-eslint` is a package to tell ESLint *to rely on Babel's parser* instead of its own, and `eslint-plugin-flowtype` is an ESLint plugin to lint Flow annotations.
+`flow-bin` is the binary to run Flow in our `scripts` tasks, `babel-preset-flow` is the preset for Babel to understand Flow annotations, `babel-eslint` is a package to enable ESLint *to rely on Babel's parser* instead of its own, and `eslint-plugin-flowtype` is an ESLint plugin to lint Flow annotations. Phew.
 
 - Update your `package.json` file with the following configuration for `babel` and `eslintConfig`:
 
@@ -289,6 +289,6 @@ There are 2 things that I want you to try:
 
 If you got the 2 different errors working, you are all set with Flow and ESLint!
 
-Next section: [4 - Express Server](/tutorial/4-express-server)
+Next section: [03 - Express, PM2](/tutorial/03-express-pm2)
 
-Back to the [previous section](/tutorial/2-gulp-babel-es6-class-import) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/01-node-yarn-package-json) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
