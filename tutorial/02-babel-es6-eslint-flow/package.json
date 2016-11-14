@@ -4,13 +4,12 @@
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "start": "yarn run watch",
-    "clean": "rimraf lib",
-    "prebuild": "yarn run clean",
-    "build": "babel src -d lib",
-    "lint": "eslint src/**/*.js",
-    "typecheck": "flow",
     "watch": "watch 'yarn run main' src --interval=1",
-    "main": "yarn run typecheck && yarn run lint && yarn run build && node lib"
+    "main": "yarn run typecheck && yarn run lint && yarn run build && node lib",
+    "build": "yarn run clean && babel src -d lib",
+    "clean": "rimraf lib",
+    "lint": "eslint src/**/*.js",
+    "typecheck": "flow"
   },
   "babel": {
     "presets": [
@@ -23,7 +22,6 @@
       "airbnb",
       "plugin:flowtype/recommended"
     ],
-    "parser": "babel-eslint",
     "plugins": [
       "flowtype"
     ]

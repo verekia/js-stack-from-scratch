@@ -259,6 +259,18 @@ export const makeBark = createAction(MAKE_BARK, () => true);
 
 - Don't forget to run `yarn add redux-actions`.
 
+## TODO
+
+Another case you will encounter is that in `src/client/reducers/dog-reducer.js`, Flow will complain about Immutable not having a default export. This issue is discussed in [#863 on Immutable](https://github.com/facebook/immutable-js/issues/863), which highlights 2 workarounds:
+
+```javascript
+import { Map as ImmutableMap } from 'immutable';
+// or
+import * as Immutable from 'immutable';
+```
+
+Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components. I'm personally going for `import * as Immutable from 'immutable'` since it's shorter and won't require refactoring the code when this issue gets fixed.
+
 Next section: [11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
 Back to the [previous section](/tutorial/9-redux) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).

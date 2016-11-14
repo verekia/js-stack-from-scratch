@@ -42,7 +42,7 @@ If you try to run `yarn start` now, it should print the correct output, but you 
 },
 ```
 
-**Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`. Your root folder will get more and more bloated over time, so keep the Babel config in `package.json` until it grows too large.
+**Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`, but since your root folder will get more and more bloated over time, I would recommend to keep the Babel config in `package.json` until it grows too large.
 
 - Try running `yarn start` again. The `lib/index.js` file should now have been correctly transformed into ES5 code (`var` everywhere!).
 
@@ -55,22 +55,19 @@ We now have the basic compilation working. To make this environment a bit more u
 ```json
 "scripts": {
   "start": "yarn run watch",
-  "clean": "rimraf lib",
-  "prebuild": "yarn run clean",
-  "build": "babel src -d lib",
-  "lint": "eslint src/**/*.js",
   "watch": "watch 'yarn run main' src --interval=1",
-  "main": "yarn run lint && yarn run build && node lib"
+  "main": "yarn run lint && yarn run build && node lib",
+  "build": "yarn run clean && babel src -d lib",
+  "clean": "rimraf lib",
+  "lint": "eslint src/**/*.js"
 },
 ```
 
-### `clean` with `rimraf`, and `prebuild`
+### `clean` with `rimraf`
 
 `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use `rimraf` instead of a plain `rm -rf` in order to support Windows environments as well.
 
 - Run `yarn add --dev rimraf`.
-
-Tasks that are prefixed by `pre` or `post` will respectively be called after and before said task. `clean` is related to `build` and we want to run it before every build, so it's a good candidate for a `pre` task. `prebuild` simply calls `yarn run clean`.
 
 ### `main` and `watch`
 
@@ -85,6 +82,8 @@ Tasks that are prefixed by `pre` or `post` will respectively be called after and
 Alright, we're now good to go.
 
 - Run `yarn start`. It should clean, build, print "Hello ES6" and start watching for changes. Try modifying `src/index.js` to make sure the  whole task flow is triggered again.
+
+**Note**: It is possible to prefix task names with `pre` or `post` (like `prebuild`), to trigger tasks before and after others. We could have for instance called `clean` in a `prebuild` task instead of chaining the two in one command separated by `&&`. This approach makes command lines shorter but I find that it actually reduces readability to have to jump up and down to look for any existing `pre` and `post` tasks when reading through our tasks.
 
 ## ES6
 
@@ -133,6 +132,7 @@ In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`.
 Note that in `dog.js`, the name `Dog` is only used in the `export`. Therefore it could be possible to export directly an anonymous class like this instead:
 
 ```javascript
+// Dog
 export default class {
   constructor(name) {
     this.name = name;
@@ -144,7 +144,7 @@ export default class {
 }
 ```
 
-You might now guess that the name 'Dog' used in the `import` in `index.js` is actually completely up to you. This would work just fine:
+You might now guess that the name `Dog` used in the `import` in `index.js` is actually completely up to you. This would work just fine:
 
 ```javascript
 import Cat from './dog'; // Don't do this
@@ -152,13 +152,15 @@ import Cat from './dog'; // Don't do this
 const toby = new Cat('Toby');
 ```
 
-Obviously, most of the time you will use the same name as the class / module you're importing.
+Obviously, most of the time you will use the same name as the class / module you're importing. Anyway!
 
 - `yarn start` should still print "Wah wah, I am Toby".
 
 ## ESLint
 
-We're going to lint our code to catch potential issues. ESLint is the linter of choice for ES6 code. Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
+> 💡 **[ESLint](http://eslint.org)** is the linter of choice for ES6 code. A linter gives you recommendations about code formatting, which enforces style consistency in your code, and code you share with your team. It's also a great way to learn about JavaScript by making mistakes that ESLint will catch.
+
+ESLint works with *rules*, and there are [many of them](http://eslint.org/docs/rules/). Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
 
 Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2016-11-11, they recommend using the following command in your terminal:
 
@@ -207,11 +209,37 @@ Here we just tell ESLint that the files we want to lint are all the `.js` files 
 
 > 💡 **[Flow](https://flowtype.org/)**: A static type checker by Facebook. It detects inconsistent types in your code. For instance, it will give you an error if you try to use a string where should be using a number.
 
-- In order for Babel to understand and remove Flow annotations during the transpilation process, install the Flow preset for Babel by running `yarn add --dev babel-preset-flow`. Then, add `"flow"` under `babel.presets` in your `package.json`.
+Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScript to give us some insights, but in order to use its full power, we need to add type annotations in our code, which will make it non-standard. We need to teach Babel and ESLint what those type annotations are in order for these tools to not freak out when parsing our files.
 
-- Create an empty `.flowconfig` file at the root of your project
+- Run `yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype`.
 
-- Run `yarn add --dev flow-bin` to install Flow, and create a `typecheck` task:
+`flow-bin` is the binary to run Flow in our `scripts` tasks, `babel-preset-flow` is the preset for Babel to understand Flow annotations, `babel-eslint` is a package to tell ESLint *to rely on Babel's parser* instead of its own, and `eslint-plugin-flowtype` is an ESLint plugin to lint Flow annotations.
+
+- Update your `package.json` file with the following configuration for `babel` and `eslintConfig`:
+
+```json
+"babel": {
+  "presets": [
+    "latest",
+    "flow"
+  ]
+},
+"eslintConfig": {
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "flowtype"
+  ]
+},
+```
+
+**Note**: The `plugin:flowtype/recommended` contains the instruction for ESLint to use Babel's parser. If you want to be more explicit, feel free to add `"parser": "babel-eslint"` under `eslintConfig`.
+
+I know this is a lot to take in, so take a minute to think about it. I'm still amazed that it is even possible for ESLint to use Babel's parser to understand Flow annotations. These 2 tools are really incredible for being so modular.
+
+- Create a `typecheck` task:
 
 ```json
 "typecheck": "flow"
@@ -223,9 +251,11 @@ Here we just tell ESLint that the files we want to lint are all the `.js` files 
 "main": "yarn run typecheck && yarn run lint && yarn run build && node lib"
 ```
 
-Alright, we should be able to run Flow now.
+- Create an empty `.flowconfig` file at the root of your project.
 
-- Add Flow annotations to `src/shared/dog.js` like so:
+Alright, we should be all set for the configuration part.
+
+- Add Flow annotations to `src/dog.js` like so:
 
 ```javascript
 // @flow
@@ -237,16 +267,9 @@ class Dog {
     this.name = name;
   }
 
-  bark(): string {
+  bark() {
     return `Wah wah, I am ${this.name}`;
   }
-
-  barkInConsole() {
-    /* eslint-disable no-console */
-    console.log(this.bark());
-    /* eslint-enable no-console */
-  }
-
 }
 
 export default Dog;
@@ -254,55 +277,17 @@ export default Dog;
 
 The `// @flow` comment tells Flow that we want this file to be typechecked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check the documentation for more details.
 
-Now if you run `yarn start`, Flow will work fine, but ESLint is going to complain about that non-standard syntax we're using. Since Babel's parser is all up-and-running with parsing Flow content thanks to the `babel-preset-flow` plugin we installed, it'd be nice if ESLint could rely on Babel's parser instead of trying to understand Flow annotations on its own. That's actually possible using the `babel-eslint` package. Let's do this.
-
-- Run `yarn add --dev babel-eslint`
-
-- In `package.json`, under `eslintConfig`, add the following property: `"parser": "babel-eslint"`
+- Add `// @flow` at the top of `index.js` as well.
 
 `yarn start` should now both lint and typecheck your code fine.
 
-Now that ESLint and Babel are able to share a common parser, we can actually get ESLint to lint our Flow annotations via the `eslint-plugin-flowtype` plugin.
+There are 2 things that I want you to try:
 
-- Run `yarn add --dev eslint-plugin-flowtype` and add `"flowtype"` under `eslintConfig.plugins` in `package.json`, and add `"plugin:flowtype/recommended"` under `eslintConfig.extends` in an array next to `"airbnb"`.
+- Replace `constructor(name: string)` by `constructor(name: number)`, and run `yarn start`. You should get a **Flow** error telling you that those types are incompatible. That means Flow is set up correctly.
 
-Now if you type `name:string` as an annotation, ESLint should complain that you forgot a space after the colon for instance.
+- Now replace `constructor(name: string)` by `constructor(name:string)`, and run `yarn start`. You should get an **ESLint** error telling you that Flow annotations should have a space after the colon. That means the Flow plugin for ESLint is set up correctly.
 
-**Note**: The `"parser": "babel-eslint"` property that I made you write in `package.json` is actually included in the `"plugin:flowtype/recommended"` config, so you can now remove it for a more minimal `package.json`. Leaving it there is more explicit though, so that's up to your personal preference. Since this tutorial is about the most minimal setup, I removed it.
-
-- You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `yarn test` or `yarn start`, and add type annotations everywhere Flow asks you to do so.
-
-One counterintuitive case is the following, for `src/client/component/message.jsx`:
-
-```javascript
-const Message = ({ message }: { message: string }) => <div>{message}</div>;
-```
-
-As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
-
-Another case you will encounter is that in `src/client/reducers/dog-reducer.js`, Flow will complain about Immutable not having a default export. This issue is discussed in [#863 on Immutable](https://github.com/facebook/immutable-js/issues/863), which highlights 2 workarounds:
-
-```javascript
-import { Map as ImmutableMap } from 'immutable';
-// or
-import * as Immutable from 'immutable';
-```
-
-Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components. I'm personally going for `import * as Immutable from 'immutable'` since it's shorter and won't require refactoring the code when this issue gets fixed.
-
-**Note**: If Flow detects type errors in your `node_modules` folder, add an `[ignore]` section in your `.flowconfig` to ignore the packages causing issues specifically (do not ignore the entire `node_modules` directory). It could look like this:
-
-```flowconfig
-[ignore]
-
-.*/node_modules/gulp-flowtype/.*
-```
-
-In my case, the `linter-flow` plugin for Atom was detecting type errors in the `node_modules/gulp-flowtype` directory, which contains files annotated with `// @flow`.
-
-You now have bullet-proof code that is linted, typechecked, and tested, good job!
-
-Back to the [previous section](/tutorial/11-testing-mocha-chai-sinon) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+If you got the 2 different errors working, you are all set with Flow and ESLint!
 
 Next section: [4 - Express Server](/tutorial/4-express-server)
 

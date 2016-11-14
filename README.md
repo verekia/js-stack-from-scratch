@@ -35,7 +35,7 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 [02 - Babel, ES6, ESLint, Flow](/tutorial/02-babel-es6-eslint-flow)
 
-[03 - Express, Nodemon, PM2](/tutorial/03-express-nodemon-pm2)
+[03 - Express, PM2](/tutorial/03-express-pm2)
 
 [04 - Webpack, React](/tutorial/04-webpack-react)
 

@@ -252,6 +252,16 @@ Install the React Babel preset, which will teach Babel how to process the JSX sy
 
 Now after running `yarn start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
 
+## TODO
+
+One counterintuitive case is the following, for `src/client/component/message.jsx`:
+
+```javascript
+const Message = ({ message }: { message: string }) => <div>{message}</div>;
+```
+
+As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
+
 Next section: [9 - Redux](/tutorial/9-redux)
 
 Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
