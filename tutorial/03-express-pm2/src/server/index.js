@@ -1,3 +1,5 @@
+// @flow
+
 /* eslint-disable no-console */
 
 import express from 'express';
@@ -13,10 +15,6 @@ app.get('/', (req, res) => {
   res.send(masterLayout('Homepage'));
 });
 
-app.get('/makebark', (req, res) => {
-  res.send({ hasBarked: true });
-});
-
 app.listen(PORT, () => {
-  console.log(`Express running on port ${PORT}`);
+  console.log(`Express running on port ${PORT}.`);
 });

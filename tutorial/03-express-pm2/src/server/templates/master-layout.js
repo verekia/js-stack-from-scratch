@@ -1,11 +1,16 @@
-export default (title: string) => `
+import html from 'common-tags';
+import { IS_PRODUCTION, STATIC_FOLDER } from '../config';
+
+export default (title: string) =>
+html`
 <!doctype html>
 <html>
   <head>
     <title>${title}</title>
+    <link> // TODO
   </head>
   <body>
-    <div class="app"></div>
+    Hello Express, the environment is: ${IS_PRODUCTION ? 'Production' : 'Development'}
   </body>
 </html>
 `;
