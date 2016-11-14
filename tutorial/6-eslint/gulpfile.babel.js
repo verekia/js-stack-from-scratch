@@ -12,7 +12,7 @@ const paths = {
   libDir: 'lib',
 };
 
-gulp.task('lint', () =>
+gulp.task('lint', () => (
   gulp.src([
     paths.allSrcJs,
     paths.gulpFile,
@@ -20,15 +20,15 @@ gulp.task('lint', () =>
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
-);
+));
 
 gulp.task('clean', () => del(paths.libDir));
 
-gulp.task('build', ['lint', 'clean'], () =>
+gulp.task('build', ['lint', 'clean'], () => (
   gulp.src(paths.allSrcJs)
     .pipe(babel())
     .pipe(gulp.dest(paths.libDir))
-);
+));
 
 gulp.task('main', ['build'], (callback) => {
   exec(`node ${paths.libDir}`, (error, stdout) => {
