@@ -12,7 +12,9 @@
 [![Chai](/img/chai.png)](http://chaijs.com/)
 [![Flow](/img/flow.png)](https://flowtype.org/)
 
-ยินดีต้อนรับสู่ Tutorial สอนใช้งาน Modern JavaScript: **JavaScript Stack from Scratch**.
+ยินดีต้อนรับสู่ Tutorial สอนการสร้าง และใช้งานเครื่องมือต่างๆ ของภาษา JavaScript สมัยใหม่: **JavaScript Stack from Scratch**
+
+**หมายเหตุ**: Tutorial นี้แปลมาจากต้นฉบับภาษาอังกฤษ [JavaScript Stack from Scratch](https://github.com/verekia/js-stack-from-scratch)
 
 Tutorial นี้เป็น tutorial ที่จะสอนการใช้งาน JavaScript tools ต่างๆ ด้วยกัน โดยจะสอนแบบตรงไปตรงมา ทีละจุดทีละเรื่อง ซึ่งผู้อ่านควรจะมีพื้นฐานทางด้านการเขียนโปรแกรมมาบ้าง รวมถึงรู้เบสิคของ JavaScript มาบ้าง **Tutorial นี้จะเน้นไปที่การรวมเอา tools ต่างๆ หลายๆ ตัวมาใช้งานด้วยกัน** และให้**ตัวอย่างโค้ดที่เรียบง่ายที่สุด** ในแต่ละ tools เพื่อให้นำไปใช้งานต่อได้ง่ายและเข้าใจมากขึ้น ซึ่งคุณเองก็สามารถที่จะอ่าน tutorial นี้ไปแต่ละบท *พร้อมกับสร้าง boilerplate ไว้ใช้เองก็ได้จาก 0*
 

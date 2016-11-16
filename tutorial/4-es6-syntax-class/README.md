@@ -1,4 +1,4 @@
-# 4 - Using the ES6 syntax with a class
+# 4 - การใช้ ES6 syntax ในการเขียน Class
 
 - Create a new file, `src/dog.js`, containing the following ES6 class:
 
