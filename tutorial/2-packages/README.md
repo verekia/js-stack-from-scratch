@@ -28,4 +28,3 @@
 บทถัดไป [บทที่ 3 - ตั้งค่าเพื่อใช้งาน ES6 โดยใช้ Babel และ Gulp](/tutorial/3-es6-babel-gulp)
 
 กลับไปยัง[บทที่แล้ว](/tutorial/1-node-npm-yarn-package-json) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)
-
