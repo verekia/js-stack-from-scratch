@@ -1,16 +1,16 @@
-# 11 - Testing with Mocha, Chai, and Sinon
+# 11 - การทำ Testing โดยใช้ Mocha, Chai และ Sinon
 
-## Mocha and Chai
+## Mocha และ Chai
 
-- Create an `src/test` folder. This folder will mirror our application folder structure, so create a `src/test/client` folder as well (feel free to add `server` and `shared` if you want, but we're not going to write tests for these).
+- สร้างโฟลเดอร์ `src/test` ขึ้นมา โฟลเดอร์นี้จะเป็นเหมือนกระจกของโฟลเดอร์ที่มีแอพของเรา ดังนั้นให้สร้างโฟลเดอร์ `src/test/client` ขึ้นมาด้วย (ซึ่งคุณสามารถสร้างโฟลเดอร์ `server` และ `shared` ขึ้นมาด้วยก็ได้ แต่เราจะยังไม่เขียน test ให้กับไฟล์เหล่านั้นในตอนนี้)
 
-- In `src/test/client`, create a `state-test.js` file, which we are going to use to test our Redux application life cycle.
+- ใน `src/test/client` สร้างไฟล์ `state-test.js` ขึ้นมา โดยเราจะใช้ไฟล์นี้ในการ test Redux life cycle
 
-We are going to use [Mocha](http://mochajs.org/) as our main testing framework. Mocha is easy to use, has tons of features, and is currently the [most popular JavaScript testing framework](http://stateofjs.com/2016/testing/). It is very flexible and modular. In particular, it lets you use any assertion library you want. [Chai](http://chaijs.com/) is a great assertion library that has a lot of [plugins](http://chaijs.com/plugins/) available and lets you choose between different assertion styles.
+เราจะใช้ [Mocha](http://mochajs.org/) สำหรับเป็น testing framework ตัวหลักของเรา Mocha นั้นใช้งานง่ายมาก พร้อมทั้งมีฟีเจอร์หลากหลาย แถมยังเป็น [JavaScript testing framework ที่ได้รับความนิยมสูงสุด](http://stateofjs.com/2016/testing/)อีกด้วย รวมถึงยังมีความยืดหยุ่นสูง Mocha สามารถให้เราใช้ assertion library ที่เราอยากใช้ได้ โดยเราจะใช้ [Chai](http://chaijs.com/) เป็น assertion library ที่มี [plugins](http://chaijs.com/plugins/) ให้ใช้เยอะมาก ตามสไตล์ของการเขียน assertion ที่เราชอบ
 
-- Let's install Mocha and Chai by running `yarn add --dev mocha chai`
+- มาทำการติดตั้ง Mocha และ Chai โดยสั่ง `yarn add --dev mocha chai`
 
-In `state-test.js`, write the following:
+ในไฟล์ `state-test.js` เขียนโค้ดต่อไปนี้
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies, no-unused-expressions */
@@ -43,17 +43,17 @@ describe('App State', () => {
 });
 ```
 
-Alright, let's analyze this whole thing.
+เอาล่ะ เรามาดูกันทีละส่วนของทั้งหมดนี้
 
-First, notice how we import the `should` assertion style from `chai`. This lets us assert things using a syntax like `mynumber.should.equal(3)`, pretty neat. In order to be able to call `should` on any object, we need to run the function `should()` before anything. Some of these assertion are *expressions*, like `mybook.should.be.true`, which will make ESLint grumpy, so we've added an ESLint comment at the top to disable the `no-unused-expressions` rule in this file.
+แรกสุด ให้ดูว่าเราทำการ import `should` assertion style มาจาก `chai` ซึ่งทำให้เราสามารถตรวจสอบค่าได้โดยใช้ syntax แบบ `mynumber.should.equal(3)` ซึ่งอ่าน-เขียนเข้าใจได้ง่าย เพื่อที่จะเรียกใช้ `should` กับ object อะไรก็ได้ เราจึงต้องเรียก function `should()` ก่อนที่จะทำทุกๆ อย่าง ซึ่งการทำ assertion บางอันนั้นจะเขียนเป็น *expressions* เช่น `mybook.should.be.true` ได้เหมือนกัน ทำให้บางที ESLint อาจจะเข้าใจผิดว่าเราเขียนผิดกฎ จึงต้องมีการ comment ที่ด้านบนสุดของโค้ดเพื่อปิดการใช้กฎ `no-unused-expressions` สำหรับไฟล์นี้
 
-Mocha tests work like a tree. In our case, we want to test the `makeBark` function which should affect the `dog` attribute of the application state, so it makes sense to use the following hierarchy of tests: `App State > Dog > makeBark`, that we declare using `describe()`. `it()` is the actual test function and `beforeEach()` is a function that is executed before each `it()` test. In our case, we want a fresh new store before running each test. We declare a `store` variable at the top of the file because it should be useful in every test of this file.
+การทำเทสด้วย Mocha จะทำงานคล้ายๆ กับ tree อย่างในเคสนี้ เราจะเขียนเทส function `makeBark` ที่ควรจะมีผลต่อ attribute `dog` ใน application state ของเรา ดังนั้น จึงมีความ make sense ที่เราจะเขียน test โดยเช็คตามนี้ `App State > Dog > makeBark` โดยเราจะประกาศการเทส โดยใช้คำสั่ง `descrive()` และ `it()` ซึ่งจะเป็นส่วนที่จะเกิดการเทสจริงๆ ส่วนฟังก์ชัน `beforeEach()` นั้น จะเป็นฟังก์ชันที่ถูกเรียกก่อนที่จะเทสผ่านฟังก์ชัน `it()` ในกรณีนี้เราต้องการ store อันใหม่เอี่ยมก่อนจะทำการรันเทสในแต่ละอัน เราจึงประกาศตัวแปร `store` ขึ้นมาอยู่ด้านบนสุด (หลัง `should()`) เพราะเราต้องใช้ store ในทุกการเทสของไฟล์นี้
 
-Our `makeBark` test is very explicit, and the description provided as a string in `it()` makes it even clearer: we test that `hasBarked` go from `false` to `true` after calling `makeBark`.
+การเทสฟังก์ชัน `makeBark` ของเราจะชัดเจนที่สุด และเราสามารถอธิบายได้ว่าเทสเคสนี้ต้องการทดสอบอะไรโดยใส่เป็น string ภายในฟังก์ชัน `it()` เพื่อบอกว่าเทสเคสนี้ ตัวแปร `hasBarked` จะต้องเปลี่ยนจาก `false` เป็น `true` หลังจากมีการเรียก `makeBark`
 
-Alright, let's run this test!
+เอาหล่ะ เมื่อเราเขียนเทสเสร็จแล้ว เรามารันเทสกันเถอะ
 
-- In `gulpfile.babel.js`, create the following `test` task, which relies on the `gulp-mocha` plugin:
+- ใน `gulpfile.babel.js` สร้าง task `test` ดังต่อไปนี้ โดยมีการใช้ plugin `gulp-mocha` ด้วย
 
 ```javascript
 import mocha from 'gulp-mocha';
@@ -71,27 +71,31 @@ gulp.task('test', ['build'], () =>
 );
 ```
 
-- Run `yarn add --dev gulp-mocha` of course.
+- สั่ง `yarn add --dev gulp-mocha`
 
-As you can see, tests are run on transpiled code in `lib`, which is why `build` is a prerequisite task of `test`. `build` also has a prerequisite, `lint`, and finally, we are making `test` a prerequisite of `main`, which gives us the following task cascade for the `default` task: `lint` > `build` > `test` > `main`.
+โดยทั้งนี้ไฟล์ test ที่เราจะนำมารันนั่นจะต้องถูก compile เสร็จแล้วอยู่ในโฟลเดอร์ `lib` นี่คือเหตุผลว่าทำไม task `build` จึงต้องถูกทำก่อนเมื่อสั่งงาน task `test` โดย task `build` เองก็ต้องสั่งงาน task `lint` ก่อนเช่นกัน และท้ายที่สุด เราจะให้ task `test` ถูกทำงานก่อน task `main` ด้วย ซึ่งทำให้ภาพรวมสุดท้ายสำหรับ `default` task จะเป็นดังนี้
 
-- Change the prerequisite of `main` to `test`:
+`lint` > `build` > `test` > `main`
+
+นั่นคือก่อนที่จะสั่งรันแอพเราได้ จะต้องผ่านการ linting ก่อน แล้วทำการ compile โค้ด ES6 เป็น ES5 จากนั้นก็จะทำการรัน test เมื่อผ่านแล้วเราจะสามารถสั่งรันแอพได้
+
+- เปลี่ยน prerequisite task (task ที่จะถูกทำก่อน) ของ `main` ให้เป็น `test` ดังนี้
 
 ```javascript
 gulp.task('main', ['test'], () => /* ... */ );
 ```
 
-- In `package.json`, replace the current `"test"` script by: `"test": "gulp test"`. This way you can use `yarn test` to just run your tests. `test` is also the standard script that will be automatically called by tools like continuous integration services for instance, so you should always bind your test task to it. `yarn start` will run the tests before building the Webpack client bundle as well, so it will only build it if all tests pass.
+- ในไฟล์ `package.json` แทน script `"test"` เดิมด้วย `"test": "gulp test"` เมื่อทำอย่างนี้แล้ว เราสามารถสั่ง `yarn test` เพื่อทำการรัน test ที่เราเขียนไว้ได้ นอกจากนี้ `test` ยังเป็น standard script ที่จะถูกรันโดยอัตโนมัติ เมื่อใช้เครื่องมืออย่างเช่น CI (Continuous Integration) ดังนั้นทำให้เราควรผูก script การ test ไว้กับ script `test` ตลอด เพราะเวลาเราสั่ง `yarn start` เองก็จะมีการรัน test ก่อนที่จะ build โดยใช้ Webpack เหมือนกัน ดังนั้นมันจะถูก build ก็ต่อเมื่อ test ผ่านแล้วเท่านั้น
 
-- Run `yarn test` or `yarn start`, and it should print the result for our test, hopefully green.
+- สั่ง `yarn test` หรือ `yarn start` จะเห็นผลของการ test (คาดหวังว่าจะเจอแต่สีเขียวคือผ่านทั้งหมดนะ)
 
 ## Sinon
 
-In some cases, we want to be able to *fake* things in a unit test. For instance, let's say we have a function, `deleteEverything`, which contains a call to `deleteDatabases()`. Running `deleteDatabases()` causes a lot of side-effects, which we absolutely don't want to happen when running our test suite.
+ในบางกรณี เราต้องการที่จะ *fake* บางสิ่งอย่างใน unit test ตัวอย่างเช่น สมมติเรามีฟังก์ชัน `deleteEverything` ที่จะเรียกใช้ฟังก์ชัน `deleteDatabases()` ซึ่งการสั่ง `deleteDatabases()` จะก่อให้เกิด side-effect จำนวนมาก (เช่น เผลอไปลบ Database จริงๆ ที่มี) ซึ่งเป็นสิ่งเราไม่ต้องการให้เกิดขึ้นตอนที่เราทำเทสแน่นอน
 
-[Sinon](http://sinonjs.org/) is a testing library that offers **Stubs** (and a lot of other things), which allow us to neutralize `deleteDatabases` and simply monitor it without actually calling it. This way we can test if it got called, or which parameters it got called with for instance. This is typically very useful to fake or avoid AJAX calls - which can cause side-effects on the back-end.
+[Sinon](http://sinonjs.org/) เป็น testing library ที่มีสิ่งที่เรียกว่า **Stubs** (และอื่นๆ อีกมากมาย) ที่จะช่วยให้ฟังก์ชัน `deleteDatabases` นั้นถูก "neutralize" (ลบล้างการทำงาน) ไปก่อน และ monitor ขึ้นมาดูการทำงานของมันแทน ทำให้เราสามารถเทสสิ่งที่จะถูกเรียกมา รวมถึงพารามิเตอร์ที่ใช้ได้ด้วย ทำให้ Sinon นั้นมีประโยชน์กับการ fake หรือ หลีกเลี่ยงการทำ AJAX calls ตรงๆ ซึ่งอาจก่อให้เกิด side-effects กับ back-end ได้
 
-In the context of our app, we are going to add a `barkInConsole` method to our `Dog` class in `src/shared/dog.js`:
+เพื่อให้เห็นภาพมากขึ้น ในแอพของเรา เราจะเพิ่มฟังก์ชัน `barkInConsole` เข้าไปในคลาส `Dog` ของเราที่อยู่ใน `src/shared/dog.js` โดยมีโค้ดตามนี้
 
 ```javascript
 class Dog {
@@ -113,9 +117,11 @@ class Dog {
 export default Dog;
 ```
 
-If we run `barkInConsole` in a unit test, `console.log()` will print things in the terminal. We are going to consider this to be an undesired side-effect in the context of our unit tests. We are interested in knowing if `console.log()` *would have normally been called* though, and we want to test what parameters it *would have been called with*.
+เมื่อเรารัน `barkInConsole` ใน unit test `console.log()` จะทำการแสดงผลข้อความขึ้นมาใน terminal ซึ่งเราจะถือว่าการทำแบบนี้จะก่อให้เกิด side-effect ที่เราไม่ต้องการในแง่มุมของการทำ unit test เราสนใจว่า `console.log()` *จะถูกเรียกใช้จริงๆ แน่นอน* หลังจากสั่ง `barkInConsole` และเรายัง้องการเทสว่าพารามิเตอร์ใดจะเป็นคนที่ *โดนใส่มาตอนที่มีการเรียกใช้ฟังก์ชันดังกล่าว*
 
-- Create a new `src/test/shared/dog-test.js` file, and add write the following:
+ทำให้ในเคสนี้ เราต้อง expect ว่า (1) `console.log()` จะถูกเรียก และ (2) พารามิเตอร์ที่อยู่ใน `console.log()` จะต้องตรงกับที่ `this.bark()` return ออกมาให้ ซึ่งทำได้ดังนี้
+
+- สร้างไฟล์ใหม่ `src/test/shared/dog-test.js` ขึ้นมา และเขียนโค้ดตามนี้
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies, no-console */
@@ -143,16 +149,16 @@ describe('Shared', () => {
 });
 ```
 
-Here, we are using *stubs* from Sinon, and a Chai plugin to be able to use Chai assertions on Sinon stubs and such.
+ในจุดนี้เรามีการใช้ *stubs* ของ Sinon และใช้ plugin ของ Chai ในการทำ assertion กับ Sinon stubs และอื่นๆ ด้วย
 
-- Run `yarn add --dev sinon sinon-chai` to install these libraries.
+- สั่งรัน `yarn add --dev sinon sinon-chai` เพื่อทำการติดตั้ง package ดังกล่าว
 
-So what is new here? Well first of all, we call `chai.use(sinonChai)` to activate the Chai plugin. Then, all the magic happens in the `it()` statement: `stub(console, 'log')` is going to neutralize `console.log` and monitor it. When `new Dog('Test Toby').barkInConsole()` is executed, a `console.log` is normally supposed to happen. We test this call to `console.log` with `console.log.should.have.been.calledWith()`, and finally, we `restore` the neutralized `console.log` to make it work normally again.
+โอเค ทีนี้มาดูก่อนว่ามีอะไรแปลกใหม่บ้าง แรกสุดเลย เรามีการใช้คำสั่ง `chai.use(sinonChai)` เพื่อเรียกใช้งาน plugin ของ Chai ขึ้นมา ถัดจากนั้น ความวิเศษของ Sinon ก็เริ่มโผล่มาใน `it()` เช่น `stub(console, `log`)` นั้นจะทำการ "neutralize" (ลบล้างการทำงานจริงๆ) `console.log` ไปก่อน และทำการ monitor มัน เมื่อคำสั่ง `new Dog('Test Toby').barkInConsole()` ถูกเรียก คำสั่ง `console.log` นั้นจะถูกรันขึ้นมาเป็นเรื่องปกติ เราเทสการเรียกใช้งาน `console.log` ด้วย `console.log.should.have.been.calledWith()` (ถูกเรียกจริงหรือไม่) และท้ายสุด เราทำการ `restore` การถูก neutralized ของ `console.log` ออกไป และให้มันกลับมาทำงานเหมือนเดิมตามปกติ
 
-**Important note**: Stubbing `console.log` is not recommended, because if the test fails, `console.log.restore()` is never called, and therefore `console.log` will remain broken for the rest of the command you executed in your terminal! It won't even print the error message that caused the test to fail, so it leaves you with very little information about what happened. That can be quite confusing. It is a good example to illustrate stubs in this simple app though.
+**สำคัญต้องอ่าน**: การทำ Stub กับ `console.log` ไม่เป็นที่แนะนำ เพราะหาก test fail ขึ้นมา `console.log.restore()` จะไม่ถูกเรียกเลย ทำให้ `console.log` จะพังไปตลอด จนเราจะไม่เห็น error message รวมถึงการแสดงผลธรรมดาใดๆ ได้อีกเลย ดังนั้นผม(ผู้เขียน) จึงขอให้เป็นการแนะนำขั้นต้นไว้ก่อนว่าอาจจะเกิดเหตุการณ์นี้ขึ้นได้ ซึ่งท่านอาจจะงงๆ ว่าทำไมถึงยกตัวอย่างนี้มา แต่ตัวอย่างนี้เป็นตัวอย่างที่ดีที่สุดแล้วสำหรับแอพที่เรียบง่ายที่เราใช้
 
-If everything went well in this chapter, you should have 2 passing tests.
+ถ้าทุกอย่างเป็นไปตามที่ปกติในบทนี้ คุณจะได้ 2 passing test ในขั้นสุดท้าย
 
-Next section: [12 - Type Checking with Flow](/tutorial/12-flow)
+บทถัดไป [12 - Type Checking with Flow](/tutorial/12-flow)
 
-Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/10-immutable-redux-improvements) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)
