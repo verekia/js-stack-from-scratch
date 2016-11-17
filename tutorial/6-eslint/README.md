@@ -1,12 +1,12 @@
-# 6 - ESLint
+# 6 - การใช้ ESLint
 
-We're going to lint our code to catch potential issues. ESLint is the linter of choice for ES6 code. Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
+ในบทนี้เราจะสอนการ 'lint' (ตรวจสอบ) โค้ดของเราเพื่อหา issues ต่างๆ ที่อาจเกิดขึ้นได้ ซึ่ง ESLint เป็น linter ตัวหนึ่งสำหรับการทำ lint กับโค้ดของ ES6 โดยที่เราสามารถกำหนดกฎ (rules) ต่างๆ ที่เราต้องการให้โค้ดเราจะเป็นได้ ซึ่งเราจะใช้กฎที่สร้างโดย Airbnb โดยที่กฎของ Airbnb นั้นมีการใช้งาน plugin บางตัวด้วย ทำให้เราต้องติดตั้ง plugin เหล่านั่นเพื่อที่จะใช้กฎดังกล่าวที่ Airbnb เขียนเอาไว้ โดยทำตามนี้
 
-- Run `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y@2.2.3 eslint-plugin-react`
+- สั่ง `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y@2.2.3 eslint-plugin-react`
 
-As you can see, you can install several packages in one command. It will add all of these to your `package.json`, as usual.
+ดังที่เห็น เราสามารถติดตั้ง package หลายๆ ตัวได้ด้วยคำสั่งเดียว ซึ่ง package เหล่านี้ก็จะถูกเพิ่มไปใน `package.json` โดยอัตโนมัติ
 
-In `package.json`, add an `eslintConfig` field like so:
+ใน `package.json` เพิ่ม field `eslintConfig` หน้าตาตามนี้
 
 ```json
 "eslintConfig": {
@@ -17,15 +17,15 @@ In `package.json`, add an `eslintConfig` field like so:
 },
 ```
 
-The `plugins` part is to tell ESLint that we use the ES6 import syntax.
+ส่วนของ `plugins` จะเป็นจุดที่บอก ESLint ว่าเราใช้ import syntax ของ ES6
 
-**Note**: An `.eslintrc.js`, `.eslintrc.json`, or `.eslintrc.yaml` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
+**หมายเหตุ**: ไฟล์ `.eslintrc.js`, `.eslintrc.json`, หรือ `.eslintrc.yaml` ที่อยู่ใน root ของโปรเจคนั้นใช้แทน `eslintConfig` ที่อยู่ใน `package.json` เหมือนกัน คล้ายๆ กับ configuration ของ Babel เราพยายามจะไม่ให้ root ของโปรเจคมีไฟล์เยอะเกินไป แต่ถ้าหาก ESLint config คุณเริ่มใหญ่ขึ้นเรื่อยๆ ก็ควรจะเขียนไฟล์แยกออกมา
 
-We'll create a Gulp task that runs ESLint for us. So we'll install the ESLint Gulp plugin as well:
+เราจะสร้าง Gulp task เพื่อสั่งรัน ESLint ให้กับเรา ดังนั้นเราต้องติดตั้ง plugin ให้กับ Gulp ด้วยเช่นเดียวกัน
 
-- Run `yarn add --dev gulp-eslint`
+- สั่ง `yarn add --dev gulp-eslint`
 
-Add the following task to your `gulpfile.babel.js`:
+เพิ่ม task เหล่านี้ลงไปในไฟล์ `gulpfile.babel.js`:
 
 ```javascript
 import eslint from 'gulp-eslint';
@@ -49,9 +49,9 @@ gulp.task('lint', () => {
 });
 ```
 
-Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
+เราบอกให้ task นี้ของ Gulp ให้ทำการ include `gulpfile.babel.js` และไฟล์ JS ที่อยู่ในโฟลเดอร์ `src` ทั้งหมด เป็น source ต้นทางของ task (นั่นคือเราจะทำการ linting `gulpfile.babel.js` ด้วย)
 
-Modify your `build` Gulp task by making the `lint` task a prerequisite to it, like so:
+แก้ไข `build` Gulp task โดยให้ task `lint` ทำงานก่อนที่จะทำ task `build` และ `clean`
 
 ```javascript
 gulp.task('build', ['lint', 'clean'], () => {
@@ -59,17 +59,19 @@ gulp.task('build', ['lint', 'clean'], () => {
 });
 ```
 
-- Run `yarn start`, and you should see a bunch of linting errors in this Gulpfile, and a warning for using `console.log()` in `index.js`.
+- สั่ง `yarn start` เราจะพบ linting error จำนวนมากภายใน Gulpfile และ warning การใช้ `console.log()` ใน `index.js`
 
-One type of issue you will see is `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)`. That's actually a false negative. ESLint cannot know which JS files are part of the build only, and which ones aren't, so we'll need to help it a little bit using comments in code. In `gulpfile.babel.js`, at the very top, add:
+หนึ่งใน issue ที่คุณพบคือ `'gulp' should be listed in the project's dependencies, not devDependencies (import/no-extraneous-dependencies)` ซึ่งจริงๆ แล้ว error นี้เป็น False Negative ที่ฟ้อง error ผิด ทั้งๆ ที่จริงๆ แล้วมันไม่ควร error แบบนี้ เพราะ ESLint ไม่สามารถรู้ได้ว่าไฟล์ JS ไฟล์ไหนนั้นใช้สำหรับการ build เท่านั้น และไฟล์ไหนไม่ใช้ในการ build ซึ่ง gulp นั้นจัดว่าเป็น devDependencies อยู่แล้ว เพราะใช้เฉพาะตอน build เท่านั้น
+
+ดังนั้น เราต้องการความช่วยเหลือเล็กๆ น้อยๆ โดยทำการ comment บางอย่างลงไปในโค้ด ใน `gulpfile.babel.js` ให้เพิ่ม comment นี้ไปที่บรรทัดบนสุดว่า
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies */
 ```
 
-This way, ESLint won't apply the rule `import/no-extraneous-dependencies` in this file.
+ทำให้ ESLint จะไม่นำกฎ `import/no-extraneous-dependencies` มาใช้ตรวจสอบในไฟล์นี้
 
-Now we are left with the issue `Unexpected block statement surrounding arrow body (arrow-body-style)`. That's a great one. ESLint is telling us that there is a better way to write the following code:
+ตอนนี้เราจะเหลือแค่ issue `Unexpected block statement surrounding arrow body (arrow-body-style)` ซึ่งอันนี้เป็น issue ที่แจ้งมาดี เพราะ ESLint บอกว่ามีวิธีที่ดีกว่านี้ในการเขียนโค้ด
 
 ```javascript
 () => {
@@ -77,15 +79,15 @@ Now we are left with the issue `Unexpected block statement surrounding arrow bod
 }
 ```
 
-It should be rewritten into:
+ให้เป็นแบบนี้แทน
 
 ```javascript
 () => 1
 ```
 
-Because when a function only contains a return statement, you can omit the curly braces, return statement, and semicolon in ES6.
+เพราะเมื่อ function มีหน้าที่แค่ return อย่างเดียว เราไม่จำเป็นต้องมี { }, คำสั่ง return และ semicolon ใน ES6 ก็ได้
 
-So let's update the Gulp file accordingly:
+ดังนั้น เราก็อัพเดตโค้ดใน Gulp file ให้เป็นแบบนี้แทน
 
 ```javascript
 gulp.task('lint', () =>
@@ -107,12 +109,12 @@ gulp.task('build', ['lint', 'clean'], () =>
 );
 ```
 
-The last issue left is about `console.log()`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
+และ issue สุดท้ายที่หลงเหลือนั้นจะเกี่ยวกับ `console.log()` ซึ่งหากเราต้องการให้เราใช้ `console.log()` ใน `index.js` ได้ แทนที่จะเตือนเราในตัวอย่างนี้ คุณคงก็คงจะเดาได้ว่าต้องทำอะไร เราก็เพิ่ม `/* eslint-disable no-console */` ไว้ที่ด้านบนสุดของไฟล์ `index.js` สิ เหมือนกับที่ทำใน Gulpfile ของเรา
 
-- Run `yarn start` and we are now all clear again.
+- สั่ง `yarn start` แล้วเราจะพบการแจ้งเตือนจาก ESLint อีกแล้ว!
 
-**Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
+**หมายเหตุ**: ในบทนี้เราใช้ ESLint ภายใน console ซึ่งดีมากเพื่อหา error ตอนที่เราทำการ build หรือก่อนที่เราจะ push โค้ดขึ้นไป แต่ก็จะเป็นการดีกว่านี้มากถ้าคุณจะใช้ ESLint ใน IDE ของคุณได้ แต่**ไม่แนะนำ**ให้ใช้ linting ตัวปกติของ IDE ในการ linting ES6 ให้ลองตั้งค่า IDE ตัวที่คุณใช้ เพื่อให้ใช้ตัว linting ที่อยู่ในโฟลเดอร์ `node_modules` เพื่อให้คุณสามารถใช้การตั้งค่าของโปรเจคที่คนอื่นๆ เขียนไว้ให้ รวมถึงใช้ preset ของ Airbnb ได้อีกด้วย หากไม่ทำแล้วคุณก็จะได้ตัว linting แบบปกติของ ES6 ไปใช้แทน
 
-Next section: [7 - Client app with Webpack](/tutorial/7-client-webpack)
+บทถัดไป [7 - พัฒนาแอพฝั่ง Client โดยใช้ Webpack](/tutorial/7-client-webpack)
 
-Back to the [previous section](/tutorial/5-es6-modules-syntax) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/5-es6-modules-syntax) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)
