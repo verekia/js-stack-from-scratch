@@ -83,7 +83,7 @@ One type of issue you will see is `'gulp' should be listed in the project's depe
 
 This way, ESLint won't apply the rule `import/no-extraneous-dependencies` in this file.
 
-Now we are left with the issue `Unexpected block statement surrounding arrow body (arrow-body-style)`. That's a great one. ESLint is telling us that there is a better way to write the following code:
+Second issue we'll address is `Unexpected block statement surrounding arrow body (arrow-body-style)`. That's a great one. ESLint is telling us that there is a better way to write the following code:
 
 ```javascript
 () => {
@@ -121,7 +121,30 @@ gulp.task('build', ['lint', 'clean'], () =>
 );
 ```
 
-The last issue left is about `console.log()`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
+Next issue is `Missing trailing comma (comma-dangle)`. Javascript language allows for trailing commas in array or object declarations, or in arrow functions return statements. You might have noticed that we already added trailing commas in some places. We'll add them in all the remaining places as it's recommended for [better diffs and easier code manipulation](https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8#.j1t5uirvj)
+
+```javascript
+gulp.task('lint', () =>
+  gulp.src([
+    paths.allSrcJs,
+    paths.gulpfile,
+  ])
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError()),
+);
+
+gulp.task('clean', // [...]
+
+gulp.task('build', ['lint', 'clean'], () =>
+  gulp.src(paths.allSrcJs)
+    .pipe(babel())
+    .pipe(gulp.dest(paths.libDir)),
+);
+```
+
+The last issue left is about `console.log()`. Let's say that we want this `console.log()` to be valid instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file. For `gulpfile.babel.js` we can merge the two eslint-disable statements into a single one:
+`/* eslint-disable import/no-extraneous-dependencies, no-console */`
 
 - Run `yarn start` and we are now all clear again.
 
