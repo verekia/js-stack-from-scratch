@@ -28,6 +28,7 @@ We'll create a Gulp task that runs ESLint for us. So we'll install the ESLint Gu
 Add the following task to your `gulpfile.babel.js`:
 
 ```javascript
+// [...]
 import eslint from 'gulp-eslint';
 
 const paths = {
@@ -35,8 +36,6 @@ const paths = {
   gulpFile: 'gulpfile.babel.js',
   libDir: 'lib',
 };
-
-// [...]
 
 gulp.task('lint', () => {
   return gulp.src([
@@ -47,6 +46,10 @@ gulp.task('lint', () => {
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 });
+
+// [...]
+
+
 ```
 
 Here we tell Gulp that for this task, we want to include `gulpfile.babel.js`, and the JS files located under `src`.
@@ -56,6 +59,17 @@ Modify your `build` Gulp task by making the `lint` task a prerequisite to it, li
 ```javascript
 gulp.task('build', ['lint', 'clean'], () => {
   // ...
+});
+```
+
+Finally, update your watch task to also watch for changes in the Gulpfile:
+
+```javascript
+gulp.task('watch', () => {
+  gulp.watch([
+    paths.allSrcJs,
+    paths.gulpFile
+  ], ['main']);
 });
 ```
 

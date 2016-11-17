@@ -38,7 +38,10 @@ gulp.task('main', ['build'], (callback) => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(paths.allSrcJs, ['main']);
+  gulp.watch([
+    paths.allSrcJs,
+    paths.gulpfile
+  ], ['main']);
 });
 
 gulp.task('default', ['watch', 'main']);
