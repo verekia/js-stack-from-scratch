@@ -1,8 +1,8 @@
-# 7 - Client App with Webpack
+# 7 - พัฒนาแอพฝั่ง Client โดยใช้ Webpack
 
-## Structure of our app
+## จัดโครงสร้างไฟล์ให้กับแอพของเรา
 
-- Create a `dist` folder at the root of your project, and add the following `index.html` file to it:
+- สร้างโฟลเดอร์ชื่อ `dist` ที่ root ของโปรเจค และเพิ่มไฟล์ `index.html` ลงไปดังนี้
 
 ```html
 <!doctype html>
@@ -16,11 +16,11 @@
 </html>
 ```
 
-In your `src` folder, create the following subfolders: `server`, `shared`, `client`, and move your current `index.js` into `server`, and `dog.js` into `shared`. Create `app.js` in `client`.
+ในโฟลเดอร์ `src` ให้สร้างโฟลเดอร์ย่อย `server`, `shared`, `client` และทำการย้ายไฟล์ `index.js` ไปยัง `server` และ `dog.js` ไปยัง `shared` แล้วให้ทำการสร้างไฟล์ `app.js` ไปไว้ในโฟลเดอร์ `client`
 
-We are not going to do any Node back-end yet, but this separation will help you see more clearly where things belong. You'll need to change the `import Dog from './dog';` in `server/index.js` to `import Dog from '../shared/dog';` though, or ESLint will detect errors for unresolved modules.
+ณ ตอนนี้เราจะยังไม่ทำอะไรกับ Node back-end แต่การแบ่งโฟลเดอร์แบบนี้จะช่วยให้เราเห็นภาพว่าของแต่ละอย่างอยู่ที่ใด ดังนั้นคุณต้องแก้โค้ด `import Dog from './dog'` ใน `server/index.js` ด้วย `import Dog from '../shared/dog';` แทน ไม่เช่นนั้นแล้ว ESLint จะตรวจเจอ error ที่แจ้งว่า unresolved modules
 
-Write this in `client/app.js`:
+เขียนโค้ดดังต่อไปนี้ใน `client/app.js`
 
 ```javascript
 import Dog from '../shared/dog';
@@ -30,7 +30,7 @@ const browserToby = new Dog('Browser Toby');
 document.querySelector('.app').innerText = browserToby.bark();
 ```
 
-Add the following to your `package.json`, under `eslintConfig`:
+เพิ่ม JSON field เหล่านี้ไปใน `package.json` ข้างใน field `eslintConfig`
 
 ```json
 "env": {
@@ -38,29 +38,29 @@ Add the following to your `package.json`, under `eslintConfig`:
 }
 ```
 
-This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
+เพื่อให้เราใช้ตัวแปร เช่น `window` หรือ `document` ที่ใช้งานบน web browser ได้ทันที โดยไม่ให้ ESLint บ่นกับเราเรื่องของตัวแปรที่ไม่โดนประกาศไว้ (undeclared variables)
 
-If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client code.
+ถ้าคุณต้องการใช้ฟีเจอร์ใหม่ๆ ของ ES6 ในฝั่ง client เช่น `Promise` คุณต้องเพิ่ม [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) เข้าไปในโค้ดของฝั่ง client ด้วย
 
-- Run `yarn add babel-polyfill`
+- สั่ง `yarn add babel-polyfill`
 
-And before anything else in `app.js`, add this import:
+และด้านบนสุดของ `app.js` ก่อนทุกๆ อย่าง ให้เพิ่ม import ด้านล่างลงไป
 
 ```javascript
 import 'babel-polyfill';
 ```
 
-Including the polyfill adds some weight to your bundle, so add it only if you use the features it covers. In order to provide some solid boilerplate code with this tutorial, I am including it and it will appear in code samples in the next chapters.
+ซึ่งการเพิ่ม polyfill นั้นจะเป็นการให้ bundle ที่คุณได้นั้นมีขนาดใหญ่ขึ้น ดังนั้นควรจะเพิ่ม polyfill เฉพาะฟีเจอร์ที่คุณต้องการใช้เท่านั้น ซึ่งในตัวอย่างบทถัดๆ ไปจะแสดงให้เห็นในเรื่องของการเพิ่ม polyfill เฉพาะที่เราต้องการ
 
 ## Webpack
 
-In a Node environment, you can freely `import` different files and Node will resolve these files using your filesystem. In a browser, there is no filesystem, and therefore your `import`s point to nowhere. In order for our entry point file `app.js` to retrieve the tree of imports it needs, we are going to "bundle" that entire tree of dependencies into one file. Webpack is a tool that does this.
+ใน Node environment ทั้งหลายทั้งปวงนั้น คุณสามารถสั่ง `import` หลายๆ ไฟล์ได้ และ Node จะเป็นคนจัดหา file เหล่านั้นใน filesystem ให้เอง แต่ว่าใน web browser นั้นไม่มีระบบ filesystem ให้ใช้ ทำให้การ `import` นั้นดูเหมือนเป็นการ import ไปหาความว่างเปล่า ไม่รู้จะไปเอา module จากไหนมา ดังนั้นในการที่ไฟล์เริ่มต้นของเรา (entry point file) `app.js` ให้รู้ว่าต้องไป import อะไรมาใช้บ้าง เราจะทำการ "bundle" dependencies ทั้งหมดที่เราต้องการใช้ รวมมาเป็นไฟล์เดียว ซึ่ง Webpack เป็นเครื่องมือที่มีหน้าที่ในการทำเรื่องดังกล่าว
 
-Webpack uses a config file, just like Gulp, called `webpack.config.js`. It is possible to use ES6 imports and exports in it, in the exact same way that we made Gulp rely on Babel to do so: by naming this file `webpack.config.babel.js`.
+Webpack จะมีการใช้ config file เหมือนๆ กับ Gulp แต่มีชื่อเรียกว่า `webpack.config.js` ซึ่งแน่นอนว่าเราสามารถใช้ ES6 imports กับ exports ได้ แบบเดียวกับที่ Gulp ขอให้ Babel ช่วยจัดการให้หน่อย โดยการตั้งชื่อไฟล์เป็น `webpack.config.babel.js`
 
-- Create an empty `webpack.config.babel.js` file
+- สร้างไฟล์เปล่า `webpack.config.babel.js`
 
-- While you're at it, add `webpack.config.babel.js` to your Gulp `lint` task, and a few more `paths` constants:
+- เพิ่ม `webpack.config.babel.js` ไปใน task 'lint' ของ Gulp โดยการเพิ่มค่าเข้าไปใน constant `paths` ดังนี้
 
 ```javascript
 const paths = {
@@ -85,11 +85,11 @@ gulp.task('lint', () =>
 );
 ```
 
-We need to teach Webpack how to process ES6 files via Babel (just like we taught Gulp how to process ES6 files with `gulp-babel`). In Webpack, when you need to process files that are not plain old JavaScript, you use *loaders*. So let's install the Babel loader for Webpack:
+เราต้องสอนให้ Webpack นั้นทำการ process ES6 files โดยใช้ Babel (คล้ายกับการสอนให้ Gulp ทำการ process ES6 files โดยใช้ `gulp-babel`) ใน Webpack เมื่อเราต้องการ process ไฟล์ที่ไม่ใช่ JavaScript ธรรมดาๆ นั้น เราจะใช้สิ่งที่เรียกว่า *loaders* ในการ process ไฟล์ดังกล่าว ดังนั้น เรามาติดตั้ง Babel loader ให้กับ Webpack โดยให้
 
-- Run `yarn add --dev babel-loader`
+- สั่ง `yarn add --dev babel-loader`
 
-- Write the following to your `webpack.config.babel.js` file:
+- เขียนโค้ดดังต่อไปนี้ลงไปใน `webpack.config.babel.js`
 
 ```javascript
 export default {
@@ -112,38 +112,44 @@ export default {
 };
 ```
 
-Let's analyze this a bit:
+เรามาดูรายละเอียดของไฟล์นี้กัน
 
-We need this file to `export` stuff for Webpack to read. `output.filename` is the name of the bundle we want to generate. `devtool: 'source-map'` will enable source maps for a better debugging experience in your browser. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we will use both `.js` files and `.jsx` files (for React) in the next chapters, we have the following regex: `/\.jsx?$/`. The `node_modules` folder is excluded because there is no transpilation to do there. This way, when your code `import`s packages located in `node_modules`, Babel doesn't bother processing those files, which reduces build time. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less paths like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
+เราต้องการให้ไฟล์นี้ถูก `export` เพื่อให้ Webpack อ่าน โดยในส่วนของ `output.filename` นั้นจะบอกชื่อไฟล์ bundle ที่เราต้องการ
 
-Okay so now we have Webpack set up, but we still need a way to *run* it.
+`devtool: 'source-map'` จะเป็นการเปิดใช้ source map เพื่อให้ทำการ debug บน web browser ได้ง่ายขึ้น
 
-## Integrating Webpack to Gulp
+ใน `module.loaders` เรามี `test` ที่เขียนเป็น JavaScript regex เพื่อใช้ในการ test ว่าไฟล์ไหนที่ต้องโดน process โดย `babel-loader` ซึ่งเราต้องการให้ทั้งไฟล์ที่มีนามสกุล `.js` และ `.jsx` (สำหรับ React ในบทถัดไป) ถูก process ด้วย `babel-loader` เราจึงใส่ regex `/\.jsx?$/` ลงไป และนอกจากนี้เราต้องการให้โฟลเดอร์ `node_modules` ไม่ถูก process ด้วย จึงใส่ไว้ใน field exclude เพื่อให้เมื่อมีการ `import` package ที่อยู่ในโฟลเดอร์ `node_modules` ตัว Babel จะไม่ยุ่งกับไฟล์เหล่านั้น เพื่อลดเวลาในการ build ลงไปอีก
 
-Webpack can do a lot of things. It can actually replace Gulp entirely if your project is mostly client-side. Gulp being a more general tool, it is better suited for things like linting, tests, and back-end tasks though. It is also simpler to understand for newcomers than a complex Webpack config. We have a pretty solid Gulp setup and workflow here, so integrating Webpack to our Gulp build is going to be easy peasy.
+ใน `resolve` จะเป็นการบอก Webpack ว่าไฟล์นามสกุลไหนบ้างที่จะสามารถ `import` เข้ามาในโค้ดได้ โดยใช้ path แบบไม่ต้องระบุนามสกุล เช่น `import Foo from './foo'` โดยที่ `foo` อาจจะเป็นได้ทั้ง `foo.js` หรือ `foo.jsx` ตามที่เราบอกใน resolve
 
-Let's create the Gulp task to run Webpack. Open your `gulpfile.babel.js`.
+โอเค ตอนนี้เราได้ set up Webpack แล้วเรียบร้อย แต่เรายังต้องหาวิธีที่จะ*สั่งให้ Webpack ทำงาน*
 
-We don't need the `main` task to execute `node lib/` anymore, since we will open `index.html` to run our app.
+## ใช้งาน Webpack คู่กับ Gulp
 
-- Remove `import { exec } from 'child_process'`.
+Webpack นั้นมีความสามารถสูงมาก สามารถทำอะไรได้เยอะแยะมากมาย จนเราอาจจะนำมันไปใช้แทน Gulp ก็ยังได้ สำหรับโปรเจคที่ทำบนฝั่ง Client เป็นหลัก แต่ Gulp นั้นเป็น tool ที่ทำงานทั่วๆ ไปได้ (เทียบกับ Webpack แล้ว Webpack จะเจาะจงสำหรับ Front-End มากกว่า) ซึ่งจะเป็นการที่ดีกว่าที่เราจะให้ Gulp เป็นคนทำ linting, รัน test หรือทำ Back-End tasks ทั้งหลายทั้งปวง และ Gulp ยังถือว่าเข้าใจง่ายกว่า Webpack config สำหรับมือใหม่ ดังนั้นการที่ให้ Webpack สามารถใช้งานผ่าน Gulp ได้จึงเป็นไอเดียที่ดี
 
-Similarly to Gulp plugins, the `webpack-stream` package lets us integrate Webpack into Gulp very easily.
+ดังนั้น เรามาสร้าง Gulp task เพื่อให้รัน Webpack กัน เปิดไฟล์ `gulpfile.babel.js` ขึ้นมา
 
-- Install the package with: `yarn add --dev webpack-stream`
+ตอนนี้เราไม่ต้องการให้ `main` task สั่งรัน `node lib/` อีกต่อไป เนื่องจากเราต้องการเปิด `index.html` ขึ้นมาเพื่อรันแอพแทน
 
-- Add the following `import`s:
+- ลบ `import { exec } from 'child_process'` ออก
+
+คล้ายๆ กับ plugin ของ Gulp package 'webpack-stream' จะช่วยให้เราใช้ Webpack ใน Gulp ได้ง่ายดายขึ้นมาก
+
+- ติดตั้ง package ด้วยคำสั่ง `yarn add --dev webpack-stream`
+
+- เพิ่ม `import`
 
 ```javascript
 import webpack from 'webpack-stream';
 import webpackConfig from './webpack.config.babel';
 ```
 
-The second line just grabs our config file.
+บรรทัดที่สอง จะเป็นการหยิบ config file ที่เราเขียนไว้เข้ามา
 
-Like I said earlier, in the next chapter we are going to use `.jsx` files (on the client, and even on the server later on), so let's set that up right now to have a bit of a head start.
+เหมือนที่ได้กล่าวไว้ข้างต้น ในบทถัดไปเราจะมีการใช้ไฟล์ `.jsx` (ในฝั่ง client รวมถึงในฝั่ง server ด้วยในอนาคต) ดังนั้น เราควรจะต้องตั้งค่าเผื่ออนาคตไว้ตั้งแต่ตอนนี้เลย ด้วยการทำตามนี้
 
-- Change the constants to the following:
+- เปลี่ยนตัวแปร constant ให้เป็นไปตามนี้
 
 ```javascript
 const paths = {
@@ -158,11 +164,11 @@ const paths = {
 };
 ```
 
-The `.js?(x)` is just a pattern to match `.js` or `.jsx` files.
+`.js?(x)` เป็น pattern ธรรมดาเพื่อใช้ match `.js` หรือ `.jsx` ไฟล์ได้
 
-We now have constants for the different parts of our application, and an entry point file.
+ดังนั้น ในตอนนี้เราจะมีตัวแปร constant เพื่อบอก path และชื่อไฟล์ต่างๆ ให้ใช้ภายในแอพของเราแล้ว
 
-- Modify the `main` task like so:
+- แก้ `main` task ให้เป็นดังนี้
 
 ```javascript
 gulp.task('main', ['lint', 'clean'], () =>
@@ -172,13 +178,13 @@ gulp.task('main', ['lint', 'clean'], () =>
 );
 ```
 
-**Note**: Our `build` task currently transpiles ES6 code to ES5 for every `.js` file located under `src`. Now that we've split our code into `server`, `shared`, and `client` code, we could make this task only compile `server` and `shared` (since Webpack takes care of `client`). However, in the Testing chapter, we are going to need Gulp to also compile the `client` code to test it outside of Webpack. So until you reach that chapter, there is a bit of useless duplicated build being done. I'm sure we can all agree that it's fine for now. We actually aren't even going to be using the `build` task and `lib` folder anymore until that chapter, since all we care about right now is the client bundle.
+**หมายเหตุ**: task `build` ของเรานั้นจะทำการแปลงโค้ด ES6 เป็น ES5 สำหรับทุกไฟล์ที่มีนามสกุล `.js` ภายในโฟลเดอร์ `src` ซึ่งในตอนนี้เราแบ่งโค้ดออกเป็นสามส่วนคือ `server`, `shared` และ `client` ทำให้เราต้องแก้ task เพื่อให้ compile เฉพาะไฟล์ใน `server` และ `shared` เท่านั้น (เพราะ Webpack จะจัดการเรื่องของ `client` ให้แล้ว) อย่างไรก็ตาม ในบทเรื่อง Testing เราจะให้ Gulp นั้น compile โค้ดจากฝั่ง `client` ที่เป็นตัวทำ testing ด้วย ซึ่ง Webpack จะไม่ยุ่งเกี่ยวกับโค้ดของการ testing ดังนั้นจนกว่าจะไปถึงบทถัดๆ ไป โค้ดในส่วนนี้เหมือนเป็นการเขียนอะไรที่ซ้ำซ้อนจนไม่มีความจำเป็น ผม(ผู้เขียน) ต้องการให้ทุกคนเข้าใจว่านี่ไม่ใช่เรื่องร้ายแรงมากสำหรับตอนนี้ โดยเฉพาะเราจะไม่มีการใช้ task `build` และโฟลเดอร์ `lib` อีกต่อไป จนกว่าจะถึงบทดังกล่าว ดังนั้นในตอนนี้สิ่งที่เราสนใจนั้นก็คือ client bundle เท่านั้น
 
-- Run `yarn start`, you should now see Webpack building your `client-bundle.js` file. Opening `index.html` in your browser should display "Wah wah, I am Browser Toby".
+- สั่ง `yarn start` เราจะเห็นว่า Webpack กำลัง build ไฟล์ `client-bundle.js` เมื่อเสร็จแล้วให้เปิดไฟล์ `index.html` ขึ้นมาใน web browser เราจะเห็นคำว่า "Wah wah, I am Browser Toby" ขึ้นมา
 
-One last thing: unlike our `lib` folder, the `dist/client-bundle.js` and `dist/client-bundle.js.map` files are not being cleaned up by our `clean` task before each build.
+อย่างสุดท้าย เราจะพบว่า ไฟล์ `dist/client-bundle.js` กับ `dist/client-bundle.js.map` จะไม่สามารถถูก clean ได้ด้วย task `clean` ที่เราเขียนไว้
 
-- Add `clientBundle: 'dist/client-bundle.js?(.map)'` to our `paths` configuration, and tweak the `clean` task like so:
+- เพิ่ม `clientBundle: 'dist/client-bundle.js?(.map)'` ใน `paths` ของเรา และแก้ไข `clean` task ให้เป็นแบบนี้ เพื่อให้เราทำการ clean ถูกโฟลเดอร์
 
 ```javascript
 gulp.task('clean', () => del([
@@ -187,8 +193,8 @@ gulp.task('clean', () => del([
 ]));
 ```
 
-- Add `/dist/client-bundle.js*` to your `.gitignore` file:
+- เพิ่ม `/dist/client-bundle.js*` เข้าไปในไฟล์ `.gitignore`
 
-Next section: [8 - React](/tutorial/8-react)
+บทถัดไป [8 - React](/tutorial/8-react)
 
-Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/6-eslint) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)
