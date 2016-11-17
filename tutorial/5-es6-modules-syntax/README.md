@@ -1,4 +1,4 @@
-# 5 - การใช้ ES6 syntax ในการสร้าง modules
+# บทที่ 5 - การใช้ ES6 syntax ในการสร้าง modules
 
 ในบทนี้เราจะแทน `const Dog = require('./dog')` จากบทที่แล้ว ด้วย `import Dog from './dog'` แทน ซึ่งเป็น syntax ใหม่สำหรับการจัดการ modules ของ ES6 (ซึ่งจะตรงข้ามกับ modules syntax ของ "CommonJS")
 
@@ -47,6 +47,6 @@ import { exec } from 'child_process';
 
 - สั่ง `yarn start` เราก็จะเห็นคำว่า "Wah wah, I am Toby" เหมือนเดิม
 
-บทถัดไป [6 - การใช้ ESLint](/tutorial/6-eslint)
+บทถัดไป [บทที่ 6 - การใช้ ESLint](/tutorial/6-eslint)
 
 กลับไปยัง[บทที่แล้ว](/tutorial/4-es6-syntax-class) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents).

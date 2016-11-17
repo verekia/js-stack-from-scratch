@@ -1,4 +1,4 @@
-# 4 - การใช้ ES6 syntax ในการเขียน Class
+# บทที่ 4 - การใช้ ES6 syntax ในการเขียน Class
 
 - สร้างไฟล์ใหม่ `src/dog.js` ที่มีโค้ด ES6 class ดังนี้
 
@@ -36,6 +36,6 @@ console.log(toby.bark());
 
 - ดูภายในโค้ดที่ถูก generate ภายในโฟลเดอร์ `lib` เพื่อดูโค้ดที่ถูก compile แล้วว่าหน้าตาเป็นอย่างไร (เช่น เราจะพบว่า มีการใช้ `var` แทนที่จะเป็น `const`)
 
-บทถัดไป [5 - การใช้ ES6 syntax ในการสร้าง modules](/tutorial/5-es6-modules-syntax)
+บทถัดไป [บทที่ 5 - การใช้ ES6 syntax ในการสร้าง modules](/tutorial/5-es6-modules-syntax)
 
 กลับไปยัง[บทที่แล้ว](/tutorial/3-es6-babel-gulp) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

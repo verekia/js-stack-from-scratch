@@ -1,4 +1,4 @@
-# 8 - React
+# บทที่ 8 - React
 
 ในบทนี้เราจะมาสร้างแอพเรา โดยใช้ React เป็น Front-End
 
@@ -53,6 +53,6 @@ clientEntryPoint: 'src/client/app.jsx',
 
 ตอนนี้ หลังจากสั่ง `yarn start` เมื่อเราเปิด `index.html` เราจะเห็น "The dog says: Wah wah, I am Browser Toby" ที่ถูก render ด้วย React
 
-บทถัดไป [9 - Redux](/tutorial/9-redux)
+บทถัดไป [บทที่ 9 - Redux](/tutorial/9-redux)
 
 กลับไปยัง[บทที่แล้ว](/tutorial/7-client-webpack) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

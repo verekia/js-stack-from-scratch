@@ -1,4 +1,4 @@
-# 9 - Redux
+# บทที่ 9 - Redux
 
 ในบทนี้ (ซึ่งจะมีความยากเยอะมาก) เราจะเพิ่ม [Redux](http://redux.js.org/) เข้ามาใช้ในแอพของเรา แล้วเราจะใช้มันคู่กับ React
 
@@ -156,6 +156,6 @@ export default connect(mapStateToProps)(Message);
 
 - ตอนนี้ลองสั่ง `yarn start` และเปิด `index.html` ขึ้นมา เราจะเห็นคำว่า "The dog did not bark" และมีปุ่มหนึ่งปุ่ม เมื่อคุณกดปุ่ม ข้อความควรจะเป็นคำว่า "The dog barked"
 
-บทถัดไป [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
+บทถัดไป [บทที่ 10 - Immutable JS และ Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
 กลับไปยัง[บทที่แล้ว](/tutorial/8-react) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

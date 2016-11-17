@@ -1,4 +1,4 @@
-# 10 - Immutable JS และ Redux Improvements
+# บทที่ 10 - Immutable JS และ Redux Improvements
 
 ## Immutable JS
 
@@ -99,6 +99,6 @@ export const makeBark = createAction(MAKE_BARK, () => true);
 
 - อย่าลืมที่จะสั่ง `yarn add redux-actions` เข้าไปด้วยก่อนแก้โค้ดนี้
 
-บทถัดไป [11 - การทำ Testing โดยใช้ Mocha, Chai และ Sinon](/tutorial/11-testing-mocha-chai-sinon)
+บทถัดไป [บทที่ 11 - การทำ Testing โดยใช้ Mocha, Chai และ Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
 กลับไปยัง[บทที่แล้ว](/tutorial/9-redux) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

@@ -1,4 +1,4 @@
-# 11 - การทำ Testing โดยใช้ Mocha, Chai และ Sinon
+# บทที่ 11 - การทำ Testing โดยใช้ Mocha, Chai และ Sinon
 
 ## Mocha และ Chai
 
@@ -159,6 +159,6 @@ describe('Shared', () => {
 
 ถ้าทุกอย่างเป็นไปตามที่ปกติในบทนี้ คุณจะได้ 2 passing test ในขั้นสุดท้าย
 
-บทถัดไป [12 - เช็ค Data Type ด้วย Flow](/tutorial/12-flow)
+บทถัดไป [บทที่ 12 - เช็ค Data Type ด้วย Flow](/tutorial/12-flow)
 
 กลับไปยัง[บทที่แล้ว](/tutorial/10-immutable-redux-improvements) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)
