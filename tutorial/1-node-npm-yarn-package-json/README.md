@@ -21,7 +21,6 @@ sudo apt-get install -y nodejs
 
 [Yarn](https://yarnpkg.com/) ก็เป็น package manager เหมือนกับ NPM แต่ว่าเร็วกว่า NPM, ใช้งานแบบ Offline ได้ รวมถึงสามารถค้นหา dependencies ต่างๆ [แบบคาดเดาได้มากขึ้น](https://yarnpkg.com/en/docs/yarn-lock) ตั้งแต่ที่ Yarn [release](https://code.facebook.com/posts/1840075619545360) ออกมาเมื่อตุลาคม 2016 นั้น ก็ได้รับการตอบรับอย่างดี รวมถึงมีการ fix bug ได้รวดเร็วมาก จนกลายเป็น package manager ตัวใหม่ที่เป็นทางเลือกนอกเหนือจากการใช้ NPM ซึ่งใน Tutorial ของเรานั้นจะใช้ Yarn ทั้งหมด แต่ถ้าคุณอยากใช้ NPM เดิมๆ ก็เพียงแค่ใช้ `npm install --save` กับ `npm install --dev` แทน `yarn add` กับ `yarn add --dev` ที่อยู่ใน Tutorial นี้ทั้งหมด
 
-
 - ติดตั้ง Yarn โดยทำตาม [instructions](https://yarnpkg.com/en/docs/install) ตามนี้ หรือจะสั่ง `npm install -g yarn` หรือ `sudo npm install -g yarn` ก็ได้ (ใช่แล้ว เราใช้ NPM เพื่อติดตั้ง Yarn มันก็คล้ายๆ กับใช้ Internet Explorer หรือ Safari เพื่อติดตั้ง Chrome นั้นแหละ!)
 
 - สร้าง folder ใหม่ขึ้นมา (ชื่ออะไรก็ได้) และ `cd` เข้าไป
