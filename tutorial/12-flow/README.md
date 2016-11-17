@@ -1,4 +1,4 @@
-# 12 - Flow
+# 12 - เช็ค Data Type ด้วย Flow
 
 [Flow](https://flowtype.org/) เป็นตัวทำ static type checker ที่จะทำการตรวจสอบหาประเภทของ data types ที่ไม่สอดคล้องกันในโค้ดได้ ซึ่งทำให้คุณสามารถเพิ่มการประกาศประเภทของข้อมูลเพิ่มเติมได้ด้วย ผ่าน annotations พิเศษของ Flow
 

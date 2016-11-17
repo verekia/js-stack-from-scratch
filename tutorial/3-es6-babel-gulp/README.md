@@ -95,4 +95,5 @@ Gulp นั้นมี API ที่ค่อนข้างจะเข้า�
 
 บทถัดไป [4 - การใช้ ES6 syntax ในการเขียน Class](/tutorial/4-es6-syntax-class)
 
-กลับไป[บทที่แล้ว](/tutorial/2-packages) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/2-packages) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)
+

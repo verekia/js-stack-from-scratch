@@ -34,7 +34,7 @@ Code ที่อยู่ใน Tutorial นี้ทำงานได้ท�
 
 ## สารบัญ
 
-[1 - Node, NPM, Yarn, and package.json](/tutorial/1-node-npm-yarn-package-json)
+[1 - Node, NPM, Yarn และ package.json](/tutorial/1-node-npm-yarn-package-json)
 
 [2 - ติดตั้งและใช้งาน package](/tutorial/2-packages)
 

@@ -38,4 +38,4 @@ console.log(toby.bark());
 
 บทถัดไป [5 - การใช้ ES6 syntax ในการสร้าง modules](/tutorial/5-es6-modules-syntax)
 
-กลับไป[บทที่แล้ว](/tutorial/3-es6-babel-gulp) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/3-es6-babel-gulp) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

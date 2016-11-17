@@ -1,4 +1,4 @@
-# 1 - Node, NPM, Yarn, and package.json
+# 1 - Node, NPM, Yarn และ package.json
 
 ในบทนี้เราจะพูดถึงการ set up Node, NPM, Yarn, และการใช้งาน `package.json` ในขั้นต้น
 
@@ -51,6 +51,6 @@ yarn-error.log
 
 **Note**: ถ้าดูในไฟล์ `package.json` ที่เรามีให้ในโปรเจคนี้ จะเห็น script `tutorial-test` ในทุกๆ บทเลย ซึ่ง script นี้จะช่วยให้ผม(ผู้เขียน) เทสว่าโค้ดในบทนี้ใช้งานได้ เมื่อทำการรัน `yarn && yarn start` ดังนั้น คุณสามารถลบ script นี้ทิ้งได้เลยในโปรเจคของคุณเอง
 
-บทต่อไป: [2 - ติดตั้งและใช้งาน package](/tutorial/2-packages)
+บทถัดไป [2 - ติดตั้งและใช้งาน package](/tutorial/2-packages)
 
-กลับไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents).
+กลับไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

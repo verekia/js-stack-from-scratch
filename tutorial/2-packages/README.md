@@ -25,6 +25,7 @@
 
 **Note**: ใน dependencies นั้นจะมีอยู่สองประเภท, `"dependencies"` กับ `"devDependencies"` `"devDependencies"` นั้นจะเป็น package ที่จำเป็นเฉพาะในตอน development เท่านั้น ไม่ได้นำไปใช้ตอน production (ปกติมักจะเป็นพวก package ที่เกี่ยวข้องกับการ build ต่างๆ, linters และอื่นๆ) ซึ่งสำหรับ `"devDependencies"` เราจะใช้ `yarn add --dev [package]` ในการเพิ่ม `"devDependencies"`
 
-บทต่อไป: [3 - ตั้งค่าเพื่อใช้งาน ES6 โดยใช้ Babel และ Gulp](/tutorial/3-es6-babel-gulp)
+บทถัดไป [3 - ตั้งค่าเพื่อใช้งาน ES6 โดยใช้ Babel และ Gulp](/tutorial/3-es6-babel-gulp)
 
-กลับไป[บทที่แล้ว](/tutorial/1-node-npm-yarn-package-json) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/1-node-npm-yarn-package-json) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)
+
