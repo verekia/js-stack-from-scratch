@@ -52,7 +52,7 @@ Code ที่อยู่ใน Tutorial นี้ทำงานได้ท�
 
 [9 - Redux](/tutorial/9-redux)
 
-[10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
+[10 - Immutable JS และ Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
 [11 - การทำ Testing โดยใช้ Mocha, Chai และ Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
