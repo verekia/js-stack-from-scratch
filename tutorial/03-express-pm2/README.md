@@ -4,6 +4,10 @@ So far we just played a bit with Node and ES6, that was not a web app. In this s
 
 // TODO: We simply tell Babel to compile an ES6 `src` directory into an ES5 `lib` directory with the `-d` flag.
 
+// Add `/lib/` to your `.gitignore`.
+
+// **Note**: It is possible to prefix task names with `pre` or `post` (like `prebuild`), to trigger tasks before and after others. We could have for instance called `clean` in a `prebuild` task instead of chaining the two in one command separated by `&&`. This approach makes command lines shorter but I find that it actually reduces readability to have to jump up and down to look for any existing `pre` and `post` tasks when reading through our tasks.
+
 ## Express
 
 > 💡 **[Express](https://)** (TODO) is a minimal TODO

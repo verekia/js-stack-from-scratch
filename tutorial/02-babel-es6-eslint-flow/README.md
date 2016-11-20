@@ -17,18 +17,9 @@ We're using a *template string* here, which is an ES6 feature that lets us injec
 
 - Run `yarn add --dev babel-cli` to install the CLI interface for Babel.
 
-Babel CLI comes with [two executables](https://babeljs.io/docs/usage/cli/), `babel`, which compiles ES6 files into new ES5 files, and `babel-node`, which you can use to replace your call to the `node` binary and execute ES6 files directly on the fly. `babel-node` is great for development but it is heavy and not meant for production. In this chapter we are going to use `babel-node` to set up the development environment, and in the next one we'll use `babel` to build ES5 files for production.
+Babel CLI comes with [two executables](https://babeljs.io/docs/usage/cli/): `babel`, which compiles ES6 files into new ES5 files, and `babel-node`, which you can use to replace your call to the `node` binary and execute ES6 files directly on the fly. `babel-node` is great for development but it is heavy and not meant for production. In this chapter we are going to use `babel-node` to set up the development environment, and in the next one we'll use `babel` to build ES5 files for production.
 
-- To run our program, we now need to execute `babel-node src` instead of `node .` (`index.js` is the default file Node looks for, which is why we can omit `index.js`).
-
-
-Add a `build` script in your `package.json`, and tweak your `start` script to run `build` before `node lib`:
-
-```json
-"scripts": {
-  "start": "babel-node src",
-},
-```
+- In `package.json`, in your `start` script, replace `node .` by `babel-node src` (`index.js` is the default file Node looks for, which is why we can omit `index.js`).
 
 If you try to run `yarn start` now, it should print the correct output, but Babel is not actually doing anything. That's because we didn't give it any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
 
@@ -46,26 +37,23 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 
 **Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`, but since your root folder will get more and more bloated over time, I would recommend to keep the Babel config in `package.json` until it grows too large.
 
-- Try running `yarn start` again. The `lib/index.js` file should now have been correctly transformed into ES5 code (`var` everywhere!).
+- `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](#es6-modules-syntax) section of this chapter.
 
-- Add `/lib/` to your `.gitignore`.
+## Watching for file changes
 
-## A few more tasks
-
-We now have the basic compilation working. To make this environment a bit more usable, we are going to add a few more `scripts` tasks:
+We now have the basic compilation working, but we need to run `yarn start` manually every time. Let's make this environment a bit more usable by creating a `watch` task to automatically re-execute our code every time we make a change:
 
 ```json
 "scripts": {
   "start": "yarn run watch",
   "watch": "watch 'yarn run main' src --interval=1",
-  "main": "yarn run lint && babel-node src",
-  "lint": "eslint src/**/*.js"
+  "main": "babel-node src"
 },
 ```
 
 ### `main` and `watch`
 
-`main` is going to be... well the *main* task of our workflow. It performs every operation needed for the build (many more will be added later), and runs the program.
+`main` is the task that will run a one-shot execution of our entire pipeline. Right now it is just executing `babel-node`, but many pre-requisite tasks will be added to it later.
 
 `watch` is going to trigger `main` every time a file changes in `src`. We use the `[watch](https://www.npmjs.com/package/watch)` package to monitor file changes, which you need to install:
 
@@ -73,11 +61,11 @@ We now have the basic compilation working. To make this environment a bit more u
 
 **Note**: The `interval` option is the duration in seconds between file change checks. The default value is a bit too slow to my taste, so I use `1` second, which seems reasonable. You can use decimal numbers like `0.5` as well.
 
+We set the default `yarn start` task to run the `watch` task, because that's the task you will want to run most of the time. If you want to run `main` just one time, you can still do `yarn run main`.
+
 Alright, we're now good to go.
 
-- Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try modifying `src/index.js` to make sure the  whole task flow is triggered again.
-
-**Note**: It is possible to prefix task names with `pre` or `post` (like `prebuild`), to trigger tasks before and after others. We could have for instance called `clean` in a `prebuild` task instead of chaining the two in one command separated by `&&`. This approach makes command lines shorter but I find that it actually reduces readability to have to jump up and down to look for any existing `pre` and `post` tasks when reading through our tasks.
+- Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try modifying `src/index.js` to make sure the `main` task is triggered again when you save.
 
 ## ES6
 
@@ -109,19 +97,18 @@ In `src/index.js`, write the following:
 const Dog = require('./dog');
 
 const toby = new Dog('Toby');
-
 console.log(toby.bark());
 ```
 
 As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
 
-- Run `yarn start` and it should print 'Wah wah, I am Toby'.
+- Run `yarn start` and it should print "Wah wah, I am Toby".
 
 ### The ES6 modules syntax
 
-Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax).
+Here we simply replace `const Dog = require('./dog');` by `import Dog from './dog';`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax).
 
-In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`.
+In `dog.js`, we also replace `module.exports = Dog;` by `export default Dog;`.
 
 Note that in `dog.js`, the name `Dog` is only used in the `export`. Therefore it could be possible to export directly an anonymous class like this instead:
 
@@ -180,15 +167,15 @@ We'll create an NPM/Yarn script to runs ESLint. Let's install the `eslint` packa
 
 - Run `yarn add --dev eslint`
 
-Add the following script to your `package.json`:
+Update the `scripts` of your `package.json` to include a new `lint` task in the `main` pipeline:
 
 ```json
-"lint": "eslint src/**/*.js"
-```
-
-And update your `main` task:
-```json
-"main": "yarn run lint && yarn run clean && yarn run build && node lib"
+"scripts": {
+  "start": "yarn run watch",
+  "watch": "watch 'yarn run main' src --interval=1",
+  "main": "yarn run lint && babel-node src",
+  "lint": "eslint src/**/*.js"
+},
 ```
 
 Here we just tell ESLint that the files we want to lint are all the `.js` files under `src`, pretty explicit.

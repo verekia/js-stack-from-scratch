@@ -42,7 +42,7 @@ Since it [came out](https://code.facebook.com/posts/1840075619545360) in October
 
 ## Hello World
 
-- Create an `index.js` file containing `console.log('Hello world')`.
+- Create an `index.js` file containing `console.log('Hello world');`.
 - Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print "Hello world".
 
 ## `start` script
