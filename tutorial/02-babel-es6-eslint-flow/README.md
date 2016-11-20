@@ -37,7 +37,7 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 
 **Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`, but since your root folder will get more and more bloated over time, I would recommend to keep the Babel config in `package.json` until it grows too large.
 
-- `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](#es6-modules-syntax) section of this chapter.
+- `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](##the-es6-modules-syntax) section of this chapter.
 
 ## Watching for file changes
 
@@ -220,16 +220,16 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
 
 I know this is a lot to take in, so take a minute to think about it. I'm still amazed that it is even possible for ESLint to use Babel's parser to understand Flow annotations. These 2 tools are really incredible for being so modular.
 
-- Create a `typecheck` task:
+- Create a `typecheck` task to run `flow` and add it to the task chain of your `main` script:
 
 ```json
-"typecheck": "flow"
-```
-
-- Add `typecheck` in the task chain of your `main` script:
-
-```json
-"main": "yarn run typecheck && yarn run lint && yarn run build && node lib"
+"scripts": {
+  "start": "yarn run watch",
+  "watch": "watch 'yarn run main' src --interval=1",
+  "main": "yarn run typecheck && yarn run lint && babel-node src",
+  "lint": "eslint src/**/*.js",
+  "typecheck": "flow"
+},
 ```
 
 - Create an empty `.flowconfig` file at the root of your project.
