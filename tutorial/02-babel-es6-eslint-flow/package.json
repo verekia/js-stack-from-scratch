@@ -5,9 +5,7 @@
   "scripts": {
     "start": "yarn run watch",
     "watch": "watch 'yarn run main' src --interval=1",
-    "main": "yarn run typecheck && yarn run lint && yarn run build && node lib",
-    "build": "yarn run clean && babel src -d lib",
-    "clean": "rimraf lib",
+    "main": "yarn run typecheck && yarn run lint && babel-node src",
     "lint": "eslint src/**/*.js",
     "typecheck": "flow"
   },

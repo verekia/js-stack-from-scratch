@@ -6,7 +6,7 @@ We're now going to use some ES6 syntax, which is a great improvement over the "o
 
 > 💡 **[Babel](https://babeljs.io/)** is a compiler that transforms ES6 code (and other things like React's JSX syntax) into ES5 code. It is very modular and can be used in tons of different [environments](https://babeljs.io/docs/setup/). It is by far the preferred ES5 compiler of the React community.
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Babel will take care of creating it. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
+- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
 
 ```javascript
 const str = 'ES6';
@@ -17,18 +17,20 @@ We're using a *template string* here, which is an ES6 feature that lets us injec
 
 - Run `yarn add --dev babel-cli` to install the CLI interface for Babel.
 
-- To run our program, we now need to execute `node lib` instead of `node .` (`index.js` is the default file Node looks for, which is why we can omit `index.js`). Add a `build` script in your `package.json`, and tweak your `start` script to run `build` before `node lib`:
+Babel CLI comes with [two executables](https://babeljs.io/docs/usage/cli/), `babel`, which compiles ES6 files into new ES5 files, and `babel-node`, which you can use to replace your call to the `node` binary and execute ES6 files directly on the fly. `babel-node` is great for development but it is heavy and not meant for production. In this chapter we are going to use `babel-node` to set up the development environment, and in the next one we'll use `babel` to build ES5 files for production.
+
+- To run our program, we now need to execute `babel-node src` instead of `node .` (`index.js` is the default file Node looks for, which is why we can omit `index.js`).
+
+
+Add a `build` script in your `package.json`, and tweak your `start` script to run `build` before `node lib`:
 
 ```json
 "scripts": {
-  "start": "yarn run build && node lib",
-  "build": "babel src -d lib"
+  "start": "babel-node src",
 },
 ```
 
-We simply tell Babel to compile an ES6 `src` directory into an ES5 `lib` directory with the `-d` flag.
-
-If you try to run `yarn start` now, it should print the correct output, but you can see that the generated `lib/index.js` did not change much compared to `src/index.js`. That's because we didn't give Babel any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
+If you try to run `yarn start` now, it should print the correct output, but Babel is not actually doing anything. That's because we didn't give it any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
 
 - Run `yarn add --dev babel-preset-latest` to install a Babel preset package containing configurations for the most recent ECMAScript features supported by Babel.
 
@@ -56,18 +58,10 @@ We now have the basic compilation working. To make this environment a bit more u
 "scripts": {
   "start": "yarn run watch",
   "watch": "watch 'yarn run main' src --interval=1",
-  "main": "yarn run lint && yarn run build && node lib",
-  "build": "yarn run clean && babel src -d lib",
-  "clean": "rimraf lib",
+  "main": "yarn run lint && babel-node src",
   "lint": "eslint src/**/*.js"
 },
 ```
-
-### `clean` with `rimraf`
-
-`clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use `rimraf` instead of a plain `rm -rf` in order to support Windows environments as well.
-
-- Run `yarn add --dev rimraf`.
 
 ### `main` and `watch`
 
@@ -81,7 +75,7 @@ We now have the basic compilation working. To make this environment a bit more u
 
 Alright, we're now good to go.
 
-- Run `yarn start`. It should clean, build, print "Hello ES6" and start watching for changes. Try modifying `src/index.js` to make sure the  whole task flow is triggered again.
+- Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try modifying `src/index.js` to make sure the  whole task flow is triggered again.
 
 **Note**: It is possible to prefix task names with `pre` or `post` (like `prebuild`), to trigger tasks before and after others. We could have for instance called `clean` in a `prebuild` task instead of chaining the two in one command separated by `&&`. This approach makes command lines shorter but I find that it actually reduces readability to have to jump up and down to look for any existing `pre` and `post` tasks when reading through our tasks.
 
@@ -275,7 +269,7 @@ class Dog {
 export default Dog;
 ```
 
-The `// @flow` comment tells Flow that we want this file to be typechecked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check the documentation for more details.
+The `// @flow` comment tells Flow that we want this file to be typechecked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check out the documentation for more details.
 
 - Add `// @flow` at the top of `index.js` as well.
 

@@ -2,6 +2,8 @@
 
 So far we just played a bit with Node and ES6, that was not a web app. In this section we are going to use Express to create a server, and will introduce the concept of development and production environments, using PM2.
 
+// TODO: We simply tell Babel to compile an ES6 `src` directory into an ES5 `lib` directory with the `-d` flag.
+
 ## Express
 
 > 💡 **[Express](https://)** (TODO) is a minimal TODO
