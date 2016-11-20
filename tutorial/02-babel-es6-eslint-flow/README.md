@@ -106,7 +106,7 @@ As you can see, unlike the community-made package `color` that we used before, w
 
 ### The ES6 modules syntax
 
-Here we simply replace `const Dog = require('./dog');` by `import Dog from './dog';`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax).
+Here we simply replace `const Dog = require('./dog');` by `import Dog from './dog';`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
 
 In `dog.js`, we also replace `module.exports = Dog;` by `export default Dog;`.
 
