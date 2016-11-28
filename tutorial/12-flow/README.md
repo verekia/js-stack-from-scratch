@@ -78,7 +78,7 @@ export default Dog;
 
 - Теперь вы можете добавить `// @flow` в каждый `.js` и `.jsx` файл в папке `src`, запустить `yarn test` или `yarn start`, и добавлять аннотации везде, где этого попросит Flow.
 
-Вы можете обнаружить неожиданный пример в `src/client/component/message.jsx`:
+Вы можете обнаружить неожиданный пример в `src/client/components/message.jsx`:
 
 ```javascript
 const Message = ({ message }: { message: string }) => <div>{message}</div>;
