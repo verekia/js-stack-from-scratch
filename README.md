@@ -13,7 +13,7 @@
 [![Chai](/img/chai.png)](http://chaijs.com/)
 [![Flow](/img/flow.png)](https://flowtype.org/)
 
->Это русскоязычная версия руководства Джонатана Верекии ([@verekia](https://twitter.com/verekia)). Оригинальное руководство расположено [здесь](https://github.com/verekia/js-stack-from-scratch). Данное пособие постоянно развивается и дополняется автором, предоставляя читателям максимально свежую и качественную информацию. Текст оригинального пособия и прилагаемый код будут меняться с течением времени. Мы так же будем стараться поддерживать русскоязычную версию в актуальном состоянии. Данный перевод соответствует английской версии по состоянию на [commit](https://github.com/verekia/js-stack-from-scratch/tree/11d7ac52647b602ba2d2840f600a05542e9f2845). 
+>Это русскоязычная версия руководства Джонатана Верекии ([@verekia](https://twitter.com/verekia)). Оригинальное руководство расположено [здесь](https://github.com/verekia/js-stack-from-scratch). Данное пособие постоянно развивается и дополняется автором, предоставляя читателям максимально свежую и качественную информацию. Текст оригинального пособия и прилагаемый код будут меняться с течением времени. Мы так же будем стараться поддерживать русскоязычную версию в актуальном состоянии. Данный перевод соответствует английской версии по состоянию на [commit](https://github.com/verekia/js-stack-from-scratch/commit/343922149f136bbab2512b14a2fe5efe095d62b7). 
 Мы будем рады вашим [замечаниям и вопросам](https://github.com/UsulPro/js-stack-from-scratch/issues)
 
 Добро пожаловать в мое современное руководство по стеку технологий JavaScript: **Стек технологий JavaScript с нуля**
@@ -69,6 +69,7 @@ Production / development окружение, Express, React Router, Сервер
 - [Китайский](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
 - [Итальянский](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
 - [Японский](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
+- [Тайский](https://github.com/MicroBenz/js-stack-from-scratch) by [MicroBenz](https://github.com/MicroBenz)
 
 Если вы хотите добавить перевод на другой язык, пожалуйста читайте [рекомендации по переводу](/how-to-translate.md) чтобы начать!
 
