@@ -1,14 +1,14 @@
-# 8 - React
+# บทที่ 8 - React
 
-We're now going to render our app using React.
+ในบทนี้เราจะมาสร้างแอพเรา โดยใช้ React เป็น Front-End
 
-First, let's install React and ReactDOM:
+แรกสุด เราติดตั้ง React และ ReactDOM ก่อน
 
-- Run `yarn add react react-dom`
+- สั่ง `yarn add react react-dom`
 
-These 2 packages go to our `"dependencies"` and not `"devDependencies"` because unlike build tools, the client bundle needs them in production.
+package ทั้งสองอันนี้จะไปอยู่ใน `"dependencies"` ไม่ใช่ `"devDependencies"` เพราะทั้งสองอันนี้ไม่ใช่ build tools แต่เป็น client bundle ที่เราต้องใช้ตอน production
 
-Let's rename our `src/client/app.js` file into `src/client/app.jsx` and write some React and JSX code in it:
+แก้ชื่อไฟล์ `src/client/app.js` เป็น `src/client/app.jsx` และเขียนโค้ด React และ JSX ดังต่อไปนี้ลงไป
 
 ```javascript
 import 'babel-polyfill';
@@ -32,17 +32,15 @@ App.propTypes = {
 ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 ```
 
-**Note**: If you are unfamiliar with React or its PropTypes, learn about React first and come back to this tutorial later. There is going to be quite some React things in the upcoming chapters, so you need a good understanding of it.
+**หมายเหตุ**: ถ้าคุณไม่คุ้นเคยกับ React หรือ PropTypes ให้ไปเรียนรู้เบสิคของ React มาก่อน แล้วกลับมายัง Tutorial นี้ต่อ เพราะในบทถัดๆ ไปจะมีคอนเซปต่างๆ ของ React ที่จะถูกใช้อย่างมาก ทำให้เป็นเรื่องดีหากคุณมีความเข้าใจเกี่ยวกับ React ระดับหนึ่งก่อนที่จะไปต่อจากนี้
 
-In your Gulpfile, change the value of `clientEntryPoint` to give it a `.jsx` extension:
+ใน Gulpfile เปลี่ยนค่าของ `clientEntryPoint` ให้เป็นนามสกุล `.jsx` ด้วย
 
 ```javascript
 clientEntryPoint: 'src/client/app.jsx',
 ```
 
-Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
-Install the React Babel preset, which will teach Babel how to process the JSX syntax:
-`yarn add --dev babel-preset-react` and change the `babel` entry in your `package.json` file like so:
+เนื่องจากเรามีการใช้ syntax ของ JSX เราต้องบอกให้ Babel รู้ว่าเราต้องแปลง JSX ด้วยนะ โดยการที่ติดตั้ง preset React Babel ที่จะสอนให้ Babel รู้จักวิธีการ process syntax ของ JSX โดยให้สั่ง `yarn add --dev babel-preset-react` และเปลี่ยน `babel` ที่อยู่ใน `package.json` ให้เป็นแบบนี้
 
 ```json
 "babel": {
@@ -53,8 +51,8 @@ Install the React Babel preset, which will teach Babel how to process the JSX sy
 },
 ```
 
-Now after running `yarn start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
+ตอนนี้ หลังจากสั่ง `yarn start` เมื่อเราเปิด `index.html` เราจะเห็น "The dog says: Wah wah, I am Browser Toby" ที่ถูก render ด้วย React
 
-Next section: [9 - Redux](/tutorial/9-redux)
+บทถัดไป [บทที่ 9 - Redux](/tutorial/9-redux)
 
-Back to the [previous section](/tutorial/7-client-webpack) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/7-client-webpack) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

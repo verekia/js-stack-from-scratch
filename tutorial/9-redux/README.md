@@ -1,16 +1,20 @@
-# 9 - Redux
+# บทที่ 9 - Redux
 
-In this chapter (which is the most difficult so far) we will be adding [Redux](http://redux.js.org/) to our application and will hook it up with React. Redux manages the state of your application. It is composed of a **store** which is a plain JavaScript object representing the state of your app, **actions** which are typically triggered by users, and **reducers** which can be seen as action handlers. Reducers affect your application state (the *store*), and when the application state is modified, things happen in your app. A good visual demonstration of Redux can be found [here](http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9).
+ในบทนี้ (ซึ่งจะมีความยากเยอะมาก) เราจะเพิ่ม [Redux](http://redux.js.org/) เข้ามาใช้ในแอพของเรา แล้วเราจะใช้มันคู่กับ React
 
-In order to demonstrate how to use Redux in the simplest possible way, our app will consist of a message and a button. The message says whether the dog has barked or not (it initially hasn't), and the button makes the dog bark, which should update the message.
+Redux นั้นเป็นคนที่จัดการเกี่ยวกับ state ของแอพเรา Redux จะมีสิ่งที่เรียกว่า **store** ที่เป็น JavaScript object​ ธรรมดา เพื่อบ่งบอกถึง state ของแอพ **actions** ที่ปกติจะถูกเรียกใช้โดย users และ **reducers** ที่สามารถมองเป็นคนที่จัดการ action ที่เกิดขึ้นก็ได้ โดย Reducers จะเป็นคนเปลี่ยนแปลง state ของแอพ (ซึ่งก็ถูกเก็บใน *store*) เมื่อ state มีการเปลี่ยนแปลงขึ้นมาแล้ว จะทำให้แอพ (หน้า view) เกิดการเปลี่ยนแปลงขึ้น
 
-We are going to need 2 packages in this part, `redux` and `react-redux`.
+ตัวอย่างหลักการของ Redux แบบเข้าใจง่ายขึ้นนั้นสามารถดูได้[ที่นี่](http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9)
 
-- Run `yarn add redux react-redux`.
+เพื่อที่จะสาธิตวิธีการใช้งาน Redux ให้ง่ายและ simple ที่สุดเท่าที่จะเป็นไปได้ แอพที่เราจะทำจะประกอบด้วย message กับ button message จะบอกว่าตอนนี้หมาของเรานั่นเห่าหรือไม่เห่า (ตอนเริ่มต้น หมาจะไม่เห่า) และ button นั้นจะเป็นการสั่งให้หมาเห่า ซึ่งทำให้ message ต้องมีการอัพเดต (บอกว่าหมาเห่า)
 
-Lets start by creating 2 folders: `src/client/actions` and `src/client/reducers`.
+เราต้องการ package เพิ่มเติมสองตัวในบทนี้ `redux` และ `react-redux`
 
-- In `actions`, create `dog-actions.js`:
+- สั่ง `yarn add redux react-redux`
+
+เราเริ่มต้นโดยการสร้างโฟลเดอร์ขึ้นมาสองอัน `src/client/actions` และ `src/client/reducers`
+
+- ในโฟลเดอร์ `actions` สร้างไฟล์ `dog-actions.js` ใน `dog-actions.js` เขียนโค้ดตามนี้
 
 ```javascript
 export const MAKE_BARK = 'MAKE_BARK';
@@ -21,9 +25,9 @@ export const makeBark = () => ({
 });
 ```
 
-Here we define an action type, `MAKE_BARK`, and a function (also known as *action creator*) that triggers a `MAKE_BARK` action called `makeBark`. Both are exported because we'll need them both in other files. This action implements the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which is why it has `type` and `payload` attributes.
+ในโค้ดนั้นเรามีการนิยาม action type `MAKE_BARK` และ function (หรืออีกชื่อหนึ่งคือ *action creator*) ชื่อ `makeBark` ที่จะเป็นคนไปเรียก action `MAKE_BARK` ทั้งคู่จะถูก export ออกไป เนื่องจากเราต้องการทั้งสองค่าในไฟล์อื่นๆ โดย action นั้นจะสร้าง [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model ขึ้นมา โดยมีสอง attributes คือ `type` กับ `payload`
 
-- In `reducers`, create `dog-reducer.js`:
+- ใน `reducers` สร้างไฟล์ `dog-reducer.js` ใน `dog-reducer.js` เขียนโค้ดตามนี้
 
 ```javascript
 import { MAKE_BARK } from '../actions/dog-actions';
@@ -44,9 +48,9 @@ const dogReducer = (state = initialState, action) => {
 export default dogReducer;
 ```
 
-Here we define the initial state of our app, which is an object containing the `hasBarked` property set to `false`, and the `dogReducer`, which is the function responsible for altering the state based on which action happened. The state cannot be modified in this function, a brand new state object must be returned.
+ในนี้เราจะกำหนด state เริ่มต้นให้กับแอพเรา ซึ่งเป็น object ที่มี property `hasBarked` โดยให้เริ่มเป็น `false` (หมาไม่เห่า) และประกาศ `dogReducer` ให้เป็น function ที่มีหน้าที่ในการจัดการ state ตาม action ที่ได้รับมา ซึ่ง state นั้นจะไม่สามารถแก้ไขได้ตรงๆ ใน function แต่จะ return state object ก้อนใหม่ขึ้นมาแทน (สังเกตว่ามีการ `return { hasBarked: action.payload };` มาแทน)
 
-- We are now going to modify `app.jsx` to create the *store*. You can replace the entire content of that file by the following:
+- เราจะแก้ไข `app.jsx` เพื่อให้สร้าง *store* ขึ้นมา โดยเราสามารถเขียนไฟล์นี้ใหม่ได้โดยมีโค้ดตามนี้แทน
 
 ```javascript
 import React from 'react';
@@ -72,19 +76,17 @@ ReactDOM.render(
 );
 ```
 
-Our store is created by the Redux function `createStore`, pretty explicit. The store object is assembled by combining all our reducers (in our case, only one) using Redux's `combineReducers` function. Each reducer is named here, and we'll name ours `dog`.
+store ของเราจะถูกสร้างโดย Redux function `createStore` โดย store object นั้นจะรวม reducers ทุกตัวที่เรามี โดยใช้ function `combineReducers` ของ Redux (ในกรณีนี้เรามี reducer ตัวเดียว) reducer แต่ละตัวจะถูกตั้งชื่อที่นี่ โดยเราตั้งชื่อ reducer ของเราว่า `dog`
 
-That's pretty much it for the pure Redux part.
+ซึ่งส่วนประกอบทั้งหมดก่อนหน้านี้ ถือว่าเป็น pure Redux ทั้งหมด ยังไม่มี React เลย เราต้้องผูกทั้งสองอย่างเข้าด้วยกัน โดยใช้ `react-redux` เพื่อให้ `react-redux` ทำการ pass store เข้าไปในแอพที่ใช้ React ของเรา ซึ่งแอพของเราทั้งหมดจะต้องโดน wrap ด้วย `<Provider>` component ที่ component นี้มี child component ได้แค่คนเดียวเท่านั้น ทำให้เราต้องสร้าง `<div>` ขึ้นมา และใน `<div>` นี้จะมี elements หลักของแอพเราสองอัน คือ `BarkMessage` และ `BarkButton`
 
-Now we are going to hook up Redux with React using `react-redux`. In order for `react-redux` to pass the store to our React app, it needs to wrap the entire app in a `<Provider>` component. This component must have a single child, so we created a `<div>`, and this `<div>` contains the 2 main elements of our app, a `BarkMessage` and a `BarkButton`.
+ถ้าเราสังเกตดูในส่วนของ `import` จะพบว่า `BarkMessage` และ `BarkButton` ถูก import มาจากโฟลเดอร์ `containers` ตอนนี้ถึงเวลาแล้วที่เราจะอธิบาย concept ของ **Components** และ **Containers** แบบจริงๆ จังๆ สักที
 
-As you can tell in the `import` section, `BarkMessage` and `BarkButton` are imported from a `containers` folder. Now is a good time to introduce the concept of **Components** and **Containers**.
+*Components* นั้นเป็น *dumb* React components ธรรมดาๆ ซึ่ง เพราะ Components นั้นจะไม่รู้เรื่องเกี่ยวกับ Redux state เลยแม้แต่น้อย แต่กับ *Containers* นั้นจะกลับกัน Containers เป็น *smart* components ที่รู้จักเกี่ยวกับ state ของ Redux และตอนนี้เรากำลังจะทำ *เชื่อมต่อ* smart component ไปกับ dumb components ดังนี้
 
-*Components* are *dumb* React components, in a sense that they don't know anything about the Redux state. *Containers* are *smart* components that know about the state and that we are going to *connect* to our dumb components.
+- สร้างโฟลเดอร์ 2 อัน `src/client/components` กับ `src/client/containers`
 
-- Create 2 folders, `src/client/components` and `src/client/containers`.
-
-- In `components`, create the following files:
+- ในโฟลเดอร์ `components` สร้างไฟล์ดังต่อไปนี้
 
 **button.jsx**
 
@@ -101,7 +103,7 @@ Button.propTypes = {
 export default Button;
 ```
 
-and **message.jsx**:
+และไฟล์ **message.jsx**:
 
 ```javascript
 import React, { PropTypes } from 'react';
@@ -116,11 +118,11 @@ export default Message;
 
 ```
 
-These are examples of *dumb* components. They are logic-less, and just show whatever they are asked to show via React **props**. The main difference between `button.jsx` and `message.jsx` is that `Button` contains an **action** in its props. That action is bound on the `onClick` event. In the context of our app, the `Button` label is never going to change, however, the `Message` component is going to reflect the state of our app, and will vary based on the state.
+ทั้งสองอันนี้เป็นตัวอย่างของ *dumb* components เราจะพบว่าทั้งคู่นั้นต่างไม่มี logic ใดๆ เลย มีหน้าที่เพียงแค่โชว์สิ่งที่มีคนขอให้โชว์ ผ่านสิ่งที่เรียกว่า **props** ใน React ข้อแตกต่างอย่างชัดเจนของ `button.jsx` กับ `message.jsx` นั้นคือ `Button` มี **action** ส่งมาใน props ของมัน ซึ่ง action ที่ถูกส่งมาจะผูกติดกับ event `onClick` ของปุ่ม นอกจากนี้ในมุมมองของแอพเรา เราจะพบว่า label ของ `Button` จะไม่ถูกเปลี่ยนแปลงเลย อย่างไรก็ตาม `Message` component นั้นจะเปลี่ยนค่าไปตาม state ของแอพเรา
 
-Again, *components* don't know anything about Redux **actions** or the **state** of our app, which is why we are going to create smart **containers** that will feed the proper *actions* and *data* to these 2 dumb components.
+ย้ำอีกครั้งว่า *components* จะไม่รู้อะไรเกี่ยวกับ Redux **actions** หรือ **state** ของแอพเรา นั่นทำให้เราต้องสร้าง smart **containers** ขึ้นมาครอบ เพื่อส่ง *actions* หรือ *data* ที่ถูกต้องไปให้กับ dumb components ทั้งสองตัว
 
-- In `containers`, create the following files:
+- ในโฟลเดอร์ `containers` ให้สร้างไฟล์
 
 **bark-button.js**
 
@@ -137,7 +139,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(null, mapDispatchToProps)(Button);
 ```
 
-and **bark-message.js**:
+และไฟล์ **bark-message.js**:
 
 ```javascript
 import { connect } from 'react-redux';
@@ -150,10 +152,10 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Message);
 ```
 
-`BarkButton` will hook up `Button` with the `makeBark` action and Redux's `dispatch` method, and `BarkMessage` will hook up the app state with `Message`. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
+`BarkButton` จะเชื่อมกับ `Button` โดยมี `makeBark` action และ `dispatch` method ของ Redux ส่วน `BarkMessage` จะเชื่อม state ของแอพกับ `Message` เมื่อ state เกิดการเปลี่ยนแปลง `Message` จะทำการ re-render component โดยอัตโนมัติ การเชื่อมต่อทั้งหมดนี้จะทำผ่าน function ชื่อว่า `connect` ของ `react-redux`
 
-- You can now run `yarn start` and open `index.html`. You should see "The dog did not bark" and a button. When you click the button, the message should show "The dog barked".
+- ตอนนี้ลองสั่ง `yarn start` และเปิด `index.html` ขึ้นมา เราจะเห็นคำว่า "The dog did not bark" และมีปุ่มหนึ่งปุ่ม เมื่อคุณกดปุ่ม ข้อความควรจะเป็นคำว่า "The dog barked"
 
-Next section: [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
+บทถัดไป [บทที่ 10 - Immutable JS และ Redux Improvements](/tutorial/10-immutable-redux-improvements)
 
-Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/8-react) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

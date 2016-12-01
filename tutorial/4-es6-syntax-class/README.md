@@ -1,6 +1,6 @@
-# 4 - Using the ES6 syntax with a class
+# บทที่ 4 - การใช้ ES6 syntax ในการเขียน Class
 
-- Create a new file, `src/dog.js`, containing the following ES6 class:
+- สร้างไฟล์ใหม่ `src/dog.js` ที่มีโค้ด ES6 class ดังนี้
 
 ```javascript
 class Dog {
@@ -16,11 +16,11 @@ class Dog {
 module.exports = Dog;
 ```
 
-It should not look surprising to you if you've done OOP in the past in any language. It's relatively recent for JavaScript though. The class is exposed to the outside world via the `module.exports` assignment.
+หากคุณคุ้นเคยกับการเขียนโปรแกรมแบบ OOP ในภาษาอื่นๆ จะดูไม่แปลกใจกับคลาสของ ES6 มากนัก ซึ่งคลาสนั้นสามารถ export ให้ภายนอกสามารถใช้งานได้ ผ่านคำสั่ง `module.exports`
 
-Typical ES6 code uses classes, `const` and `let`, "template strings" (with back ticks) like the one in `bark()`, and arrow functions (`(param) => { console.log('Hi'); }`), even though we're not using any in this example.
+และแน่นอน โค้ดต่างๆ ของ ES6 สามารถใช้งานในคลาสได้ทั้งหมด เช่น `const`, `let` รวมถึง "template strings" อย่างที่ใช้ใน function `bark()` รวมถึง arrow functions เช่น `(param) => { console.log('Hi'); }`) ก็ทำได้ แต่ในตัวอย่างของบทนี้เราจะไม่มีการใช้ arrow function เพื่อให้เกิดความคุ้นเคยกับ syntax แบบเดิมก่อนในการสร้าง class
 
-In `src/index.js`, write the following:
+ในไฟล์ `src/index.js` เขียนโค้ดดังต่อไปนี้
 
 ```javascript
 const Dog = require('./dog');
@@ -30,12 +30,12 @@ const toby = new Dog('Toby');
 console.log(toby.bark());
 ```
 
-As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
+ถ้าเราสังเกต จะต่างกับ package `color` ที่เราเคยใช้ เมื่อเราต้องการ require ไฟล์มาใช้ เราจะใช้ `./` ใน require() เพื่อทำการ require class มาใช้งาน
 
-- Run `yarn start` and it should print 'Wah wah, I am Toby'.
+- สั่ง `yarn start` แล้วเราจะเห็นคำว่า 'Wah Wah, I am Toby'
 
-- Take a look at the code generated in `lib` to see what your compiled code looks like (`var` instead of `const` for instance).
+- ดูภายในโค้ดที่ถูก generate ภายในโฟลเดอร์ `lib` เพื่อดูโค้ดที่ถูก compile แล้วว่าหน้าตาเป็นอย่างไร (เช่น เราจะพบว่า มีการใช้ `var` แทนที่จะเป็น `const`)
 
-Next section: [5 - The ES6 modules syntax](/tutorial/5-es6-modules-syntax)
+บทถัดไป [บทที่ 5 - การใช้ ES6 syntax ในการสร้าง modules](/tutorial/5-es6-modules-syntax)
 
-Back to the [previous section](/tutorial/3-es6-babel-gulp) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/3-es6-babel-gulp) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

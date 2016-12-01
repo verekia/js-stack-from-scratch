@@ -1,12 +1,14 @@
-# 3 - Setting up ES6 with Babel and Gulp
+# บทที่ 3 - ตั้งค่าเพื่อใช้งาน ES6 โดยใช้ Babel และ Gulp
 
-We're now going to use ES6 syntax, which is a great improvement over the "old" ES5 syntax. All browsers and JS environments understand ES5 well, but not ES6. So we're going to use a tool called Babel to transform ES6 files into ES5 files. To run Babel, we are going to use Gulp, a task runner. It is similar to the tasks located under `scripts` in `package.json`, but writing your task in a JS file is simpler and clearer than a JSON file, so we'll install Gulp, and the Babel plugin for Gulp too:
+ตอนนี้เราจะมาใช้ ES6 syntax สำหรับการเขียนภาษา JavaScript กัน ซึ่งนับว่าเป็นอะไรที่พัฒนาขึ้นมาดีขึ้นมากเทียบกับ ES5 syntax "แบบเดิมๆ" ซึ่ง browsers ปัจจุบัน รวมถึงเหล่า JS environments ทั้งหลายที่มักใช้ๆ กันต่างเข้าใจ ES5 เป็นอย่างดี แต่ไม่เข้าใจ ES6 ดังนั้นทำให้เราต้องใช้เครื่องมือที่เรียกว่า Babel ในการแปลงจาก ES6 ไปเป็น ES5
 
-- Run `yarn add --dev gulp`
-- Run `yarn add --dev gulp-babel`
-- Run `yarn add --dev babel-preset-latest`
-- Run `yarn add --dev del` (for the `clean` task, as you will see below)
-- In `package.json`, add a `babel` field for the Babel configuration. Make it use the latest Babel preset like this:
+เพื่อที่จะใช้งาน Babel เราจะมีการใช้ Gulp ด้วย Gulp นั้นเป็น task runner ซึ่งจะคล้ายคลึงกับ tasks ที่อยู่ใน `scripts` ในไฟล์ `package.json` แต่ว่าเราจะเขียน task เหล่านั้นด้วยโค้ดภาษา JavaScript ซึ่งแน่นอนว่ามันก็ง่ายกว่า และชัดเจนกว่าเขียนเป็น JSON เยอะ ดังนั้น เราจะติดตั้ง Gulp และ Babel plugin สำหรับ Gulp ด้วย โดยทำตามนี้
+
+- สั่ง `yarn add --dev gulp`
+- สั่ง `yarn add --dev gulp-babel`
+- สั่ง `yarn add --dev babel-preset-latest`
+- สั่ง `yarn add --dev del` (ใช้สำหรับ `clean` task เดี๋ยวจะมีในตัวอย่างด้านล่าง)
+- ในไฟล์ `package.json` เพิ่ม field `babel` ไว้เป็นค่า config ให้กับ Babel เพื่อให้ Babel นั้นใช้ presets ตัวล่าสุด แบบนี้
 
 ```json
 "babel": {
@@ -16,18 +18,20 @@ We're now going to use ES6 syntax, which is a great improvement over the "old" E
 },
 ```
 
-**Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`. Your root folder will get more and more bloated over time, so keep the Babel config in `package.json` until it grows too large.
+**หมายเหตุ**: ไฟล์ `.babelrc` ที่อยู่ที่โปรเจคของเราก็สามารถใช้งานแทน field `babel` ที่อยู่ในไฟล์ `package.json` ได้เหมือนกัน ซึ่งในความเป็นจริง โปรเจคของเราก็จะมีขนาดใหญ่ขึ้นมากเรื่องๆ ดังนั้นการเอา config ของ Babel ไว้ใน `package.json` ก็เป็นสิ่งที่ดี เว้นแต่ว่า Babel config จะเริ่มใหญ่ขึ้นเรื่อยๆ จึงค่อยแยกออกมาอีกไฟล์
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. A `lib` folder is where the compiled ES5 code will go. Gulp and Babel will take care of creating it. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
+- ย้ายไฟล์ `index.js` ไปไว้ในโฟลเดอร์ชื่อว่า `src` (สร้างโฟลเดอร์ใหม่ หากยังไม่มี) ในโฟลเดอร์นี้เราจะเขียนโค้ดภาษา JavaScript แบบ ES6 กัน โดยเมื่อทำการ compile โค้ด ES6 เสร็จแล้ว โค้ด ES5 ที่ได้จะอยู่ในโฟลเดอร์ `lib` โดยที่ Gulp กับ Babel จะเป็นคนจัดการในการ compile และสร้างโฟลเดอร์ `lib` ขึ้นมาเอง แล้วให้ทำการลบโค้ดที่เกี่ยวกับ `color` ที่หลงเหลือจากตอนที่แล้ว และเขียนโค้ดด้านล่างแทน
 
 ```javascript
 const str = 'ES6';
 console.log(`Hello ${str}`);
 ```
 
-We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`. Note that template strings are created using **backquotes**.
+โค้ดนี้เรามีการใช้สิ่งที่เรียกว่า *template string* ซึ่งเป็นฟีเจอร์ใหม่ใน ES6 ที่เราสามารถแทรกตัวแปรเข้าไปใน string ได้โดยตรง ไม่จำเป็นต้องทำการต่อ string แบบเดิมๆ อีกต่อไป โดยใช้  `${}`
 
-- Create a `gulpfile.js` containing:
+สังเกตดูจะเห็นว่า template strings จะถูกเขียนโดยใช้สัญลักษณ์ **backquotes** (` )
+
+- ต่อมาให้เราทำการสร้างไฟล์ `gulpfile.js` ในไฟล์ให้เขียนโค้ดดังต่อไปนี้
 
 ```javascript
 const gulp = require('gulp');
@@ -65,29 +69,30 @@ gulp.task('default', ['watch', 'main']);
 
 ```
 
-Let's take a moment to understand all this.
+เรามาอธิบายโค้ดทั้งหมดนี้ให้เข้าใจกันก่อน
 
-The API of Gulp itself is pretty straightforward. It defines `gulp.task`s, that can reference `gulp.src` files, applies a chain of treatments to them with `.pipe()` (like `babel()` in our case) and outputs the new files to `gulp.dest`. It can also `gulp.watch` for changes on your filesystem. Gulp tasks can run prerequisite tasks before them, by passing an array (like `['build']`) as a second parameter to `gulp.task`. Refer to the [documentation](https://github.com/gulpjs/gulp) for a more thorough presentation.
+Gulp นั้นมี API ที่ค่อนข้างจะเข้าใจง่าย ใช้คำตรงไปตรงมา สิ่งที่เราทำก็คือ เรานิยาม `gulp.task` จำนวนมากที่อ้างอิงถึงไฟล์ได้ผ่าน `gulp.src` แล้ว chain คำสั่งต่อๆ กันด้วยคำสั่ง `.pipe()` (เช่น คำสั่ง `babel()` เป็นต้น) และได้ output ออกมาเป็นไฟล์ใหม่ โดยใช้ `gulp.dest` ในการอ้างอิง path ปลายทาง
 
-First we define a `paths` object to store all our different file paths and keep things DRY.
+นอกจากนี้เรายังมี `gulp.watch` ที่จะมองการเปลี่ยนแปลงของไฟล์ที่เราสนใจ เมื่อไฟล์เกิดการเปลี่ยนแปลง เราจะสั่งงานตาม tasks ที่เราระบุไว้ใน array (เช่น `['build']`) เป็นพารามิเตอร์ตัวที่สอง นอกจากนี้ยังมี API อีกมากมายให้ใช้ ซึ่งหากสนใจสามารถดูใน [documentation](https://github.com/gulpjs/gulp) ของ Gulp ได้
 
-Then we define 5 tasks: `build`, `clean`, `main`, `watch`, and `default`.
+ในบรรทัดต้นๆ เราประกาศ object `paths` เพื่อเก็บ path ของไฟล์ที่เราจะใช้ทั้งหมด นั่นคือ path ของ source file `allSrcJs` และ path ของปลายทางที่เราต้องการ `libDir` และการทำแบบนี้ก็ช่วยให้เรา Don't Repeat Yourself (DRY) ได้อีกด้วย
 
-- `build` is where Babel is called to transform all of our source files located under `src` and write the transformed ones to `lib`.
-- `clean` is a task that simply deletes our entire auto-generated `lib` folder before every `build`. This is typically useful to get rid of old compiled files after renaming or deleting some in `src`, or to make sure the `lib` folder is in sync with the `src` folder if your build fails and you don't notice. We use the `del` package to delete files in a way that integrates well with Gulp's stream (this is the [recommended](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) way to delete files with Gulp).
-- `main` is the equivalent of running `node .` in the previous chapter, except this time, we want to run it on `lib/index.js`. Since `index.js` is the default file Node looks for, we can simply write `node lib` (we use the `libDir` variable to keep things DRY). The `require('child_process').exec` and `exec` part in the task is a native Node function that executes a shell command. We forward `stdout` to `console.log()` and return a potential error using `gulp.task`'s callback function. Don't worry if this part is not super clear to you, remember that this task is basically just running `node lib`.
-- `watch` runs the `main` task when filesystem changes happen in the specified files.
-- `default` is a special task that will be run if you simply call `gulp` from the CLI. In our case we want it to run both `watch` and `main` (for the first execution).
+หลังจากนั้น เรานิยาม tasks (งาน) มา 5 งาน: `build`, `clean`, `main`, `watch`, และ `default`
 
-**Note**: You might be wondering how come we're using some ES6 code in this Gulp file, since it doesn't get transpiled into ES5 by Babel. This is because we're using a version of Node that supports ES6 features out of the box (make sure you are running Node > 6.5.0 by running `node -v`).
+- `build` จะเป็น task ที่ Babel จะถูกเรียกใช้เพื่อแปลง source file ทั้งหมดที่เราเขียนในโฟลเดอร์ `src` และบันทึกผลสุดท้ายที่แปลงสำเร็จแล้วลงโฟลเดอร์ `lib`
+- `clean` เป็น task ที่เราจะทำการเคลียร์ข้อมูลในโฟลเดอร์ `lib` ที่ถูกสร้างขึ้นมาเองด้วย Gulp ทั้งหมด โดยจะถูกเรียกก่อนที่จะทำ task `build` ทุกครั้ง ซึ่ง task นี้มีประโยชน์ในการลบไฟล์เก่าทิ้งไปให้หมด เพื่อให้เหมือนเป็นการที่เราจะ sync ผลลัพธ์ให้ตรงกับต้นฉบับในโฟลเดอร์ `src` อยู่ตลอด โดยเราใช้ package ชื่อว่า `del` ในการลบไฟล์ทิ้ง ซึ่งเหมาะกับการใช้คู่กันกับ Gulp's stream (ซึ่งวิธีนี้เป็นคำ[แนะนำ](https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md) ในการลบไฟล์ที่ดี โดยใช้ Gulp)
+- `main` มีค่าใกล้เคียงกับการสั่ง `node .` ในครั้งที่แล้ว แต่ครั้งนี้เราต้องการรันโค้ดที่อยู่ภายใน `lib/index.js` แทน เพราะปกติ Node จะมองหา `index.js` เป็นค่า default เราแค่สั่ง `node lib` ก็ได้ผลเหมือนเดิม (ในที่นี้เราใช้ตัวแปร `libDir` เลยเพื่อให้เรานั้นไม่ทำอะไรซ้ำซ้อนหลายๆ รอบ) ส่วนคำสั่ง `require('child_process').exec` และ `exec` ใน task นั้นเป็น function ของ Node ที่ให้เรา execute shell command ได้ เราส่งตัวแปร `stdout` ไปให้กับ `console.log()` และให้ return error ที่อาจเกิดขึ้นได้โดยใช้ callback function ของ `gulp.task` มาช่วย โอเค หากคุณยังรู้สึกงงๆ อยู่บ้าง ก็ไม่เป็นไร ขอสรุปว่า task นี้จะแค่สั่ง `node lib` ให้กับเราโดยอัตโนมัติ
+- `watch` จะสั่งรัน task `main` เมื่อ filesystem พบว่ามีการเปลี่ยนแปลงเกิดขึ้นกับ file ที่เราระบุไว้ในฟังก์ชัน (ในทีนี้ก็คือ หากไฟล์ในโฟลเดอร์ `src` เกิดการเปลี่ยนแปลง ให้สั่งงาน task `main` ทันที)
+- `default` เป็น task พิเศษที่จะทำงานเมื่อเราสั่งแค่ `gulp` เฉยๆ จาก Command Line (CLI) ในเคสนี้เราจะให้รัน task `watch` กับ `main`
 
-Alright! Let's see if this works.
+**หมายเหตุ**: คุณอาจจะกำลังสงสัยว่าทำไมเราเขียน ES6 ใน Gulp file ของเราได้ ทั้งๆ ที่เราไม่ได้แปลงมันเป็น ES5 ด้วย Babel เลยนี่หนา? นั่นเป็นเพราะว่าเราเลือกใช้ Node เวอร์ชันใหม่ที่รองรับการใช้ ES6 อยู่แต่แรกแล้ว ทำให้เราเขียนโค้ด ES6 บน Gulp file ได้ (ดังนั้น โปรดเช็คให้มั่นใจว่าใช้งาน Node เวอร์ชันที่ใหม่กว่า 6.5.0 เป็นต้นไปแล้ว โดยใช้คำสั่ง `node -v` ในการเช็ค)
 
-- In `package.json`, change your `start` script to: `"start": "gulp"`.
-- Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try writing bad code in `src/index.js` to see Gulp automatically showing you the error when you save.
+เอาล่ะ! เรามาดูกันว่า task เหล่านี้ใช้งานได้
 
-- Add `/lib/` to your `.gitignore`
+- ใน `package.json` เปลี่ยน `start` script ให้เป็น `"start": "gulp"`
+- สั่ง `yarn start` เราควรจะเห็น "Hello ES6" ขึ้นมา แล้ว Gulp จะเริ่มมองการเปลี่ยนแปลงของไฟล์ ให้ลองเขียนโค้ดผิดๆ ดูในไฟล์ `src/index.js` เพื่อดูว่า Gulp จะแสดงผล error โดยอัตโนมัติ หลังจากที่คุณเซฟไฟล์ใหม่แล้ว
+- เพิ่มโฟลเดอร์ `/lib/` ไปใน `.gitignore` (ไม่จำเป็นที่จะต้อง commit โค้ดในโฟลเดอรนี้ลงไป เพราะอย่างไรก็ตามเราสามารถทำการ compile ได้อยู่แล้ว เพียงแค่มี source code)
 
-Next section: [4 - Using the ES6 syntax with a class](/tutorial/4-es6-syntax-class)
+บทถัดไป [บทที่ 4 - การใช้ ES6 syntax ในการเขียน Class](/tutorial/4-es6-syntax-class)
 
-Back to the [previous section](/tutorial/2-packages) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/2-packages) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

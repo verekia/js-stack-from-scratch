@@ -1,12 +1,12 @@
-# 12 - Flow
+# บทที่ 12 - เช็ค Data Type ด้วย Flow
 
-[Flow](https://flowtype.org/) is a static type checker. It detects inconsistent types in your code and you can add explicit type declarations in it via annotations.
+[Flow](https://flowtype.org/) เป็นตัวทำ static type checker ที่จะทำการตรวจสอบหาประเภทของ data types ที่ไม่สอดคล้องกันในโค้ดได้ ซึ่งทำให้คุณสามารถเพิ่มการประกาศประเภทของข้อมูลเพิ่มเติมได้ด้วย ผ่าน annotations พิเศษของ Flow
 
-- In order for Babel to understand and remove Flow annotations during the transpilation process, install the Flow preset for Babel by running `yarn add --dev babel-preset-flow`. Then, add `"flow"` under `babel.presets` in your `package.json`.
+- ในการที่จะให้ Babel เข้าใจและลบ annotation ของ Flow ทิ้งตอนที่ทำการ compile นั้น ให้ทำการติดตั้ง Flow present ของ Babel โดยสั่ง `yarn add --dev babel-preset-flow` หลังจากนั้นให้ทำการเพิ่ม `"flow"` ลงไปภายใน `babel.presets` ในไฟล์ `package.json`
 
-- Create an empty `.flowconfig` file at the root of your project
+- สร้างไฟล์เปล่า `.flowconfig` ใน root ของโปรเจค
 
-- Run `yarn add --dev gulp-flowtype` to install the Gulp plugin for Flow, and add `flow()` to your `lint` task:
+- สั่ง `yarn add --dev gulp-flowtype` เพื่อติดตั้ง Gulp plugin สำหรับใช้งาน Flow และเพิ่ม `flow()` เข้าไปใน task `lint`
 
 ```javascript
 import flow from 'gulp-flowtype';
@@ -26,11 +26,11 @@ gulp.task('lint', () =>
 );
 ```
 
-The `abort` option is to interrupt the Gulp task if Flow detects an issue.
+option `abort` มีไว้เพื่อบอกว่าให้หยุดการทำงานของ Gulp task เมื่อ Flow ตรวจเจอ issue ขึ้นมา
 
-Alright, we should be able to run Flow now.
+เมื่อทำทั้งหมดข้างต้นเสร็จแล้ว ณ ตอนนี้ก็ควรสามารถใช้งาน Flow ได้แล้ว
 
-- Add Flow annotations to `src/shared/dog.js` like so:
+- เพิ่ม Flow annotation ใน `src/shared/dog.js` ตามโค้ดด้านล่างนี้
 
 ```javascript
 // @flow
@@ -57,45 +57,47 @@ class Dog {
 export default Dog;
 ```
 
-The `// @flow` comment tells Flow that we want this file to be typechecked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check the documentation for more details.
+comment `// @flow` ใช้เพื่อบอก Flow ว่าเราต้องการให้ไฟล์นี้ทั้งไฟล์ถูกตรวจสอบ data type โดย Flow annotation จะมีลักษณะเป็น colon (:) ตามหลังพารามิเตอร์ของฟังก์ชัน หรือด้านหลังชื่อฟังก์ชัน ซึ่งคุณสามารถดู documentation ของ Flow ได้สำหรับรายละเอียดเพิ่มเติม
 
-Now if you run `yarn start`, Flow will work fine, but ESLint is going to complain about that non-standard syntax we're using. Since Babel's parser is all up-and-running with parsing Flow content thanks to the `babel-preset-flow` plugin we installed, it'd be nice if ESLint could rely on Babel's parser instead of trying to understand Flow annotations on its own. That's actually possible using the `babel-eslint` package. Let's do this.
+ดังนั้น เมื่อคุณรัน `yarn start` ไป Flow ก็จะทำงานได้ตามปกติ แต่ ESLint จะบ่นเราเรื่องที่มี syntax ที่ผิดมาตรฐานถูกใช้อยู่ แต่บังเอิญเป็นเรื่องดีที่ว่า plugin `babel-preset-flow` นั้นช่วยให้ตัว parser ของ Babel เข้าใจว่าจุดที่แปลกๆ นั้นคือ Flow content นั่นเอง ซึ่งจะเป็นการดีมาก หาก ESLint นั้นเลือกที่จะเชื่อมั่นในตัว parser ของ Babel แทนที่จะมานั่งทำความเข้าใจ Flow annotation เอง ดังนั้นเราจึงมีการใช้ package `babel-eslint` เพื่อให้ ESLint เชื่อมั่นในตัว parser ของ Babel แทนว่าโค้ดที่เราเขียนนั้นไม่มีปัญหาเรื่อง syntax แปลกประหลาดแต่อย่างใด
 
-- Run `yarn add --dev babel-eslint`
+- สั่งรัน `yarn add --dev babel-eslint`
 
-- In `package.json`, under `eslintConfig`, add the following property: `"parser": "babel-eslint"`
+- ในไฟล์ `package.json` ในส่วนของ `eslintConfig` เพิ่ม property `"parser": "babel-eslint"` ลงไป
 
-`yarn start` should now both lint and typecheck your code fine.
+เมื่อสั่ง `yarn start` ณ ตอนนี้จะพบว่าทั้งการทำ linting และ typecheck ในโค้ดของคุณนั้นทำงานได้อย่างปกติสุขไม่มีปัญหาอะไร
 
-Now that ESLint and Babel are able to share a common parser, we can actually get ESLint to lint our Flow annotations via the `eslint-plugin-flowtype` plugin.
+ตอนนี้ ESLint และ Babel นั้นสามารถ share parser ด้วยกันได้แล้ว เราสามารถใช้ ESLint เพื่อทำการ lint Flow annotation ได้แล้ว ผ่าน plugin `eslint-plugin-flowtype`
 
-- Run `yarn add --dev eslint-plugin-flowtype` and add `"flowtype"` under `eslintConfig.plugins` in `package.json`, and add `"plugin:flowtype/recommended"` under `eslintConfig.extends` in an array next to `"airbnb"`.
+- สั่ง `yarn add --dev eslint-plugin-flowtype` และเพิ่ม `"flowtype"` ลงไปใน `eslintConfig.plugins` ในไฟล์ `package.json`
 
-Now if you type `name:string` as an annotation, ESLint should complain that you forgot a space after the colon for instance.
+- ทำการเพิ่ม `"plugin:flowtype/recommended"` ลงไปใน `eslintConfig.extends` ใน array ช่องถัดจาก `"airbnb"` ที่อยู่ในไฟล์ `package.json` ด้วย
 
-**Note**: The `"parser": "babel-eslint"` property that I made you write in `package.json` is actually included in the `"plugin:flowtype/recommended"` config, so you can now remove it for a more minimal `package.json`. Leaving it there is more explicit though, so that's up to your personal preference. Since this tutorial is about the most minimal setup, I removed it.
+ตอนนี้ ถ้าคุณพิมพ์ `name:string` เป็น annotation ESLint จะทำการบ่นคุณว่าลืมเติมช่องว่างหลัง colon ให้ไปเติมด้วย
 
-- You can now add `// @flow` in every `.js` and `.jsx` file under `src`, run `yarn test` or `yarn start`, and add type annotations everywhere Flow asks you to do so.
+**หมายเหตุ**: property `"parser": "babel-eslint"` ที่ให้เพิ่มใน `package.json` นั้นจริงๆ แล้วถูกรวมอยู่ใน config ของ `"plugin:flowtype/recommended"` อยู่แล้ว ดังนั้นคุณสามารถลบมันทิ้งได้ เพื่อลดขนาดของ `package.json` ลงได้ แต่คุณสามารถปล่อยให้เป็นแบบนั้นไว้ได้ เพื่อให้เกิดความชัดเจนเวลามีคนอื่นสงสัยว่า parser หายไปไหน ทำไมไม่มี ดังนั้น เรื่องนี้จึงเป็นเรื่องส่วนบุคคล ว่าอยากจะเก็บไว้หรือไม่ แต่เนื่องจาก tutorial นี้จะเน้นให้ minimal มากที่สุด ดังนั้นผม(ผู้เขียน) จึงขอลบออก
 
-One counterintuitive case is the following, for `src/client/components/message.jsx`:
+- ตอนนี้คุณสามารถเพิ่ม `// @flow` ในทุกไฟล์ที่มีนามสกุล `.js` และ `.jsx` ที่อยู่ภายในโฟลเดอร์ `src`  ได้แล้ว โดยสามารถสั่ง `yarn test` หรือ `yarn start` และเพิ่ม type annotation ให้กับทุกที่ที่ Flow บอกให้คุณเพิ่ม
+
+ต่อมา เรามีหนึ่งตัวอย่างที่น่าสนใจมานำเสนอ (และอาจจะดูขัดใจแปลกๆ) สำหรับไฟล์ `src/client/components/message.jsx'
 
 ```javascript
 const Message = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
-As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
+เราจะเห็นว่า เมื่อเราทำการ destructuring พารามิเตอร์ในฟังก์ชันแล้ว เราจะต้องทำ type annotate กับ properties ที่จะถูกแกะออกมาด้วย โดยใช้หลักการทำ object literal notation (การประกาศ Object โดยใช้ { }) ซึ่งในทีนี้เราให้ตัวแปร `message` มี type เป็น string
 
-Another case you will encounter is that in `src/client/reducers/dog-reducer.js`, Flow will complain about Immutable not having a default export. This issue is discussed in [#863 on Immutable](https://github.com/facebook/immutable-js/issues/863), which highlights 2 workarounds:
+อีกกรณีนึงที่คุณอาจจะเจอ คือในไฟล์ `src/client/reducers/dog-reducer.js` Flow จะบ่นเรื่องของ Immutable ไม่มี default export ซึ่ง issue นี้ก็ยังเป็นที่ถกเถียงกันใน [Issue#863 on Immutable](https://github.com/facebook/immutable-js/issues/863) ที่มี workarounds อยู่สองแบบ
 
 ```javascript
 import { Map as ImmutableMap } from 'immutable';
-// or
+// หรือ
 import * as Immutable from 'immutable';
 ```
 
-Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components. I'm personally going for `import * as Immutable from 'immutable'` since it's shorter and won't require refactoring the code when this issue gets fixed.
+จนกว่าเจ้าของ Immutable จะทำการประกาศแจ้งเรื่อง issue นี้อีกทีนึงในอนาคต ให้เลือกใช้อันที่คุณคิดว่าดีกว่าในการ import Immutable components มาใช้ ซึ่งส่วนตัวผม(ผู้เขียน) เลือกใช้ `import * as Immutable from 'immutable'` เพราะโค้ดสั้นกว่า และไม่ต้องทำ refactoring โค้ดเดิมเลย
 
-**Note**: If Flow detects type errors in your `node_modules` folder, add an `[ignore]` section in your `.flowconfig` to ignore the packages causing issues specifically (do not ignore the entire `node_modules` directory). It could look like this:
+**หมายเหตุ**: ถ้า Flow ตรวจเจอ type errors ในโฟลเดอร์ `node_modules` ให้เพิ่ม `[ignore]` section ในไฟล์ `.flowconfig` เพื่อให้ ignore เฉพาะ package ที่ก่อให้เกิด issue ดังกล่าวเป็นกรณีพิเศษไป (อย่า ignore ทั้งโฟลเดอร์ `node_modules` นะ) โดยหน้าตาจะประมาณนี้
 
 ```flowconfig
 [ignore]
@@ -103,8 +105,8 @@ Until Immutable officially adresses the issue, just pick whichever looks better 
 .*/node_modules/gulp-flowtype/.*
 ```
 
-In my case, the `linter-flow` plugin for Atom was detecting type errors in the `node_modules/gulp-flowtype` directory, which contains files annotated with `// @flow`.
+ในกรณีที่ผม(ผู้เขียน) เจอมา plugin `linter-flow` ของ Atom ถูก detect ว่ามี type errors ในโฟลเดอร์ `node_modules/gulp-flowtype` ซึ่งมีการระบุว่าใช้ `// @flow` ด้วย จึง ignore เฉพาะโฟลเดอร์ดังกล่าวไป ตามตัวอย่างที่แสดงด้านบน
 
-You now have bullet-proof code that is linted, typechecked, and tested, good job!
+ณ ตอนนี้ คุณก็จะต้องเขียนโค้ดที่ผ่านการ lint, typecheck และถูกรัน test ครบถ้วนแล้วก่อนที่จะ build เยี่ยมยอดมาก!
 
-Back to the [previous section](/tutorial/11-testing-mocha-chai-sinon) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/11-testing-mocha-chai-sinon) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents)

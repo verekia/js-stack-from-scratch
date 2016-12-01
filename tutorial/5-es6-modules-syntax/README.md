@@ -1,10 +1,10 @@
-# 5 - The ES6 modules syntax
+# บทที่ 5 - การใช้ ES6 syntax ในการสร้าง modules
 
-Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax).
+ในบทนี้เราจะแทน `const Dog = require('./dog')` จากบทที่แล้ว ด้วย `import Dog from './dog'` แทน ซึ่งเป็น syntax ใหม่สำหรับการจัดการ modules ของ ES6 (ซึ่งจะตรงข้ามกับ modules syntax ของ "CommonJS")
 
-In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`.
+ใน `dog.js` เราจะแทน `module.exports = Dog` ด้วย `export default Dog` (เช่นเดียวกับด้านบน คำสั่งนี้เป็น syntax ใหม่ใน ES6)
 
-Note that in `dog.js`, the name `Dog` is only used in the `export`. Therefore it could be possible to export directly an anonymous class like this instead:
+ให้จำไว้ว่า ใน `dog.js` ชื่อ `Dog` นั้นจะถูกใช้เฉพาะในการ `export` แต่ว่าเราก็สามารถ export anonymous class (คลาสที่ไม่มีชื่อ) ออกไปได้เช่นกับ ดังตัวอย่าง
 
 ```javascript
 export default class {
@@ -18,7 +18,7 @@ export default class {
 }
 ```
 
-You might now guess that the name 'Dog' used in the `import` in `index.js` is actually completely up to you. This would work just fine:
+ซึ่งทำให้ในไฟล์ `index.js` นั้นเราไม่จำเป็นต้องใช้ 'Dog' สำหรับการ `import` เข้ามาแล้ว เราจะตั้งชื่อเป็นอะไรก็ได้ เพราะคลาสที่ถูก export ออกมานั้นเป็น anonymous class ทำให้เราตั้งชื่อเป็นอะไรก็ได้ เพื่ออ้างอิงถึงคลาสดังกล่าว ดังเช่นตัวอย่างด้านล่างนี้
 
 ```javascript
 import Cat from './dog';
@@ -26,14 +26,15 @@ import Cat from './dog';
 const toby = new Cat('Toby');
 ```
 
-Obviously, most of the time you will use the same name as the class / module you're importing.
-A case where you don't do that is how we `const babel = require('gulp-babel')` in our Gulp file.
+แต่แน่นอนว่า เราก็ควรจะใช้ชื่อให้ตรงกับชื่อคลาส หรือ module ที่เรา import มาอยู่แล้ว (คงแปลกน่าดูที่เราไป import Cat มาจาก dog) แต่ก็มีบางกรณีที่เราอาจจะตั้งชื่อไม่ตรงกับสิ่งที่เรา import มา เช่น `const babel = require('gulp-babel')` ใน Gulp file
 
-So what about those `require()`s in our `gulpfile.js`? Can we use `import` instead? The latest version of Node supports most ES6 features, but not ES6 modules yet. Luckily for us, Gulp is able to call Babel for help. If we rename our `gulpfile.js` to `gulpfile.babel.js`, Babel will take care of passing `import`ed modules to Gulp.
+อ้าว แล้วทีนี้ใน `gulpfile.js` เราไม่ใช้ `require()` แล้วแต่เราใช้ `import` แทนได้ไหม? ช่าวร้ายคือแม้ว่า Node เวอร์ชันล่าสุดจะรองรับฟีเจอร์ของ ES6 ได้เป็นส่วนมาก แต่ก็ยังไม่รองรับการใช้ ES6 modules
 
-- Rename your `gulpfile.js` to `gulpfile.babel.js`
+แต่ในความโชคร้าย ก็มีความโชคดีที่เราสามารถให้ Gulp เรียก Babel มาช่วยงานเราได้ โดยเพียงแค่เปลี่ยนชื่อไฟล์จาก `gulpfile.js` เป็น `gulpfile.babel.js` Babel จะช่วยให้เราจัดการ `import` modules ของ Gulp แบบ ES6 modules ได้ โดยขั้นตอนง่ายๆ เพียงแค่
 
-- Replace your `require()`s by:
+- เปลี่ยนชื่อไฟล์ `gulpfile.js` เป็น `gulpfile.babel.js`
+
+- แทนคำสั่ง `require()` ด้วย ES6 modules import ดังนี้
 
 ```javascript
 import gulp from 'gulp';
@@ -42,10 +43,10 @@ import del from 'del';
 import { exec } from 'child_process';
 ```
 
-Note the syntactic sugar to extract `exec` directly from `child_process`. Pretty elegant!
+สังเกตว่า syntax ของการนำ `exec` มาใช้จาก `child_process` นั้นดูดีทีเดียวเชียว
 
-- `yarn start` should still print "Wah wah, I am Toby".
+- สั่ง `yarn start` เราก็จะเห็นคำว่า "Wah wah, I am Toby" เหมือนเดิม
 
-Next section: [6 - ESLint](/tutorial/6-eslint)
+บทถัดไป [บทที่ 6 - การใช้ ESLint](/tutorial/6-eslint)
 
-Back to the [previous section](/tutorial/4-es6-syntax-class) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+กลับไปยัง[บทที่แล้ว](/tutorial/4-es6-syntax-class) หรือไปที่[สารบัญ](https://github.com/MicroBenz/js-stack-from-scratch#table-of-contents).
