@@ -47,9 +47,7 @@ class Dog {
   }
 
   barkInConsole() {
-    /* eslint-disable no-console */
-    console.log(this.bark());
-    /* eslint-enable no-console */
+    console.log(this.bark()); // eslint-disable-line no-console
   }
 
 }
