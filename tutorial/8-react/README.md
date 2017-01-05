@@ -32,7 +32,7 @@ App.propTypes = {
 ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
 ```
 
-**Примечание**: Если вы не знакомы с React или его PropTypes (типы параметров), ознакомьтесь сначала с ним и затем возвращайтесь в это руководство. В следующих главах мы будем использовать React, поэтому вам понадобится хорошее его понимание.
+**Примечание**: Если вы не знакомы с React или его PropTypes (типы параметров), ознакомьтесь сначала с ним и затем возвращайтесь в это руководство. В следующих главах мы будем использовать React, поэтому вам понадобится его хорошее понимание.
 
 В Gulp файле, измените в `clientEntryPoint` расширение на `.jsx`:
 
@@ -53,7 +53,7 @@ clientEntryPoint: 'src/client/app.jsx',
 },
 ```
 
-Теперь, после запуска `yarn start`, открыв `index.html`, мы должны увидеть "The dog says: Wah wah, I am Browser Toby", сгенерированное React.
+Теперь после запуска `yarn start`, открыв `index.html`, мы должны увидеть "The dog says: Wah wah, I am Browser Toby", сгенерированное React.
 
 Следующий раздел: [9 - Redux](/tutorial/9-redux)
 
