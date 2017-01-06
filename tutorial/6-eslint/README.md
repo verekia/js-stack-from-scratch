@@ -6,7 +6,7 @@
 
 Как вы видите, вы можете установить несколько пакетов одной командой. Как обычно, они все добавятся в ваш `package.json`.
 
-В `package.json`, добавьте свойство `eslintConfig` со следующим содержанием:
+В `package.json` добавьте свойство `eslintConfig` со следующим содержанием:
 
 ```json
 "eslintConfig": {
@@ -67,7 +67,7 @@ gulp.task('build', ['lint', 'clean'], () => {
 /* eslint-disable import/no-extraneous-dependencies */
 ```
 
-Таким образом ESLint не будет применять правило `import/no-extraneous-dependencies` в этом файле.
+Таким образом, ESLint не будет применять правило `import/no-extraneous-dependencies` в этом файле.
 
 Теперь у нас осталась проблема с `Unexpected block statement surrounding arrow body (arrow-body-style)` (неожиданное определение блока, окружающего тело стрелочной функции). Это важно. ESLint сообщает нам, что существует лучший способ написать следующий код:
 

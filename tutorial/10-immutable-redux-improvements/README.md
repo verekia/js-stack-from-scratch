@@ -66,7 +66,7 @@ export default dogReducer;
 
 Теперь мы создаем исходное состояние, используя Immutable Map, а новое состояние получаем применяя `set()`, что исключает любые мутации предыдущего состояния.
 
-В `containers/bark-message.js`, обновите функцию `mapStateToProps`, чтобы она использовала `.get('hasBarked')` вместо `.hasBarked`:
+В `containers/bark-message.js` обновите функцию `mapStateToProps`, чтобы она использовала `.get('hasBarked')` вместо `.hasBarked`:
 
 ```javascript
 const mapStateToProps = state => ({
@@ -101,6 +101,6 @@ export const makeBark = createAction(MAKE_BARK, () => true);
 
 - Не забудьте запустить `yarn add redux-actions`.
 
-Следующий раздел: [11 - Тестировние с Mocha, Chai и Sinon](/tutorial/11-testing-mocha-chai-sinon)
+Следующий раздел: [11 - Тестирование с Mocha, Chai и Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
 Назад в [предыдущий раздел](/tutorial/9-redux) или [Содержание](/../../#Содержание).
