@@ -1,4 +1,4 @@
-import html from 'common-tags';
+import { html } from 'common-tags';
 import { IS_PRODUCTION, STATIC_FOLDER } from '../config';
 
 export default (title: string) =>
