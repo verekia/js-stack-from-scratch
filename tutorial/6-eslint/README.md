@@ -2,7 +2,7 @@
 
 Мы собираемся контролировать качество кода (to lint), чтобы перехватывать потенциальные проблемы. ESLint - наиболее предпочтительный анализатор кода (linter) для ES6. Вместо того чтобы самим определять правила для нашего кода, мы воспользуемся конфигурацией, созданной Airbnb. В этой конфигурации используется несколько плагинов, поэтому мы их тоже установим.
 
-- Запустите `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y@2.2.3 eslint-plugin-react`
+- Запустите `yarn add --dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
 
 Как вы видите, вы можете установить несколько пакетов одной командой. Как обычно, они все добавятся в ваш `package.json`.
 
