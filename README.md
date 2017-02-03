@@ -25,9 +25,9 @@ A big chunk of the stack described in this tutorial uses React. If you are begin
 
 Code examples are available for each chapter, and you can run them all with `yarn && yarn start` or `npm install && npm start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** of each chapter.
 
-**Every chapter contains the code of previous chapters**, so if you are simply looking for a boilerplate project containing everything, just clone the last chapter and you're good to go.
+**Every chapter contains the code of previous chapters**, so if you are simply looking for a boilerplate project containing everything, go to the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate) to download the final code of this tutorial.
 
-The code of this tutorial works on Linux, macOS, and Windows.
+The code provided works on Linux, macOS, and Windows.
 
 ## Table of contents
 
