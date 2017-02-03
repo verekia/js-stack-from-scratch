@@ -1,4 +1,4 @@
-# 06 - Testing with Mocha, Chai, and Sinon
+# 06 - Testing with Mocha, Chai, and mocking
 
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
