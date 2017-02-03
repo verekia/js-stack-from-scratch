@@ -9,8 +9,8 @@ We're now going to use some ES6 syntax, which is a great improvement over the "o
 - Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
 
 ```javascript
-const str = 'ES6';
-console.log(`Hello ${str}`);
+const str = 'ES6'
+console.log(`Hello ${str}`)
 ```
 
 We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`. Note that template strings are created using **backquotes**.
@@ -25,47 +25,17 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 
 - Run `yarn add --dev babel-preset-latest` to install a Babel preset package containing configurations for the most recent ECMAScript features supported by Babel.
 
-- In `package.json`, add a `babel` field for the Babel configuration. Make it use the `latest` Babel preset like this:
+- Create a `.babelrc` file at the root of your project, which is a JSON file for your Babel configuration. Write the following to it to make Babel use the `latest` preset:
 
 ```json
-"babel": {
+{
   "presets": [
     "latest"
   ]
-},
+}
 ```
 
-**Note**: A `.babelrc` file at the root of your project could also be used instead of the `babel` field of `package.json`, but since your root folder will get more and more bloated over time, I would recommend to keep the Babel config in `package.json` until it grows too large.
-
-- `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](##the-es6-modules-syntax) section of this chapter.
-
-## Watching for file changes
-
-We now have the basic compilation working, but we need to run `yarn start` manually every time. Let's make this environment a bit more usable by creating a `watch` task to automatically re-execute our code every time we make a change:
-
-```json
-"scripts": {
-  "start": "yarn run watch",
-  "watch": "watch 'yarn run main' src --interval=1",
-  "main": "babel-node src"
-},
-```
-
-### `main` and `watch`
-
-`main` is the task that will run a one-shot execution of our entire pipeline. Right now it is just executing `babel-node`, but many pre-requisite tasks will be added to it later.
-
-`watch` is going to trigger `main` every time a file changes in `src`. We use the `[watch](https://www.npmjs.com/package/watch)` package to monitor file changes, which you need to install:
-
-- Run `yarn add --dev watch`.
-
-**Note**: The `interval` option is the duration in seconds between file change checks. The default value is a bit too slow to my taste, so I use `1` second, which seems reasonable. You can use decimal numbers like `0.5` as well.
-
-We set the default `yarn start` task to run the `watch` task, because that's the task you will want to run most of the time. If you want to run `main` just one time, you can still do `yarn run main`.
-
-Alright, we're now good to go.
-
-- Run `yarn start`. It should print "Hello ES6" and start watching for changes. Try modifying `src/index.js` to make sure the `main` task is triggered again when you save.
+- `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](#the-es6-modules-syntax) section of this chapter.
 
 ## ES6
 
@@ -78,15 +48,15 @@ Alright, we're now good to go.
 ```javascript
 class Dog {
   constructor(name) {
-    this.name = name;
+    this.name = name
   }
 
   bark() {
-    return `Wah wah, I am ${this.name}`;
+    return `Wah wah, I am ${this.name}`
   }
 }
 
-module.exports = Dog;
+module.exports = Dog
 ```
 
 It should not look surprising to you if you've done OOP in the past in any language. It's relatively recent for JavaScript though. The class is exposed to the outside world via the `module.exports` assignment.
@@ -94,10 +64,11 @@ It should not look surprising to you if you've done OOP in the past in any langu
 In `src/index.js`, write the following:
 
 ```javascript
-const Dog = require('./dog');
+const Dog = require('./dog')
 
-const toby = new Dog('Toby');
-console.log(toby.bark());
+const toby = new Dog('Toby')
+
+console.log(toby.bark())
 ```
 
 As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
@@ -106,34 +77,9 @@ As you can see, unlike the community-made package `color` that we used before, w
 
 ### The ES6 modules syntax
 
-Here we simply replace `const Dog = require('./dog');` by `import Dog from './dog';`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
+Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
 
-In `dog.js`, we also replace `module.exports = Dog;` by `export default Dog;`.
-
-Note that in `dog.js`, the name `Dog` is only used in the `export`. Therefore it could be possible to export directly an anonymous class like this instead:
-
-```javascript
-// Dog
-export default class {
-  constructor(name) {
-    this.name = name;
-  }
-
-  bark() {
-    return `Wah wah, I am ${this.name}`;
-  }
-}
-```
-
-You might now guess that the name `Dog` used in the `import` in `index.js` is actually completely up to you. This would work just fine:
-
-```javascript
-import Cat from './dog'; // Don't do this
-
-const toby = new Cat('Toby');
-```
-
-Obviously, most of the time you will use the same name as the class / module you're importing. Anyway!
+In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`.
 
 - `yarn start` should still print "Wah wah, I am Toby".
 
@@ -143,48 +89,66 @@ Obviously, most of the time you will use the same name as the class / module you
 
 ESLint works with *rules*, and there are [many of them](http://eslint.org/docs/rules/). Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
 
-Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2016-11-11, they recommend using the following command in your terminal:
+Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2017-02-03, they recommend using the following command in your terminal:
 
 ```bash
 npm info eslint-config-airbnb@latest peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev eslint-config-airbnb@latest
 ```
 
-It should install everything you need and add `eslint-config-airbnb`,  `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file automatically.
+It should install everything you need and add `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file automatically.
 
 **Note**: I've replaced `npm install` by `yarn add` in this command. Also, this won't work on Windows, so take a look at the `package.json` file of this repository and just install all the ESLint-related dependencies manually using `yarn add --dev packagename@^#.#.#` with `#.#.#` being the versions given in `package.json` for each package.
 
-In `package.json`, add an `eslintConfig` field like so:
+Create an `.eslintrc.json` file at the root of your project, just like we did for Babel, and write the following to it:
 
 ```json
-"eslintConfig": {
+{
   "extends": "airbnb"
-},
+}
 ```
-
-**Note**: An `.eslintrc.js`, `.eslintrc.json`, or `.eslintrc.yaml` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
 
 We'll create an NPM/Yarn script to runs ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
 
 - Run `yarn add --dev eslint`
 
-Update the `scripts` of your `package.json` to include a new `lint` task in the `main` pipeline:
+Update the `scripts` of your `package.json` to include a new `lint` task:
 
 ```json
 "scripts": {
-  "start": "yarn run watch",
-  "watch": "watch 'yarn run main' src --interval=1",
-  "main": "yarn run lint && babel-node src",
-  "lint": "eslint src/**/*.js"
+  "start": "babel-node src",
+  "lint": "eslint src"
 },
 ```
 
-Here we just tell ESLint that the files we want to lint are all the `.js` files under `src`, pretty explicit.
+Here we just tell ESLint that want to lint all JavaScript files under the `src` folder.
 
-- Run `yarn start`, and you should see a warning for using `console.log()` in `index.js`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. Add `/* eslint-disable no-console */` at the top of our `index.js` file to allow the use of `console` in this file.
+- Run `yarn run lint`, and you should see a whole bunch of errors for missing semicolons, and a warning for using `console.log()` in `index.js`. Add `/* eslint-disable no-console */` at the top of our `index.js` file to allow the use of `console` in this file.
 
-- Run `yarn start` and we are now all clear!
+### Semicolons
 
-**Note**: This section sets you up with ESLint in the console. It is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE. Do NOT use your IDE's native linting for ES6. Configure it so the binary it uses for linting is the one in your `node_modules` folder. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get a generic ES6 linting.
+Alright, this is probably the most heated debate in the JavaScript community, let's talk about it for a minute. JavaScript has this thing called Automatic Semicolon Insertion, which allows you to write your code with or without semicolons. It really comes down to personal preference and there is no right and wrong on this topic. If you like the syntax of Python, Ruby, or Scala, you will probably enjoy omitting semicolons. If you prefer the syntax of Java, C#, or PHP, you will probably prefer using semicolons.
+
+Most people write JavaScript with semicolons, out of habit. That was my case until I tried going semicolon-less after seeing code samples from the Redux documentation. At first it felt a bit weird, simply because I was not used to it. After just one day of writing code this way I could not see myself going back to using semicolons at all. They felt so cumbersome and unnecessary. A semicolon-less code is easier on the eyes in my opinion, and is faster to type.
+
+I recommend reading the [ESLint documentation about semicolons](http://eslint.org/docs/rules/semi). As mentioned in this page, if you're going semicolon-less, there are some rather rare cases where semicolons are required. ESLint can protect you from such cases with the `no-unexpected-multiline` rule. Let's set up ESLint to safely go semicolon-less in the `.eslintrc.json` file:
+
+```json
+{
+  "extends": "airbnb",
+  "rules": {
+    "semi": [2, "never"],
+    "no-unexpected-multiline": 2
+  }
+}
+```
+
+- Run `yarn run lint`, and it should now pass successfully. Try adding an unnecessary semicolon somewhere to make sure the rule is set up correctly.
+
+I am aware that some of you will want to keep using semicolons, which will make the code provided in this tutorial inconvenient. If you are using this tutorial just for learning, I'm sure it will remain bearable to learn without semicolons, until going back to using them on your real projects. If you want to use the code provided in this tutorial as a boilerplate though, it will require a bit of rewriting, which should be pretty quick with a good use of Find-Replace and ESLint set to enforce semicolons. I apologize if that's your case.
+
+### Editor Integration
+
+This section set you up with ESLint in the terminal, which is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE for immediate feedback. Do NOT use your IDE's native ES6 linting. Configure it so the binary it uses for linting is the one in your `node_modules` folder instead. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get some generic ES6 linting.
 
 ## Flow
 
@@ -269,6 +233,10 @@ There are 2 things that I want you to try:
 - Now replace `constructor(name: string)` by `constructor(name:string)`, and run `yarn start`. You should get an **ESLint** error telling you that Flow annotations should have a space after the colon. That means the Flow plugin for ESLint is set up correctly.
 
 If you got the 2 different errors working, you are all set with Flow and ESLint!
+
+## Git Hooks with Husky
+
+TODO
 
 Next section: [03 - Express, PM2](/tutorial/03-express-pm2)
 

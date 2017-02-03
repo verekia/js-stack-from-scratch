@@ -33,7 +33,7 @@ The code provided works on Linux, macOS, and Windows.
 
 [01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json)
 
-[02 - Babel, ES6, ESLint, Flow](/tutorial/02-babel-es6-eslint-flow)
+[02 - Babel, ES6, ESLint, Flow, Husky](/tutorial/02-babel-es6-eslint-flow-husky)
 
 [03 - Express, PM2](/tutorial/03-express-pm2)
 
