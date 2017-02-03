@@ -10,6 +10,7 @@
 [![Mocha](/img/mocha.png)](https://mochajs.org/)
 [![Chai](/img/chai.png)](http://chaijs.com/)
 [![Flow](/img/flow.png)](https://flowtype.org/)
+[![PM2](/img/pm2.png)](http://pm2.keymetrics.io/)
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
@@ -41,11 +42,11 @@ The code of this tutorial works on Linux, macOS, and Windows.
 
 [05 - Redux, Immutable](/tutorial/05-redux-immutable)
 
-[06 - Mocha, Chai, Sinon](/tutorial/06-mocha-chai-sinon)
+[06 - Mocha, Chai, Mocking](/tutorial/06-mocha-chai-mocking)
 
 ## Coming up next
 
-React Router, Server-Side Rendering, Styling, Enzyme, Git Hooks.
+React Router, Server-Side Rendering, Styling, Enzyme.
 
 ## Translations
 
