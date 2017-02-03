@@ -1,6 +1,6 @@
-**This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
-
 # 06 - Testing with Mocha, Chai, and Sinon
+
+**This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
 ## Mocha and Chai
 
@@ -153,6 +153,6 @@ So what is new here? Well first of all, we call `chai.use(sinonChai)` to activat
 
 If everything went well in this chapter, you should have 2 passing tests.
 
-Next section: [12 - Type Checking with Flow](/tutorial/12-flow)
+**This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
 Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
