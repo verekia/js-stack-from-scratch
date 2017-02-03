@@ -55,7 +55,7 @@ We now have the basic compilation working, but we need to run `yarn start` manua
 
 `main` is the task that will run a one-shot execution of our entire pipeline. Right now it is just executing `babel-node`, but many pre-requisite tasks will be added to it later.
 
-`watch` is going to trigger `main` every time a file changes in `src`. We use the `[watch](https://www.npmjs.com/package/watch)` package to monitor file changes, which you need to install:
+`watch` is going to trigger `main` every time a file changes in `src`. We use the [watch](https://www.npmjs.com/package/watch) package to monitor file changes, which you need to install:
 
 - Run `yarn add --dev watch`.
 
