@@ -10,11 +10,10 @@
 [![Mocha](/img/mocha.png)](https://mochajs.org/)
 [![Chai](/img/chai.png)](http://chaijs.com/)
 [![Flow](/img/flow.png)](https://flowtype.org/)
-[![PM2](/img/pm2.png)](http://pm2.keymetrics.io/)
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
-**This is v2.0.0**: See the [Change Log](/CHANGELOG.md).
+> **This is V2 of the tutorial, major changes happened since the initial 2016 release. See the [Change Log](/CHANGELOG.md) for more info!**
 
 This is a minimalistic and straight-to-the-point guide to assembling a JavaScript stack. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*.
 
