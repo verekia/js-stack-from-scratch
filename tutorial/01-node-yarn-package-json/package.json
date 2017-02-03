@@ -6,7 +6,7 @@
     "start": "node ."
   },
   "dependencies": {
-    "color": "^0.11.3"
+    "color": "^1.0.0"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",

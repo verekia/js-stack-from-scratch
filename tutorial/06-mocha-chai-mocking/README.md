@@ -155,4 +155,4 @@ If everything went well in this chapter, you should have 2 passing tests.
 
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
-Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

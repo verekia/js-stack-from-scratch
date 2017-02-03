@@ -49,11 +49,19 @@ React Router, Server-Side Rendering, Styling, Enzyme.
 
 ## Translations
 
-- (**Tutorial v1.0.0**) [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
-- (**Tutorial v1.0.0**) [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
-- (**Tutorial v1.0.0**) [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
-
 If you want to add your translation, please read the [translation recommendations](/how-to-translate.md) to get started!
+
+### V2
+
+Coming soon!
+
+### V1
+
+- [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
+- [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
+- [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
+- [Русский](https://github.com/UsulPro/js-stack-from-scratch) by [React Theming](https://github.com/sm-react/react-theming)
+- [ไทย](https://github.com/MicroBenz/js-stack-from-scratch) by [MicroBenz](https://github.com/MicroBenz)
 
 ## Credits
 

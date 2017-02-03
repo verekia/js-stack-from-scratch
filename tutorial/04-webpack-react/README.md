@@ -264,4 +264,4 @@ As you can see, when destructuring function parameters, you must annotate the ex
 
 Next section: [9 - Redux](/tutorial/9-redux)
 
-Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/6-eslint) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

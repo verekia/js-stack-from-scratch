@@ -161,7 +161,7 @@ In `package.json`, add an `eslintConfig` field like so:
 },
 ```
 
-**Note**: An `.eslintrc.js`, `.eslintrc.json`, or `. eslintrc.yaml` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
+**Note**: An `.eslintrc.js`, `.eslintrc.json`, or `.eslintrc.yaml` file at the root of your project could also be used instead of the `eslintConfig` field of `package.json`. Just like for the Babel configuration, we try to avoid bloating the root folder with too many files, but if you have a complex ESLint config, consider this alternative.
 
 We'll create an NPM/Yarn script to runs ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
 

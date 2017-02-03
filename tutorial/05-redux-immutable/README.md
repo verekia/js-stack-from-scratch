@@ -273,4 +273,4 @@ Until Immutable officially adresses the issue, just pick whichever looks better 
 
 Next section: [11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
 
-Back to the [previous section](/tutorial/9-redux) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
+Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
