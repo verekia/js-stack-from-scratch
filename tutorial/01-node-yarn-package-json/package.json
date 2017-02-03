@@ -1,12 +1,12 @@
 {
   "name": "js-stack-from-scratch",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "start": "node ."
   },
   "dependencies": {
-    "color": "^1.0.0"
+    "color": "^1.0.3"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
