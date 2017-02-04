@@ -142,6 +142,4 @@ PM2 can be configured with command-line parameters or config files. Since we try
 // TODO: We simply tell Babel to compile an ES6 `src` directory into an ES5 `lib` directory with the `-d` flag.
 
 - Add `/lib/` to your `.gitignore`.
-
-
 The only point of this file is to see that our public assets folder is set up correctly with some basic styling.
