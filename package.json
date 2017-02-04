@@ -8,8 +8,7 @@
   },
   "devDependencies": {
     "glob": "^7.1.1",
-    "markdownlint": "^0.3.0",
-    "yarn": "^0.16.1"
+    "markdownlint": "^0.3.0"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
