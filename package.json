@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "test": "yarn run mdlint",
+    "test": "yarn run mdlint && cd tutorial/01-node-yarn-package-json && yarn && yarn start && cd ../02-babel-es6-eslint-flow-husky && yarn && yarn test && yarn start",
     "mdlint": "node mdlint.js"
   },
   "devDependencies": {
