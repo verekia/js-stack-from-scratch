@@ -5,7 +5,6 @@ const config = {
   'default': true,
   'line_length': false,
   'no-emphasis-as-header': false,
-  'no-duplicate-header': false,
 }
 
 const files = glob.sync('**/*.md', { ignore: '**/node_modules/**' })

@@ -3,41 +3,26 @@
   "version": "2.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "start": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tutorial-test": "gulp main"
-  },
-  "eslintConfig": {
-    "extends": "airbnb",
-    "plugins": [
-      "import"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "latest"
-    ]
+    "start": "babel-node src",
+    "test": "eslint src && flow",
+    "precommit": "yarn test",
+    "prepush": "yarn test"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-eslint": "^7.1.0",
+    "babel-cli": "^6.22.2",
+    "babel-eslint": "^7.1.1",
     "babel-preset-flow": "^1.0.0",
-    "babel-preset-latest": "^6.16.0",
-    "eslint": "^3.9.1",
+    "babel-preset-latest": "^6.22.0",
+    "eslint": "^3.13.0",
     "eslint-config-airbnb": "latest",
-    "eslint-plugin-flowtype": "^2.25.0",
-    "eslint-plugin-import": "^2.1.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.6.0",
-    "flow-bin": "^0.35.0",
-    "pm2": "^2.1.4",
-    "rimraf": "^2.5.4",
-    "watch": "^1.0.1"
+    "eslint-plugin-flowtype": "^2.30.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "flow-bin": "^0.38.0",
+    "husky": "^0.13.1"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.14.0"
-  }
+  "license": "MIT"
 }
