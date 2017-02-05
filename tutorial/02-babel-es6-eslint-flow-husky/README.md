@@ -1,4 +1,4 @@
-# 02 - Babel, ES6, ESLint, Flow
+# 02 - Babel, ES6, ESLint, Flow, Git Hooks
 
 We're now going to use some ES6 syntax, which is a great improvement over the "old" ES5 syntax. All browsers and JS environments understand ES5 well, but not ES6. That's where a tool called Babel comes to the rescue!
 

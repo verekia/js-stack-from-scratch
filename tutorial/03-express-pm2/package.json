@@ -5,7 +5,7 @@
   "scripts": {
     "start": "yarn dev",
     "dev": "yarn stop && pm2 start pm2-dev.yaml",
-    "prod": "yarn stop && yarn build-prod && pm2 start pm2-prod.yaml",
+    "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
     "build": "rimraf lib && babel src -d lib",
     "stop": "rimraf logs/* && pm2 delete all || true",
     "test": "eslint src && flow && yarn build",
