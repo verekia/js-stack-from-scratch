@@ -1,0 +1,7 @@
+apps:
+  - script: ./lib/server
+    out_file: logs/server-prod.log
+    error_file: logs/server-prod.log
+    combine_logs: true
+    env:
+      NODE_ENV: production

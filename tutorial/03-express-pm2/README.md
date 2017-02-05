@@ -110,7 +110,9 @@ Anyway, back to business!
 
 > 💡 **[PM2](http://pm2.keymetrics.io/)** is a Process Manager for Node. It keeps your processes alive in production, and offers tons of features to manage them and monitor them.
 
-PM2 is not only great for production, it can also be used in development thanks to its *watch* feature. Let's set up both environments right now.
+PM2 is not only great for production, it can also be used in development thanks to its *watch* feature which restarts the server automatically when files are changed.
+
+- Run `yarn add --dev pm2`.
 
 ### Development mode
 
@@ -133,15 +135,94 @@ Try to run `node src/server/server` in your terminal. `node` should choke on `Un
 
 - Now run `node src/server` instead (which points to `src/server/index.js`, the default file of the directory). This time it's going through the require hook and you should see your server starting. Magic!
 
-### Development configuration file
+#### Development configuration file
 
 PM2 can be configured with command-line parameters or config files. Since we try to keep our `package.json` as lean as possible, we're going to use config files, one per environment.
 
-- Create
+- Create a `pm2-dev.yaml` file, containing:
 
-// TODO: We simply tell Babel to compile an ES6 `src` directory into an ES5 `lib` directory with the `-d` flag.
+```yaml
+apps:
+  - script: ./src/server
+    out_file: logs/server-dev.log
+    error_file: logs/server-dev.log
+    combine_logs: true
+    watch: true
+    ignore_watch: logs/
+    env:
+      NODE_ENV: development
+```
+
+`script` is the entry point of our server process (the require hook), then we declare that we want our server logs stored in the `logs/` folder, `combine_logs` is a parameter to not use process id suffixes in the log filename, `watch` enables the auto-restart of the server when **any** file changes in the directory, `ignore_watch` lets us exclude the `logs` directory to avoid infinite loops due the constant rewriting of logs. Finally `env.NODE_ENV` is your regular NODE_ENV environment variable.
+
+- Add `/logs/` to your `.gitignore`.
+
+The log file is going to grow bigger and bigger over time, and it's probably a good idea to clear it (delete it) every time we start the server. A neat simple package that lets us delete files with cross platform support us `rimraf`.
+
+- Run `yarn add --dev rimraf`.
+
+#### Development scripts
+
+Let's update our `package.json` like so:
+
+```json
+"scripts": {
+  "start": "yarn dev",
+  "dev": "yarn stop && pm2 start pm2-dev.yaml",
+  "stop": "rimraf logs/* && pm2 delete all || true",
+  "test": "eslint src && flow",
+  "precommit": "yarn test",
+  "prepush": "yarn test"
+},
+```
+
+`start` is now just a pointer to some other task, which is `dev` here. That gives us a layer of abstraction to tweak what the default task is.
+
+`dev` is our main task for development. It calls `stop` to get rid of any previous process, and starts our PM2 process based on the config file.
+
+In `stop`, `rimraf logs/* && pm2 delete all` clears the logs folder and deletes all processes. If there was no processes running, it returns an error exit code. Since we don't want this error to interrupt our chain of tasks, we force it to pass with `|| true`.
+
+- Go to `http://localhost:8000/` in your browser. If you have no hanging process currently running it should give you a 404. Run `yarn start`, which should trigger `dev`, which triggers, `stop`, and finally launches the process of our server. Hit `http://localhost:8000/` and it should now show your app. Take a look at the `logs/server-dev.log` file, which should contain `Express running on port 8000.`.
+
+- Run `yarn stop` to stop your server. If everything works well, it should now give you a 404 again in your browser.
+
+You are now all set for your development environment.
+
+### Production mode
+
+In production, you want your server to be as performant as possible. `babel-node` and the require hook trigger the whole Babel transpilation process for your files at each execution, which is not something you want in production. We need Babel to do all this work beforehand, and have our server serve plain old pre-compiled ES5 files.
+
+One of the main features of Babel is to take a folder of ES6 code (usually named `src`) and transpile it into a folder of ES5 code (usually named `lib`). Let's add the following `build` task to our `package.json`:
+
+```json
+"prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
+"build": "rimraf lib && babel src -d lib",
+```
+
+We use `rimraf` to clean up auto-generated `lib` folder, `babel` to transpile our code, and finally run PM2 on a different config file, `pm2-prod.yaml`.
+
+- Create a `pm2-prod.yaml` file containing:
+
+```yaml
+apps:
+  - script: ./lib/server
+    out_file: logs/server-prod.log
+    error_file: logs/server-prod.log
+    combine_logs: true
+    env:
+      NODE_ENV: production
+```
+
+The only differences with the `pm2-dev.yaml` file is that the `script` now points to the `lib` folder instead of `src`, and we are not using `watch`.
 
 - Add `/lib/` to your `.gitignore`.
 
+- Run `yarn prod`. It should delete previous `logs` and `lib` files, kill any previous process, transpile your files and run your server on `http://localhost:8000/`.
 
-The only point of this file is to see that our public assets folder is set up correctly with some basic styling.
+All good? Congratulations, you now have development and production environments set up!
+
+One last thing. Now that we have a `build` task, it would be neat to run it in our `test` task to make sure the transpilation is successful. Tweak your `test` task like this: `"test": "eslint src && flow && yarn build",`. That will be yet another safety net to make sure our code is clean before pushing it to the repository.
+
+Next section: [04 - Webpack, React](/tutorial/04-webpack-react)
+
+Back to the [previous section](/tutorial/02-babel-es6-eslint-flow-husky) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

@@ -1,0 +1,9 @@
+apps:
+  - script: ./src/server
+    out_file: logs/server-dev.log
+    error_file: logs/server-dev.log
+    combine_logs: true
+    watch: true
+    ignore_watch: logs/
+    env:
+      NODE_ENV: development
