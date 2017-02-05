@@ -1,42 +1,30 @@
-# 5 - Client App with Webpack and React
+# 04 - Webpack and React
 
-## Structure of our app
+## Webpack
 
-We are now going to turn our command-line-only app into a web app by splitting it between server code and client code. Since we're using JavaScript, we're actually even going to be able to share some code between the two. This chapter is a bit dense, but I promise it's worth it!
+> 💡 **[Webpack](https://webpack.github.io/)** is a *module bundler*. It takes a whole bunch of various source files, processes them, and assembles them into one (usually) JavaScript file called a bundle, which is the only file your client will execute.
 
-- In your `src` folder, create the following subfolders: `server`, `shared`, `client`, and move your current `index.js` into `server`, and `dog.js` into `shared`. Create `app.js` in `client`. You'll need to change the `import Dog from './dog';` in `server/index.js` to `import Dog from '../shared/dog';` though, or ESLint will detect errors for unresolved modules.
+Let's create some very basic *hello world* app and bundle it with Webpack.
 
-## The Express Server
+- Run `yarn add --dev webpack`.
 
-- Create a `src/server/templates/master-layout.js` file and add the following `index.html` file to it:
-
-// TODO
+- Create an `src/client/entry.js` file containing:
 
 ```javascript
-<!doctype html>
-<html>
-  <head>
-  </head>
-  <body>
-    <div class="app"></div>
-    <script src="client-bundle.js"></script>
-  </body>
-</html>
+// @flow
+
+import 'babel-polyfill'
+
+document.querySelector('.js-app').innerText = 'Wah wah'
 ```
 
-We are not going to do any Node back-end yet, but this separation will help you see more clearly where things belong.
+If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) before anything else in in your bundle.
 
-Write this in `client/app.js`:
+- Run `yarn add babel-polyfill`.
 
-```javascript
-import Dog from '../shared/dog';
+If you run ESLint on this file, it will complain about `document` being undeclared.
 
-const browserToby = new Dog('Browser Toby');
-
-document.querySelector('.app').innerText = browserToby.bark();
-```
-
-Add the following to your `package.json`, under `eslintConfig`:
+- Add the following to your `.eslintrc.json` at the root of the object to allow the use of `window` and `document`:
 
 ```json
 "env": {
@@ -44,21 +32,68 @@ Add the following to your `package.json`, under `eslintConfig`:
 }
 ```
 
-This way we can use variables such as `window` or `document` which are always accessible in the browser without ESLint complaining about undeclared variables.
+Alright, we now need to bundle this ES6 client app into an ES5 bundle.
 
-If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) in your client code.
-
-- Run `yarn add babel-polyfill`
-
-And before anything else in `app.js`, add this import:
+- Create a `webpack.config.babel.js` file containing:
 
 ```javascript
-import 'babel-polyfill';
+// @flow
+
+export default {
+  entry: './src/client/entry.js',
+  output: { filename: 'dist/js/bundle.js' },
+  module: {
+    rules: [
+      { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
+    ],
+  },
+}
 ```
 
-Including the polyfill adds some weight to your bundle, so add it only if you use the features it covers. In order to provide some solid boilerplate code with this tutorial, I am including it and it will appear in code samples in the next chapters.
+This file is used to describe how our bundle should be assembled: `entry` is the starting point of our app and `output.filename` is the file path of the bundle to generate. We put it in a `dist` folder, which will contain bundles and other things that are generated automatically (unlike the declarative CSS we created earlier which lives in `public`). `module.rules` is where you tell Webpack to apply some treatment to some type of files. Here we say that we want all `.js` files except the ones in `node_modules` to go through something called `babel-loader`.
 
-## Webpack
+`babel-loader` is a plugin for Webpack that transpiles your code just like we've been doing since the beginning of this tutorial. The only difference is that this time, the code will end up running in the browser of your client instead of your server.
+
+- Run `yarn add --dev babel-core babel-loader`.
+
+- Add `/dist/` to your `.gitignore`.
+
+`babel-core` is a peer-dependency of `babel-loader`, so you need to install it as well.
+
+### Development / Production variations
+
+Tweak your `package.json` scripts like so:
+
+```json
+"dev": "yarn stop && webpack && pm2 start pm2-dev.yaml",
+"prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
+"build": "rimraf lib && babel src -d lib && webpack",
+```
+
+Next, let's create a `<div class="js-app"></div>` container in our `src/server/template/master-template.js`, and include the bundle that will be generated:
+
+```javascript
+// @flow
+
+import { STATIC_PATH } from '../../shared/config'
+
+export default (title: string) => `
+<!doctype html>
+<html>
+  <head>
+    <title>${title}</title>
+    <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
+  </head>
+  <body>
+    <h1>${title}</h1>
+    <div class="js-app"></div>
+    <script src="/dist/js/bundle.js"></script>
+  </body>
+</html>
+`
+```
+
+## Webpack (old)
 
 In a Node environment, you can freely `import` different files and Node will resolve these files using your filesystem. In a browser, there is no filesystem, and therefore your `import`s point to nowhere. In order for our entry point file `app.js` to retrieve the tree of imports it needs, we are going to "bundle" that entire tree of dependencies into one file. Webpack is a tool that does this.
 

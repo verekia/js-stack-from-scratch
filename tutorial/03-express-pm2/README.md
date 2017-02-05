@@ -33,6 +33,8 @@ export const EXPRESS_PORT = 8000
 export const STATIC_PATH = '/static'
 ```
 
+This `shared` folder is where we put *isomorphic / universal* JavaScript code – files that are accessible by both the client and the server. A great use case of shared code is *routes*, as you will see later in this tutorial when we'll make an AJAX call. Here we simply have some configuration constants as an example for now.
+
 - Create a `src/server/server.js` file containing:
 
 ```javascript
@@ -59,7 +61,7 @@ app.listen(EXPRESS_PORT, () => {
 })
 ```
 
-Nothing fancy here, it's almost Express' Hello World tutorial with a few additional imports.
+Nothing fancy here, it's almost Express' Hello World tutorial with a few additional imports. We're using 2 different static file directories here. `dist` for generated files, `public` for declarative ones.
 
 - Create a `src/server/template/master-template.js` file containing:
 
@@ -196,10 +198,10 @@ One of the main features of Babel is to take a folder of ES6 code (usually named
 
 ```json
 "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-"build": "rimraf lib && babel src -d lib",
+"build": "rimraf lib && babel src/server -d lib/server && babel src/shared -d lib/shared",
 ```
 
-We use `rimraf` to clean up auto-generated `lib` folder, `babel` to transpile our code, and finally run PM2 on a different config file, `pm2-prod.yaml`.
+First, we use `rimraf` to clean up auto-generated `lib` folder. Then we use `babel` to transpile our code from `src` to `lib`, but instead of transpiling the entire folder (which would be done with `babel src -d lib`), we split it into 2 commands, one for `server`, and one for `shared`. This way, when we start adding code in the `client` folder, Babel won't waste time transpiling useless client-only files that the server does not need. Finally we run PM2 on a different config file, `pm2-prod.yaml`.
 
 - Create a `pm2-prod.yaml` file containing:
 

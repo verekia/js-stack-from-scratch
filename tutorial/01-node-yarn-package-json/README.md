@@ -73,6 +73,8 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 *.log
 ```
 
+If you are using a Mac, you should probably add `.DS_Store` to this file as well.
+
 `npm-debug.log` and `yarn-error.log` are files that are created when your package manager encounters an error, we don't want them versioned in our repository.
 
 ## Installing and using a package
