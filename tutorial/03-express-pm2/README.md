@@ -223,7 +223,12 @@ The only differences with the `pm2-dev.yaml` file is that the `script` now point
 
 All good? Congratulations, you now have development and production environments set up!
 
-One last thing. Now that we have a `build` task, it would be neat to run it in our `test` task to make sure the transpilation is successful. Tweak your `test` task like this: `"test": "eslint src && flow && yarn build",`. That will be yet another safety net to make sure our code is clean before pushing it to the repository.
+One last thing. Now that we have a `build` task, it would be neat to run it after our `test` task to make sure the transpilation is successful as well before pushing code to our Git repository. Tweak your `precommit` and `prepush` tasks like this:
+
+```json
+"precommit": "yarn test && yarn build",
+"prepush": "yarn test && yarn build"
+```
 
 Next section: [04 - Webpack, React](/tutorial/04-webpack-react)
 
