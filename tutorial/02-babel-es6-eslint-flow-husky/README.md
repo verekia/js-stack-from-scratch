@@ -272,6 +272,8 @@ All we have to do is to create two new tasks in `scripts`, `precommit` and `prep
 
 If you now try to commit or push your code, it should automatically run the `test` task.
 
+**Note**: If you are pushing right after a commit, you can use `git push --no-verify` to avoid running all the tests again.
+
 Next section: [03 - Express, PM2](/tutorial/03-express-pm2)
 
 Back to the [previous section](/tutorial/01-node-yarn-package-json) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
