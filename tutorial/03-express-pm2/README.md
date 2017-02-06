@@ -223,11 +223,14 @@ The only differences with the `pm2-dev.yaml` file is that the `script` now point
 
 All good? Congratulations, you now have development and production environments set up!
 
-One last thing. Now that we have a `build` task, it would be neat to run it after our `test` task to make sure the transpilation is successful as well before pushing code to our Git repository. Tweak your `precommit` and `prepush` tasks like this:
+### Full-check script
+
+Now that we have a `build` task and a server to manage, it would be neat to make sure these work fine before pushing code to the repository. I suggest creating a `full-check` task that will run all our tests, and start the production server after building the code for it. We'll run this `full-check` task before commits and pushes:
 
 ```json
-"precommit": "yarn test && yarn build",
-"prepush": "yarn test && yarn build"
+"full-check": "yarn test && yarn prod && yarn stop",
+"precommit": "yarn full-check",
+"prepush": "yarn full-check"
 ```
 
 Next section: [04 - Webpack, React](/tutorial/04-webpack-react)
