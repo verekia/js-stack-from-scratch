@@ -146,7 +146,7 @@ I recommend reading the [ESLint documentation about semicolons](http://eslint.or
 }
 ```
 
-- Run `yarn run lint`, and it should now pass successfully. Try adding an unnecessary semicolon somewhere to make sure the rule is set up correctly.
+- Run `yarn test`, and it should now pass successfully. Try adding an unnecessary semicolon somewhere to make sure the rule is set up correctly.
 
 I am aware that some of you will want to keep using semicolons, which will make the code provided in this tutorial inconvenient. If you are using this tutorial just for learning, I'm sure it will remain bearable to learn without semicolons, until going back to using them on your real projects. If you want to use the code provided in this tutorial as a boilerplate though, it will require a bit of rewriting, which should be pretty quick with ESLint set to enforce semicolons to guide you through the process. I apologize if you're in such case.
 
@@ -186,9 +186,6 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
   "plugins": [
     "flowtype"
   ],
-  "env": {
-    "browser": true
-  },
   "rules": {
     "semi": [2, "never"],
     "no-unexpected-multiline": 2
@@ -237,15 +234,15 @@ The `// @flow` comment tells Flow that we want this file to be typechecked. For 
 
 - Add `// @flow` at the top of `index.js` as well.
 
-`yarn start` should now both lint and typecheck your code fine.
+`yarn test` should now both lint and typecheck your code fine.
 
 There are 2 things that I want you to try:
 
-- Replace `constructor(name: string)` by `constructor(name: number)`, and run `yarn start`. You should get a **Flow** error telling you that those types are incompatible. That means Flow is set up correctly.
+- In `dog.js`, replace `constructor(name: string)` by `constructor(name: number)`, and run `yarn test`. You should get a **Flow** error telling you that those types are incompatible. That means Flow is set up correctly.
 
-- Now replace `constructor(name: string)` by `constructor(name:string)`, and run `yarn start`. You should get an **ESLint** error telling you that Flow annotations should have a space after the colon. That means the Flow plugin for ESLint is set up correctly.
+- Now replace `constructor(name: string)` by `constructor(name:string)`, and run `yarn test`. You should get an **ESLint** error telling you that Flow annotations should have a space after the colon. That means the Flow plugin for ESLint is set up correctly.
 
-If you got the 2 different errors working, you are all set with Flow and ESLint!
+If you got the 2 different errors working, you are all set with Flow and ESLint! Remember to put the missing space back in the Flow annotation.
 
 ### Flow in your editor
 
