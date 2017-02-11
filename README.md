@@ -14,7 +14,7 @@
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
-> ⚠️️ A major update of the tutorial will be available before the end of February. I would recommend waiting a bit! [Read more](https://github.com/verekia/js-stack-from-scratch/issues/133).
+> ⚠️️ A major update of the tutorial will be available before the end of February, so wait a bit! [Read more](https://github.com/verekia/js-stack-from-scratch/issues/133).
 
 This is a minimalistic and straight-to-the-point guide to assembling a JavaScript stack. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*.
 
