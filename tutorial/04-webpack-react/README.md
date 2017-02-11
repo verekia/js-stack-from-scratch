@@ -6,8 +6,6 @@
 
 Let's create some very basic *hello world* app and bundle it with Webpack.
 
-- Run `yarn add --dev webpack`.
-
 - Create an `src/client/entry.js` file containing:
 
 ```javascript
@@ -48,7 +46,7 @@ export const WDS_PORT = 7000
 import { WDS_PORT } from './src/shared/config'
 
 export default {
-  entry: './src/client/entry.jsx',
+  entry: './src/client/entry.js',
   output: { filename: 'dist/js/bundle.js' },
   module: {
     rules: [
@@ -71,7 +69,7 @@ This file is used to describe how our bundle should be assembled: `entry` is the
 
 `babel-core` is a peer-dependency of `babel-loader`, so you need to install it as well.
 
-- Run `yarn add --dev webpack-dev-server`.
+- Run `yarn add --dev webpack webpack-dev-server`.
 
 - Add `/dist/` to your `.gitignore`.
 
@@ -116,6 +114,14 @@ export default (title: string) => `
 
 Depending on the environment we're in, we'll include either the Webpack Dev Server bundle, or the production bundle. Note that the path to Webpack Dev Server's bundle is *virtual*, `dist/js/bundle.js` is not actually read from your hard drive in development mode. It's also necessary to give Webpack Dev Server a different port than your main web port.
 
+Alright that was a lot of changes, let's see if everything works as expected:
+
+- Run `yarn start`. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should be 1MB+ files) and the process hangs in your terminal, open `http://localhost:8000/` and you should see "Wah wah". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In `src/client/entry.js` Try changing `Wah wah` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should start reloading automatically.
+
+- Run `yarn prod`. Once Webpack is done generating the minified bundle (around 300KB this time), open `http://localhost:8000/` and you should still see "Wah wah". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
+
+Phew, that was a lot of infra stuff. All these first chapters basically just give you a Hello World in your browser! Alright, I think you now finally deserve to build the app we've been preparing for this entire time.
+
 ## React
 
 > 💡 **[React](https://facebook.github.io/react/)** is a library for building user interfaces by Facebook. It uses the **[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)** syntax to represent HTML elements and components while leveraging the power of JavaScript.
@@ -126,54 +132,33 @@ First, let's install React and ReactDOM:
 
 - Run `yarn add react react-dom`
 
-These 2 packages go to our `"dependencies"` and not `"devDependencies"` because unlike build tools, the client bundle needs them in production.
-
 Let's rename our `src/client/app.js` file into `src/client/app.jsx` and write some React and JSX code in it:
 
 ```javascript
-import 'babel-polyfill';
+// TODO
+```
 
-import React, { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import Dog from '../shared/dog';
+Also, modify `entry` in your `webpack.config.babel.js` to use this JSX file:
 
-const dogBark = new Dog('Browser Toby').bark();
-
-const App = props => (
-  <div>
-    The dog says: {props.message}
-  </div>
-);
-
-App.propTypes = {
-  message: PropTypes.string.isRequired,
-};
-
-ReactDOM.render(<App message={dogBark} />, document.querySelector('.app'));
+```javascript
+entry: './src/client/entry.jsx',
 ```
 
 **Note**: If you are unfamiliar with React or its PropTypes, learn about React first and come back to this tutorial later. There is going to be quite some React things in the upcoming chapters, so you need a good understanding of it.
 
-In your Gulpfile, change the value of `clientEntryPoint` to give it a `.jsx` extension:
-
-```javascript
-clientEntryPoint: 'src/client/app.jsx',
-```
-
 Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
 Install the React Babel preset, which will teach Babel how to process the JSX syntax:
-`yarn add --dev babel-preset-react` and change the `babel` entry in your `package.json` file like so:
+`yarn add --dev babel-preset-react` and change your `.babelrc` file like so:
 
 ```json
-"babel": {
+{
   "presets": [
     "latest",
+    "flow",
     "react"
   ]
-},
+}
 ```
-
-Now after running `yarn start`, if we open `index.html`, we should see "The dog says: Wah wah, I am Browser Toby" rendered by React.
 
 ## TODO
 
