@@ -34,40 +34,61 @@ If you run ESLint on this file, it will complain about `document` being undeclar
 
 Alright, we now need to bundle this ES6 client app into an ES5 bundle.
 
+- In `src/shared/config`, add the following constant:
+
+```javascript
+export const WDS_PORT = 7000
+```
+
 - Create a `webpack.config.babel.js` file containing:
 
 ```javascript
 // @flow
 
+import { WDS_PORT } from './src/shared/config'
+
 export default {
-  entry: './src/client/entry.js',
+  entry: './src/client/entry.jsx',
   output: { filename: 'dist/js/bundle.js' },
   module: {
     rules: [
-      { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
     ],
   },
+  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devServer: { port: WDS_PORT },
 }
 ```
 
-This file is used to describe how our bundle should be assembled: `entry` is the starting point of our app and `output.filename` is the file path of the bundle to generate. We put it in a `dist` folder, which will contain bundles and other things that are generated automatically (unlike the declarative CSS we created earlier which lives in `public`). `module.rules` is where you tell Webpack to apply some treatment to some type of files. Here we say that we want all `.js` files except the ones in `node_modules` to go through something called `babel-loader`.
+This file is used to describe how our bundle should be assembled: `entry` is the starting point of our app and `output.filename` is the file path of the bundle to generate. We put it in a `dist` folder, which will contain bundles and other things that are generated automatically (unlike the declarative CSS we created earlier which lives in `public`). `module.rules` is where you tell Webpack to apply some treatment to some type of files. Here we say that we want all `.js` and `.jsx` files except the ones in `node_modules` to go through something called `babel-loader`. We also want these two extensions to `resolve`. Finally, we declare a port for Webpack Dev Server.
 
 `babel-loader` is a plugin for Webpack that transpiles your code just like we've been doing since the beginning of this tutorial. The only difference is that this time, the code will end up running in the browser of your client instead of your server.
 
 - Run `yarn add --dev babel-core babel-loader`.
 
-- Add `/dist/` to your `.gitignore`.
-
 `babel-core` is a peer-dependency of `babel-loader`, so you need to install it as well.
+
+- Run `yarn add --dev webpack-dev-server`.
+
+- Add `/dist/` to your `.gitignore`.
 
 ### Development / Production variations
 
-Tweak your `package.json` scripts like so:
+In development mode, we are going to use `webpack-dev-server` to take advantage of hot module reloading, and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code.
+
+One more thing: In order for our `webpack.config.babel.js` file to be aware of the `NODE_ENV` environment variable, we need to pass it to the `webpack`. With Unix, you would do this by running `NODE_ENV=production webpack`, but Windows uses a different syntax. We're going to use a small package called `cross-env` to make this syntax work on Windows as well.
+
+- Run `yarn add --dev cross-env`.
+
+You can now tweak your `package.json` scripts like so:
 
 ```json
-"dev": "yarn stop && webpack && pm2 start pm2-dev.yaml",
+"dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
 "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-"build": "rimraf lib && babel src -d lib && webpack",
+"build": "rimraf dist lib && babel src/server -d lib/server && babel src/shared -d lib/shared && cross-env NODE_ENV=production webpack -p --progress"
 ```
 
 Next, let's create a `<div class="js-app"></div>` container in our `src/server/template/master-template.js`, and include the bundle that will be generated:
@@ -75,7 +96,7 @@ Next, let's create a `<div class="js-app"></div>` container in our `src/server/t
 ```javascript
 // @flow
 
-import { STATIC_PATH } from '../../shared/config'
+import { isProd, STATIC_PATH, WDS_PORT } from '../../shared/config'
 
 export default (title: string) => `
 <!doctype html>
@@ -87,23 +108,13 @@ export default (title: string) => `
   <body>
     <h1>${title}</h1>
     <div class="js-app"></div>
-    <script src="/dist/js/bundle.js"></script>
+    <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/bundle.js"></script>
   </body>
 </html>
 `
 ```
 
-## Webpack (old)
-
-// In a Node environment, you can freely `import` different files and Node will resolve these files using your filesystem. In a browser, there is no filesystem, and therefore your `import`s point to nowhere. In order for our entry point file `app.js` to retrieve the tree of imports it needs, we are going to "bundle" that entire tree of dependencies into one file. Webpack is a tool that does this.
-
-// Let's analyze this a bit:
-
-// We need this file to `export` stuff for Webpack to read. `output.filename` is the name of the bundle we want to generate. `devtool: 'source-map'` will enable source maps for a better debugging experience in your browser. In `module.loaders`, we have a `test`, which is the JavaScript regex that will be used to test which files should be processed by the `babel-loader`. Since we will use both `.js` files and `.jsx` files (for React) in the next chapters, we have the following regex: `/\.jsx?$/`. The `node_modules` folder is excluded because there is no transpilation to do there. This way, when your code `import`s packages located in `node_modules`, Babel doesn't bother processing those files, which reduces build time. The `resolve` part is to tell Webpack what kind of file we want to be able to `import` in our code using extension-less paths like `import Foo from './foo'` where `foo` could be `foo.js` or `foo.jsx` for instance.
-
-// Okay so now we have Webpack set up, but we still need a way to *run* it.
-
-// Like I said earlier, in the next chapter we are going to use `.jsx` files (on the client, and even on the server later on), so let's set that up right now to have a bit of a head start.
+Depending on the environment we're in, we'll include either the Webpack Dev Server bundle, or the production bundle. Note that the path to Webpack Dev Server's bundle is *virtual*, `dist/js/bundle.js` is not actually read from your hard drive in development mode. It's also necessary to give Webpack Dev Server a different port than your main web port.
 
 ## React
 
