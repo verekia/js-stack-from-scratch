@@ -112,7 +112,7 @@ Anyway, back to business!
 
 > 💡 **[PM2](http://pm2.keymetrics.io/)** is a Process Manager for Node. It keeps your processes alive in production, and offers tons of features to manage them and monitor them.
 
-PM2 is not only great for production, it can also be used in development thanks to its *watch* feature which restarts the server automatically when files are changed.
+PM2 is not only great for production, it can also be used in development thanks to its *watch* feature which restarts the server automatically when files are changed. And if you ever need to run multiple processes, like a separate websocket server for instance, PM2 makes it very easy as well.
 
 - Run `yarn add --dev pm2`.
 
