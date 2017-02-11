@@ -1,48 +1,44 @@
 {
-  "name": "js-stack-from-scratch",
-  "version": "2.0.0",
-  "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
+  "name": "your-project",
+  "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
-    "start": "gulp",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tutorial-test": "gulp main"
-  },
-  "eslintConfig": {
-    "extends": "airbnb",
-    "plugins": [
-      "import"
-    ],
-    "env": {
-      "browser": true
-    }
-  },
-  "babel": {
-    "presets": [
-      "latest",
-      "react"
-    ]
+    "start": "yarn dev",
+    "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
+    "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
+    "build": "rimraf dist lib && babel src/server -d lib/server && babel src/shared -d lib/shared && cross-env NODE_ENV=production webpack -p --progress",
+    "stop": "rimraf logs/* && pm2 delete all || true",
+    "test": "eslint src && flow",
+    "full-check": "yarn test && yarn prod && yarn stop",
+    "precommit": "yarn full-check",
+    "prepush": "yarn full-check"
   },
   "dependencies": {
-    "babel-polyfill": "^6.16.0",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "babel-polyfill": "^6.22.0",
+    "express": "^4.14.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "babel-loader": "^6.2.5",
-    "babel-preset-latest": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
-    "del": "^2.2.2",
-    "eslint": "^3.8.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^2.0.1",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-eslint": "^3.0.1",
-    "webpack-stream": "^3.2.0"
-  },
-  "repository": "verekia/js-stack-from-scratch",
-  "author": "Jonathan Verrecchia - @verekia",
-  "license": "MIT"
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-flow": "^1.0.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "cross-env": "^3.1.4",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-flowtype": "^2.30.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "flow-bin": "^0.39.0",
+    "husky": "^0.13.1",
+    "pm2": "^2.4.0",
+    "rimraf": "^2.5.4",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
+  }
 }

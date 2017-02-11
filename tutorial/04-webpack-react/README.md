@@ -20,7 +20,7 @@ If you want to use some of the most recent ES features in your client code, like
 
 - Run `yarn add babel-polyfill`.
 
-If you run ESLint on this file, it will complain about `document` being undeclared.
+If you run ESLint on this file, it will complain about `document` being undefined.
 
 - Add the following to your `.eslintrc.json` at the root of the object to allow the use of `window` and `document`:
 
@@ -30,12 +30,14 @@ If you run ESLint on this file, it will complain about `document` being undeclar
 }
 ```
 
-Alright, we now need to bundle this ES6 client app into an ES5 bundle.
+Alright, we now need to bundle this ES6 client app into an ES5 bundle. It's going to take quite a few changes to get there, so bear with me until the end.
 
-- In `src/shared/config`, add the following constant:
+- In `src/shared/config`, add the following declarations:
 
 ```javascript
 export const WDS_PORT = 7000
+
+export const isProd = process.env.NODE_ENV === 'production'
 ```
 
 - Create a `webpack.config.babel.js` file containing:
@@ -43,7 +45,7 @@ export const WDS_PORT = 7000
 ```javascript
 // @flow
 
-import { WDS_PORT } from './src/shared/config'
+import { WDS_PORT, isProd } from './src/shared/config'
 
 export default {
   entry: './src/client/entry.js',
@@ -53,7 +55,7 @@ export default {
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
     ],
   },
-  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
+  devtool: isProd ? false : 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -61,15 +63,15 @@ export default {
 }
 ```
 
-This file is used to describe how our bundle should be assembled: `entry` is the starting point of our app and `output.filename` is the file path of the bundle to generate. We put it in a `dist` folder, which will contain bundles and other things that are generated automatically (unlike the declarative CSS we created earlier which lives in `public`). `module.rules` is where you tell Webpack to apply some treatment to some type of files. Here we say that we want all `.js` and `.jsx` (React) files except the ones in `node_modules` to go through something called `babel-loader`. We also want these two extensions to `resolve`. Finally, we declare a port for Webpack Dev Server.
+This file is used to describe how our bundle should be assembled: `entry` is the starting point of our app and `output.filename` is the file path of the bundle to generate. We put it in a `dist` folder, which will contain bundles and other things that are generated automatically (unlike the declarative CSS we created earlier which lives in `public`). `module.rules` is where you tell Webpack to apply some treatment to some type of files. Here we say that we want all `.js` and `.jsx` (for React) files except the ones in `node_modules` to go through something called `babel-loader`. We also want these two extensions to `resolve`. Finally, we declare a port for Webpack Dev Server.
+
+**Note**: The `.babel.js` extension is a Webpack feature to apply our Babel transformations to this config file.
 
 `babel-loader` is a plugin for Webpack that transpiles your code just like we've been doing since the beginning of this tutorial. The only difference is that this time, the code will end up running in the browser of your client instead of your server.
 
-- Run `yarn add --dev babel-core babel-loader`.
+- Run `yarn add --dev webpack webpack-dev-server babel-core babel-loader`.
 
-`babel-core` is a peer-dependency of `babel-loader`, so you need to install it as well.
-
-- Run `yarn add --dev webpack webpack-dev-server`.
+`babel-core` is a peer-dependency of `babel-loader`, so we installed it as well.
 
 - Add `/dist/` to your `.gitignore`.
 
@@ -77,7 +79,7 @@ This file is used to describe how our bundle should be assembled: `entry` is the
 
 In development mode, we are going to use `webpack-dev-server` to take advantage of hot module reloading, and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code.
 
-One more thing: In order for our `webpack.config.babel.js` file to be aware of the `NODE_ENV` environment variable, we need to pass it to the `webpack`. With Unix, you would do this by running `NODE_ENV=production webpack`, but Windows uses a different syntax. We're going to use a small package called `cross-env` to make this syntax work on Windows as well.
+One more thing: In order for our `webpack.config.babel.js` file to be aware of the `NODE_ENV` environment variable, we need to pass it to the `webpack` binary. With Unix, you would do this by running `NODE_ENV=production webpack`, but Windows uses a different syntax. We're going to use a small package called `cross-env` to make this syntax work on Windows as well.
 
 - Run `yarn add --dev cross-env`.
 
@@ -86,8 +88,10 @@ You can now tweak your `package.json` scripts like so:
 ```json
 "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
 "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-"build": "rimraf dist lib && babel src/server -d lib/server && babel src/shared -d lib/shared && cross-env NODE_ENV=production webpack -p --progress"
+"build": "rimraf dist lib && babel src/server -d lib/server && babel src/shared -d lib/shared && cross-env NODE_ENV=production webpack -p --progress",
 ```
+
+Take a moment to read these scripts carefully. They start looking a bit bloated but you should be able to understand everything they do.
 
 Next, let's create a `<div class="js-app"></div>` container in our `src/server/template/master-template.js`, and include the bundle that will be generated:
 
@@ -116,9 +120,9 @@ Depending on the environment we're in, we'll include either the Webpack Dev Serv
 
 Alright that was a lot of changes, let's see if everything works as expected:
 
-- Run `yarn start`. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should be 1MB+ files) and the process hangs in your terminal, open `http://localhost:8000/` and you should see "Wah wah". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In `src/client/entry.js` Try changing `Wah wah` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should start reloading automatically.
+- Run `yarn start`. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should both be ~600kB files) and the process hangs in your terminal, open `http://localhost:8000/` and you should see "Wah wah". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In your editor, in `src/client/entry.js`, try changing `Wah wah` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should reload automatically. You can interrupt the process with Ctrl+C.
 
-- Run `yarn prod`. Once Webpack is done generating the minified bundle (around 300KB this time), open `http://localhost:8000/` and you should still see "Wah wah". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
+- Run `yarn prod`. Once Webpack is done generating the minified bundle (~90kB this time), open `http://localhost:8000/` and you should still see "Wah wah". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
 
 Phew, that was a lot of infra stuff. All these first chapters basically just give you a Hello World in your browser! Alright, I think you now finally deserve to build the app we've been preparing for this entire time.
 
@@ -132,10 +136,21 @@ First, let's install React and ReactDOM:
 
 - Run `yarn add react react-dom`
 
-Let's rename our `src/client/app.js` file into `src/client/app.jsx` and write some React and JSX code in it:
+Let's rename our `src/client/entry.js` file into `src/client/entry.jsx` and write some React and JSX code in it:
 
 ```javascript
-// TODO
+// @flow
+
+import 'babel-polyfill'
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+ReactDOM.render(
+  <div>
+    The dog says: Wah wah
+  </div>
+  , document.querySelector('.js-app'))
 ```
 
 Also, modify `entry` in your `webpack.config.babel.js` to use this JSX file:
@@ -147,8 +162,8 @@ entry: './src/client/entry.jsx',
 **Note**: If you are unfamiliar with React or its PropTypes, learn about React first and come back to this tutorial later. There is going to be quite some React things in the upcoming chapters, so you need a good understanding of it.
 
 Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
-Install the React Babel preset, which will teach Babel how to process the JSX syntax:
-`yarn add --dev babel-preset-react` and change your `.babelrc` file like so:
+
+- Run `yarn add --dev babel-preset-react` and change your `.babelrc` file like so:
 
 ```json
 {
