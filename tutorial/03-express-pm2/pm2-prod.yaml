@@ -1,5 +1,6 @@
 apps:
-  - script: ./lib/server
+  - name: prod
+    script: ./lib/server
     out_file: logs/server-prod.log
     error_file: logs/server-prod.log
     combine_logs: true

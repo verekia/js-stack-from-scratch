@@ -35,7 +35,9 @@ export const STATIC_PATH = '/static'
 
 This `shared` folder is where we put *isomorphic / universal* JavaScript code – files that are accessible by both the client and the server. A great use case of shared code is *routes*, as you will see later in this tutorial when we'll make an AJAX call. Here we simply have some configuration constants as an example for now.
 
-- Create a `src/server/server.js` file containing:
+- Run `yarn add express`.
+
+- Create a `src/server/index.js` file containing:
 
 ```javascript
 // @flow
@@ -102,11 +104,11 @@ I did not include this trick in the boilerplate of this tutorial, since it seems
 
 Anyway, back to business!
 
-- Run `yarn add express`.
-
-- In `package.json` change your `start` script like so: `"start": "babel-node src/server/server"`
+- In `package.json` change your `start` script like so: `"start": "babel-node src/server"`
 
 - Run `yarn start`, and hit `localhost:8000` in your browser. If everything works as expected you should see a blank page with "Dog App" written both on the tab title and as a heading on the page. Inspect the `body` element to make sure our CSS is loaded correctly.
+
+**Note**: Some processes – typically processes that wait for things to happen, like a server for instance – will prevent you from entering commands in your terminal until they're done. To interrupt such processes and get your prompt back, press **Ctrl+C**. You can alternatively open a new terminal tab if you want to keep them running while being able to enter commands. You can also make these processes run in the background but that's out of the scope of this tutorial.
 
 ## PM2
 
@@ -124,18 +126,18 @@ Right now, we use the `babel-node` binary to interpret our ES6/Flow code. PM2 ty
 
 The Babel require hook (or `babel-register`) is an override of `node`'s native `require` function. Once you include it somewhere in your code, any `require` happening after that will trigger Babel transformations of the requested code. Pretty trippy! What's great about it is that we can now let PM2 use the regular `node` binary instead of `babel-node`. Let's set that up.
 
-- Create a `src/server/index.js` file containing:
+- Create a `src/server/require-hook.js` file containing:
 
 ```javascript
 /* eslint-disable import/no-extraneous-dependencies */
 
 require('babel-register')
-require('./server.js')
+require('./index.js')
 ```
 
-Try to run `node src/server/server` in your terminal. `node` should choke on `Unexpected token import`, which is expected.
+Try to run `node src/server` in your terminal. `node` should choke on `Unexpected token import`, which is expected.
 
-- Now run `node src/server` instead (which points to `src/server/index.js`, the default file of the directory). This time it's going through the require hook and you should see your server starting. Magic!
+- Now run `node src/server/require-hook` instead. This time it's going through the require hook and you should see your server starting. Magic!
 
 #### Development configuration file
 
@@ -145,7 +147,8 @@ PM2 can be configured with command-line parameters or config files. Since we try
 
 ```yaml
 apps:
-  - script: ./src/server
+  - name: dev
+    script: ./src/server/require-hook.js
     out_file: logs/server-dev.log
     error_file: logs/server-dev.log
     combine_logs: true
@@ -155,7 +158,7 @@ apps:
       NODE_ENV: development
 ```
 
-`script` is the entry point of our server process (the require hook), then we declare that we want our server logs stored in the `logs/` folder, `combine_logs` is a parameter to not use process id suffixes in the log filename, `watch` enables the auto-restart of the server when **any** file changes in the directory, `ignore_watch` lets us exclude the `logs` directory to avoid infinite loops due the constant rewriting of logs. Finally `env.NODE_ENV` is your regular NODE_ENV environment variable.
+`name` is an arbitrary given name. `script` is the entry point of our server process. Then we declare that we want our server logs stored in the `logs/` folder. `combine_logs` is a parameter to not use process ID suffixes in the log filename. `watch` enables the auto-restart of the server when **any** file changes in the directory. `ignore_watch` lets us exclude the `logs` directory to avoid infinite loops due the constant rewriting of logs. Finally, `env.NODE_ENV` is your regular NODE_ENV environment variable.
 
 - Add `/logs/` to your `.gitignore`.
 
@@ -184,7 +187,9 @@ Let's update our `package.json` like so:
 
 In `stop`, `rimraf logs/* && pm2 delete all` clears the logs folder and deletes all processes. If there was no processes running, it returns an error exit code. Since we don't want this error to interrupt our chain of tasks, we force it to pass with `|| true`.
 
-- Go to `http://localhost:8000/` in your browser. If you have no hanging process currently running it should give you a 404. Run `yarn start`, which should trigger `dev`, which triggers, `stop`, and finally launches the process of our server. Hit `http://localhost:8000/` and it should now show your app. Take a look at the `logs/server-dev.log` file, which should contain `Express running on port 8000.`.
+- Go to `http://localhost:8000/` in your browser. If you have no hanging process currently running it should give you a 404. Run `yarn start`, which should trigger `dev`, which triggers, `stop`, and finally launches the process of our server. Note that with PM2, your processes are run in the background so you still have control over your terminal. Hit `http://localhost:8000/` and it should now show your app. Take a look at the `logs/server-dev.log` file, which should contain `Express running on port 8000.`.
+
+Since we enabled PM2's *watch* feature, you can modify the `Dog App` string in `src/server/index.js`, save the file, reload your browser tab, and see the updated string. Without watching, this would require restarting the whole process.
 
 - Run `yarn stop` to stop your server. If everything works well, it should now give you a 404 again in your browser.
 
@@ -207,7 +212,8 @@ First, we use `rimraf` to clean up auto-generated `lib` folder. Then we use `bab
 
 ```yaml
 apps:
-  - script: ./lib/server
+  - name: prod
+    script: ./lib/server
     out_file: logs/server-prod.log
     error_file: logs/server-prod.log
     combine_logs: true
