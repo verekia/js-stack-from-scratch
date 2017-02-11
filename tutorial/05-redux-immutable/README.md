@@ -1,50 +1,105 @@
-# 9 - Redux
+# 05 - Redux and Immutable
 
-In this chapter (which is the most difficult so far) we will be adding [Redux](http://redux.js.org/) to our application and will hook it up with React. Redux manages the state of your application. It is composed of a **store** which is a plain JavaScript object representing the state of your app, **actions** which are typically triggered by users, and **reducers** which can be seen as action handlers. Reducers affect your application state (the *store*), and when the application state is modified, things happen in your app. A good visual demonstration of Redux can be found [here](http://slides.com/jenyaterpil/redux-from-twitter-hype-to-production#/9).
+In this chapter we will hook up React and Redux to make a very simple app. The app will consist of a message and a button. The message changes when the user clicks the button.
 
-In order to demonstrate how to use Redux in the simplest possible way, our app will consist of a message and a button. The message says whether the dog has barked or not (it initially hasn't), and the button makes the dog bark, which should update the message.
+Before we start, here is a very quick introduction to ImmutableJS, which is completely unrelated to React and Redux, but will be used in this chapter.
 
-We are going to need 2 packages in this part, `redux` and `react-redux`.
+## ImmutableJS
 
-- Run `yarn add redux react-redux`.
+> 💡 **[ImmutableJS](https://facebook.github.io/immutable-js/)** (or just Immutable) is a library by Facebook to manipulate immutable collections, like lists and maps. Any change made on an immutable object returns a new object without mutating the original object.
 
-Lets start by creating 2 folders: `src/client/actions` and `src/client/reducers`.
-
-- In `actions`, create `dog-actions.js`:
+For instance, instead of doing:
 
 ```javascript
-export const MAKE_BARK = 'MAKE_BARK';
-
-export const makeBark = () => ({
-  type: MAKE_BARK,
-  payload: true,
-});
+const obj = { a: 1 }
+obj.a = 2 // Mutates `obj`
 ```
 
-Here we define an action type, `MAKE_BARK`, and a function (also known as *action creator*) that triggers a `MAKE_BARK` action called `makeBark`. Both are exported because we'll need them both in other files. This action implements the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which is why it has `type` and `payload` attributes.
-
-- In `reducers`, create `dog-reducer.js`:
+You would do:
 
 ```javascript
-import { MAKE_BARK } from '../actions/dog-actions';
+const obj = Immutable.Map({ a: 1 })
+obj.set('a', 2) // Returns a new object without mutating `obj`
+```
 
-const initialState = {
-  hasBarked: false,
-};
+This approach follows the **functional programming** paradigm, which works really well with Redux.
 
-const dogReducer = (state = initialState, action) => {
+When creating immutable collections, a very convenient method is `Immutable.fromJS()`, which takes any regular JS object or array and returns a deeply immutable version of it:
+
+```javascript
+const immutablePerson = Immutable.fromJS({
+  name: 'Stan',
+  friends: ['Kyle', 'Cartman', 'Kenny'],
+})
+
+console.log(immutablePerson)
+/*
+ * Map {
+ *   "name": "Stan",
+ *   "friends": List [ "Kyle", "Cartman", "Kenny" ]
+ * }
+ */
+```
+
+- Run `yarn add immutable`.
+
+**Note**: Due to the implementation of ImmutableJS, Flow does not accept importing it with `import Immutable from 'immutable'`, so use this syntax instead: `import * as Immutable from 'immutable'`. Let's cross fingers for a [fix](https://github.com/facebook/immutable-js/issues/863) soon.
+
+## Redux
+
+> 💡 **[Redux](http://redux.js.org/)** is a library to handle the lifecycle of your application. It creates a *store*, which is the single source of truth of the state of your app at any given time.
+
+Let's start with the easy part, declaring our Redux actions:
+
+- Run `yarn add redux redux-actions`.
+
+- Create a `src/client/action/dog.js` file containing:
+
+```javascript
+// @flow
+
+import { createAction } from 'redux-actions'
+
+export const BARK = 'BARK'
+export const bark = createAction(BARK)
+```
+
+This file exposes an *action*, `BARK`, and its *action creator*, `bark`, which is a function. We use `redux-actions` to reduce the boilerplate associated with Redux actions. `redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which makes *action creators* return objects with the `type` and `payload` attributes.
+
+- Create a `src/client/reducer/dog.js` file containing:
+
+```javascript
+// @flow
+
+import * as Immutable from 'immutable'
+
+import { BARK } from '../action/dog'
+
+const initialState = Immutable.fromJS({
+  barkMessage: 'The dog is quiet',
+})
+
+const dogReducer = (state: Object = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
-    case MAKE_BARK:
-      return { hasBarked: action.payload };
+    case BARK:
+      return state.set('barkMessage', action.payload)
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default dogReducer;
+export default dogReducer
 ```
 
-Here we define the initial state of our app, which is an object containing the `hasBarked` property set to `false`, and the `dogReducer`, which is the function responsible for altering the state based on which action happened. The state cannot be modified in this function, a brand new state object must be returned.
+In this file we initialize the state of our reducer with an Immutable Map containing one property, `barkMessage`, set to `The dog is quiet`. The `dogReducer` handles `BARK` actions by simply setting the new `barkMessage` with the action payload. The Flow annotation for `action` destructures it into a `type` and a `payload`. The `payload` can be of `any` type. It looks funky if you've never seen this before, but it remains pretty understandable. Note the usage of `Immutable.fromJS()` and `set()` as seen before.
+
+## React-Redux
+
+> 💡 **[react-redux](https://github.com/reactjs/react-redux)** *connects* a Redux store with React components. With `react-redux`, when the Redux store changes, React components get automatically updated. They can also fire Redux actions.
+
+- Run `yarn add react-redux`.
+
+TODO =============
 
 - We are now going to modify `app.jsx` to create the *store*. You can replace the entire content of that file by the following:
 
@@ -162,42 +217,6 @@ Back to the [previous section](/tutorial/8-react) or the [table of contents](htt
 
 Unlike the previous chapter, this one is rather easy, and consists in minor improvements.
 
-First, we are going to add **Immutable JS** to our codebase. Immutable is a library to manipulate objects without mutating them. Instead of doing:
-
-```javascript
-const obj = { a: 1 };
-obj.a = 2; // Mutates `obj`
-```
-
-You would do:
-
-```javascript
-const obj = Immutable.Map({ a: 1 });
-obj.set('a', 2); // Returns a new object without mutating `obj`
-```
-
-This approach follows the **functional programming** paradigm, which works really well with Redux. Your reducer functions actually *have* to be pure functions that don't alter the state passed as parameter, but return a brand new state object instead. Let's use Immutable to enforce this.
-
-- Run `yarn add immutable`
-
-We are going to use `Map` in our codebase, but ESLint and the Airbnb config will complain about using a capitalized name without it being a class. Add the following to your `package.json` under `eslintConfig`:
-
-```json
-"rules": {
-  "new-cap": [
-    2,
-    {
-      "capIsNewExceptions": [
-        "Map",
-        "List"
-      ]
-    }
-  ]
-}
-```
-
-This makes `Map` and `List` (the 2 Immutable objects you'll use all the time) exceptions to that ESLint rule. This verbose JSON formatting is actually done automatically by Yarn/NPM, so we cannot make it more compact unfortunately.
-
 Anyway, back to Immutable:
 
 In `dog-reducer.js` tweak your file so it looks like this:
@@ -238,12 +257,6 @@ The app should still behave exactly the way it did before.
 
 As you can see from the code snippet above, our state object still contains a plain old `dog` object attribute, which isn't immutable. It is fine this way, but if you want to only manipulate immutable objects, you could install the `redux-immutable` package to replace Redux's `combineReducers` function.
 
-**Optional**:
-
-- Run `yarn add redux-immutable`
-- Replace your `combineReducers` function in `app.jsx` to use the one imported from `redux-immutable` instead.
-- In `bark-message.js` replace `state.dog.get('hasBarked')` by `state.getIn(['dog', 'hasBarked'])`.
-
 ## // TODO
 
 One counterintuitive case is the following, for `src/client/component/message.jsx`:
@@ -254,33 +267,6 @@ const Message = ({ message }: { message: string }) => <div>{message}</div>;
 
 As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
 
-## Redux Actions
+Next section: [06 - Jest](/tutorial/06-jest)
 
-As you add more and more actions to your app, you will find yourself writing quite a lot of the same boilerplate. The `redux-actions` package helps reducing that boilerplate code. With `redux-actions` you can rewrite your `dog-actions.js` file in a more compact way:
-
-```javascript
-import { createAction } from 'redux-actions';
-
-export const MAKE_BARK = 'MAKE_BARK';
-export const makeBark = createAction(MAKE_BARK, () => true);
-```
-
-`redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, just like the action we previously wrote, so integrating `redux-actions` is seamless if you follow this model.
-
-- Don't forget to run `yarn add redux-actions`.
-
-## TODO
-
-Another case you will encounter is that in `src/client/reducers/dog-reducer.js`, Flow will complain about Immutable not having a default export. This issue is discussed in [#863 on Immutable](https://github.com/facebook/immutable-js/issues/863), which highlights 2 workarounds:
-
-```javascript
-import { Map as ImmutableMap } from 'immutable';
-// or
-import * as Immutable from 'immutable';
-```
-
-Until Immutable officially adresses the issue, just pick whichever looks better to you when importing Immutable components. I'm personally going for `import * as Immutable from 'immutable'` since it's shorter and won't require refactoring the code when this issue gets fixed.
-
-Next section: [11 - Testing with Mocha, Chai, and Sinon](/tutorial/11-testing-mocha-chai-sinon)
-
-Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/04-webpack-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

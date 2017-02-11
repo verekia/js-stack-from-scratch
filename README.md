@@ -13,7 +13,7 @@
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
-> ⚠️️ **This is V2 of the tutorial, major changes happened since the initial 2016 release. Check the [Change Log](/CHANGELOG.md)!**
+> 🎉 **This is V2 of the tutorial, major changes happened since the initial 2016 release. Check the [Change Log](/CHANGELOG.md)!**
 
 This is a minimalistic and straight-to-the-point guide to assembling a JavaScript stack. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*.
 
@@ -41,7 +41,7 @@ The code provided works on Linux, macOS, and Windows.
 
 [05 - Redux, Immutable](/tutorial/05-redux-immutable)
 
-[06 - Mocha, Chai, Mocking](/tutorial/06-mocha-chai-mocking)
+[06 - Jest](/tutorial/06-jest)
 
 ## Coming up next
 
