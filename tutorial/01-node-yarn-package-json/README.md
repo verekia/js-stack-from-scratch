@@ -40,6 +40,16 @@ Since it [came out](https://code.facebook.com/posts/1840075619545360) in October
 - Create a new folder to work in, and `cd` in it.
 - Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.
 
+Here is the basic `package.json` I'll use in this tutorial:
+
+```json
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "license": "MIT"
+}
+```
+
 ## Hello World
 
 - Create an `index.js` file containing `console.log('Hello world')`.
@@ -49,11 +59,16 @@ Since it [came out](https://code.facebook.com/posts/1840075619545360) in October
 
 Running `node .` to execute our program is a bit too low-level. We are going to use an NPM/Yarn script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `yarn start`, even when our program gets more complicated.
 
-- In `package.json`, add a `scripts` object to the root object like so:
+- In `package.json`, add a `scripts` object like so:
 
 ```json
-"scripts": {
-  "start": "node ."
+{
+  "name": "your-project",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ."
+  }
 }
 ```
 
