@@ -244,6 +244,16 @@ As you can see from the code snippet above, our state object still contains a pl
 - Replace your `combineReducers` function in `app.jsx` to use the one imported from `redux-immutable` instead.
 - In `bark-message.js` replace `state.dog.get('hasBarked')` by `state.getIn(['dog', 'hasBarked'])`.
 
+## // TODO
+
+One counterintuitive case is the following, for `src/client/component/message.jsx`:
+
+```javascript
+const Message = ({ message }: { message: string }) => <div>{message}</div>;
+```
+
+As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
+
 ## Redux Actions
 
 As you add more and more actions to your app, you will find yourself writing quite a lot of the same boilerplate. The `redux-actions` package helps reducing that boilerplate code. With `redux-actions` you can rewrite your `dog-actions.js` file in a more compact way:

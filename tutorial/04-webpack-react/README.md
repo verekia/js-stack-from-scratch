@@ -124,19 +124,19 @@ Alright that was a lot of changes, let's see if everything works as expected:
 
 - Run `yarn prod`. Once Webpack is done generating the minified bundle (~90kB this time), open `http://localhost:8000/` and you should still see "Wah wah". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
 
-Phew, that was a lot of infra stuff. All these first chapters basically just give you a Hello World in your browser! Alright, I think you now finally deserve to build the app we've been preparing for this entire time.
+Good job, I know this was quite dense. You deserve a break! The next section is easier.
 
 ## React
 
 > 💡 **[React](https://facebook.github.io/react/)** is a library for building user interfaces by Facebook. It uses the **[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)** syntax to represent HTML elements and components while leveraging the power of JavaScript.
 
-We're now going to render our app using React and JSX.
+In this section we are going to render some text using React and JSX.
 
 First, let's install React and ReactDOM:
 
-- Run `yarn add react react-dom`
+- Run `yarn add react react-dom`.
 
-Let's rename our `src/client/entry.js` file into `src/client/entry.jsx` and write some React and JSX code in it:
+Rename your `src/client/entry.js` file into `src/client/entry.jsx` and write some React code in it:
 
 ```javascript
 // @flow
@@ -153,17 +153,15 @@ ReactDOM.render(
   , document.querySelector('.js-app'))
 ```
 
-Also, modify `entry` in your `webpack.config.babel.js` to use this JSX file:
+Also, modify `entry` in `webpack.config.babel.js` to use this `entry.jsx`:
 
 ```javascript
 entry: './src/client/entry.jsx',
 ```
 
-**Note**: If you are unfamiliar with React or its PropTypes, learn about React first and come back to this tutorial later. There is going to be quite some React things in the upcoming chapters, so you need a good understanding of it.
-
 Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
 
-- Run `yarn add --dev babel-preset-react` and change your `.babelrc` file like so:
+- Run `yarn add --dev babel-preset-react` and add `react` to your `.babelrc` file like so:
 
 ```json
 {
@@ -175,15 +173,7 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 }
 ```
 
-## TODO
-
-One counterintuitive case is the following, for `src/client/component/message.jsx`:
-
-```javascript
-const Message = ({ message }: { message: string }) => <div>{message}</div>;
-```
-
-As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
+Run `yarn start` (or `yarn prod`) and open Chrome on `http://localhost:8000`. You should see "The dog says: Wah wah", which is now rendered by React.
 
 Next section: [05 - Redux, Immutable](/tutorial/05-redux-immutable)
 
