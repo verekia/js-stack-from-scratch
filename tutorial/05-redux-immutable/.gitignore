@@ -1,5 +1,6 @@
+.DS_Store
+*.log
 node_modules/
-npm-debug.log
-yarn-error.log
+/logs/
 /lib/
-/dist/client-bundle.*
+/dist/

@@ -1,18 +1,18 @@
+// @flow
+
+import { WDS_PORT } from './src/shared/config'
+
 export default {
-  output: {
-    filename: 'client-bundle.js',
-  },
-  devtool: 'source-map',
+  entry: './src/client/entry.jsx',
+  output: { filename: 'dist/js/bundle.js' },
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loader: 'babel-loader',
-        exclude: [/node_modules/],
-      },
+    rules: [
+      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
     ],
   },
+  devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
-};
+  devServer: { port: WDS_PORT },
+}
