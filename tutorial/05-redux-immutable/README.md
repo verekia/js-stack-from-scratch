@@ -223,11 +223,210 @@ Next, we wrap our entire app inside `react-redux`'s `Provider` component and pas
 
 Congratulations, we finally made an app that does something! Okay it's not a *super* impressive from the outside, but we all know that it is powered by one badass stack under the hood.
 
-## Asynchronous call with Redux-thunk
+## Extending our app with an asynchronous call
 
-// isomorphic fetch
+We are now going to add a second button to our app, which will trigger an AJAX call to retrieve a message from the server. Let's start with the easy part: creating the component and container for the button. It's pretty much exactly the same as the other button.
 
-// TODO
+### The server endpoint
+
+- Create a `src/shared/routes.js` file containing:
+
+```javascript
+// @flow
+
+export default {
+  asyncBark: '/async/bark',
+}
+```
+
+- In `src/server/index.js`, add the following:
+
+```javascript
+import routes from '../shared/routes'
+
+// ...
+
+app.get(routes.asyncBark, (req, res) => {
+  res.send({ message: 'Wah wah! (from the server)' })
+})
+```
+
+### Fetch
+
+We are going to use `fetch` to make calls to the server from the client. `isomorphic-fetch` is a polyfill for `fetch` that makes it work cross-browsers and also in Node.
+
+- Run `yarn add isomorphic-fetch`.
+
+### The React bits
+
+- Create a `src/client/component/bark-async-button.jsx` file containing:
+
+```javascript
+// @flow
+
+import React, { PropTypes } from 'react'
+
+const BarkAsyncButton = ({ barkAsync }: { barkAsync: Function }) =>
+  <button onClick={barkAsync}>Bark Async</button>
+
+BarkAsyncButton.propTypes = {
+  barkAsync: PropTypes.func.isRequired,
+}
+
+export default BarkAsyncButton
+```
+
+- Create a `src/client/container/bark-async-button.jsx` file containing:
+
+```javascript
+// @flow
+
+import { connect } from 'react-redux'
+
+import { barkAsync } from '../action/dog'
+import BarkAsyncButton from '../component/bark-async-button'
+
+const mapDispatchToProps = dispatch => ({
+  barkAsync: () => { dispatch(barkAsync()) },
+})
+
+export default connect(null, mapDispatchToProps)(BarkAsyncButton)
+```
+
+What we need now is to create this `barkAsync` action.
+
+### 3 asynchronous actions
+
+`barkAsync` is not going to be a regular action. Asynchronous actions are usually split into 3 actions, which trigger 3 different states: a *request* action (or "loading"), a *success* action, and a *failure* action.
+
+- Edit `src/client/action/dog.js` like so:
+
+```javascript
+// @flow
+
+import 'isomorphic-fetch'
+
+import { createAction } from 'redux-actions'
+import routes from '../../shared/routes'
+
+export const BARK = 'BARK'
+export const BARK_ASYNC_REQUEST = 'BARK_ASYNC_REQUEST'
+export const BARK_ASYNC_SUCCESS = 'BARK_ASYNC_SUCCESS'
+export const BARK_ASYNC_FAILURE = 'BARK_ASYNC_FAILURE'
+
+export const bark = createAction(BARK)
+export const barkAsyncRequest = createAction(BARK_ASYNC_REQUEST)
+export const barkAsyncSuccess = createAction(BARK_ASYNC_SUCCESS)
+export const barkAsyncFailure = createAction(BARK_ASYNC_FAILURE)
+
+export const barkAsync = () => (dispatch: Function) =>
+  fetch(routes.asyncBark, { method: 'GET' })
+    .then((res) => {
+      if (!res.ok) {
+        throw Error(res.statusText)
+      }
+      dispatch(barkAsyncRequest())
+      return res.json()
+    })
+    .then((data) => {
+      if (!data.message) {
+        throw Error('No message received')
+      }
+      dispatch(barkAsyncSuccess(data.message))
+    })
+    .catch(() => {
+      dispatch(barkAsyncFailure())
+    })
+```
+
+Instead of returning an action, `barkAsync` returns a function which launches the `fetch` call. `fetch` returns a `Promise`, which we use to *dispatch* different actions depending on the current state of our asynchronous call.
+
+### 3 asynchronous action handlers
+
+Let's handle these different actions in `src/client/reducer/dog.js`:
+
+```javascript
+// @flow
+
+import * as Immutable from 'immutable'
+
+import { BARK, BARK_ASYNC_REQUEST, BARK_ASYNC_SUCCESS, BARK_ASYNC_FAILURE } from '../action/dog'
+
+const initialState = Immutable.fromJS({
+  barkMessage: 'The dog is quiet',
+})
+
+const dogReducer = (state: Object = initialState, action: { type: string, payload: any }) => {
+  switch (action.type) {
+    case BARK:
+      return state.set('barkMessage', action.payload)
+    case BARK_ASYNC_REQUEST:
+      return state.set('barkMessage', '...')
+    case BARK_ASYNC_SUCCESS:
+      return state.set('barkMessage', action.payload)
+    case BARK_ASYNC_FAILURE:
+      return state.set('barkMessage', 'Could not bark, please check your connection')
+    default:
+      return state
+  }
+}
+
+export default dogReducer
+```
+
+This part doesn't look as scary as the previous one, does it? Here we simply update `barkMessage` with different messages depending on the action we receive. During `BARK_ASYNC_REQUEST`, we show `...`, which is a cheap way to represent a "Loading" state. `BARK_ASYNC_SUCCESS` updates `barkMessage` just like `BARK` would do normally. `BARK_ASYNC_FAILURE` gives an error message.
+
+### Redux-thunk
+
+In `src/client/action/dog.js`, we made `barkAsync`, an action creator that returns a function. This is actually not a feature that is natively supported by Redux. In order to perform these async actions, we need to extend Redux's functionality with the `redux-thunk` *middleware*.
+
+- Run `yarn add redux-thunk`.
+
+- Update your `entry.jsx` file like so:
+
+```javascript
+// @flow
+
+import 'babel-polyfill'
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+
+import BarkAsyncButton from './container/bark-async-button'
+import BarkButton from './container/bark-button'
+import Message from './container/message'
+import dogReducer from './reducer/dog'
+
+/* eslint-disable no-underscore-dangle */
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+/* eslint-enable no-underscore-dangle */
+
+const store = createStore(combineReducers({
+  dog: dogReducer,
+}), composeEnhancers(applyMiddleware(thunkMiddleware)))
+
+ReactDOM.render(
+  <Provider store={store}>
+    <div>
+      <Message />
+      <BarkButton />
+      <BarkAsyncButton />
+    </div>
+  </Provider>
+  , document.querySelector('.js-app'),
+)
+```
+
+Here we pass `redux-thunk` to Redux's `applyMiddleware` function. In order for the Redux Devtools to keep working, we also need to use Redux's `compose` function. Don't worry too much about this part, just remember that we enhancing Redux with `redux-thunk`.
+
+- Run `yarn start` or `yarn prod` and you should now be able to click the "Bark Async" button and retrieve a message from the server! Since you're working locally, the call is instantaneous, but if you open the Redux Devtools, you will notice that each click triggers both `BARK_ASYNC_REQUEST` and `BARK_ASYNC_SUCCESS`, making the message go through the intermediate `...` loading state as expected.
+
+That's it! This is our entire app. You've made it, good job!
+
+Now we'll just add some unit tests to make sure things keep running as expected.
 
 Next section: [06 - Jest](/tutorial/06-jest)
 
