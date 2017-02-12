@@ -121,6 +121,8 @@ BarkButton.propTypes = {
 export default BarkButton
 ```
 
+**Note**: You can see another case of destructuring with Flow annotations here. If `props` contains `bark`, instead of writing `const BarkButton = (props) => { props.bark() }`, we write `const BarkButton = ({ bark }: { bark: Function }) => { bark() }`. The syntax is a bit cumbersome but worth it.
+
 - Create a `src/client/component/message.jsx` file containing:
 
 ```javascript
@@ -217,65 +219,9 @@ Let's take a moment to review this. First, we create a *store* with `createStore
 
 Next, we wrap our entire app inside `react-redux`'s `Provider` component and pass it our store. We put our 2 **containers** in a `<div>` because `Provider` must have a single child.
 
-- You can now run `yarn start` and open `index.html`. You should see "The dog did not bark" and a button. When you click the button, the message should show "The dog barked".
+- You can now run `yarn start` and open `http://localhost:8000`. You should see "The dog is quiet" and a button. When you click the button, the message should change to "Wah wah!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
 
-Next section: [10 - Immutable JS and Redux Improvements](/tutorial/10-immutable-redux-improvements)
-
-Back to the [previous section](/tutorial/8-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch).
-
-## Immutable JS
-
-Unlike the previous chapter, this one is rather easy, and consists in minor improvements.
-
-Anyway, back to Immutable:
-
-In `dog-reducer.js` tweak your file so it looks like this:
-
-```javascript
-import Immutable from 'immutable';
-import { MAKE_BARK } from '../actions/dog-actions';
-
-const initialState = Immutable.Map({
-  hasBarked: false,
-});
-
-const dogReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case MAKE_BARK:
-      return state.set('hasBarked', action.payload);
-    default:
-      return state;
-  }
-};
-
-export default dogReducer;
-```
-
-The initial state is now built using an Immutable Map, and the new state is generated using `set()`, preventing any mutation of the previous state.
-
-In `containers/bark-message.js`, update the `mapStateToProps` function to use `.get('hasBarked')` instead of `.hasBarked`:
-
-```javascript
-const mapStateToProps = state => ({
-  message: state.dog.get('hasBarked') ? 'The dog barked' : 'The dog did not bark',
-});
-```
-
-The app should still behave exactly the way it did before.
-
-**Note**: If Babel complains about Immutable exceeding 100KB, add `"compact": false` to your `package.json` under `babel`.
-
-As you can see from the code snippet above, our state object still contains a plain old `dog` object attribute, which isn't immutable. It is fine this way, but if you want to only manipulate immutable objects, you could install the `redux-immutable` package to replace Redux's `combineReducers` function.
-
-## // TODO
-
-One counterintuitive case is the following, for `src/client/component/message.jsx`:
-
-```javascript
-const Message = ({ message }: { message: string }) => <div>{message}</div>;
-```
-
-As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
+Congratulations, we finally made an app that does something! Okay it's not a *super* impressive from the outside, but we all know that it is powered by one badass stack under the hood.
 
 ## Asynchronous call with Redux-thunk
 
