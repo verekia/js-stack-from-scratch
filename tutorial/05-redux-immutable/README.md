@@ -65,7 +65,7 @@ export const BARK = 'BARK'
 export const bark = createAction(BARK)
 ```
 
-This file exposes an *action*, `BARK`, and its *action creator*, `bark`, which is a function. We use `redux-actions` to reduce the boilerplate associated with Redux actions. `redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which makes *action creators* return objects with the `type` and `payload` attributes.
+This file exposes an *action*, `BARK`, and its *action creator*, `bark`, which is a function. We use [`redux-actions`](https://github.com/acdlite/redux-actions) to reduce the boilerplate associated with Redux actions. `redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which makes *action creators* return objects with the `type` and `payload` attributes.
 
 - Create a `src/client/reducer/dog.js` file containing:
 
