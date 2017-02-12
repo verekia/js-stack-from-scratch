@@ -31,17 +31,17 @@ The code provided works on Linux, macOS, and Windows.
 
 ## Table of contents
 
-[01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json)
+[01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json#01---node-yarn-and-packagejson)
 
-[02 - Babel, ES6, ESLint, Flow, Husky](/tutorial/02-babel-es6-eslint-flow-husky)
+[02 - Babel, ES6, ESLint, Flow, Husky](/tutorial/02-babel-es6-eslint-flow-husky#02---babel-es6-eslint-flow-git-hooks)
 
-[03 - Express, PM2](/tutorial/03-express-pm2)
+[03 - Express, PM2](/tutorial/03-express-pm2#03---express-pm2)
 
-[04 - Webpack, React](/tutorial/04-webpack-react)
+[04 - Webpack, React](/tutorial/04-webpack-react#04---webpack-and-react)
 
-[05 - Redux, Immutable](/tutorial/05-redux-immutable)
+[05 - Redux, Immutable](/tutorial/05-redux-immutable#05---redux-and-immutable)
 
-[06 - Jest](/tutorial/06-jest)
+[06 - Jest](/tutorial/06-jest#06---jest)
 
 ## Coming up next
 

@@ -8,7 +8,7 @@ We're now going to use some ES6 syntax, which is a great improvement over the "o
 
 - Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
 
-```javascript
+```js
 const str = 'ES6'
 console.log(`Hello ${str}`)
 ```
@@ -45,7 +45,7 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 
 - Create a new file, `src/dog.js`, containing the following ES6 class:
 
-```javascript
+```js
 class Dog {
   constructor(name) {
     this.name = name
@@ -63,7 +63,7 @@ It should not look surprising to you if you've done OOP in the past in any langu
 
 In `src/index.js`, write the following:
 
-```javascript
+```js
 const Dog = require('./dog')
 
 const toby = new Dog('Toby')
@@ -91,7 +91,7 @@ ESLint works with *rules*, and there are [many of them](http://eslint.org/docs/r
 
 Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2017-02-03, they recommend using the following command in your terminal:
 
-```bash
+```sh
 npm info eslint-config-airbnb@latest peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev eslint-config-airbnb@latest
 ```
 
@@ -212,7 +212,7 @@ Alright, we should be all set for the configuration part.
 
 - Add Flow annotations to `src/dog.js` like so:
 
-```javascript
+```js
 // @flow
 
 class Dog {
@@ -273,6 +273,6 @@ If you now try to commit or push your code, it should automatically run the `tes
 
 **Note**: If you are pushing right after a commit, you can use `git push --no-verify` to avoid running all the tests again.
 
-Next section: [03 - Express, PM2](/tutorial/03-express-pm2)
+Next section: [03 - Express, PM2](/tutorial/03-express-pm2#03---express-pm2)
 
-Back to the [previous section](/tutorial/01-node-yarn-package-json) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/01-node-yarn-package-json#01---node-yarn-and-packagejson) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

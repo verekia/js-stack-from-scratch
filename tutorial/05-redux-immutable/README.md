@@ -10,14 +10,14 @@ Before we start, here is a very quick introduction to ImmutableJS, which is comp
 
 For instance, instead of doing:
 
-```javascript
+```js
 const obj = { a: 1 }
 obj.a = 2 // Mutates `obj`
 ```
 
 You would do:
 
-```javascript
+```js
 const obj = Immutable.Map({ a: 1 })
 obj.set('a', 2) // Returns a new object without mutating `obj`
 ```
@@ -26,7 +26,7 @@ This approach follows the **functional programming** paradigm, which works reall
 
 When creating immutable collections, a very convenient method is `Immutable.fromJS()`, which takes any regular JS object or array and returns a deeply immutable version of it:
 
-```javascript
+```js
 const immutablePerson = Immutable.fromJS({
   name: 'Stan',
   friends: ['Kyle', 'Cartman', 'Kenny'],
@@ -56,7 +56,7 @@ Let's start with the easy part, declaring our Redux actions:
 
 - Create a `src/client/action/dog.js` file containing:
 
-```javascript
+```js
 // @flow
 
 import { createAction } from 'redux-actions'
@@ -69,7 +69,7 @@ This file exposes an *action*, `BARK`, and its *action creator*, `bark`, which i
 
 - Create a `src/client/reducer/dog.js` file containing:
 
-```javascript
+```js
 // @flow
 
 import * as Immutable from 'immutable'
@@ -106,7 +106,7 @@ In this section we are going to create *Components* and *Containers*.
 
 - Create a `src/client/component/bark-button.jsx` file containing:
 
-```javascript
+```js
 // @flow
 
 import React, { PropTypes } from 'react'
@@ -125,7 +125,7 @@ export default BarkButton
 
 - Create a `src/client/component/message.jsx` file containing:
 
-```javascript
+```js
 // @flow
 
 import React, { PropTypes } from 'react'
@@ -146,7 +146,7 @@ Again, *components* don't know anything about Redux **actions** or the **state**
 
 - Create a `src/client/container/bark-button.js` file containing:
 
-```javascript
+```js
 // @flow
 
 import { connect } from 'react-redux'
@@ -165,7 +165,7 @@ This container hooks up the `BarkButton` component with the `bark` action and Re
 
 - Create a `src/client/container/message.js` file containing:
 
-```javascript
+```js
 // @flow
 
 import { connect } from 'react-redux'
@@ -185,7 +185,7 @@ We still haven't initialized the Redux store and haven't put the 2 containers an
 
 - Edit `entry.jsx` like so:
 
-```javascript
+```js
 // @flow
 
 import 'babel-polyfill'
@@ -231,7 +231,7 @@ We are now going to add a second button to our app, which will trigger an AJAX c
 
 - Create a `src/shared/routes.js` file containing:
 
-```javascript
+```js
 // @flow
 
 export default {
@@ -241,7 +241,7 @@ export default {
 
 - In `src/server/index.js`, add the following:
 
-```javascript
+```js
 import routes from '../shared/routes'
 
 // ...
@@ -261,7 +261,7 @@ We are going to use `fetch` to make calls to the server from the client. `isomor
 
 - Create a `src/client/component/bark-async-button.jsx` file containing:
 
-```javascript
+```js
 // @flow
 
 import React, { PropTypes } from 'react'
@@ -278,7 +278,7 @@ export default BarkAsyncButton
 
 - Create a `src/client/container/bark-async-button.jsx` file containing:
 
-```javascript
+```js
 // @flow
 
 import { connect } from 'react-redux'
@@ -301,7 +301,7 @@ What we need now is to create this `barkAsync` action.
 
 - Edit `src/client/action/dog.js` like so:
 
-```javascript
+```js
 // @flow
 
 import 'isomorphic-fetch'
@@ -345,7 +345,7 @@ Instead of returning an action, `barkAsync` returns a function which launches th
 
 Let's handle these different actions in `src/client/reducer/dog.js`:
 
-```javascript
+```js
 // @flow
 
 import * as Immutable from 'immutable'
@@ -384,7 +384,7 @@ In `src/client/action/dog.js`, we made `barkAsync`, an action creator that retur
 
 - Update your `entry.jsx` file like so:
 
-```javascript
+```js
 // @flow
 
 import 'babel-polyfill'
@@ -428,6 +428,6 @@ That's it! This is our entire app. You've made it, good job!
 
 Now we'll just add some unit tests to make sure things keep running as expected.
 
-Next section: [06 - Jest](/tutorial/06-jest)
+Next section: [06 - Jest](/tutorial/06-jest#06---jest)
 
-Back to the [previous section](/tutorial/04-webpack-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/04-webpack-react#04---webpack-and-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

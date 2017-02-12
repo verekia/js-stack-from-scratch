@@ -8,7 +8,7 @@ Let's create some very basic *hello world* app and bundle it with Webpack.
 
 - Create an `src/client/entry.js` file containing:
 
-```javascript
+```js
 // @flow
 
 import 'babel-polyfill'
@@ -34,7 +34,7 @@ Alright, we now need to bundle this ES6 client app into an ES5 bundle. It's goin
 
 - In `src/shared/config`, add the following declarations:
 
-```javascript
+```js
 export const WDS_PORT = 7000
 
 export const isProd = process.env.NODE_ENV === 'production'
@@ -42,7 +42,7 @@ export const isProd = process.env.NODE_ENV === 'production'
 
 - Create a `webpack.config.babel.js` file containing:
 
-```javascript
+```js
 // @flow
 
 import { WDS_PORT, isProd } from './src/shared/config'
@@ -95,7 +95,7 @@ Take a moment to read these scripts carefully. They start looking a bit bloated 
 
 Next, let's create a `<div class="js-app"></div>` container in our `src/server/template/master-template.js`, and include the bundle that will be generated:
 
-```javascript
+```js
 // @flow
 
 import { isProd, STATIC_PATH, WDS_PORT } from '../../shared/config'
@@ -138,7 +138,7 @@ First, let's install React and ReactDOM:
 
 Rename your `src/client/entry.js` file into `src/client/entry.jsx` and write some React code in it:
 
-```javascript
+```js
 // @flow
 
 import 'babel-polyfill'
@@ -155,7 +155,7 @@ ReactDOM.render(
 
 Also, modify `entry` in `webpack.config.babel.js` to use this `entry.jsx`:
 
-```javascript
+```js
 entry: './src/client/entry.jsx',
 ```
 
@@ -175,6 +175,6 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 
 Run `yarn start` (or `yarn prod`) and open Chrome on `http://localhost:8000`. You should see "The dog says: Wah wah", which is now rendered by React.
 
-Next section: [05 - Redux, Immutable](/tutorial/05-redux-immutable)
+Next section: [05 - Redux, Immutable](/tutorial/05-redux-immutable#05---redux-and-immutable)
 
-Back to the [previous section](/tutorial/03-express-pm2) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/03-express-pm2#03---express-pm2) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

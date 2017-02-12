@@ -26,7 +26,7 @@ body {
 
 - Create a `src/shared/config.js` file, containing:
 
-```javascript
+```js
 // @flow
 
 export const EXPRESS_PORT = 8000
@@ -39,7 +39,7 @@ This `shared` folder is where we put *isomorphic / universal* JavaScript code â€
 
 - Create a `src/server/index.js` file containing:
 
-```javascript
+```js
 // @flow
 
 /* eslint-disable no-console */
@@ -67,7 +67,7 @@ Nothing fancy here, it's almost Express' Hello World tutorial with a few additio
 
 - Create a `src/server/template/master-template.js` file containing:
 
-```javascript
+```js
 // @flow
 
 import { STATIC_PATH } from '../../shared/config'
@@ -92,7 +92,7 @@ You know how you typically have *templating engines* on the back-end? Well these
 
 It might be possible to get syntax highlighting working for HTML code inside template strings depending on your editor. In Atom, if you prefix your template string with an `html` tag (or any tag that *ends* with `html`, like `ilovehtml`), it will automatically highlight the content of that string. I sometimes use the `html` tag of the `common-tags` library to take advantage of this:
 
-```javascript
+```js
 import { html } from `common-tags`
 
 const template = html`
@@ -128,7 +128,7 @@ The Babel require hook (or `babel-register`) is an override of `node`'s native `
 
 - Create a `src/server/require-hook.js` file containing:
 
-```javascript
+```js
 /* eslint-disable import/no-extraneous-dependencies */
 
 require('babel-register')
@@ -239,6 +239,6 @@ Now that we have a `build` task and a server to manage, it would be neat to make
 "prepush": "yarn full-check"
 ```
 
-Next section: [04 - Webpack, React](/tutorial/04-webpack-react)
+Next section: [04 - Webpack, React](/tutorial/04-webpack-react#04---webpack-and-react)
 
-Back to the [previous section](/tutorial/02-babel-es6-eslint-flow-husky) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/02-babel-es6-eslint-flow-husky#02---babel-es6-eslint-flow-git-hooks) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

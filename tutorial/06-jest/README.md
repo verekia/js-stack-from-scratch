@@ -1,4 +1,4 @@
-# 06 - Testing with Mocha, Chai, and mocking
+# 06 - Jest
 
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
@@ -12,7 +12,7 @@ We are going to use [Mocha](http://mochajs.org/) as our main testing framework. 
 
 In `dog-reducer.test.js`, write the following:
 
-```javascript
+```js
 /* eslint-disable import/no-extraneous-dependencies, no-unused-expressions */
 
 import { createStore } from 'redux';
@@ -53,7 +53,7 @@ Alright, let's run this test!
 
 - In `gulpfile.babel.js`, create the following `test` task, which relies on the `gulp-mocha` plugin:
 
-```javascript
+```js
 import mocha from 'gulp-mocha';
 
 const paths = {
@@ -73,7 +73,7 @@ gulp.task('test', () =>
 
 - Add `test` as a prerequisite of `build`, and make `build` the prerequisite of `main`:
 
-```javascript
+```js
 gulp.task('build', ['lint', 'test', 'clean'], () => /* ... */)
 
 // [...]
@@ -95,7 +95,7 @@ In some cases, we want to be able to *fake* things in a unit test. For instance,
 
 In the context of our app, we are going to add a `barkInConsole` method to our `Dog` class in `src/shared/dog.js`:
 
-```javascript
+```js
 class Dog {
   constructor(name) {
     this.name = name;
@@ -119,7 +119,7 @@ If we run `barkInConsole` in a unit test, `console.log()` will print things in t
 
 - Create a new `src/shared/dog.test.js` file, and add write the following:
 
-```javascript
+```js
 /* eslint-disable import/no-extraneous-dependencies, no-console */
 
 import chai from 'chai';
@@ -155,4 +155,4 @@ If everything went well in this chapter, you should have 2 passing tests.
 
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
-Back to the [previous section](/tutorial/10-immutable-redux-improvements) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/05-redux-immutable#05---redux-and-immutable) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
