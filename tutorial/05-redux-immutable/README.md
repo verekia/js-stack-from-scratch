@@ -33,6 +33,7 @@ const immutablePerson = Immutable.fromJS({
 })
 
 console.log(immutablePerson)
+
 /*
  * Map {
  *   "name": "Stan",
@@ -99,113 +100,122 @@ In this file we initialize the state of our reducer with an Immutable Map contai
 
 - Run `yarn add react-redux`.
 
-TODO =============
+In this section we are going to create *Components* and *Containers*.
 
-- We are now going to modify `app.jsx` to create the *store*. You can replace the entire content of that file by the following:
+**Components** are *dumb* React components, in a sense that they don't know anything about the Redux state. **Containers** are *smart* components that know about the state and that we are going to *connect* to our dumb components.
+
+- Create a `src/client/component/bark-button.jsx` file containing:
 
 ```javascript
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import dogReducer from './reducers/dog-reducer';
-import BarkMessage from './containers/bark-message';
-import BarkButton from './containers/bark-button';
+// @flow
 
+import React, { PropTypes } from 'react'
+
+const BarkButton = ({ bark }: { bark: Function }) =>
+  <button onClick={bark}>Bark</button>
+
+BarkButton.propTypes = {
+  bark: PropTypes.func.isRequired,
+}
+
+export default BarkButton
+```
+
+- Create a `src/client/component/message.jsx` file containing:
+
+```javascript
+// @flow
+
+import React, { PropTypes } from 'react'
+
+const Message = ({ message }: { message: string }) =>
+  <div>{message}</div>
+
+Message.propTypes = {
+  message: PropTypes.string.isRequired,
+}
+
+export default Message
+```
+
+These are examples of *dumb* components. They are logic-less, and just show whatever they are asked to show via React **props**. The main difference between `bark-button.jsx` and `message.jsx` is that `BarkButton` contains an reference to an action dispatcher in its props, where `Message` contains some data to show.
+
+Again, *components* don't know anything about Redux **actions** or the **state** of our app, which is why we are going to create smart **containers** that will feed the proper action dispatchers and data to these 2 dumb components.
+
+- Create a `src/client/container/bark-button.js` file containing:
+
+```javascript
+// @flow
+
+import { connect } from 'react-redux'
+
+import { bark } from '../action/dog'
+import BarkButton from '../component/bark-button'
+
+const mapDispatchToProps = dispatch => ({
+  bark: () => { dispatch(bark('Wah wah!')) },
+})
+
+export default connect(null, mapDispatchToProps)(BarkButton)
+```
+
+This container hooks up the `BarkButton` component with the `bark` action and Redux's `dispatch` method.
+
+- Create a `src/client/container/message.js` file containing:
+
+```javascript
+// @flow
+
+import { connect } from 'react-redux'
+
+import Message from '../component/message'
+
+const mapStateToProps = state => ({
+  message: state.dog.get('barkMessage'),
+})
+
+export default connect(mapStateToProps)(Message)
+```
+
+This container hooks up the Redux's app state with the `Message` component. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
+
+We still haven't initialized the Redux store and haven't put the 2 containers anywhere in our app yet:
+
+- Edit `entry.jsx` like so:
+
+```javascript
+// @flow
+
+import 'babel-polyfill'
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+
+import BarkButton from './container/bark-button'
+import Message from './container/message'
+import dogReducer from './reducer/dog'
+
+/* eslint-disable no-underscore-dangle */
 const store = createStore(combineReducers({
   dog: dogReducer,
-}));
+}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+/* eslint-enable no-underscore-dangle */
 
 ReactDOM.render(
   <Provider store={store}>
     <div>
-      <BarkMessage />
+      <Message />
       <BarkButton />
     </div>
   </Provider>
-  , document.querySelector('.app')
-);
+  , document.querySelector('.js-app'))
 ```
 
-Our store is created by the Redux function `createStore`, pretty explicit. The store object is assembled by combining all our reducers (in our case, only one) using Redux's `combineReducers` function. Each reducer is named here, and we'll name ours `dog`.
+Let's take a moment to review this. First, we create a *store* with `createStore`. Stores are created by passing reducers to them. Here we only have one reducer, but for the sake of future scalability, we use `combineReducers` to group all of our reducers together. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we surround that block with comments to temporarily disable this ESLint rule.
 
-That's pretty much it for the pure Redux part.
-
-Now we are going to hook up Redux with React using `react-redux`. In order for `react-redux` to pass the store to our React app, it needs to wrap the entire app in a `<Provider>` component. This component must have a single child, so we created a `<div>`, and this `<div>` contains the 2 main elements of our app, a `BarkMessage` and a `BarkButton`.
-
-As you can tell in the `import` section, `BarkMessage` and `BarkButton` are imported from a `containers` folder. Now is a good time to introduce the concept of **Components** and **Containers**.
-
-*Components* are *dumb* React components, in a sense that they don't know anything about the Redux state. *Containers* are *smart* components that know about the state and that we are going to *connect* to our dumb components.
-
-- Create 2 folders, `src/client/components` and `src/client/containers`.
-
-- In `components`, create the following files:
-
-**button.jsx**
-
-```javascript
-import React, { PropTypes } from 'react';
-
-const Button = ({ action, actionLabel }) => <button onClick={action}>{actionLabel}</button>;
-
-Button.propTypes = {
-  action: PropTypes.func.isRequired,
-  actionLabel: PropTypes.string.isRequired,
-};
-
-export default Button;
-```
-
-and **message.jsx**:
-
-```javascript
-import React, { PropTypes } from 'react';
-
-const Message = ({ message }) => <div>{message}</div>;
-
-Message.propTypes = {
-  message: PropTypes.string.isRequired,
-};
-
-export default Message;
-
-```
-
-These are examples of *dumb* components. They are logic-less, and just show whatever they are asked to show via React **props**. The main difference between `button.jsx` and `message.jsx` is that `Button` contains an **action** in its props. That action is bound on the `onClick` event. In the context of our app, the `Button` label is never going to change, however, the `Message` component is going to reflect the state of our app, and will vary based on the state.
-
-Again, *components* don't know anything about Redux **actions** or the **state** of our app, which is why we are going to create smart **containers** that will feed the proper *actions* and *data* to these 2 dumb components.
-
-- In `containers`, create the following files:
-
-**bark-button.js**
-
-```javascript
-import { connect } from 'react-redux';
-import Button from '../components/button';
-import { makeBark } from '../actions/dog-actions';
-
-const mapDispatchToProps = dispatch => ({
-  action: () => { dispatch(makeBark()); },
-  actionLabel: 'Bark',
-});
-
-export default connect(null, mapDispatchToProps)(Button);
-```
-
-and **bark-message.js**:
-
-```javascript
-import { connect } from 'react-redux';
-import Message from '../components/message';
-
-const mapStateToProps = state => ({
-  message: state.dog.hasBarked ? 'The dog barked' : 'The dog did not bark',
-});
-
-export default connect(mapStateToProps)(Message);
-```
-
-`BarkButton` will hook up `Button` with the `makeBark` action and Redux's `dispatch` method, and `BarkMessage` will hook up the app state with `Message`. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
+Next, we wrap our entire app inside `react-redux`'s `Provider` component and pass it our store. We put our 2 **containers** in a `<div>` because `Provider` must have a single child.
 
 - You can now run `yarn start` and open `index.html`. You should see "The dog did not bark" and a button. When you click the button, the message should show "The dog barked".
 
@@ -266,6 +276,12 @@ const Message = ({ message }: { message: string }) => <div>{message}</div>;
 ```
 
 As you can see, when destructuring function parameters, you must annotate the extracted properties using a sort of object literal notation.
+
+## Asynchronous call with Redux-thunk
+
+// isomorphic fetch
+
+// TODO
 
 Next section: [06 - Jest](/tutorial/06-jest)
 
