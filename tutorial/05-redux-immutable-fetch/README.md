@@ -430,6 +430,6 @@ That's it! This is our entire app. You've made it, good job!
 
 Now we'll just add some unit tests to make sure things keep running as expected.
 
-Next section: [06 - Jest](/tutorial/06-jest#06---jest)
+Next section: [06 - React Router, Server-Side Rendering](/tutorial/06-react-router-ssr#06---react-router-and-server-side-rendering)
 
 Back to the [previous section](/tutorial/04-webpack-react#04---webpack-and-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
