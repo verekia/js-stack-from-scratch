@@ -2,6 +2,8 @@
 
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
+TODO
+
 ## Mocha and Chai
 
 - In `src/client/reducers`, create a `dog-reducer.test.js` file, which we are going to use to test if our reducer is doing its job when dispatching the `makeBark` action.
@@ -155,4 +157,4 @@ If everything went well in this chapter, you should have 2 passing tests.
 
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
-Back to the [previous section](/tutorial/05-redux-immutable#05---redux-immutable-fetch) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/06-react-router-ssr#06---react-router-and-server-side-rendering) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

@@ -7,9 +7,9 @@
 [![Redux](/img/redux.png)](http://redux.js.org/)
 [![ESLint](/img/eslint.png)](http://eslint.org/)
 [![Webpack](/img/webpack.png)](https://webpack.github.io/)
-[![Mocha](/img/mocha.png)](https://mochajs.org/)
-[![Chai](/img/chai.png)](http://chaijs.com/)
 [![Flow](/img/flow.png)](https://flowtype.org/)
+[![Jest](/img/jest.png)](https://facebook.github.io/jest/)
+[![React Router](/img/react-router.png)](https://github.com/ReactTraining/react-router)
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
@@ -39,13 +39,15 @@ The code provided works on Linux, macOS, and Windows.
 
 [04 - Webpack, React](/tutorial/04-webpack-react#04---webpack-and-react)
 
-[05 - Redux, Immutable](/tutorial/05-redux-immutable#05---redux-immutable-fetch)
+[05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable#05---redux-immutable-fetch)
 
-[06 - Jest](/tutorial/06-jest#06---jest)
+[06 - React Router, Server-Side Rendering](/tutorial/06-react-router-ssr#06---react-router-and-server-side-rendering)
+
+[07 - Jest](/tutorial/07-jest#07---jest)
 
 ## Coming up next
 
-React Router, Server-Side Rendering, Styling, Enzyme.
+Styling, Enzyme.
 
 ## Translations
 
