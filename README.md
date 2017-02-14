@@ -2,17 +2,15 @@
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch) [![Join the chat at https://gitter.im/js-stack-from-scratch/Lobby](https://badges.gitter.im/js-stack-from-scratch/Lobby.svg)](https://gitter.im/js-stack-from-scratch/Lobby)
 
-[![React](/img/react-padded.png)](https://facebook.github.io/react/)
-[![Redux](/img/redux-padded.png)](http://redux.js.org/)
-[![React Router](/img/react-router-padded.png)](https://github.com/ReactTraining/react-router)
-
-[![Flow](/img/flow-padded.png)](https://flowtype.org/)
-[![ESLint](/img/eslint-padded.png)](http://eslint.org/)
-[![Jest](/img/jest-padded.png)](https://facebook.github.io/jest/)
-
-[![Yarn](/img/yarn-padded.png)](https://yarnpkg.com/)
-[![Webpack](/img/webpack-padded.png)](https://webpack.github.io/)
-[![PM2](/img/pm2-padded.png)](http://pm2.keymetrics.io/)
+[![React](/img/react-padded-90.png)](https://facebook.github.io/react/)
+[![Redux](/img/redux-padded-90.png)](http://redux.js.org/)
+[![React Router](/img/react-router-padded-90.png)](https://github.com/ReactTraining/react-router)
+[![Flow](/img/flow-padded-90.png)](https://flowtype.org/)
+[![ESLint](/img/eslint-padded-90.png)](http://eslint.org/)
+[![Jest](/img/jest-padded-90.png)](https://facebook.github.io/jest/)
+[![Yarn](/img/yarn-padded-90.png)](https://yarnpkg.com/)
+[![Webpack](/img/webpack-padded-90.png)](https://webpack.github.io/)
+[![PM2](/img/pm2-padded-90.png)](http://pm2.keymetrics.io/)
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
