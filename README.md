@@ -5,12 +5,14 @@
 [![Yarn](/img/yarn-padded.png)](https://yarnpkg.com/)
 [![React](/img/react-padded.png)](https://facebook.github.io/react/)
 [![Redux](/img/redux-padded.png)](http://redux.js.org/)
+
 [![Webpack](/img/webpack-padded.png)](https://webpack.github.io/)
 [![ESLint](/img/eslint-padded.png)](http://eslint.org/)
 [![Flow](/img/flow-padded.png)](https://flowtype.org/)
-[![Jest](/img/jest.png)](https://facebook.github.io/jest/)
-[![React Router](/img/react-router.png)](https://github.com/ReactTraining/react-router)
-[![PM2](/img/pm2.png)](http://pm2.keymetrics.io/)
+
+[![Jest](/img/jest-padded.png)](https://facebook.github.io/jest/)
+[![React Router](/img/react-router-padded.png)](https://github.com/ReactTraining/react-router)
+[![PM2](/img/pm2-padded.png)](http://pm2.keymetrics.io/)
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
