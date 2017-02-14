@@ -2,10 +2,11 @@
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch) [![Join the chat at https://gitter.im/js-stack-from-scratch/Lobby](https://badges.gitter.im/js-stack-from-scratch/Lobby.svg)](https://gitter.im/js-stack-from-scratch/Lobby)
 
-[![React](/img/react.png)](https://facebook.github.io/react/)
-[![Redux](/img/redux.png)](http://redux.js.org/)
+[![Yarn](/img/yarn-padded.png)](https://yarnpkg.com/)
+[![React](/img/react-padded.png)](https://facebook.github.io/react/)
+[![Redux](/img/redux-padded.png)](http://redux.js.org/)
+[![Webpack](/img/webpack-padded.png)](https://webpack.github.io/)
 [![ESLint](/img/eslint.png)](http://eslint.org/)
-[![Webpack](/img/webpack.png)](https://webpack.github.io/)
 [![Flow](/img/flow.png)](https://flowtype.org/)
 [![Jest](/img/jest.png)](https://facebook.github.io/jest/)
 [![React Router](/img/react-router.png)](https://github.com/ReactTraining/react-router)
