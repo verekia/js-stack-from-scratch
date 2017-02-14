@@ -39,7 +39,7 @@ The code provided works on Linux, macOS, and Windows.
 
 [04 - Webpack, React](/tutorial/04-webpack-react#04---webpack-and-react)
 
-[05 - Redux, Immutable](/tutorial/05-redux-immutable#05---redux-and-immutable)
+[05 - Redux, Immutable](/tutorial/05-redux-immutable#05---redux-immutable-fetch)
 
 [06 - Jest](/tutorial/06-jest#06---jest)
 

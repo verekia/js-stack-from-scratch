@@ -1,4 +1,4 @@
-# 05 - Redux and Immutable
+# 05 - Redux, Immutable, Fetch
 
 In this chapter we will hook up React and Redux to make a very simple app. The app will consist of a message and a button. The message changes when the user clicks the button.
 
@@ -253,7 +253,9 @@ app.get(routes.asyncBark, (req, res) => {
 
 ### Fetch
 
-We are going to use `fetch` to make calls to the server from the client. `isomorphic-fetch` is a polyfill for `fetch` that makes it work cross-browsers and also in Node.
+> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** is a standardized JavaScript function to make asynchronous calls inspired by jQuery's AJAX methods.
+
+We are going to use `fetch` to make calls to the server from the client. `fetch` is not supported by all browsers yet, so we are going to need a polyfill. `isomorphic-fetch` is a polyfill that makes it work cross-browsers and in Node too!
 
 - Run `yarn add isomorphic-fetch`.
 

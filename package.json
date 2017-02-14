@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "full-check": "yarn mdlint && yarn 01 && yarn 02 && yarn 03",
+    "full-check": "yarn mdlint && yarn 01 && yarn 02 && yarn 03 && yarn 04 && yarn 05",
     "01": "cd tutorial/01-node-yarn-package-json && yarn && yarn start",
     "02": "cd tutorial/02-babel-es6-eslint-flow-husky && yarn && yarn test && yarn start",
     "03": "cd tutorial/03-express-pm2 && yarn && yarn full-check",
+    "04": "cd tutorial/04-webpack-react && yarn && yarn full-check",
+    "05": "cd tutorial/05-redux-immutable-fetch && yarn && yarn full-check",
     "mdlint": "node mdlint.js"
   },
   "devDependencies": {
