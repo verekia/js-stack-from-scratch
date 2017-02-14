@@ -36,7 +36,7 @@ Final code available in the [JS-Stack-Boilerplate repository](https://github.com
 
 [04 - Webpack, React](/tutorial/04-webpack-react#04---webpack-and-react)
 
-[05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable#05---redux-immutable-fetch)
+[05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch#05---redux-immutable-fetch)
 
 [06 - React Router, Server-Side Rendering](/tutorial/06-react-router-ssr#06---react-router-and-server-side-rendering)
 
