@@ -219,7 +219,7 @@ Let's take a moment to review this. First, we create a *store* with `createStore
 
 Next, we wrap our entire app inside `react-redux`'s `Provider` component and pass it our store. We put our 2 **containers** in a `<div>` because `Provider` must have a single child.
 
-- You can now run `yarn start` and open `http://localhost:8000`. You should see "The dog is quiet" and a button. When you click the button, the message should change to "Wah wah!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
+🏁 You can now run `yarn start` and open `http://localhost:8000`. You should see "The dog is quiet" and a button. When you click the button, the message should change to "Wah wah!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
 
 Congratulations, we finally made an app that does something! Okay it's not a *super* impressive from the outside, but we all know that it is powered by one badass stack under the hood.
 
@@ -424,7 +424,7 @@ ReactDOM.render(
 
 Here we pass `redux-thunk` to Redux's `applyMiddleware` function. In order for the Redux Devtools to keep working, we also need to use Redux's `compose` function. Don't worry too much about this part, just remember that we enhancing Redux with `redux-thunk`.
 
-- Run `yarn start` or `yarn prod` and you should now be able to click the "Bark Async" button and retrieve a message from the server! Since you're working locally, the call is instantaneous, but if you open the Redux Devtools, you will notice that each click triggers both `BARK_ASYNC_REQUEST` and `BARK_ASYNC_SUCCESS`, making the message go through the intermediate `...` loading state as expected.
+🏁 Run `yarn start` or `yarn prod` and you should now be able to click the "Bark Async" button and retrieve a message from the server! Since you're working locally, the call is instantaneous, but if you open the Redux Devtools, you will notice that each click triggers both `BARK_ASYNC_REQUEST` and `BARK_ASYNC_SUCCESS`, making the message go through the intermediate `...` loading state as expected.
 
 That's it! This is our entire app. You've made it, good job!
 

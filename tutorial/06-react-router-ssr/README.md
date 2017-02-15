@@ -1,6 +1,6 @@
 # 06 - React Router and Server-Side Rendering
 
-TODO
+TODO 🏁
 
 Next section: [07 - Jest](/tutorial/07-jest#07---jest)
 
