@@ -53,7 +53,8 @@ Here is the basic `package.json` I'll use in this tutorial:
 ## Hello World
 
 - Create an `index.js` file containing `console.log('Hello world')`.
-- 🏁 Run `node .` in this folder (`index.js` is the default file Node looks for in the current folder). It should print "Hello world".
+
+🏁 Run `node .` in this folder (`index.js` is the default file Node looks for in a folder). It should print "Hello world".
 
 ## `start` script
 
