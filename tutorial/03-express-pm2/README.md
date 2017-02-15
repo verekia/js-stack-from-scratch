@@ -20,6 +20,7 @@ body {
   margin: auto;
   font-family: sans-serif;
 }
+
 h1 {
   color: limegreen;
 }
@@ -32,11 +33,12 @@ h1 {
 ```js
 // @flow
 
-export const EXPRESS_PORT = 8000
+export const WEB_PORT = process.env.PORT || 8000
 export const STATIC_PATH = '/static'
+export const APP_NAME = 'Hello App'
 ```
 
-This `shared` folder is where we put *isomorphic / universal* JavaScript code – files that are accessible by both the client and the server. A great use case of shared code is *routes*, as you will see later in this tutorial when we'll make an AJAX call. Here we simply have some configuration constants as an example for now.
+This `shared` folder is where we put *isomorphic / universal* JavaScript code – files that are accessible by both the client and the server. A great use case of shared code is *routes*, as you will see later in this tutorial when we'll make an asynchronous call. Here we simply have some configuration constants as an example for now.
 
 - Run `yarn add express`.
 
@@ -49,8 +51,8 @@ This `shared` folder is where we put *isomorphic / universal* JavaScript code �
 
 import express from 'express'
 
-import { EXPRESS_PORT, STATIC_PATH } from '../shared/config'
-import masterTemplate from './template/master-template'
+import { APP_NAME, STATIC_PATH, WEB_PORT } from '../shared/config'
+import staticTemplate from './static-template'
 
 const app = express()
 
@@ -58,22 +60,22 @@ app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
 app.get('/', (req, res) => {
-  res.send(masterTemplate('Dog App'))
+  res.send(staticTemplate(APP_NAME))
 })
 
-app.listen(EXPRESS_PORT, () => {
-  console.log(`Express running on port ${EXPRESS_PORT}.`)
+app.listen(WEB_PORT, () => {
+  console.log(`Express running on port ${WEB_PORT}.`)
 })
 ```
 
 Nothing fancy here, it's almost Express' Hello World tutorial with a few additional imports. We're using 2 different static file directories here. `dist` for generated files, `public` for declarative ones.
 
-- Create a `src/server/template/master-template.js` file containing:
+- Create a `src/server/static-template.js` file containing:
 
 ```js
 // @flow
 
-import { STATIC_PATH } from '../../shared/config'
+import { STATIC_PATH } from '../shared/config'
 
 export default (title: string) => `
 <!doctype html>
@@ -109,7 +111,7 @@ Anyway, back to business!
 
 - In `package.json` change your `start` script like so: `"start": "babel-node src/server"`
 
-- Run `yarn start`, and hit `localhost:8000` in your browser. If everything works as expected you should see a blank page with "Dog App" written both on the tab title and as a heading on the page. The heading should be green if your CSS is applied correctly.
+🏁 Run `yarn start`, and hit `localhost:8000` in your browser. If everything works as expected you should see a blank page with "Hello App" written both on the tab title and as a green heading on the page.
 
 **Note**: Some processes – typically processes that wait for things to happen, like a server for instance – will prevent you from entering commands in your terminal until they're done. To interrupt such processes and get your prompt back, press **Ctrl+C**. You can alternatively open a new terminal tab if you want to keep them running while being able to enter commands. You can also make these processes run in the background but that's out of the scope of this tutorial.
 
@@ -190,9 +192,9 @@ Let's update our `package.json` like so:
 
 In `stop`, `rimraf logs/* && pm2 delete all` clears the logs folder and deletes all processes. If there was no processes running, it returns an error exit code. Since we don't want this error to interrupt our chain of tasks, we force it to pass with `|| true`.
 
-- Go to `http://localhost:8000/` in your browser. If you have no hanging process currently running it should give you a 404. Run `yarn start`, which should trigger `dev`, which triggers, `stop`, and finally launches the process of our server. Note that with PM2, your processes are run in the background so you still have control over your terminal. Hit `http://localhost:8000/` and it should now show your app. Take a look at the `logs/server-dev.log` file, which should contain `Express running on port 8000.`.
+🏁 Go to `http://localhost:8000/` in your browser. If you have no hanging process currently running it should give you a 404. Run `yarn start`, which should trigger `dev`, which triggers, `stop`, and finally launches the process of our server. Note that with PM2, your processes are run in the background so you still have control over your terminal. Hit `http://localhost:8000/` and it should now show your app. Take a look at the `logs/server-dev.log` file, which should contain `Express running on port 8000.`.
 
-Since we enabled PM2's *watch* feature, you can modify the `Dog App` string in `src/server/index.js`, save the file, reload your browser tab, and see the updated string. Without watching, this would require restarting the whole process.
+Since we enabled PM2's *watch* feature, you can modify the `APP_NAME` string in `src/shared/config.js`, save the file, reload your browser tab, and see the updated string. Without watching, this would require restarting the whole process.
 
 - Run `yarn stop` to stop your server. If everything works well, it should now give you a 404 again in your browser.
 
@@ -206,10 +208,10 @@ One of the main features of Babel is to take a folder of ES6 code (usually named
 
 ```json
 "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-"build": "rimraf lib && babel src/server -d lib/server && babel src/shared -d lib/shared",
+"build": "rimraf lib && babel src -d lib",
 ```
 
-First, we use `rimraf` to clean up auto-generated `lib` folder. Then we use `babel` to transpile our code from `src` to `lib`, but instead of transpiling the entire folder (which would be done with `babel src -d lib`), we split it into 2 commands, one for `server`, and one for `shared`. This way, when we start adding code in the `client` folder, Babel won't waste time transpiling useless client-only files that the server does not need. Finally we run PM2 on a different config file, `pm2-prod.yaml`.
+First, we use `rimraf` to clean up the auto-generated `lib` folder. Then we use `babel` to transpile our code from `src` to `lib`. Finally we run PM2 on a different config file, `pm2-prod.yaml`.
 
 - Create a `pm2-prod.yaml` file containing:
 
@@ -228,7 +230,7 @@ The only differences with the `pm2-dev.yaml` file is that the `script` now point
 
 - Add `/lib/` to your `.gitignore`.
 
-- Run `yarn prod`. It should delete previous `logs` and `lib` files, kill any previous process, transpile your files and run your server on `http://localhost:8000/`.
+🏁 Run `yarn prod`. It should delete previous `logs` and `lib` files, kill any previous process, transpile your files and run your server on `http://localhost:8000/`.
 
 All good? Congratulations, you now have development and production environments set up!
 
@@ -241,6 +243,8 @@ Now that we have a `build` task and a server to manage, it would be neat to make
 "precommit": "yarn full-check",
 "prepush": "yarn full-check"
 ```
+
+🏁 Run `yarn full-check` or commit your files to trigger the whole process.
 
 Next section: [04 - Webpack, React](/tutorial/04-webpack-react#04---webpack-and-react)
 
