@@ -1,6 +1,6 @@
 // @flow
 
-import { STATIC_PATH } from '../../shared/config'
+import { STATIC_PATH } from '../shared/config'
 
 export default (title: string) => `
 <!doctype html>

@@ -40,6 +40,8 @@ export const APP_NAME = 'Hello App'
 
 This `shared` folder is where we put *isomorphic / universal* JavaScript code – files that are accessible by both the client and the server. A great use case of shared code is *routes*, as you will see later in this tutorial when we'll make an asynchronous call. Here we simply have some configuration constants as an example for now.
 
+If the Node process used to run your app has a `process.env.PORT` environment variable set (that's the case when you deploy to Heroku for instance), it will use this for the port. If there is none, we default to `8000`.
+
 - Run `yarn add express`.
 
 - Create a `src/server/index.js` file containing:
@@ -226,7 +228,7 @@ apps:
       NODE_ENV: production
 ```
 
-The only differences with the `pm2-dev.yaml` file is that the `script` now points to the `lib` folder instead of `src`, and we are not using `watch`.
+The only differences with the `pm2-dev.yaml` file is that the `script` now points to the `lib` folder instead of the require hook in `src`, and we are not using `watch`.
 
 - Add `/lib/` to your `.gitignore`.
 
