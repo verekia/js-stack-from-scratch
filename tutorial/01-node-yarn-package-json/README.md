@@ -56,6 +56,8 @@ Here is the basic `package.json` I'll use in this tutorial:
 
 🏁 Run `node .` in this folder (`index.js` is the default file Node looks for in a folder). It should print "Hello world".
 
+**Note**: See that 🏁 racing flag emoji? I will use it every time you reach a **checkpoint**. We are sometimes going to make a lot of changes in a row, and your code may not work until you reach the next checkpoint.
+
 ## `start` script
 
 Running `node .` to execute our program is a bit too low-level. We are going to use an NPM/Yarn script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `yarn start`, even when our program gets more complicated.
