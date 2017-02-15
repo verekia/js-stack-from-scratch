@@ -4,16 +4,14 @@
 
 > 💡 **[Webpack](https://webpack.github.io/)** is a *module bundler*. It takes a whole bunch of various source files, processes them, and assembles them into one (usually) JavaScript file called a bundle, which is the only file your client will execute.
 
-Let's create some very basic *hello world* app and bundle it with Webpack.
+Let's create some very basic *hello world* and bundle it with Webpack.
 
-- Create an `src/client/entry.js` file containing:
+- Create an `src/client/index.js` file containing:
 
 ```js
-// @flow
-
 import 'babel-polyfill'
 
-document.querySelector('.js-app').innerText = 'Wah wah'
+document.querySelector('.app').innerHTML = '<h1>Hello Webpack!</h1>'
 ```
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) before anything else in in your bundle.
@@ -32,10 +30,18 @@ If you run ESLint on this file, it will complain about `document` being undefine
 
 Alright, we now need to bundle this ES6 client app into an ES5 bundle. It's going to take quite a few changes to get there, so bear with me until the end.
 
-- In `src/shared/config`, add the following declarations:
+- In `src/shared/config`, add the following constant:
 
 ```js
 export const WDS_PORT = 7000
+```
+
+- Create a `src/shared/util.js` file containing:
+
+```js
+// @flow
+
+/* eslint-disable import/prefer-default-export */
 
 export const isProd = process.env.NODE_ENV === 'production'
 ```
@@ -45,10 +51,11 @@ export const isProd = process.env.NODE_ENV === 'production'
 ```js
 // @flow
 
-import { WDS_PORT, isProd } from './src/shared/config'
+import { WDS_PORT } from './src/shared/config'
+import { isProd } from './src/shared/util'
 
 export default {
-  entry: './src/client/entry.js',
+  entry: './src/client',
   output: { filename: 'dist/js/bundle.js' },
   module: {
     rules: [
@@ -88,17 +95,18 @@ You can now tweak your `package.json` scripts like so:
 ```json
 "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
 "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-"build": "rimraf dist lib && babel src/server -d lib/server && babel src/shared -d lib/shared && cross-env NODE_ENV=production webpack -p --progress",
+"build": "rimraf dist lib && babel src -d lib && cross-env NODE_ENV=production webpack -p --progress",
 ```
 
 Take a moment to read these scripts carefully. They start looking a bit bloated but you should be able to understand everything they do.
 
-Next, let's create a `<div class="js-app"></div>` container in our `src/server/template/master-template.js`, and include the bundle that will be generated:
+Next, let's create a `<div class="app"></div>` container in our `src/server/static-template.js`, and include the bundle that will be generated:
 
 ```js
 // @flow
 
-import { isProd, STATIC_PATH, WDS_PORT } from '../../shared/config'
+import { STATIC_PATH, WDS_PORT } from '../shared/config'
+import { isProd } from '../shared/util'
 
 export default (title: string) => `
 <!doctype html>
@@ -108,8 +116,7 @@ export default (title: string) => `
     <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
   </head>
   <body>
-    <h1>${title}</h1>
-    <div class="js-app"></div>
+    <div class="app"></div>
     <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/bundle.js"></script>
   </body>
 </html>
@@ -120,9 +127,9 @@ Depending on the environment we're in, we'll include either the Webpack Dev Serv
 
 Alright that was a lot of changes, let's see if everything works as expected:
 
-- Run `yarn start`. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should both be ~600kB files) and the process hangs in your terminal, open `http://localhost:8000/` and you should see "Wah wah". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In your editor, in `src/client/entry.js`, try changing `Wah wah` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should reload automatically. You can interrupt the process with Ctrl+C.
+🏁 Run `yarn start`. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should both be ~600kB files) and the process hangs in your terminal, open `http://localhost:8000/` and you should see "Hello!". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In your editor, in `src/client/entry.js`, try changing `Hello!` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should reload automatically. You can interrupt the process with Ctrl+C.
 
-- Run `yarn prod`. Once Webpack is done generating the minified bundle (~90kB this time), open `http://localhost:8000/` and you should still see "Wah wah". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
+- Run `yarn prod`. Once Webpack is done generating the minified bundle (~90kB this time), open `http://localhost:8000/` and you should still see "Hello!". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
 
 Good job, I know this was quite dense. You deserve a break! The next section is easier.
 
@@ -146,17 +153,7 @@ import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-ReactDOM.render(
-  <div>
-    The dog says: Wah wah
-  </div>
-  , document.querySelector('.js-app'))
-```
-
-Also, modify `entry` in `webpack.config.babel.js` to use this `entry.jsx`:
-
-```js
-entry: './src/client/entry.jsx',
+ReactDOM.render(<h1>Hello React!</h1>, document.querySelector('.app'))
 ```
 
 Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
@@ -173,7 +170,7 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 }
 ```
 
-Run `yarn start` (or `yarn prod`) and open Chrome on `http://localhost:8000`. You should see "The dog says: Wah wah", which is now rendered by React.
+🏁 Run `yarn start` (or `yarn prod`) and open Chrome on `http://localhost:8000`. You should see "Hello React!".
 
 Next section: [05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch#05---redux-immutable-fetch)
 
