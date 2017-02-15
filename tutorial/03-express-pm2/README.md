@@ -20,6 +20,9 @@ body {
   margin: auto;
   font-family: sans-serif;
 }
+h1 {
+  color: limegreen;
+}
 ```
 
 - Create an empty `src/client/` folder.
@@ -106,7 +109,7 @@ Anyway, back to business!
 
 - In `package.json` change your `start` script like so: `"start": "babel-node src/server"`
 
-- Run `yarn start`, and hit `localhost:8000` in your browser. If everything works as expected you should see a blank page with "Dog App" written both on the tab title and as a heading on the page. Inspect the `body` element to make sure our CSS is loaded correctly.
+- Run `yarn start`, and hit `localhost:8000` in your browser. If everything works as expected you should see a blank page with "Dog App" written both on the tab title and as a heading on the page. The heading should be green if your CSS is applied correctly.
 
 **Note**: Some processes – typically processes that wait for things to happen, like a server for instance – will prevent you from entering commands in your terminal until they're done. To interrupt such processes and get your prompt back, press **Ctrl+C**. You can alternatively open a new terminal tab if you want to keep them running while being able to enter commands. You can also make these processes run in the background but that's out of the scope of this tutorial.
 
