@@ -35,7 +35,7 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 }
 ```
 
-- `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](#the-es6-modules-syntax) section of this chapter.
+🏁 `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](#the-es6-modules-syntax) section of this chapter.
 
 ## ES6
 
@@ -73,7 +73,7 @@ console.log(toby.bark())
 
 As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
 
-- Run `yarn start` and it should print "Wah wah, I am Toby".
+🏁 Run `yarn start` and it should print "Wah wah, I am Toby".
 
 ### The ES6 modules syntax
 
@@ -81,7 +81,7 @@ Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog
 
 In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`.
 
-- `yarn start` should still print "Wah wah, I am Toby".
+🏁 `yarn start` should still print "Wah wah, I am Toby".
 
 ## ESLint
 
@@ -99,7 +99,7 @@ It should install everything you need and add `eslint-config-airbnb`, `eslint-pl
 
 **Note**: I've replaced `npm install` by `yarn add` in this command. Also, this won't work on Windows, so take a look at the `package.json` file of this repository and just install all the ESLint-related dependencies manually using `yarn add --dev packagename@^#.#.#` with `#.#.#` being the versions given in `package.json` for each package.
 
-Create an `.eslintrc.json` file at the root of your project, just like we did for Babel, and write the following to it:
+- Create an `.eslintrc.json` file at the root of your project, just like we did for Babel, and write the following to it:
 
 ```json
 {
@@ -146,7 +146,7 @@ I recommend reading the [ESLint documentation about semicolons](http://eslint.or
 }
 ```
 
-- Run `yarn test`, and it should now pass successfully. Try adding an unnecessary semicolon somewhere to make sure the rule is set up correctly.
+🏁 Run `yarn test`, and it should now pass successfully. Try adding an unnecessary semicolon somewhere to make sure the rule is set up correctly.
 
 I am aware that some of you will want to keep using semicolons, which will make the code provided in this tutorial inconvenient. If you are using this tutorial just for learning, I'm sure it will remain bearable to learn without semicolons, until going back to using them on your real projects. If you want to use the code provided in this tutorial as a boilerplate though, it will require a bit of rewriting, which should be pretty quick with ESLint set to enforce semicolons to guide you through the process. I apologize if you're in such case.
 
@@ -242,7 +242,7 @@ There are 2 things that I want you to try:
 
 - Now replace `constructor(name: string)` by `constructor(name:string)`, and run `yarn test`. You should get an **ESLint** error telling you that Flow annotations should have a space after the colon. That means the Flow plugin for ESLint is set up correctly.
 
-If you got the 2 different errors working, you are all set with Flow and ESLint! Remember to put the missing space back in the Flow annotation.
+🏁 If you got the 2 different errors working, you are all set with Flow and ESLint! Remember to put the missing space back in the Flow annotation.
 
 ### Flow in your editor
 
@@ -269,7 +269,7 @@ All we have to do is to create two new tasks in `scripts`, `precommit` and `prep
 },
 ```
 
-If you now try to commit or push your code, it should automatically run the `test` task.
+🏁 If you now try to commit or push your code, it should automatically run the `test` task.
 
 **Note**: If you are pushing right after a commit, you can use `git push --no-verify` to avoid running all the tests again.
 
