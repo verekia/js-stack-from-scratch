@@ -266,14 +266,6 @@ app.get(asyncHelloRoute(), (req, res) => {
 })
 ```
 
-### Fetch
-
-> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** is a standardized JavaScript function to make asynchronous calls inspired by jQuery's AJAX methods.
-
-We are going to use `fetch` to make calls to the server from the client. `fetch` is not supported by all browsers yet, so we are going to need a polyfill. `isomorphic-fetch` is a polyfill that makes it work cross-browsers and in Node too!
-
-- Run `yarn add isomorphic-fetch`.
-
 ### New containers
 
 - Create a `src/client/container/hello-async-button.js` file containing:
@@ -318,6 +310,14 @@ export default connect(mapStateToProps)(MessageAsync)
 You can see that in this container, we are referring to a `messageAsync` property, which we're going to add to our reducer soon.
 
 What we need now is to create this `sayHelloAsync` action.
+
+### Fetch
+
+> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** is a standardized JavaScript function to make asynchronous calls inspired by jQuery's AJAX methods.
+
+We are going to use `fetch` to make calls to the server from the client. `fetch` is not supported by all browsers yet, so we are going to need a polyfill. `isomorphic-fetch` is a polyfill that makes it work cross-browsers and in Node too!
+
+- Run `yarn add isomorphic-fetch`.
 
 ### 3 asynchronous actions
 
