@@ -77,7 +77,7 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 
 `package.json` must be a valid JSON file, which means that you cannot have trailing commas. So be careful when editing manually your `package.json` file.
 
-- Run `yarn start`. It should print `Hello world`.
+🏁 Run `yarn start`. It should print `Hello world`.
 
 ## Git and `.gitignore`
 
@@ -117,7 +117,7 @@ const redHexa = color({ r: 255, g: 0, b: 0 }).hex()
 console.log(redHexa)
 ```
 
-- Run `yarn start`. It should print `#FF0000`.
+🏁 Run `yarn start`. It should print `#FF0000`.
 
 Congratulations, you installed and used a package!
 
