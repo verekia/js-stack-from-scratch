@@ -3,3 +3,7 @@ body {
   margin: auto;
   font-family: sans-serif;
 }
+
+h1 {
+  color: limegreen;
+}

@@ -100,7 +100,7 @@ You can now tweak your `package.json` scripts like so:
 
 Take a moment to read these scripts carefully. They start looking a bit bloated but you should be able to understand everything they do.
 
-Next, let's create a `<div class="app"></div>` container in our `src/server/static-template.js`, and include the bundle that will be generated:
+- Next, let's create a `<div class="app"></div>` container in our `src/server/static-template.js`, and include the bundle that will be generated:
 
 ```js
 // @flow
@@ -127,9 +127,9 @@ Depending on the environment we're in, we'll include either the Webpack Dev Serv
 
 Alright that was a lot of changes, let's see if everything works as expected:
 
-🏁 Run `yarn start`. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should both be ~600kB files) and the process hangs in your terminal, open `http://localhost:8000/` and you should see "Hello!". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In your editor, in `src/client/entry.js`, try changing `Hello!` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should reload automatically. You can interrupt the process with Ctrl+C.
+🏁 Run `yarn start`. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should both be ~600kB files) and the process hangs in your terminal, open `http://localhost:8000/` and you should see "Hello Webpack!". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In your editor, in `src/client/index.js`, try changing `Hello Webpack!` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should reload automatically. You can interrupt the process with Ctrl+C.
 
-- Run `yarn prod`. Once Webpack is done generating the minified bundle (~90kB this time), open `http://localhost:8000/` and you should still see "Hello!". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
+- Run `yarn prod`. Once Webpack is done generating the minified bundle (~90kB this time), open `http://localhost:8000/` and you should still see "Hello Webpack!". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
 
 Good job, I know this was quite dense. You deserve a break! The next section is easier.
 
@@ -143,7 +143,7 @@ First, let's install React and ReactDOM:
 
 - Run `yarn add react react-dom`.
 
-Rename your `src/client/entry.js` file into `src/client/entry.jsx` and write some React code in it:
+Rename your `src/client/index.js` file into `src/client/index.jsx` and write some React code in it:
 
 ```js
 // @flow

@@ -1,6 +1,7 @@
 // @flow
 
-import { isProd, STATIC_PATH, WDS_PORT } from '../../shared/config'
+import { STATIC_PATH, WDS_PORT } from '../shared/config'
+import { isProd } from '../shared/util'
 
 export default (title: string) => `
 <!doctype html>
@@ -10,8 +11,7 @@ export default (title: string) => `
     <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
   </head>
   <body>
-    <h1>${title}</h1>
-    <div class="js-app"></div>
+    <div class="app"></div>
     <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/bundle.js"></script>
   </body>
 </html>

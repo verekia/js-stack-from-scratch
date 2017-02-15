@@ -4,8 +4,8 @@
 
 import express from 'express'
 
-import { EXPRESS_PORT, STATIC_PATH } from '../shared/config'
-import masterTemplate from './template/master-template'
+import { APP_NAME, STATIC_PATH, WEB_PORT } from '../shared/config'
+import staticTemplate from './static-template'
 
 const app = express()
 
@@ -13,9 +13,9 @@ app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
 app.get('/', (req, res) => {
-  res.send(masterTemplate('Dog App'))
+  res.send(staticTemplate(APP_NAME))
 })
 
-app.listen(EXPRESS_PORT, () => {
-  console.log(`Express running on port ${EXPRESS_PORT}.`)
+app.listen(WEB_PORT, () => {
+  console.log(`Express running on port ${WEB_PORT}.`)
 })
