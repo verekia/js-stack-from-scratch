@@ -8,26 +8,29 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-import BarkAsyncButton from './container/bark-async-button'
-import BarkButton from './container/bark-button'
+import HelloButton from './container/hello-button'
+import HelloAsyncButton from './container/hello-async-button'
 import Message from './container/message'
-import dogReducer from './reducer/dog'
+import MessageAsync from './container/message-async'
+import helloReducer from './reducer/hello'
+import { APP_NAME } from '../shared/config'
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 /* eslint-enable no-underscore-dangle */
 
 const store = createStore(combineReducers({
-  dog: dogReducer,
+  hello: helloReducer,
 }), composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 ReactDOM.render(
   <Provider store={store}>
     <div>
+      <h1>{APP_NAME}</h1>
       <Message />
-      <BarkButton />
-      <BarkAsyncButton />
+      <HelloButton />
+      <MessageAsync />
+      <HelloAsyncButton />
     </div>
   </Provider>
-  , document.querySelector('.js-app'),
-)
+  , document.querySelector('.app'))

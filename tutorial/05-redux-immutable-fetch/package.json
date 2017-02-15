@@ -6,7 +6,7 @@
     "start": "yarn dev",
     "dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
     "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-    "build": "rimraf dist lib && babel src/server -d lib/server && babel src/shared -d lib/shared && cross-env NODE_ENV=production webpack -p --progress",
+    "build": "rimraf dist lib && babel src -d lib && cross-env NODE_ENV=production webpack -p --progress",
     "stop": "rimraf logs/* && pm2 delete all || true",
     "test": "eslint src && flow",
     "full-check": "yarn test && yarn prod && yarn stop",
@@ -14,7 +14,7 @@
     "prepush": "yarn full-check"
   },
   "dependencies": {
-    "babel-polyfill": "^6.22.0",
+    "babel-polyfill": "^6.23.0",
     "express": "^4.14.1",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
@@ -26,13 +26,13 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-core": "^6.22.1",
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.2.10",
-    "babel-preset-flow": "^1.0.0",
+    "babel-loader": "^6.3.1",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-latest": "^6.22.0",
-    "babel-preset-react": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
     "cross-env": "^3.1.4",
     "eslint": "^3.15.0",
     "eslint-config-airbnb": "latest",

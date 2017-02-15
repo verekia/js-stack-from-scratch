@@ -189,7 +189,7 @@ This container hooks up the Redux's app state with the `Message` component. When
 
 We still haven't initialized the Redux store and haven't put the 2 containers anywhere in our app yet:
 
-- Edit `index.jsx` like so:
+- Edit `src/client/index.jsx` like so:
 
 ```js
 // @flow

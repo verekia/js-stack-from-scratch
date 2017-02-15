@@ -4,9 +4,9 @@
 
 import express from 'express'
 
-import routes from '../shared/routes'
-import { EXPRESS_PORT, STATIC_PATH } from '../shared/config'
-import masterTemplate from './template/master-template'
+import { APP_NAME, STATIC_PATH, WEB_PORT } from '../shared/config'
+import { asyncHelloRoute } from '../shared/routes'
+import staticTemplate from './static-template'
 
 const app = express()
 
@@ -14,13 +14,13 @@ app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
 app.get('/', (req, res) => {
-  res.send(masterTemplate('Dog App'))
+  res.send(staticTemplate(APP_NAME))
 })
 
-app.get(routes.asyncBark, (req, res) => {
-  res.send({ message: 'Wah wah! (from the server)' })
+app.get(asyncHelloRoute(), (req, res) => {
+  res.json({ message: `Hello from the server! (received ${req.params.num})` })
 })
 
-app.listen(EXPRESS_PORT, () => {
-  console.log(`Express running on port ${EXPRESS_PORT}.`)
+app.listen(WEB_PORT, () => {
+  console.log(`Express running on port ${WEB_PORT}.`)
 })
