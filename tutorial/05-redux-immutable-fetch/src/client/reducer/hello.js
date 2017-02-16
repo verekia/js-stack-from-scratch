@@ -10,8 +10,8 @@ import {
 } from '../action/hello'
 
 const initialState = Immutable.fromJS({
-  message: 'Initial message',
-  messageAsync: 'Initial message for async call',
+  message: 'Initial reducer message',
+  messageAsync: 'Initial reducer message for async call',
 })
 
 const helloReducer = (state: Object = initialState, action: { type: string, payload: any }) => {

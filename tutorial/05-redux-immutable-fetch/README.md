@@ -78,7 +78,7 @@ import * as Immutable from 'immutable'
 import { SAY_HELLO } from '../action/hello'
 
 const initialState = Immutable.fromJS({
-  message: 'Initial message',
+  message: 'Initial reducer message',
 })
 
 const helloReducer = (state: Object = initialState, action: { type: string, payload: any }) => {
@@ -93,7 +93,7 @@ const helloReducer = (state: Object = initialState, action: { type: string, payl
 export default helloReducer
 ```
 
-In this file we initialize the state of our reducer with an Immutable Map containing one property, `message`, set to `Initial message`. The `helloReducer` handles `SAY_HELLO` actions by simply setting the new `message` with the action payload. The Flow annotation for `action` destructures it into a `type` and a `payload`. The `payload` can be of `any` type. It looks funky if you've never seen this before, but it remains pretty understandable. Note the usage of `Immutable.fromJS()` and `set()` as seen before.
+In this file we initialize the state of our reducer with an Immutable Map containing one property, `message`, set to `Initial reducer message`. The `helloReducer` handles `SAY_HELLO` actions by simply setting the new `message` with the action payload. The Flow annotation for `action` destructures it into a `type` and a `payload`. The `payload` can be of `any` type. It looks funky if you've never seen this before, but it remains pretty understandable. Note the usage of `Immutable.fromJS()` and `set()` as seen before.
 
 ## React-Redux
 
@@ -227,7 +227,7 @@ Let's take a moment to review this. First, we create a *store* with `createStore
 
 Next, we wrap our entire app inside `react-redux`'s `Provider` component and pass it our store. We put our 2 **containers** in a `<div>` because `Provider` must have a single child.
 
-🏁 You can now run `yarn start` and open `http://localhost:8000`. You should see "Initial message" and a button. When you click the button, the message should change to "Hello!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
+🏁 You can now run `yarn start` and open `http://localhost:8000`. You should see "Initial reducer message" and a button. When you click the button, the message should change to "Hello!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
 
 Congratulations, we finally made an app that does something! Okay it's not a *super* impressive from the outside, but we all know that it is powered by one badass stack under the hood.
 
@@ -382,8 +382,8 @@ import {
 } from '../action/hello'
 
 const initialState = Immutable.fromJS({
-  message: 'Initial message',
-  messageAsync: 'Initial message for async call',
+  message: 'Initial reducer message',
+  messageAsync: 'Initial reducer message for async call',
 })
 
 const helloReducer = (state: Object = initialState, action: { type: string, payload: any }) => {

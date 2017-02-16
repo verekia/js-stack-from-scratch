@@ -86,6 +86,9 @@ You will find a lot of React Router example using `*` as the route on the server
 - Create `server/static-app`
 - Create `server/store`
 - `server/static-template`
+
+Immutable objects implement the `toJSON()` method which means you can use `JSON.stringify` to turn them into plain JSON strings.
+
 - `server/index.js`
 
 🏁 Run `yarn start`.

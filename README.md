@@ -44,7 +44,7 @@ Final code available in the [JS-Stack-Boilerplate repository](https://github.com
 
 ## Coming up next
 
-Styling, Enzyme.
+Styling, Bootstrap, Enzyme, MongoDB, Progressive Web App.
 
 ## Translations
 
@@ -52,7 +52,7 @@ If you want to add your translation, please read the [translation recommendation
 
 ### V2
 
-Coming soon!
+Your link here soon ;)
 
 ### V1
 

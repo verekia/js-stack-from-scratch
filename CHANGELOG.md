@@ -10,5 +10,5 @@
 - Linting / typechecking / testing is not launched at every file change anymore, but triggered by Git Hooks via Husky. This makes your workflow much smoother, while still protecting your repository from bad code.
 - Some chapters have been combined to make it easier to maintain the tutorial.
 - Replaced Chai and Mocha by Jest
-- Added React-Router and Server-Side rendering
+- Added React-Router, Server-Side rendering, react-helmet
 - Renamed all "dog" things and replaced it by "hello" things. It's a Hello World app after all.
