@@ -4,7 +4,7 @@
 
 - Gulp is gone, replaced by NPM scripts.
 - Express has been added, with template strings for static HTML
-- Support for development environment with Nodemon and production environment with PM2. Minification or sourcemaps depending on the environment via Webpack.
+- Support for development environment with Nodemon and production environment with PM2. Minification or sourcemaps depending on the environment via Webpack. Gzip compression enabled.
 - Webpack Dev Server added, with Hot Module Replacement and react-hot-loader
 - Added an asynchronous call example with redux-thunk integration.
 - Linting / typechecking / testing is not launched at every file change anymore, but triggered by Git Hooks via Husky. This makes your workflow much smoother, while still protecting your repository from bad code.
