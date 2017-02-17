@@ -12,4 +12,4 @@
 - Replaced Chai and Mocha by Jest.
 - Added React-Router, Server-Side rendering, react-helmet.
 - Renamed all "dog" things and replaced it by "hello" things. It's a Hello World app after all.
-- Added Twitter Bootstrap and JSS for styling.
+- Added Twitter Bootstrap, JSS, and react-jss for styling.

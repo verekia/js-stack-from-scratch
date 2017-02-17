@@ -44,7 +44,7 @@ Final code available in the [JS-Stack-Boilerplate repository](https://github.com
 
 ## Coming up next
 
-Styling, Bootstrap, Enzyme, MongoDB, Progressive Web App.
+MongoDB, Progressive Web App.
 
 ## Translations
 
