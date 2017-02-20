@@ -1,6 +1,6 @@
 # Change Log
 
-## 2.3.0
+## 2.4.0
 
 - Gulp is gone, replaced by NPM scripts.
 - Express has been added, with template strings for static HTML
@@ -13,3 +13,4 @@
 - Added React-Router, Server-Side rendering, react-helmet.
 - Renamed all "dog" things and replaced it by "hello" things. It's a Hello World app after all.
 - Added Twitter Bootstrap, JSS, and react-jss for styling.
+- Added a Websocket example with socket.io.
