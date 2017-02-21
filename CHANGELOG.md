@@ -14,3 +14,4 @@
 - Renamed all "dog" things and replaced it by "hello" things. It's a Hello World app after all.
 - Added Twitter Bootstrap, JSS, and react-jss for styling.
 - Added a Websocket example with socket.io.
+- Added optional Heroku, Travis, and Coveralls integrations.
