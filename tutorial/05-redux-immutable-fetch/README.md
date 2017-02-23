@@ -459,6 +459,6 @@ Here we pass `redux-thunk` to Redux's `applyMiddleware` function. In order for t
 
 You can congratulate yourself, that was a tough chapter!
 
-Next section: [06 - React Router, Server-Side Rendering](/tutorial/06-react-router-ssr#06---react-router-and-server-side-rendering)
+Next section: [06 - React Router, Server-Side Rendering, Helmet](/tutorial/06-react-router-ssr-helmet#06---react-router-server-side-rendering-and-helmet)
 
-Back to the [previous section](/tutorial/04-webpack-react#04---webpack-and-react) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/04-webpack-react-hmr#04---webpack-react-and-hot-module-replacement) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

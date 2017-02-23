@@ -2,8 +2,6 @@
 
 ## TODO: 07 - Jest
 
-**This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
-
 TODO 🏁
 
 ## Mocha and Chai
@@ -157,6 +155,6 @@ So what is new here? Well first of all, we call `chai.use(sinonChai)` to activat
 
 If everything went well in this chapter, you should have 2 passing tests.
 
-**This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
+Next section: [08 - Bootstrap, JSS](/tutorial/08-bootstrap-jss#08---bootstrap-and-jss)
 
-Back to the [previous section](/tutorial/06-react-router-ssr#06---react-router-and-server-side-rendering) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/06-react-router-ssr-helmet#06---react-router-server-side-rendering-and-helmet) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

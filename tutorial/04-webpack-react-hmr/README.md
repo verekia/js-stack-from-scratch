@@ -172,6 +172,6 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 
 🏁 Run `yarn start` (or `yarn prod`) and open Chrome on `http://localhost:8000`. You should see "Hello React!".
 
-Next section: [05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch#05---redux-immutable-fetch)
+Next section: [05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch#05---redux-immutable-and-fetch)
 
-Back to the [previous section](/tutorial/03-express-pm2#03---express-pm2) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/03-express-nodemon-pm2#03---express-nodemon-and-pm2) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
