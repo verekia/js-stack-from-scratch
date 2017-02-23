@@ -10,7 +10,7 @@
 [![Jest](/img/jest-padded-90.png)](https://facebook.github.io/jest/)
 [![Yarn](/img/yarn-padded-90.png)](https://yarnpkg.com/)
 [![Webpack](/img/webpack-padded-90.png)](https://webpack.github.io/)
-[![PM2](/img/pm2-padded-90.png)](http://pm2.keymetrics.io/)
+[![Bootstrap](/img/bootstrap-padded-90.png)](http://getbootstrap.com/)
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
