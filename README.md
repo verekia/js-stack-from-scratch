@@ -48,7 +48,7 @@ Final code available in the [JS-Stack-Boilerplate repository](https://github.com
 
 ## Coming up next
 
-MongoDB, Progressive Web App.
+Setting up your editor (Atom first), MongoDB, Progressive Web App.
 
 ## Translations
 
