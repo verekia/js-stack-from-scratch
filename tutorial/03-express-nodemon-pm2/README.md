@@ -1,4 +1,4 @@
-# 03 - Express, PM2
+# 03 - Express, Nodemon, and PM2
 
 In this section we are going to create the server that will render our web app. We will also set up a development mode and a production mode for this server.
 

@@ -1,4 +1,4 @@
-# 06 - React Router and Server-Side Rendering
+# 06 - React Router, Server-Side Rendering, and Helmet
 
 In this chapter we are going to create different pages for our app and make it possible to navigate between them.
 

@@ -34,7 +34,7 @@ Final code available in the [JS-Stack-Boilerplate repository](https://github.com
 
 [03 - Express, Nodemon, PM2](/tutorial/03-express-nodemon-pm2#03---express-nodemon-and-pm2)
 
-[04 - Webpack, React, HMR](/tutorial/04-webpack-hmr#04---webpack-react-and-hot-module-replacement)
+[04 - Webpack, React, HMR](/tutorial/04-webpack-react-hmr#04---webpack-react-and-hot-module-replacement)
 
 [05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch#05---redux-immutable-and-fetch)
 

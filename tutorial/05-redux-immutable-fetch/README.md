@@ -1,4 +1,4 @@
-# 05 - Redux, Immutable, Fetch
+# 05 - Redux, Immutable, and Fetch
 
 In this chapter we will hook up React and Redux to make a very simple app. The app will consist of a message and a button. The message changes when the user clicks the button.
 

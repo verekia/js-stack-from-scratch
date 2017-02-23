@@ -1,4 +1,6 @@
-# 07 - Jest
+# 07 - Socket.IO
+
+## TODO: 07 - Jest
 
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 

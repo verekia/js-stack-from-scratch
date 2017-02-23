@@ -1,3 +1,3 @@
-# 08 Bootstrap, Styling
+# 08 - Bootstrap and JSS
 
 `.flowconfig`: ignore JSS

@@ -1,4 +1,4 @@
-# 04 - Webpack and React
+# 04 - Webpack, React, and Hot Module Replacement
 
 ## Webpack
 
