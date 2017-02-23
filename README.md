@@ -40,7 +40,7 @@ Final code available in the [JS-Stack-Boilerplate repository](https://github.com
 
 [06 - React Router, Server-Side Rendering, Helmet](/tutorial/06-react-router-ssr-helmet#06---react-router-server-side-rendering-and-helmet)
 
-[07 - Socket.IO](/tutorial/07-socket-io#07---socket-io)
+[07 - Socket.IO](/tutorial/07-socket-io#07---socketio)
 
 [08 - Bootstrap, JSS](/tutorial/08-bootstrap-jss#08---bootstrap-and-jss)
 
