@@ -130,7 +130,7 @@ I did not include this trick in the boilerplate of this tutorial, since it seems
 
 Anyway, back to business!
 
-- In `package.json` change your `start` script like so: `"start": "babel-node src/server"`
+- In `package.json` change your `start` script like so: `"start": "babel-node src/server",`
 
 🏁 Run `yarn start`, and hit `localhost:8000` in your browser. If everything works as expected you should see a blank page with "Hello App" written both on the tab title and as a green heading on the page.
 
@@ -153,9 +153,9 @@ We are going to use Nodemon whenever we are in **development** mode.
 
 `start` is now just a pointer to an other task, `dev:start`. That gives us a layer of abstraction to tweak what the default task is.
 
-In `dev:start`, the `--ignore lib` flag is to not restart the server when changes happen in the `lib` directory. You don't have this directory yet, but we're going to generate it in the next section of this chapter, so it will soon make sense. Nodemon typically runs the `node` binary. In our case, since we're using Babel, we can tell Nodemon to use the `babel-node` binary instead. This way it will understand all the ES6/Flow code.
+In `dev:start`, the `--ignore lib` flag is to *not* restart the server when changes happen in the `lib` directory. You don't have this directory yet, but we're going to generate it in the next section of this chapter, so it will soon make sense. Nodemon typically runs the `node` binary. In our case, since we're using Babel, we can tell Nodemon to use the `babel-node` binary instead. This way it will understand all the ES6/Flow code.
 
-🏁 Run `yarn start` and open `localhost:8000`. Go ahead and change the `APP_NAME` constant in `src/shared/config`, which should trigger a restart of your server in the terminal. Refresh the page to see the updated title.
+🏁 Run `yarn start` and open `localhost:8000`. Go ahead and change the `APP_NAME` constant in `src/shared/config`, which should trigger a restart of your server in the terminal. Refresh the page to see the updated title. Note that this automatic restart of the server is different from *Hot Module Replacement*, which is when components on the page update in real-time. Here we still need a manual refresh, but at least we don't need to kill the process and restart it manually to see changes. Hot Module Replacement will be introduced in the next chapter.
 
 ## PM2
 
@@ -174,10 +174,10 @@ This `lib` folder being auto-generated, it's a good practice to clean it up befo
 Let's add the following `prod:build` task to our `package.json`:
 
 ```json
-"prod:build": "rimraf lib && babel src -d lib --ignore test.js",
+"prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
 ```
 
-- Run `yarn prod:build`, and it should generate a `lib` folder containing the transpiled code.
+- Run `yarn prod:build`, and it should generate a `lib` folder containing the transpiled code, except for files ending in `.test.js` (note that `.test.jsx` files are also ignored by this parameter).
 
 - Add `/lib/` to your `.gitignore`
 
@@ -202,7 +202,7 @@ Let's update our `package.json` like so:
 
 - Run `yarn add --dev pm2`
 
-🏁 Run `prod:build`, then run `prod:start`. PM2 should show an active process. Go to `http://localhost:8000/` in your browser and you should see your app. Your terminal should show the logs, which should be "Server running on port 8000 (production).". Note that with PM2, your processes are run in the background. If you press `Ctrl+C`, it will kill the `pm2 logs` command, which was the last command our our `prod:start` chain, but the server should still render the page. If you want to stop the server, run `yarn prod:stop`.
+🏁 Run `yarn prod:build`, then run `yarn prod:start`. PM2 should show an active process. Go to `http://localhost:8000/` in your browser and you should see your app. Your terminal should show the logs, which should be "Server running on port 8000 (production).". Note that with PM2, your processes are run in the background. If you press Ctrl+C, it will kill the `pm2 logs` command, which was the last command our our `prod:start` chain, but the server should still render the page. If you want to stop the server, run `yarn prod:stop`.
 
 Now that we have a `prod:build` task, it would be neat to make sure it works fine before pushing code to the repository. Since it is probably unnecessary to run it for every commit, I suggest adding it to the `prepush` task:
 
