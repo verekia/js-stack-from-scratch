@@ -84,11 +84,7 @@ This file is used to describe how our bundle should be assembled: `entry` is the
 
 ### Development / Production variations
 
-In development mode, we are going to use `webpack-dev-server` to take advantage of hot module reloading, and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code.
-
-One more thing: In order for our `webpack.config.babel.js` file to be aware of the `NODE_ENV` environment variable, we need to pass it to the `webpack` binary. With Unix, you would do this by running `NODE_ENV=production webpack`, but Windows uses a different syntax. We're going to use a small package called `cross-env` to make this syntax work on Windows as well.
-
-- Run `yarn add --dev cross-env`.
+In development mode, we are going to use `webpack-dev-server` to take advantage of hot module reloading, and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code, and the `NODE_ENV` variable.
 
 You can now tweak your `package.json` scripts like so:
 
