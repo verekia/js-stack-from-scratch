@@ -248,6 +248,40 @@ There are 2 things that I want you to try:
 
 Just like with ESLint, you should spend some time configuring your Editor / IDE to give you immediate feedback when Flow detects issues in your code.
 
+## Jest
+
+> 💡 **[Jest](https://facebook.github.io/jest/)**: A JavaScript testing library by Facebook. It is very simple to set up and provides everything you would need from a testing library right out of the box. It can also test React components.
+
+- Run `yarn add --dev jest babel-jest` to install Jest and the package to make it use Babel.
+
+- Create a `src/dog.test.js` file containing:
+
+```js
+/* eslint-disable no-undef */
+
+import Dog from './dog'
+
+test('Dog.bark', () => {
+  const testDog = new Dog('Test')
+  expect(testDog.bark()).toBe('Wah wah, I am Test')
+})
+```
+
+- Add `jest` to your `test` script:
+
+```json
+"scripts": {
+  "start": "babel-node src",
+  "test": "eslint src && flow && jest --coverage"
+},
+```
+
+The `--coverage` flag makes Jest generate coverage data for your tests automatically. This is useful to see which parts of your codebase lack testing. It writes this data into a `coverage` folder.
+
+- Add `/coverage/` to your `.gitignore`
+
+🏁 Run `yarn test`. After linting and type checking, it should run Jest tests and show a coverage table. Everything should be green!
+
 ## Git Hooks with Husky
 
 > 💡 **[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)**: Scripts that are run when certain actions like a commit or a push occur.
@@ -263,7 +297,7 @@ All we have to do is to create two new tasks in `scripts`, `precommit` and `prep
 ```json
 "scripts": {
   "start": "babel-node src",
-  "test": "eslint src && flow",
+  "test": "eslint src && flow && jest --coverage",
   "precommit": "yarn test",
   "prepush": "yarn test"
 },

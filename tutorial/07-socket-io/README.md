@@ -1,7 +1,5 @@
 # 07 - Socket.IO
 
-## TODO: 07 - Jest
-
 TODO 🏁
 
 ## Mocha and Chai
