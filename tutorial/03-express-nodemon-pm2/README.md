@@ -214,6 +214,6 @@ Now that we have a `prod:build` task, it would be neat to make sure it works fin
 
 🏁 Run `yarn prepush` or just push your files to trigger the process.
 
-Next section: [04 - Webpack, React, HMR](/tutorial/04-webpack-react-hmr#04---webpack-react-and-hot-module-replacement)
+Next section: [04 - Webpack, React, HMR](/tutorial/04-webpack-react-hmr)
 
-Back to the [previous section](/tutorial/02-babel-es6-eslint-flow-jest-husky#02---babel-es6-eslint-flow-jest-and-husky) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/02-babel-es6-eslint-flow-jest-husky) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

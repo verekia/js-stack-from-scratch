@@ -93,6 +93,6 @@ Immutable objects implement the `toJSON()` method which means you can use `JSON.
 
 🏁 Run `yarn start`.
 
-Next section: [07 - Socket.IO](/tutorial/07-socket-io#07---socketio)
+Next section: [07 - Socket.IO](/tutorial/07-socket-io)
 
-Back to the [previous section](/tutorial/05-redux-immutable-fetch#05---redux-immutable-and-fetch) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/05-redux-immutable-fetch) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

@@ -153,6 +153,6 @@ So what is new here? Well first of all, we call `chai.use(sinonChai)` to activat
 
 If everything went well in this chapter, you should have 2 passing tests.
 
-Next section: [08 - Bootstrap, JSS](/tutorial/08-bootstrap-jss#08---bootstrap-and-jss)
+Next section: [08 - Bootstrap, JSS](/tutorial/08-bootstrap-jss)
 
-Back to the [previous section](/tutorial/06-react-router-ssr-helmet#06---react-router-server-side-rendering-and-helmet) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/06-react-router-ssr-helmet) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

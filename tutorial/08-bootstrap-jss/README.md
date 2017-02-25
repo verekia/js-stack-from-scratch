@@ -6,6 +6,6 @@
 
 **The code of this chapter is available in the [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) branch of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
-Next section: [09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku#09---travis-coveralls-and-heroku)
+Next section: [09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku)
 
-Back to the [previous section](/tutorial/07-socket-io#07---socketio) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/07-socket-io) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

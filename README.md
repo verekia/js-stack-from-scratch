@@ -28,23 +28,23 @@ Final code available in the [JS-Stack-Boilerplate repository](https://github.com
 
 ## Table of contents
 
-[01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json#01---node-yarn-and-packagejson)
+[01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json)
 
-[02 - Babel, ES6, ESLint, Flow, Jest, Husky](/tutorial/02-babel-es6-eslint-flow-jest-husky#02---babel-es6-eslint-flow-jest-and-husky)
+[02 - Babel, ES6, ESLint, Flow, Jest, Husky](/tutorial/02-babel-es6-eslint-flow-jest-husky)
 
-[03 - Express, Nodemon, PM2](/tutorial/03-express-nodemon-pm2#03---express-nodemon-and-pm2)
+[03 - Express, Nodemon, PM2](/tutorial/03-express-nodemon-pm2)
 
-[04 - Webpack, React, HMR](/tutorial/04-webpack-react-hmr#04---webpack-react-and-hot-module-replacement)
+[04 - Webpack, React, HMR](/tutorial/04-webpack-react-hmr)
 
-[05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch#05---redux-immutable-and-fetch)
+[05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch)
 
-[06 - React Router, Server-Side Rendering, Helmet](/tutorial/06-react-router-ssr-helmet#06---react-router-server-side-rendering-and-helmet)
+[06 - React Router, Server-Side Rendering, Helmet](/tutorial/06-react-router-ssr-helmet)
 
-[07 - Socket.IO](/tutorial/07-socket-io#07---socketio)
+[07 - Socket.IO](/tutorial/07-socket-io)
 
-[08 - Bootstrap, JSS](/tutorial/08-bootstrap-jss#08---bootstrap-and-jss)
+[08 - Bootstrap, JSS](/tutorial/08-bootstrap-jss)
 
-[09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku#09---travis-coveralls-and-heroku)
+[09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku)
 
 ## Coming up next
 

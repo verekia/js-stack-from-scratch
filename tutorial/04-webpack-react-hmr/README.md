@@ -266,6 +266,6 @@ Please ignore the Flow and ESLint comments to focus on what we're doing here: We
 
 🏁 Restart your `yarn dev:wds` process if it was still running. Open `localhost:8000`. In the Console tab, you should see some logs about HMR. Go ahead and change something in `src/client/app.jsx` and your changes should be reflected in your browser after a few seconds, without any full-page reload!
 
-Next section: [05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch#05---redux-immutable-and-fetch)
+Next section: [05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch)
 
-Back to the [previous section](/tutorial/03-express-nodemon-pm2#03---express-nodemon-and-pm2) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/03-express-nodemon-pm2) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
