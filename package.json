@@ -6,19 +6,18 @@
     "full-check": "yarn mdlint && yarn 01 && yarn 02 && yarn 03 && yarn 04 && yarn 05 && yarn 06",
     "01": "cd tutorial/01-node-yarn-package-json/code && yarn && yarn start",
     "02": "cd tutorial/02-babel-es6-eslint-flow-jest-husky/code && yarn && yarn test && yarn start",
-    "03": "cd tutorial/03-express-nodemon-pm2/code && yarn && yarn full-check",
-    "04": "cd tutorial/04-webpack-react-hmr/code && yarn && yarn full-check",
-    "05": "cd tutorial/05-redux-immutable-fetch/code && yarn && yarn full-check",
+    "03": "cd tutorial/03-express-nodemon-pm2/code && yarn && yarn test",
+    "04": "cd tutorial/04-webpack-react-hmr/code && yarn && yarn test",
+    "05": "cd tutorial/05-redux-immutable-fetch/code && yarn && yarn test",
     "06": "cd tutorial/06-react-router-ssr-helmet/code",
-    "07": "cd tutorial/07-socket-io/code",
-    "08": "cd tutorial/08-bootstrap-jss/code",
-    "09": "cd tutorial/09-travis-coveralls-heroku/code",
+    "07": "cd tutorial/07-socket-io",
+    "08": "cd tutorial/08-bootstrap-jss",
+    "09": "cd tutorial/09-travis-coveralls-heroku",
     "mdlint": "node mdlint.js"
   },
   "devDependencies": {
     "glob": "^7.1.1",
-    "markdownlint": "^0.3.0",
-    "pm2": "^2.4.0"
+    "markdownlint": "^0.3.0"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
