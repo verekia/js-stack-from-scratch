@@ -208,7 +208,7 @@ I know this is a lot to take in, so take a minute to think about it. I'm still a
 
 - Create a `.flowconfig` file at the root of your project containing:
 
-```
+```flowconfig
 [options]
 suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
 ```

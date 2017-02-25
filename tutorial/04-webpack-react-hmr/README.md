@@ -180,7 +180,7 @@ Now try changing the text in `src/client/index.jsx` to something else. Webpack D
 
 ## Hot Module Replacement
 
-> 💡 **[Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)** (*HMR*) is a powerful Webpack feature to replace a module on the fly without page reload.
+> 💡 **[Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)** (*HMR*) is a powerful Webpack feature to replace a module on the fly without reloading the entire page.
 
 To make HMR work with React, we are going to need to tweak a few things.
 
