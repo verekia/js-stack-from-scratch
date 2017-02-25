@@ -133,7 +133,7 @@ Alright that was a lot of changes, let's see if everything works as expected:
 
 🏁 Run `yarn start`. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should both be ~600kB files) and the process hangs in your terminal, open `http://localhost:8000/` and you should see "Hello Webpack!". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In your editor, in `src/client/index.js`, try changing `Hello Webpack!` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should reload automatically. You can interrupt the process with Ctrl+C.
 
-- Run `yarn prod`. Once Webpack is done generating the minified bundle (~90kB this time), open `http://localhost:8000/` and you should still see "Hello Webpack!". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified.
+- Kill the previous processes in your terminals, then run `yarn prod:build`, and then `yarn prod:start`. Open `http://localhost:8000/` and you should still see "Hello Webpack!". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified. Run `yarn prod:stop`.
 
 Good job, I know this was quite dense. You deserve a break! The next section is easier.
 
@@ -145,7 +145,7 @@ In this section we are going to render some text using React and JSX.
 
 First, let's install React and ReactDOM:
 
-- Run `yarn add react react-dom`.
+- Run `yarn add react react-dom`
 
 Rename your `src/client/index.js` file into `src/client/index.jsx` and write some React code in it:
 
@@ -157,7 +157,23 @@ import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-ReactDOM.render(<h1>Hello React!</h1>, document.querySelector('.app'))
+import App from './app'
+
+ReactDOM.render(<App />, document.querySelector('.js-app'))
+```
+
+- Create a `src/client/app.jsx` file containing:
+
+```js
+// @flow
+
+import React from 'react'
+
+const App = () => (
+  <h1>Hello React!</h1>
+)
+
+export default App
 ```
 
 Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
@@ -174,9 +190,9 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 }
 ```
 
-🏁 Run `yarn start` (or `yarn prod`) and open Chrome on `http://localhost:8000`. You should see "Hello React!".
+🏁 Run `yarn start` and `yarn dev:wds` and open Chrome on `http://localhost:8000`. You should see "Hello React!".
 
-Now try changing the text in `src/client/index.jsx` to something else. Webpack Dev Server should reload the page automatically, which is pretty neat, but we are going to make it even better.
+Now try changing the text in `src/client/app.jsx` to something else. Webpack Dev Server should reload the page automatically, which is pretty neat, but we are going to make it even better.
 
 ## Hot Module Replacement
 
@@ -208,21 +224,7 @@ plugins: [
 ],
 ```
 
-- Create a `src/client/app.jsx` file containing:
-
-```js
-// @flow
-
-import React from 'react'
-
-const App = () => (
-  <h1>Hello React with HMR!</h1>
-)
-
-export default App
-```
-
-And finally edit your `src/client/index.jsx` file:
+- Edit your `src/client/index.jsx` file:
 
 ```js
 // @flow
