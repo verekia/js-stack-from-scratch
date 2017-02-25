@@ -1,6 +1,6 @@
 {
   "name": "js-stack-from-scratch",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "full-check": "yarn mdlint && yarn 01 && yarn 02 && yarn 03 && yarn 04 && yarn 05 && yarn 06",

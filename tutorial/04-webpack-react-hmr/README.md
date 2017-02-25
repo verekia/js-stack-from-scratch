@@ -34,6 +34,9 @@ Alright, we now need to bundle this ES6 client app into an ES5 bundle. It's goin
 
 ```js
 export const WDS_PORT = 7000
+
+export const APP_CONTAINER_CLASS = 'js-app'
+export const APP_CONTAINER_SELECTOR = `.${APP_CONTAINER_CLASS}`
 ```
 
 - Create a `webpack.config.babel.js` file containing:
@@ -98,7 +101,7 @@ Create a `dev:wds` and tweak your `prod:build` task:
 ```js
 // @flow
 
-import { STATIC_PATH, WDS_PORT } from '../shared/config'
+import { APP_CONTAINER_CLASS, STATIC_PATH, WDS_PORT } from '../shared/config'
 import { isProd } from '../shared/util'
 
 const renderApp = (title: string) =>
@@ -109,7 +112,7 @@ const renderApp = (title: string) =>
     <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
   </head>
   <body>
-    <div class="js-app"></div>
+    <div class="${APP_CONTAINER_CLASS}"></div>
     <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/bundle.js"></script>
   </body>
 </html>

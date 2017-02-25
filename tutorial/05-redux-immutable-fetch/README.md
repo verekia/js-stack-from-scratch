@@ -228,11 +228,12 @@ import { createStore, combineReducers } from 'redux'
 
 import App from './app'
 import helloReducer from './reducer/hello'
+import { isProd } from '../shared/util'
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(combineReducers({
   hello: helloReducer,
-}), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+}), isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 /* eslint-enable no-underscore-dangle */
 
 const rootEl = document.querySelector('.js-app')
@@ -476,9 +477,10 @@ import thunkMiddleware from 'redux-thunk'
 
 import App from './app'
 import helloReducer from './reducer/hello'
+import { isProd } from '../shared/util'
 
 /* eslint-disable no-underscore-dangle */
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 /* eslint-enable no-underscore-dangle */
 
 const store = createStore(combineReducers({
