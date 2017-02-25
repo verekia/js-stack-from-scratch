@@ -79,7 +79,7 @@ As you can see, unlike the community-made package `color` that we used before, w
 
 Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
 
-In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`.
+In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`
 
 🏁 `yarn start` should still print "Wah wah, I am Toby".
 
@@ -160,7 +160,7 @@ This chapter set you up with ESLint in the terminal, which is great for catching
 
 Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScript to give us some insights, but in order to use its full power, we need to add type annotations in our code, which will make it non-standard. We need to teach Babel and ESLint what those type annotations are in order for these tools to not freak out when parsing our files.
 
-- Run `yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype`.
+- Run `yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype`
 
 `flow-bin` is the binary to run Flow in our `scripts` tasks, `babel-preset-flow` is the preset for Babel to understand Flow annotations, `babel-eslint` is a package to enable ESLint *to rely on Babel's parser* instead of its own, and `eslint-plugin-flowtype` is an ESLint plugin to lint Flow annotations. Phew.
 
@@ -302,7 +302,7 @@ Okay so we now have this neat `test` task that tells us if our code looks good o
 
 [Husky](https://github.com/typicode/husky) is a package that makes this very easy to set up Git Hooks.
 
-- Run `yarn add --dev husky`.
+- Run `yarn add --dev husky`
 
 All we have to do is to create two new tasks in `scripts`, `precommit` and `prepush`:
 

@@ -8,7 +8,7 @@ In this section we are going to create the server that will render our web app. 
 
 Let's set up a minimal Express server to serve an HTML page with some CSS.
 
-- Delete everything inside `src`.
+- Delete everything inside `src`
 
 Create the following files and folders:
 
@@ -56,7 +56,7 @@ export const isProd = process.env.NODE_ENV === 'production'
 
 That's a simple util to test if we are running in production mode or not. The `/* eslint-disable import/prefer-default-export */` comment is because we only have one named export here. You can remove it as you add other exports in this file.
 
-- Run `yarn add express compression`.
+- Run `yarn add express compression`
 
 `compression` is an Express middleware to activate Gzip compression on the server.
 

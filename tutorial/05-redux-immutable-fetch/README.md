@@ -99,7 +99,7 @@ In this file we initialize the state of our reducer with an Immutable Map contai
 
 > 💡 **[react-redux](https://github.com/reactjs/react-redux)** *connects* a Redux store with React components. With `react-redux`, when the Redux store changes, React components get automatically updated. They can also fire Redux actions.
 
-- Run `yarn add react-redux`.
+- Run `yarn add react-redux`
 
 In this section we are going to create *Components* and *Containers*.
 
@@ -231,9 +231,8 @@ import helloReducer from './reducer/hello'
 import { isProd } from '../shared/util'
 
 /* eslint-disable no-underscore-dangle */
-const store = createStore(combineReducers({
-  hello: helloReducer,
-}), isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(combineReducers({ hello: helloReducer }),
+  isProd ? undefined : window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 /* eslint-enable no-underscore-dangle */
 
 const rootEl = document.querySelector('.js-app')
@@ -367,7 +366,7 @@ What we need now is to create this `sayHelloAsync` action.
 
 We are going to use `fetch` to make calls to the server from the client. `fetch` is not supported by all browsers yet, so we are going to need a polyfill. `isomorphic-fetch` is a polyfill that makes it work cross-browsers and in Node too!
 
-- Run `yarn add isomorphic-fetch`.
+- Run `yarn add isomorphic-fetch`
 
 ### 3 asynchronous actions
 
@@ -483,9 +482,8 @@ import { isProd } from '../shared/util'
 const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
 /* eslint-enable no-underscore-dangle */
 
-const store = createStore(combineReducers({
-  hello: helloReducer,
-}), composeEnhancers(applyMiddleware(thunkMiddleware)))
+const store = createStore(combineReducers({ hello: helloReducer }),
+  composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 const rootEl = document.querySelector('.js-app')
 

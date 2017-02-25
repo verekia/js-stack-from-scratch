@@ -16,7 +16,7 @@ document.querySelector('.js-app').innerHTML = '<h1>Hello Webpack!</h1>'
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) before anything else in in your bundle.
 
-- Run `yarn add babel-polyfill`.
+- Run `yarn add babel-polyfill`
 
 If you run ESLint on this file, it will complain about `document` being undefined.
 
@@ -79,11 +79,11 @@ This file is used to describe how our bundle should be assembled: `entry` is the
 
 `babel-loader` is a plugin for Webpack that transpiles your code just like we've been doing since the beginning of this tutorial. The only difference is that this time, the code will end up running in the browser of your client instead of your server.
 
-- Run `yarn add --dev webpack webpack-dev-server babel-core babel-loader`.
+- Run `yarn add --dev webpack webpack-dev-server babel-core babel-loader`
 
 `babel-core` is a peer-dependency of `babel-loader`, so we installed it as well.
 
-- Add `/dist/` to your `.gitignore`.
+- Add `/dist/` to your `.gitignore`
 
 ### Development / Production variations
 
