@@ -42,7 +42,7 @@ console.log(immutablePerson)
  */
 ```
 
-- Run `yarn add immutable`.
+- Run `yarn add immutable`
 
 **Note**: Due to the implementation of ImmutableJS, Flow does not accept importing it with `import Immutable from 'immutable'`, so use this syntax instead: `import * as Immutable from 'immutable'`. Let's cross fingers for a [fix](https://github.com/facebook/immutable-js/issues/863) soon.
 
@@ -52,7 +52,7 @@ console.log(immutablePerson)
 
 Let's start with the easy part, declaring our Redux actions:
 
-- Run `yarn add redux redux-actions`.
+- Run `yarn add redux redux-actions`
 
 - Create a `src/client/action/hello.js` file containing:
 
@@ -133,7 +133,7 @@ export default Button
 import React, { PropTypes } from 'react'
 
 const Message = ({ message }: { message: string }) =>
-  <div>{message}</div>
+  <p>{message}</p>
 
 Message.propTypes = {
   message: PropTypes.string.isRequired,
@@ -187,6 +187,28 @@ export default connect(mapStateToProps)(Message)
 
 This container hooks up the Redux's app state with the `Message` component. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
 
+- Update your `src/client/app.jsx` file like so:
+
+```js
+// @flow
+
+import React from 'react'
+
+import HelloButton from './container/hello-button'
+import Message from './container/message'
+import { APP_NAME } from '../shared/config'
+
+const App = () => (
+  <div>
+    <h1>{APP_NAME}</h1>
+    <Message />
+    <HelloButton />
+  </div>
+)
+
+export default App
+```
+
 We still haven't initialized the Redux store and haven't put the 2 containers anywhere in our app yet:
 
 - Edit `src/client/index.jsx` like so:
@@ -194,17 +216,18 @@ We still haven't initialized the Redux store and haven't put the 2 containers an
 ```js
 // @flow
 
+/* eslint-disable import/no-extraneous-dependencies */
+
 import 'babel-polyfill'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 
-import HelloButton from './container/hello-button'
-import Message from './container/message'
+import App from './app'
 import helloReducer from './reducer/hello'
-import { APP_NAME } from '../shared/config'
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(combineReducers({
@@ -212,20 +235,29 @@ const store = createStore(combineReducers({
 }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 /* eslint-enable no-underscore-dangle */
 
-ReactDOM.render(
-  <Provider store={store}>
-    <div>
-      <h1>{APP_NAME}</h1>
-      <Message />
-      <HelloButton />
-    </div>
+const rootEl = document.querySelector('.js-app')
+
+const wrapApp = (AppComponent, reduxStore) =>
+  <Provider store={reduxStore}>
+    <AppContainer>
+      <AppComponent />
+    </AppContainer>
   </Provider>
-  , document.querySelector('.app'))
+
+ReactDOM.render(wrapApp(App, store), rootEl)
+
+if (module.hot) {
+  // flow-disable-next-line
+  module.hot.accept('./app', () => {
+    /* eslint-disable global-require */
+    const NextApp = require('./app').default
+    /* eslint-enable global-require */
+    ReactDOM.render(wrapApp(NextApp, store), rootEl)
+  })
+}
 ```
 
-Let's take a moment to review this. First, we create a *store* with `createStore`. Stores are created by passing reducers to them. Here we only have one reducer, but for the sake of future scalability, we use `combineReducers` to group all of our reducers together. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we surround that block with comments to temporarily disable this ESLint rule.
-
-Next, we wrap our entire app inside `react-redux`'s `Provider` component and pass it our store. We put our 2 **containers** in a `<div>` because `Provider` must have a single child.
+Let's take a moment to review this. First, we create a *store* with `createStore`. Stores are created by passing reducers to them. Here we only have one reducer, but for the sake of future scalability, we use `combineReducers` to group all of our reducers together. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we surround that block with comments to temporarily disable this ESLint rule. Next, we conveniently wrap our entire app inside `react-redux`'s `Provider` component thanks to our `wrapApp` function, and pass our store to it.
 
 🏁 You can now run `yarn start` and open `http://localhost:8000`. You should see "Initial reducer message" and a button. When you click the button, the message should change to "Hello!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
 
@@ -233,7 +265,7 @@ Congratulations, we finally made an app that does something! Okay it's not a *su
 
 ## Extending our app with an asynchronous call
 
-We are now going to add a second button to our app, which will trigger an AJAX call to retrieve a message from the server. Let's start with the easy part: creating the component and container for the button. It's pretty much exactly the same as the other button.
+We are now going to add a second button to our app, which will trigger an AJAX call to retrieve a message from the server. For the sake of demonstration, this call will also send some data, the hard-coded number `1234`.
 
 ### The server endpoint
 
@@ -244,25 +276,42 @@ We are now going to add a second button to our app, which will trigger an AJAX c
 
 /* eslint-disable import/prefer-default-export */
 
-export const asyncHelloRoute = (num: ?number) => `/async/hello/${num || ':num'}`
+export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
 ```
 
 This function is a little helper to produce the following:
 
 ```js
-asyncHelloRoute()     // -> '/async/hello/:num' (for Express)
-asyncHelloRoute(1234) // -> '/async/hello/1234' (for the actual call)
+helloEndpointRoute()     // -> '/ajax/hello/:num' (for Express)
+helloEndpointRoute(1234) // -> '/ajax/hello/1234' (for the actual call)
 ```
+
+Let's actually create a test real quick to make sure this thing works well.
+
+- Create a `src/shared/routes.test.js` containing:
+
+```js
+/* eslint-disable no-undef */
+
+import { helloEndpointRoute } from './routes'
+
+test('helloEndpointRoute', () => {
+  expect(helloEndpointRoute()).toBe('/ajax/hello/:num')
+  expect(helloEndpointRoute(123)).toBe('/ajax/hello/123')
+})
+```
+
+- Run `yarn test` and it should pass successfully.
 
 - In `src/server/index.js`, add the following:
 
 ```js
-import { asyncHelloRoute } from '../shared/routes'
+import { helloEndpointRoute } from '../shared/routes'
 
 // ...
 
-app.get(asyncHelloRoute(), (req, res) => {
-  res.json({ message: `Hello from the server! (received ${req.params.num})` })
+app.get(helloEndpointRoute(), (req, res) => {
+  res.json({ serverMessage: `Hello from the server! (received ${req.params.num})` })
 })
 ```
 
@@ -331,7 +380,7 @@ We are going to use `fetch` to make calls to the server from the client. `fetch`
 import 'isomorphic-fetch'
 
 import { createAction } from 'redux-actions'
-import { asyncHelloRoute } from '../../shared/routes'
+import { helloEndpointRoute } from '../../shared/routes'
 
 export const SAY_HELLO = 'SAY_HELLO'
 export const SAY_HELLO_ASYNC_REQUEST = 'SAY_HELLO_ASYNC_REQUEST'
@@ -343,24 +392,21 @@ export const sayHelloAsyncRequest = createAction(SAY_HELLO_ASYNC_REQUEST)
 export const sayHelloAsyncSuccess = createAction(SAY_HELLO_ASYNC_SUCCESS)
 export const sayHelloAsyncFailure = createAction(SAY_HELLO_ASYNC_FAILURE)
 
-export const sayHelloAsync = (num: number) => (dispatch: Function) =>
-  fetch(asyncHelloRoute(num), { method: 'GET' })
+export const sayHelloAsync = (num: number) => (dispatch: Function) => {
+  dispatch(sayHelloAsyncRequest())
+  return fetch(helloEndpointRoute(num), { method: 'GET' })
     .then((res) => {
-      if (!res.ok) {
-        throw Error(res.statusText)
-      }
-      dispatch(sayHelloAsyncRequest())
+      if (!res.ok) throw Error(res.statusText)
       return res.json()
     })
     .then((data) => {
-      if (!data.message) {
-        throw Error('No message received')
-      }
-      dispatch(sayHelloAsyncSuccess(data.message))
+      if (!data.serverMessage) throw Error('No message received')
+      dispatch(sayHelloAsyncSuccess(data.serverMessage))
     })
     .catch(() => {
       dispatch(sayHelloAsyncFailure())
     })
+}
 ```
 
 Instead of returning an action, `sayHelloAsync` returns a function which launches the `fetch` call. `fetch` returns a `Promise`, which we use to *dispatch* different actions depending on the current state of our asynchronous call.
@@ -391,7 +437,7 @@ const helloReducer = (state: Object = initialState, action: { type: string, payl
     case SAY_HELLO:
       return state.set('message', action.payload)
     case SAY_HELLO_ASYNC_REQUEST:
-      return state.set('messageAsync', '...')
+      return state.set('messageAsync', 'Loading...')
     case SAY_HELLO_ASYNC_SUCCESS:
       return state.set('messageAsync', action.payload)
     case SAY_HELLO_ASYNC_FAILURE:
@@ -404,33 +450,32 @@ const helloReducer = (state: Object = initialState, action: { type: string, payl
 export default helloReducer
 ```
 
-We added a new field to our store, `messageAsync`, and we update it with different messages depending on the action we receive. During `SAY_HELLO_ASYNC_REQUEST`, we show `...`, which is a cheap way to represent a "Loading" state. `SAY_HELLO_ASYNC_SUCCESS` updates `messageAsync` similarly to how `SAY_HELLO` updates `message`. `SAY_HELLO_ASYNC_FAILURE` gives an error message.
+We added a new field to our store, `messageAsync`, and we update it with different messages depending on the action we receive. During `SAY_HELLO_ASYNC_REQUEST`, we show `Loading...`. `SAY_HELLO_ASYNC_SUCCESS` updates `messageAsync` similarly to how `SAY_HELLO` updates `message`. `SAY_HELLO_ASYNC_FAILURE` gives an error message.
 
 ### Redux-thunk
 
 In `src/client/action/hello.js`, we made `sayHelloAsync`, an action creator that returns a function. This is actually not a feature that is natively supported by Redux. In order to perform these async actions, we need to extend Redux's functionality with the `redux-thunk` *middleware*.
 
-- Run `yarn add redux-thunk`.
+- Run `yarn add redux-thunk`
 
 - Update your `src/client/index.jsx` file like so:
 
 ```js
 // @flow
 
+/* eslint-disable import/no-extraneous-dependencies */
+
 import 'babel-polyfill'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
-import HelloButton from './container/hello-button'
-import HelloAsyncButton from './container/hello-async-button'
-import Message from './container/message'
-import MessageAsync from './container/message-async'
+import App from './app'
 import helloReducer from './reducer/hello'
-import { APP_NAME } from '../shared/config'
 
 /* eslint-disable no-underscore-dangle */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -440,24 +485,182 @@ const store = createStore(combineReducers({
   hello: helloReducer,
 }), composeEnhancers(applyMiddleware(thunkMiddleware)))
 
-ReactDOM.render(
-  <Provider store={store}>
-    <div>
-      <h1>{APP_NAME}</h1>
-      <Message />
-      <HelloButton />
-      <MessageAsync />
-      <HelloAsyncButton />
-    </div>
+const rootEl = document.querySelector('.js-app')
+
+const wrapApp = (AppComponent, reduxStore) =>
+  <Provider store={reduxStore}>
+    <AppContainer>
+      <AppComponent />
+    </AppContainer>
   </Provider>
-  , document.querySelector('.app'))
+
+ReactDOM.render(wrapApp(App, store), rootEl)
+
+if (module.hot) {
+  // flow-disable-next-line
+  module.hot.accept('./app', () => {
+    /* eslint-disable global-require */
+    const NextApp = require('./app').default
+    /* eslint-enable global-require */
+    ReactDOM.render(wrapApp(NextApp, store), rootEl)
+  })
+}
 ```
 
 Here we pass `redux-thunk` to Redux's `applyMiddleware` function. In order for the Redux Devtools to keep working, we also need to use Redux's `compose` function. Don't worry too much about this part, just remember that we enhancing Redux with `redux-thunk`.
 
-🏁 Run `yarn start` or `yarn prod` and you should now be able to click the "Say hello asynchronously and send 1234" button and retrieve a corresponding message from the server! Since you're working locally, the call is instantaneous, but if you open the Redux Devtools, you will notice that each click triggers both `SAY_HELLO_ASYNC_REQUEST` and `SAY_HELLO_ASYNC_SUCCESS`, making the message go through the intermediate `...` loading state as expected.
+- Update `src/client/app.jsx` like so:
 
-You can congratulate yourself, that was a tough chapter!
+```js
+// @flow
+
+import React from 'react'
+
+import HelloButton from './container/hello-button'
+import HelloAsyncButton from './container/hello-async-button'
+import Message from './container/message'
+import MessageAsync from './container/message-async'
+import { APP_NAME } from '../shared/config'
+
+const App = () => (
+  <div>
+    <h1>{APP_NAME}</h1>
+    <Message />
+    <HelloButton />
+    <MessageAsync />
+    <HelloAsyncButton />
+  </div>
+)
+
+export default App
+```
+
+🏁 Run `yarn start` and `yarn dev:wds` and you should now be able to click the "Say hello asynchronously and send 1234" button and retrieve a corresponding message from the server! Since you're working locally, the call is instantaneous, but if you open the Redux Devtools, you will notice that each click triggers both `SAY_HELLO_ASYNC_REQUEST` and `SAY_HELLO_ASYNC_SUCCESS`, making the message go through the intermediate `Loading...` state as expected.
+
+You can congratulate yourself, that was an intense section! Let's wrap it up with some testing.
+
+## Testing
+
+In this section, we are going to test our actions and reducer. Let's start with the actions.
+
+In order to isolate the logic that is specific to `action/hello.js` we are going to need to *mock* things that don't concern it, and also mock that AJAX `fetch` request which should not trigger an actual AJAX in our tests.
+
+- Run `yarn add --dev redux-mock-store fetch-mock`
+
+- Create a `src/client/action/hello.test.js` containing:
+
+```js
+/* eslint-disable no-undef */
+
+import fetchMock from 'fetch-mock'
+import configureMockStore from 'redux-mock-store'
+import thunkMiddleware from 'redux-thunk'
+
+import {
+  sayHelloAsync,
+  sayHelloAsyncRequest,
+  sayHelloAsyncSuccess,
+  sayHelloAsyncFailure,
+} from './hello'
+
+import { helloEndpointRoute } from '../../shared/routes'
+
+const mockStore = configureMockStore([thunkMiddleware])
+
+afterEach(() => {
+  fetchMock.restore()
+})
+
+test('sayHelloAsync success', () => {
+  fetchMock.get(helloEndpointRoute(666), { serverMessage: 'Async hello success' })
+  const store = mockStore()
+  return store.dispatch(sayHelloAsync(666))
+    .then(() => {
+      expect(store.getActions()).toEqual([
+        sayHelloAsyncRequest(),
+        sayHelloAsyncSuccess('Async hello success'),
+      ])
+    })
+})
+
+test('sayHelloAsync 404', () => {
+  fetchMock.get(helloEndpointRoute(666), 404)
+  const store = mockStore()
+  return store.dispatch(sayHelloAsync(666))
+    .then(() => {
+      expect(store.getActions()).toEqual([
+        sayHelloAsyncRequest(),
+        sayHelloAsyncFailure(),
+      ])
+    })
+})
+
+test('sayHelloAsync data error', () => {
+  fetchMock.get(helloEndpointRoute(666), {})
+  const store = mockStore()
+  return store.dispatch(sayHelloAsync(666))
+    .then(() => {
+      expect(store.getActions()).toEqual([
+        sayHelloAsyncRequest(),
+        sayHelloAsyncFailure(),
+      ])
+    })
+})
+```
+
+Alright so let's look at what's happening here. First we mock the Redux store using `const mockStore = configureMockStore([thunkMiddleware])`. By doing this we can dispatch actions without them triggering any reducer logic. For each test, to mock `fetch` using `fetchMock.get()` and make it return whatever we want. What we actually test using `expect()` is which series of actions have been dispatched by the store, thanks to the `store.getActions()` function from `redux-mock-store`. After each test we restore the normal behavior of `fetch` with `fetchMock.restore()`.
+
+Let's now test our reducer, which is much easier.
+
+- Create a `src/client/reducer/hello.test.js` file containing:
+
+```js
+/* eslint-disable no-undef */
+
+import {
+  sayHello,
+  sayHelloAsyncRequest,
+  sayHelloAsyncSuccess,
+  sayHelloAsyncFailure,
+} from '../action/hello'
+
+import helloReducer from './hello'
+
+let helloState
+
+beforeEach(() => {
+  helloState = helloReducer(undefined, {})
+})
+
+test('handle default', () => {
+  expect(helloState.get('message')).toBe('Initial reducer message')
+  expect(helloState.get('messageAsync')).toBe('Initial reducer message for async call')
+})
+
+test('handle SAY_HELLO', () => {
+  helloState = helloReducer(helloState, sayHello('Test'))
+  expect(helloState.get('message')).toBe('Test')
+})
+
+test('handle SAY_HELLO_ASYNC_REQUEST', () => {
+  helloState = helloReducer(helloState, sayHelloAsyncRequest())
+  expect(helloState.get('messageAsync')).toBe('Loading...')
+})
+
+test('handle SAY_HELLO_ASYNC_SUCCESS', () => {
+  helloState = helloReducer(helloState, sayHelloAsyncSuccess('Test async'))
+  expect(helloState.get('messageAsync')).toBe('Test async')
+})
+
+test('handle SAY_HELLO_ASYNC_FAILURE', () => {
+  helloState = helloReducer(helloState, sayHelloAsyncFailure())
+  expect(helloState.get('messageAsync')).toBe('No message received, please check your connection')
+})
+```
+
+Before each test, we initialize `helloState` with the default result of our reducer (the `default` case of our `switch` statement in the reducer, which returns `initialState`). The tests are then very explicit, we just make sure the reducer updates `message` and `messageAsync` correctly depending on which action it received.
+
+🏁 Run `yarn test`. It should be all green.
 
 Next section: [06 - React Router, Server-Side Rendering, Helmet](/tutorial/06-react-router-ssr-helmet#06---react-router-server-side-rendering-and-helmet)
 
