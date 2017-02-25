@@ -98,8 +98,8 @@ Nothing fancy here, it's almost Express' Hello World tutorial with a few additio
 
 import { STATIC_PATH } from '../shared/config'
 
-export default (title: string) => `
-<!doctype html>
+const renderApp = (title: string) =>
+`<!doctype html>
 <html>
   <head>
     <title>${title}</title>
@@ -110,6 +110,8 @@ export default (title: string) => `
   </body>
 </html>
 `
+
+export default renderApp
 ```
 
 You know how you typically have *templating engines* on the back-end? Well these are pretty much obsolete now that JavaScript supports template strings. Here we create a function that takes a `title` as a parameter and injects it in both the `title` and `h1` tags of the page, returning the complete HTML string. We also use a `STATIC_PATH` constant as the base path for all our static assets.

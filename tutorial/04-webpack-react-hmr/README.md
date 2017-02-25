@@ -11,7 +11,7 @@ Let's create some very basic *hello world* and bundle it with Webpack.
 ```js
 import 'babel-polyfill'
 
-document.querySelector('.app').innerHTML = '<h1>Hello Webpack!</h1>'
+document.querySelector('.js-app').innerHTML = '<h1>Hello Webpack!</h1>'
 ```
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) before anything else in in your bundle.
@@ -36,27 +36,25 @@ Alright, we now need to bundle this ES6 client app into an ES5 bundle. It's goin
 export const WDS_PORT = 7000
 ```
 
-- Create a `src/shared/util.js` file containing:
-
-```js
-// @flow
-
-/* eslint-disable import/prefer-default-export */
-
-export const isProd = process.env.NODE_ENV === 'production'
-```
-
 - Create a `webpack.config.babel.js` file containing:
 
 ```js
 // @flow
 
+import path from 'path'
+
 import { WDS_PORT } from './src/shared/config'
 import { isProd } from './src/shared/util'
 
 export default {
-  entry: './src/client',
-  output: { filename: 'dist/js/bundle.js' },
+  entry: [
+    './src/client',
+  ],
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist/js'),
+    publicPath: `http://localhost:${WDS_PORT}/dist/js/`,
+  },
   module: {
     rules: [
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
@@ -66,7 +64,9 @@ export default {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devServer: { port: WDS_PORT },
+  devServer: {
+    port: WDS_PORT,
+  },
 }
 ```
 
@@ -84,19 +84,16 @@ This file is used to describe how our bundle should be assembled: `entry` is the
 
 ### Development / Production variations
 
-In development mode, we are going to use `webpack-dev-server` to take advantage of hot module reloading, and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code, and the `NODE_ENV` variable.
+In development mode, we are going to use `webpack-dev-server` to take advantage of hot module reloading, and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code, and the `NODE_ENV` variable set to `production`.
 
-You can now tweak your `package.json` scripts like so:
+Create a `dev:wds` and tweak your `prod:build` task:
 
 ```json
-"dev": "yarn stop && pm2 start pm2-dev.yaml && webpack-dev-server --progress",
-"prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-"build": "rimraf dist lib && babel src -d lib && cross-env NODE_ENV=production webpack -p --progress",
+"dev:wds": "webpack-dev-server --progress",
+"prod:build": "rimraf lib dist && babel src -d lib --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
 ```
 
-Take a moment to read these scripts carefully. They start looking a bit bloated but you should be able to understand everything they do.
-
-- Next, let's create a `<div class="app"></div>` container in our `src/server/static-template.js`, and include the bundle that will be generated:
+- Next, let's create a `<div class="js-app"></div>` container in our `src/server/render-app.js`, and include the bundle that will be generated:
 
 ```js
 // @flow
@@ -104,22 +101,33 @@ Take a moment to read these scripts carefully. They start looking a bit bloated 
 import { STATIC_PATH, WDS_PORT } from '../shared/config'
 import { isProd } from '../shared/util'
 
-export default (title: string) => `
-<!doctype html>
+const renderApp = (title: string) =>
+`<!doctype html>
 <html>
   <head>
     <title>${title}</title>
     <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
   </head>
   <body>
-    <div class="app"></div>
+    <div class="js-app"></div>
     <script src="${isProd ? STATIC_PATH : `http://localhost:${WDS_PORT}/dist`}/js/bundle.js"></script>
   </body>
 </html>
 `
+
+export default renderApp
 ```
 
 Depending on the environment we're in, we'll include either the Webpack Dev Server bundle, or the production bundle. Note that the path to Webpack Dev Server's bundle is *virtual*, `dist/js/bundle.js` is not actually read from your hard drive in development mode. It's also necessary to give Webpack Dev Server a different port than your main web port.
+
+Finally, in `src/server/index.js`, tweak your `console.log` message like so:
+
+```js
+console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
+  '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
+```
+
+That will give other developers a hint about what to do if they try to just run `yarn start` without Webpack Dev Server.
 
 Alright that was a lot of changes, let's see if everything works as expected:
 
@@ -167,6 +175,91 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 ```
 
 🏁 Run `yarn start` (or `yarn prod`) and open Chrome on `http://localhost:8000`. You should see "Hello React!".
+
+Now try changing the text in `src/client/index.jsx` to something else. Webpack Dev Server should reload the page automatically, which is pretty neat, but we are going to make it even better.
+
+## Hot Module Replacement
+
+> 💡 **[Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)** (*HMR*) is a powerful Webpack feature to replace a module on the fly without page reload.
+
+To make HMR work with React, we are going to need to tweak a few things.
+
+- Run `yarn add --dev react-hot-loader@next`
+
+- Edit your `webpack.config.babel.js` like so:
+
+```js
+import webpack from 'webpack'
+// [...]
+entry: [
+  'react-hot-loader/patch',
+  './src/client',
+],
+// [...]
+devServer: {
+  port: WDS_PORT,
+  hot: true,
+},
+plugins: [
+  new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
+],
+```
+
+- Create a `src/client/app.jsx` file containing:
+
+```js
+// @flow
+
+import React from 'react'
+
+const App = () => (
+  <h1>Hello React with HMR!</h1>
+)
+
+export default App
+```
+
+And finally edit your `src/client/index.jsx` file:
+
+```js
+// @flow
+
+/* eslint-disable import/no-extraneous-dependencies */
+
+import 'babel-polyfill'
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
+
+import App from './app'
+
+const rootEl = document.querySelector('.js-app')
+
+const wrapApp = AppComponent =>
+  <AppContainer>
+    <AppComponent />
+  </AppContainer>
+
+ReactDOM.render(wrapApp(App), rootEl)
+
+if (module.hot) {
+  // flow-disable-next-line
+  module.hot.accept('./app', () => {
+    /* eslint-disable global-require */
+    const NextApp = require('./app').default
+    /* eslint-enable global-require */
+    ReactDOM.render(wrapApp(NextApp), rootEl)
+  })
+}
+```
+
+Please ignore the Flow and ESLint comments to focus on what we're doing here: We need to make our `App` a child of `react-hot-loader`'s `AppContainer`, and we need to `require` the next version of our `App` when hot-reloading. To make this  process clean and DRY, we create a little `wrapApp` function that we use in both places it needs to render `App`. Feel free to move the `eslint-disable global-require` to the top of the file to make this more readable.
+
+🏁 Restart your `yarn dev:wds` process if it was still running. Open `localhost:8000`. In the Console tab, you should see some logs about HMR. Go ahead and change something in `src/client/app.jsx` and your changes should be reflected in your browser after a few seconds, without any full-page reload!
 
 Next section: [05 - Redux, Immutable, Fetch](/tutorial/05-redux-immutable-fetch#05---redux-immutable-and-fetch)
 

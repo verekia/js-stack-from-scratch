@@ -206,7 +206,19 @@ I know this is a lot to take in, so take a minute to think about it. I'm still a
 },
 ```
 
-- Create an empty `.flowconfig` file at the root of your project.
+- Create a `.flowconfig` file at the root of your project containing:
+
+```
+[options]
+suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
+```
+
+This is a little utility that we set up to make Flow ignore any warning detected on the next line. You would use it like this, similarly to `eslint-disable`:
+
+```js
+// flow-disable-next-line
+something.flow(doesnt.like).for.instance()
+```
 
 Alright, we should be all set for the configuration part.
 
