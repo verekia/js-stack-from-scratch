@@ -85,18 +85,32 @@ This file is used to describe how our bundle should be assembled: `entry` is the
 
 - Add `/dist/` to your `.gitignore`
 
-### Development / Production variations
+### Tasks update
 
 In development mode, we are going to use `webpack-dev-server` to take advantage of hot module reloading, and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code, and the `NODE_ENV` variable set to `production`.
 
-Create a `dev:wds` and tweak your `prod:build` task:
+Let's update our `scripts` to implement all this, and improve some other tasks as well:
 
 ```json
-"dev:wds": "webpack-dev-server --progress",
-"prod:build": "rimraf lib dist && babel src -d lib --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
+"scripts": {
+  "start": "yarn dev:start",
+  "dev:start": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
+  "dev:wds": "webpack-dev-server --progress",
+  "prod:build": "rimraf lib dist && babel src -d lib --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
+  "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
+  "prod:stop": "pm2 delete all",
+  "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
+  "test": "yarn lint && flow && jest --coverage",
+  "precommit": "yarn test",
+  "prepush": "yarn test && yarn prod:build"
+},
 ```
 
-- Next, let's create a `<div class="js-app"></div>` container in our `src/server/render-app.js`, and include the bundle that will be generated:
+In `dev:start` we explicitly declare file extensions to monitor, `.js` and `.jsx`, and add `dist` in the ignored directories.
+
+We created a separate `lint` task and added `webpack.config.babel.js` to the checked files.
+
+- Next, let's create the container for our app in `src/server/render-app.js`, and include the bundle that will be generated:
 
 ```js
 // @flow

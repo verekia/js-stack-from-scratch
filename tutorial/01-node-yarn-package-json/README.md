@@ -88,10 +88,11 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 - Create a `.gitignore` file and add the following to it:
 
 ```gitignore
-*.log
+.DS_Store
+/*.log
 ```
 
-If you are using a Mac, you should probably add `.DS_Store` to this file as well.
+`.DS_Store` files are auto-generated macOS files that you should never have in your repository.
 
 `npm-debug.log` and `yarn-error.log` are files that are created when your package manager encounters an error, we don't want them versioned in our repository.
 

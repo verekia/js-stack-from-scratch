@@ -2,7 +2,12 @@
 
 **The code of this chapter is available in the [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) branch of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
-`.flowconfig`: ignore JSS
+`.flowconfig`:
+
+```flowconfig
+[ignore]
+.*/node_modules/jss/.*
+```
 
 **The code of this chapter is available in the [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) branch of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
