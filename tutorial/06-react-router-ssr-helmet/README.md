@@ -390,7 +390,8 @@ const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMP
 const preloadedState = window.__PRELOADED_STATE__
 /* eslint-enable no-underscore-dangle */
 
-const store = createStore(combineReducers({ hello: helloReducer }),
+const store = createStore(combineReducers(
+  { hello: helloReducer }),
   { hello: Immutable.fromJS(preloadedState.hello) },
   composeEnhancers(applyMiddleware(thunkMiddleware)))
 ```
@@ -399,7 +400,101 @@ const store = createStore(combineReducers({ hello: helloReducer }),
 
 I purposely made you write `FIX ME` in the title to highlight the fact that even though we are doing server-side rendering, we currently do not fill the `title` tag – or any of the tags in `head` that vary depending on the page you're on – properly.
 
-🏁 Run `yarn start`.
+- Edit `src/server/render-app.jsx` like so:
+
+```js
+import Helmet from 'react-helmet'
+// [...]
+const renderApp = (/* [...] */) => {
+
+  const appHtml = ReactDOMServer.renderToString(/* [...] */)
+  const head = Helmet.rewind()
+
+  return (
+    `<!doctype html>
+    <html>
+      <head>
+        ${head.title}
+        ${head.meta}
+        <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
+      </head>
+    [...]
+    `
+  )
+}
+```
+
+- Edit `src/shared/app.jsx` like so:
+
+```js
+import Helmet from 'react-helmet'
+// [...]
+const App = () =>
+  <div>
+    <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
+    // [...]
+```
+
+- Edit `src/shared/component/page/home.jsx` like so:
+
+```js
+import Helmet from 'react-helmet'
+// [...]
+
+const HomePage = () =>
+  <div>
+    <Helmet
+      meta={[
+        { name: 'description', content: 'Hello App is an app to say hello' },
+        { property: 'og:title', content: APP_NAME },
+      ]}
+    />
+    // [...]
+```
+
+- Edit `src/shared/component/page/hello.jsx` like so:
+
+```js
+import Helmet from 'react-helmet'
+// [...]
+
+const title = 'Hello Page'
+
+const HelloPage = () =>
+  <div>
+    <Helmet
+      title={title}
+      meta={[
+        { name: 'description', content: 'A page to say hello' },
+        { property: 'og:title', content: title },
+      ]}
+    />
+    // [...]
+```
+
+- Edit `src/shared/component/page/hello-async.jsx` like so:
+
+```js
+import Helmet from 'react-helmet'
+// [...]
+
+const title = 'Async Hello Page'
+
+const HelloAsyncPage = () =>
+  <div>
+    <Helmet
+      title={title}
+      meta={[
+        { name: 'description', content: 'A page to say hello asynchronously' },
+        { property: 'og:title', content: title },
+      ]}
+    />
+    // [...]
+```
+
+The `<Helmet>` component doesn't actually render anything, it just injects content in the `head` of your document.
+
+🏁 Run `yarn start` and navigate between pages. The title on your tab should change when you navigate, and it should also stay the same when you refresh the page. Show the source of the page to see how React Helmet sets the `title` and `meta` tags even for server-side rendering.
 
 Next section: [07 - Socket.IO](/tutorial/07-socket-io)
 
