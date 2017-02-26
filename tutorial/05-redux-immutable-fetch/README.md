@@ -228,6 +228,7 @@ import { createStore, combineReducers } from 'redux'
 
 import App from './app'
 import helloReducer from './reducer/hello'
+import { APP_CONTAINER_SELECTOR } from '../shared/config'
 import { isProd } from '../shared/util'
 
 /* eslint-disable no-underscore-dangle */
@@ -235,7 +236,7 @@ const store = createStore(combineReducers({ hello: helloReducer }),
   isProd ? undefined : window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 /* eslint-enable no-underscore-dangle */
 
-const rootEl = document.querySelector('.js-app')
+const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
 
 const wrapApp = (AppComponent, reduxStore) =>
   <Provider store={reduxStore}>
@@ -476,6 +477,7 @@ import thunkMiddleware from 'redux-thunk'
 
 import App from './app'
 import helloReducer from './reducer/hello'
+import { APP_CONTAINER_SELECTOR } from '../shared/config'
 import { isProd } from '../shared/util'
 
 /* eslint-disable no-underscore-dangle */
@@ -485,7 +487,7 @@ const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMP
 const store = createStore(combineReducers({ hello: helloReducer }),
   composeEnhancers(applyMiddleware(thunkMiddleware)))
 
-const rootEl = document.querySelector('.js-app')
+const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
 
 const wrapApp = (AppComponent, reduxStore) =>
   <Provider store={reduxStore}>

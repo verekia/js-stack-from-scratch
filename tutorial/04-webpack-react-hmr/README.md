@@ -6,12 +6,23 @@
 
 Let's create some very basic *hello world* and bundle it with Webpack.
 
+- In `src/shared/config`, add the following constant:
+
+```js
+export const WDS_PORT = 7000
+
+export const APP_CONTAINER_CLASS = 'js-app'
+export const APP_CONTAINER_SELECTOR = `.${APP_CONTAINER_CLASS}`
+```
+
 - Create an `src/client/index.js` file containing:
 
 ```js
 import 'babel-polyfill'
 
-document.querySelector('.js-app').innerHTML = '<h1>Hello Webpack!</h1>'
+import { APP_CONTAINER_SELECTOR } from '../shared/config'
+
+document.querySelector(APP_CONTAINER_SELECTOR).innerHTML = '<h1>Hello Webpack!</h1>'
 ```
 
 If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) before anything else in in your bundle.
@@ -28,16 +39,7 @@ If you run ESLint on this file, it will complain about `document` being undefine
 }
 ```
 
-Alright, we now need to bundle this ES6 client app into an ES5 bundle. It's going to take quite a few changes to get there, so bear with me until the end.
-
-- In `src/shared/config`, add the following constant:
-
-```js
-export const WDS_PORT = 7000
-
-export const APP_CONTAINER_CLASS = 'js-app'
-export const APP_CONTAINER_SELECTOR = `.${APP_CONTAINER_CLASS}`
-```
+Alright, we now need to bundle this ES6 client app into an ES5 bundle.
 
 - Create a `webpack.config.babel.js` file containing:
 
@@ -175,8 +177,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import App from './app'
+import { APP_CONTAINER_SELECTOR } from '../shared/config'
 
-ReactDOM.render(<App />, document.querySelector('.js-app'))
+ReactDOM.render(<App />, document.querySelector(APP_CONTAINER_SELECTOR))
 ```
 
 - Create a `src/client/app.jsx` file containing:
@@ -255,8 +258,9 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 
 import App from './app'
+import { APP_CONTAINER_SELECTOR } from '../shared/config'
 
-const rootEl = document.querySelector('.js-app')
+const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
 
 const wrapApp = AppComponent =>
   <AppContainer>

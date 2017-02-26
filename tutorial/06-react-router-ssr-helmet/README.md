@@ -397,6 +397,8 @@ const store = createStore(combineReducers({ hello: helloReducer }),
 
 ### React Helmet
 
+I purposely made you write `FIX ME` in the title to highlight the fact that even though we are doing server-side rendering, we currently do not fill the `title` tag – or any of the tags in `head` that vary depending on the page you're on – properly.
+
 🏁 Run `yarn start`.
 
 Next section: [07 - Socket.IO](/tutorial/07-socket-io)
