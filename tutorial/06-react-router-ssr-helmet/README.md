@@ -145,7 +145,6 @@ And finally, edit `src/client/app.jsx` like so:
 // @flow
 
 import React from 'react'
-
 import { Switch } from 'react-router'
 import { Route } from 'react-router-dom'
 import { APP_NAME } from '../shared/config'
@@ -400,6 +399,8 @@ const store = createStore(combineReducers(
 
 I purposely made you write `FIX ME` in the title to highlight the fact that even though we are doing server-side rendering, we currently do not fill the `title` tag – or any of the tags in `head` that vary depending on the page you're on – properly.
 
+- Run `yarn add react-helmet`
+
 - Edit `src/server/render-app.jsx` like so:
 
 ```js
@@ -432,14 +433,19 @@ import Helmet from 'react-helmet'
 const App = () =>
   <div>
     <Helmet titleTemplate={`%s | ${APP_NAME}`} defaultTitle={APP_NAME} />
+    <Nav />
     // [...]
 ```
 
 - Edit `src/shared/component/page/home.jsx` like so:
 
 ```js
+// @flow
+
+import React from 'react'
 import Helmet from 'react-helmet'
-// [...]
+
+import { APP_NAME } from '../../config'
 
 const HomePage = () =>
   <div>
@@ -449,7 +455,11 @@ const HomePage = () =>
         { property: 'og:title', content: APP_NAME },
       ]}
     />
-    // [...]
+    <h1>{APP_NAME}</h1>
+  </div>
+
+export default HomePage
+
 ```
 
 - Edit `src/shared/component/page/hello.jsx` like so:
@@ -469,6 +479,7 @@ const HelloPage = () =>
         { property: 'og:title', content: title },
       ]}
     />
+    <h1>{title}</h1>
     // [...]
 ```
 
@@ -489,7 +500,33 @@ const HelloAsyncPage = () =>
         { property: 'og:title', content: title },
       ]}
     />
+    <h1>{title}</h1>
     // [...]
+```
+
+- Edit `src/shared/component/page/not-found.jsx` like so:
+
+```js
+// @flow
+
+import React from 'react'
+import Helmet from 'react-helmet'
+
+const title = 'Page Not Found'
+
+const NotFoundPage = () =>
+  <div>
+    <Helmet
+      title={title}
+      meta={[
+        { name: 'description', content: 'A page to say hello' },
+        { property: 'og:title', content: title },
+      ]}
+    />
+    <h1>{title}</h1>
+  </div>
+
+export default NotFoundPage
 ```
 
 The `<Helmet>` component doesn't actually render anything, it just injects content in the `head` of your document.

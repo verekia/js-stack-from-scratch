@@ -193,7 +193,6 @@ This container hooks up the Redux's app state with the `Message` component. When
 // @flow
 
 import React from 'react'
-
 import HelloButton from './container/hello-button'
 import Message from './container/message'
 import { APP_NAME } from '../shared/config'
@@ -517,7 +516,6 @@ Here we pass `redux-thunk` to Redux's `applyMiddleware` function. In order for t
 // @flow
 
 import React from 'react'
-
 import HelloButton from './container/hello-button'
 import HelloAsyncButton from './container/hello-async-button'
 import Message from './container/message'
