@@ -4,6 +4,14 @@
 
 TODO
 
+## Coveralls
+
+```yaml
+script: yarn test && yarn prod:build && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+```
+
+## Badges
+
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
 Back to the [previous section](/tutorial/08-bootstrap-jss) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

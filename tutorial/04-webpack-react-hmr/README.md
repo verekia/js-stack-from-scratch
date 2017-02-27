@@ -156,6 +156,8 @@ Alright that was a lot of changes, let's see if everything works as expected:
 
 Good job, I know this was quite dense. You deserve a break! The next section is easier.
 
+**Note**: I would recommend to have at least 3 terminals open, one for your Express server, one for the Webpack Dev Server, and one for Git and general commands like installing packages with `yarn`. Ideally, you should split your terminal screen in multiple panes to see them all.
+
 ## React
 
 > 💡 **[React](https://facebook.github.io/react/)** is a library for building user interfaces by Facebook. It uses the **[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)** syntax to represent HTML elements and components while leveraging the power of JavaScript.
@@ -220,7 +222,7 @@ Now try changing the text in `src/client/app.jsx` to something else. Webpack Dev
 
 To make HMR work with React, we are going to need to tweak a few things.
 
-- Run `yarn add --dev react-hot-loader@next`
+- Run `yarn add react-hot-loader@next`
 
 - Edit your `webpack.config.babel.js` like so:
 
@@ -248,8 +250,6 @@ plugins: [
 
 ```js
 // @flow
-
-/* eslint-disable import/no-extraneous-dependencies */
 
 import 'babel-polyfill'
 

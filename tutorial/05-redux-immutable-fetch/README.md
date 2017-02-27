@@ -215,8 +215,6 @@ We still haven't initialized the Redux store and haven't put the 2 containers an
 ```js
 // @flow
 
-/* eslint-disable import/no-extraneous-dependencies */
-
 import 'babel-polyfill'
 
 import React from 'react'
@@ -462,8 +460,6 @@ In `src/client/action/hello.js`, we made `sayHelloAsync`, an action creator that
 
 ```js
 // @flow
-
-/* eslint-disable import/no-extraneous-dependencies */
 
 import 'babel-polyfill'
 

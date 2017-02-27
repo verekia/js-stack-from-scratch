@@ -2,6 +2,12 @@
 
 **The code of this chapter is available in the [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) branch of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
+## Twitter Bootstrap
+
+> Blah
+
+**Note**: I've removed accessibility-related attributes (like `aria` attributes) to make the code more readable *in the context of this tutorial*. **You should absolutely put them back**. Refer to Bootstrap's documentation and code samples to see how to use them.
+
 `.flowconfig`:
 
 ```flowconfig
