@@ -32,6 +32,11 @@ describe('App State', () => {
         dog: dogReducer,
       }));
     });
+    describe('initial state', () => {
+      it('should be set correctly', () => {
+        store.getState().getIn(['dog', 'hasBarked']).should.be.false;
+      });
+    });
     describe('makeBark', () => {
       it('should make hasBarked go from false to true', () => {
         store.getState().getIn(['dog', 'hasBarked']).should.be.false;
@@ -47,7 +52,9 @@ Alright, let's analyze this whole thing.
 
 First, notice how we import the `should` assertion style from `chai`. This lets us assert things using a syntax like `mynumber.should.equal(3)`, pretty neat. In order to be able to call `should` on any object, we need to run the function `should()` before anything. Some of these assertion are *expressions*, like `mybook.should.be.true`, which will make ESLint grumpy, so we've added an ESLint comment at the top to disable the `no-unused-expressions` rule in this file.
 
-Mocha tests work like a tree. In our case, we want to test the `makeBark` function which should affect the `dog` attribute of the application state, so it makes sense to use the following hierarchy of tests: `App State > Dog > makeBark`, that we declare using `describe()`. `it()` is the actual test function and `beforeEach()` is a function that is executed before each `it()` test. In our case, we want a fresh new store before running each test. We declare a `store` variable at the top of the file because it should be useful in every test of this file.
+Mocha tests work like a tree. In our case, we want to test the initial state and the `makeBark` function which should affect the `dog` attribute of the application state, so it makes sense to use the following hierarchy of tests: `App State > Dog > initial state` and `App State > Dog > makeBark`, that we declare using `describe()`. `it()` is the actual test function and `beforeEach()` is a function that is executed before each `it()` test. In our case, we want a fresh new store before running each test. We declare a `store` variable at the top of the file because it should be useful in every test of this file.
+
+Testing initial state is easy. We just test that `hasBarked` is properly set to false.
 
 Our `makeBark` test is very explicit, and the description provided as a string in `it()` makes it even clearer: we test that `hasBarked` go from `false` to `true` after calling `makeBark`.
 
