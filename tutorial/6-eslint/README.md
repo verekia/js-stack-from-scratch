@@ -107,6 +107,45 @@ gulp.task('build', ['lint', 'clean'], () =>
 );
 ```
 
+If you run `yarn start` now, you may see a complaint about dangling commas on our multi-line ES6-style functions. This is because they are being passed as arguments to `gulp.task`, and multi-line arguments should have dangling commas, for example:
+
+```javascript
+foo(
+  argument1,
+  argument2,
+);
+
+// instead of,
+
+foo(
+  argument1,
+  argument2
+)
+
+```
+
+We can fix it by wrapping the body of the function in parenthesis.
+
+```javascript
+gulp.task('lint', () => (
+  gulp.src([
+    paths.allSrcJs,
+    paths.gulpFile,
+  ])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+));
+
+// [...]
+
+gulp.task('build', ['lint', 'clean'], () => (
+  gulp.src(paths.allSrcJs)
+    .pipe(babel())
+    .pipe(gulp.dest(paths.libDir))
+));
+```
+
 The last issue left is about `console.log()`. Let's say that we want this `console.log()` to be valid in `index.js` instead of triggering a warning in this example. You might have guessed it, we'll put `/* eslint-disable no-console */` at the top of our `index.js` file.
 
 - Run `yarn start` and we are now all clear again.
