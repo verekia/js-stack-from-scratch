@@ -243,7 +243,7 @@ export default ModalExample
 
 ```js
 const App = () =>
-  <div style={{ paddingTop: 54 }}>  
+  <div style={{ paddingTop: 54 }}>
 ```
 
 This is an example of a *React inline style*.
