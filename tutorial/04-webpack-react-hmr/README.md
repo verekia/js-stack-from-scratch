@@ -156,7 +156,7 @@ Alright that was a lot of changes, let's see if everything works as expected:
 
 Good job, I know this was quite dense. You deserve a break! The next section is easier.
 
-**Note**: I would recommend to have at least 3 terminals open, one for your Express server, one for the Webpack Dev Server, and one for Git and general commands like installing packages with `yarn`. Ideally, you should split your terminal screen in multiple panes to see them all.
+**Note**: I would recommend to have at least 3 terminals open, one for your Express server, one for the Webpack Dev Server, and one for Git, tests, and general commands like installing packages with `yarn`. Ideally, you should split your terminal screen in multiple panes to see them all.
 
 ## React
 
