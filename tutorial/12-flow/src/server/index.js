@@ -2,8 +2,22 @@
 
 /* eslint-disable no-console */
 
-import Dog from '../shared/dog';
+import express from 'express';
+import masterLayout from './templates/master-layout';
 
-const toby = new Dog('Toby');
+const app = express();
+const port = 3000;
 
-console.log(toby.bark());
+app.use('/static', express.static('public'));
+
+app.get('/', (req, res) => {
+  res.send(masterLayout('Homepage'));
+});
+
+app.get('/makebark', (req, res) => {
+  res.send({ hasBarked: true });
+});
+
+app.listen(port, () => {
+  console.log(`Express running on port ${port}`);
+});
