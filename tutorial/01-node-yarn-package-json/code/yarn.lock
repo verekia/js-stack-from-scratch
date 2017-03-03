@@ -13,8 +13,8 @@ color-name@^1.0.0, color-name@^1.1.1:
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.1.tgz#4b1415304cf50028ea81643643bd82ea05803689"
 
 color-string@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.4.0.tgz#2b47f8565fb0eb52f9f77c801992b8ca55d6e898"
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.0.tgz#f9a7a0553e55b34d18a463c06f13e3384dd960ce"
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"

@@ -6,7 +6,7 @@ In this section we will set up Node, Yarn, a basic `package.json` file, and try 
 
 > 💡 **[Node.js](https://nodejs.org/)** is a JavaScript runtime environment. It is mostly used for Back-End development, but also for general scripting. In the context of Front-End development, it can be used to perform a whole bunch of tasks like linting, testing, and assembling files.
 
-We will to use Node for basically everything in this tutorial, so you're going to need it. Head to the [download page](https://nodejs.org/en/download/current/) for **macOS** or **Windows** binaries, or the [package manager installations page](https://nodejs.org/en/download/package-manager/) for Linux distributions.
+We will use Node for basically everything in this tutorial, so you're going to need it. Head to the [download page](https://nodejs.org/en/download/current/) for **macOS** or **Windows** binaries, or the [package manager installations page](https://nodejs.org/en/download/package-manager/) for Linux distributions.
 
 For instance, on **Ubuntu / Debian**, you would run the following commands to install Node:
 
@@ -29,13 +29,13 @@ NPM is the default package manager for Node. It is automatically installed along
 
 > 💡 **[Yarn](https://yarnpkg.com/)** is a Node.js package manager which is much faster than NPM, has offline support, and fetches dependencies [more predictably](https://yarnpkg.com/en/docs/yarn-lock).
 
-Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and is becoming the new package manager of choice of the JavaScript community. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --save-dev`.
+Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and may soon become the package manager of choice of the JavaScript community. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --save-dev`.
 
 - Install Yarn by following the [instructions](https://yarnpkg.com/en/docs/install) for your OS.
 
 ## `package.json`
 
-> 💡 **[package.json](https://yarnpkg.com/en/docs/package-json)** is the file used to describe and configure your JavaScript project. It contains general information (your project's name, version, contributors, license, etc), configuration options for tools you use, and even a section to run *tasks*.
+> 💡 **[package.json](https://yarnpkg.com/en/docs/package-json)** is the file used to describe and configure your JavaScript project. It contains general information (your project name, version, contributors, license, etc), configuration options for tools you use, and even a section to run *tasks*.
 
 - Create a new folder to work in, and `cd` in it.
 - Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.

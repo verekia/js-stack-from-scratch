@@ -14,7 +14,7 @@
 
 Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
 
-> 🎉 **This is V2 of the tutorial, major changes happened since the initial 2016 release. Check the [Change Log](/CHANGELOG.md)!**
+> 🎉 **This is the V2 of the tutorial, major changes happened since the 2016 release. Check the [Change Log](/CHANGELOG.md)!**
 
 This is a straight-to-the-point guide to assembling a JavaScript stack. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*. Since the goal of this tutorial is to assemble various tools, I do not go into details about how these tools work individually. Refer to their documentation or find other tutorials if you want to acquire deeper knowledge in them.
 

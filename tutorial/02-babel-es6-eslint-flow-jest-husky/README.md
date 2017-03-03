@@ -39,7 +39,7 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 
 ## ES6
 
-> 💡 **[ES6](http://es6-features.org/)**: The most significant improvement of the JavaScript language. There are too many ES6 features to list them here but typical ES6 code uses classes with `class`, `const` and `let`, template strings, and arrow functions (`(param) => { console.log('Hi'); }`).
+> 💡 **[ES6](http://es6-features.org/)**: The most significant improvement of the JavaScript language. There are too many ES6 features to list them here but typical ES6 code uses classes with `class`, `const` and `let`, template strings, and arrow functions (`(text) => { console.log(text) }`).
 
 ### Creating an ES6 class
 
@@ -87,7 +87,7 @@ In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`
 
 > 💡 **[ESLint](http://eslint.org)** is the linter of choice for ES6 code. A linter gives you recommendations about code formatting, which enforces style consistency in your code, and code you share with your team. It's also a great way to learn about JavaScript by making mistakes that ESLint will catch.
 
-ESLint works with *rules*, and there are [many of them](http://eslint.org/docs/rules/). Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well to use their config.
+ESLint works with *rules*, and there are [many of them](http://eslint.org/docs/rules/). Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well.
 
 Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2017-02-03, they recommend using the following command in your terminal:
 
@@ -107,7 +107,7 @@ It should install everything you need and add `eslint-config-airbnb`, `eslint-pl
 }
 ```
 
-We'll create an NPM/Yarn script to runs ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
+We'll create an NPM/Yarn script to run ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
 
 - Run `yarn add --dev eslint`
 
@@ -122,7 +122,7 @@ Update the `scripts` of your `package.json` to include a new `test` task:
 
 Here we just tell ESLint that want to lint all JavaScript files under the `src` folder.
 
-We will use this standard `test` task to run a chain of all the commands that validate our code, whether it's linting, typechecking, or unit testing.
+We will use this standard `test` task to run a chain of all the commands that validate our code, whether it's linting, type checking, or unit testing.
 
 - Run `yarn test`, and you should see a whole bunch of errors for missing semicolons, and a warning for using `console.log()` in `index.js`. Add `/* eslint-disable no-console */` at the top of our `index.js` file to allow the use of `console` in this file.
 
@@ -242,11 +242,11 @@ class Dog {
 export default Dog
 ```
 
-The `// @flow` comment tells Flow that we want this file to be typechecked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check out the documentation for more details.
+The `// @flow` comment tells Flow that we want this file to be type-checked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check out the [documentation](https://flowtype.org/docs/quick-reference.html) for more details.
 
 - Add `// @flow` at the top of `index.js` as well.
 
-`yarn test` should now both lint and typecheck your code fine.
+`yarn test` should now both lint and type-check your code fine.
 
 There are 2 things that I want you to try:
 
@@ -258,7 +258,7 @@ There are 2 things that I want you to try:
 
 ### Flow in your editor
 
-Just like with ESLint, you should spend some time configuring your Editor / IDE to give you immediate feedback when Flow detects issues in your code.
+Just like with ESLint, you should spend some time configuring your editor / IDE to give you immediate feedback when Flow detects issues in your code.
 
 ## Jest
 
