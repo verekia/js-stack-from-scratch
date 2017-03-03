@@ -53,7 +53,7 @@ Of course, replace `GITHUB-USERNAME/GITHUB-REPO` by your actual Github username 
 
 ## Heroku
 
-> 💡 **[Heroku](https://www.heroku.com/)** is a [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service) to deploy to. It takes care of infrastructure details, so you can focus on your developing your app without worrying about what happens behind the scenes.
+> 💡 **[Heroku](https://www.heroku.com/)** is a [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service) to deploy to. It takes care of infrastructure details, so you can focus on developing your app without worrying about what happens behind the scenes.
 
 This tutorial is not sponsored in any way by Heroku, but Heroku being one hell of a platform, I am going to show you how to deploy your app to it. Yep, that's the kind of free love you get when you build a great product.
 
@@ -92,7 +92,7 @@ We are not going to use PM2 anymore, we'll use `heroku local` instead to run in 
 
 - Run `yarn remove pm2`
 
-- Edit your `package.json` file to replace the `prod:start` script, remove `prod:stop`, and add a `heroku-postbuild` one:
+- Edit your `prod:start` script in `package.json`:
 
 ```json
 "prod:start": "heroku local",
@@ -110,7 +110,7 @@ We are not going to use PM2 anymore, we'll use `heroku local` instead to run in 
 "heroku-postbuild": "yarn prod:build",
 ```
 
-`heroku-postbuild` is a task that will be run everytime you deploy new code to the Heroku app.
+`heroku-postbuild` is a task that will be run every time you deploy an app to Heroku.
 
 - Create a `Procfile` file containing:
 
@@ -146,6 +146,10 @@ This is for your Review Apps to use.
 You should now be all set to use Heroku Pipeline deployments.
 
 🏁 Create a new git branch, make changes and open a Github Pull Request to instantiate a Review App. Check your changes on the Review App URL, and if everything looks good, merge your Pull Request with `master` on Github. A few minutes later, your staging app should have been automatically deployed. Check your changes on the staging app URL, and if everything still looks good, promote staging to production.
+
+You are done! Congratulations if you finished this entire tutorial starting from scratch.
+
+You deserve this emoji medal: 🏅
 
 **This is the last chapter of the tutorial. The final code is available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).**
 
