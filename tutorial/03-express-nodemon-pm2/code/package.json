@@ -3,33 +3,37 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "yarn dev",
-    "dev": "yarn stop && pm2 start pm2-dev.yaml",
-    "prod": "yarn stop && yarn build && pm2 start pm2-prod.yaml",
-    "build": "rimraf lib && babel src -d lib",
-    "stop": "rimraf logs/* && pm2 delete all || true",
-    "test": "eslint src && flow",
-    "full-check": "yarn test && yarn prod && yarn stop",
-    "precommit": "yarn full-check",
-    "prepush": "yarn full-check"
+    "start": "yarn dev:start",
+    "dev:start": "nodemon --ignore lib --exec babel-node src/server",
+    "prod:build": "rimraf lib && babel src -d lib --ignore test.js",
+    "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
+    "prod:stop": "pm2 delete all",
+    "test": "eslint src && flow && jest --coverage",
+    "precommit": "yarn test",
+    "prepush": "yarn test && yarn prod:build"
   },
   "dependencies": {
-    "express": "^4.14.1"
+    "compression": "^1.6.2",
+    "express": "^4.15.0"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-eslint": "^7.1.1",
+    "babel-jest": "^19.0.0",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-latest": "^6.22.0",
-    "eslint": "^3.15.0",
-    "eslint-config-airbnb": "latest",
+    "cross-env": "^3.1.4",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-flowtype": "^2.30.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2 || ^4.0.0",
     "eslint-plugin-react": "^6.9.0",
-    "flow-bin": "^0.39.0",
-    "husky": "^0.13.1",
-    "pm2": "^2.4.0",
-    "rimraf": "^2.5.4"
+    "flow-bin": "^0.40.0",
+    "husky": "^0.13.2",
+    "jest": "^19.0.2",
+    "nodemon": "^1.11.0",
+    "pm2": "^2.4.2",
+    "rimraf": "^2.6.1"
   }
 }

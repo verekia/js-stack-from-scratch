@@ -2,8 +2,8 @@
 
 import { STATIC_PATH } from '../shared/config'
 
-export default (title: string) => `
-<!doctype html>
+const renderApp = (title: string) =>
+`<!doctype html>
 <html>
   <head>
     <title>${title}</title>
@@ -14,3 +14,5 @@ export default (title: string) => `
   </body>
 </html>
 `
+
+export default renderApp
