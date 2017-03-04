@@ -33,8 +33,8 @@ const wrapApp = (AppComponent, reduxStore) =>
 Our app will have 4 pages:
 
 - A Home page.
-- A Hello page that will only show the button and message.
-- A Hello Async page that will only show the async button and message.
+- A Hello page showing a button and message for the synchronous action.
+- A Hello Async page showing a button and message for the asynchronous action.
 - A 404 "Not Found" page.
 
 - Create a `src/client/component/page/home.jsx` file containing:
@@ -192,7 +192,7 @@ export default App
 
 🏁 Run `yarn start` and `yarn dev:wds`. Open `http://localhost:8000`, and click on the links to navigate between our different pages. You should see the URL changing dynamically. Switch between different pages and use the back button of your browser to see that the browsing history is working as expected.
 
-Now, let's say you navigated to `http://localhost:8000/hello` this way. Hit the refresh button. You now get a 404, because our Express server only responds to `/`. As you navigated between pages, you were actually only doing it on the client-side. Let's add server-side rendering to mix to get the expected behavior.
+Now, let's say you navigated to `http://localhost:8000/hello` this way. Hit the refresh button. You now get a 404, because our Express server only responds to `/`. As you navigated between pages, you were actually only doing it on the client-side. Let's add server-side rendering to the mix to get the expected behavior.
 
 ## Server-Side Rendering
 
@@ -212,7 +212,7 @@ We have to adjust a whole bunch of imports:
 
 - In `src/shared/app.jsx`, replace `'../shared/routes'` by `'./routes'` and `'../shared/config'` by `'./config'`
 
-- In `src/shared/component/nav.jsx`, replace `''../../shared/routes''` by `''../routes''`
+- In `src/shared/component/nav.jsx`, replace `'../../shared/routes'` by `'../routes'`
 
 ### Server changes
 
@@ -385,7 +385,7 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
     <html>
       <head>
         <title>FIX ME</title>
-        <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
       </head>
       <body>
         <div class="${APP_CONTAINER_CLASS}">${appHtml}</div>
@@ -424,6 +424,8 @@ const store = createStore(combineReducers(
 
 Here with feed our client-side store with the `preloadedState` that was received from the server.
 
+🏁 You can now run `yarn start` and `yarn dev:wds` and navigate between pages. Refreshing the page on `/hello`, `/hello-async`, and `/404` (or any other URI), should now work correctly. Notice how the `message` and `messageAsync` vary depending on if you navigated to that page from the client or if it comes from server-side rendering.
+
 ### React Helmet
 
 > 💡 **[React Helmet](https://github.com/nfl/react-helmet)**: A library to inject content to the `head` of a React app, on both the client and the server.
@@ -456,7 +458,7 @@ const renderApp = (/* [...] */) => {
 }
 ```
 
-React Helmet uses [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind` to pull out some data from the rendering of our app, which will soon contain some `<Helmet />` components. Those `<Helmet />` components are where we set the `title` and and other `head` details for each page.
+React Helmet uses [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind` to pull out some data from the rendering of our app, which will soon contain some `<Helmet />` components. Those `<Helmet />` components are where we set the `title` and other `head` details for each page.
 
 - Edit `src/shared/app.jsx` like so:
 
@@ -498,8 +500,13 @@ export default HomePage
 - Edit `src/shared/component/page/hello.jsx` like so:
 
 ```js
+// @flow
+
+import React from 'react'
 import Helmet from 'react-helmet'
-// [...]
+
+import HelloButton from '../../container/hello-button'
+import Message from '../../container/message'
 
 const title = 'Hello Page'
 
@@ -513,14 +520,23 @@ const HelloPage = () =>
       ]}
     />
     <h1>{title}</h1>
-    // [...]
+    <Message />
+    <HelloButton />
+  </div>
+
+export default HelloPage
 ```
 
 - Edit `src/shared/component/page/hello-async.jsx` like so:
 
 ```js
+// @flow
+
+import React from 'react'
 import Helmet from 'react-helmet'
-// [...]
+
+import HelloAsyncButton from '../../container/hello-async-button'
+import MessageAsync from '../../container/message-async'
 
 const title = 'Async Hello Page'
 
@@ -534,7 +550,12 @@ const HelloAsyncPage = () =>
       ]}
     />
     <h1>{title}</h1>
-    // [...]
+    <MessageAsync />
+    <HelloAsyncButton />
+  </div>
+
+export default HelloAsyncPage
+
 ```
 
 - Edit `src/shared/component/page/not-found.jsx` like so:
@@ -564,7 +585,7 @@ export default NotFoundPage
 
 The `<Helmet>` component doesn't actually render anything, it just injects content in the `head` of your document and exposes the same data to the server.
 
-🏁 Run `yarn start` and navigate between pages. The title on your tab should change when you navigate, and it should also stay the same when you refresh the page. Show the source of the page to see how React Helmet sets the `title` and `meta` tags even for server-side rendering.
+🏁 Run `yarn start` and `yarn dev:wds` and navigate between pages. The title on your tab should change when you navigate, and it should also stay the same when you refresh the page. Show the source of the page to see how React Helmet sets the `title` and `meta` tags even for server-side rendering.
 
 Next section: [07 - Socket.IO](/tutorial/07-socket-io)
 
