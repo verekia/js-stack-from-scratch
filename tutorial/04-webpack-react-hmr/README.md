@@ -212,7 +212,7 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 }
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds` and open Chrome on `http://localhost:8000`. You should see "Hello React!".
+🏁 Run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Hello React!".
 
 Now try changing the text in `src/client/app.jsx` to something else. Webpack Dev Server should reload the page automatically, which is pretty neat, but we are going to make it even better.
 
