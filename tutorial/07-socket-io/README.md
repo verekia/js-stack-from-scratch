@@ -100,7 +100,7 @@ const setUpSocket = (io: Object) => {
 export default setUpSocket
 ```
 
-Okay so in this file, we implement *how our server should react when clients connect and send messages to it*:
+Okay, so in this file, we implement *how our server should react when clients connect and send messages to it*:
 
 - When the client connects, we log it in the server console, and get access to the `socket` object, which we can use to communicate back with that client.
 - When a client sends `IO_CLIENT_JOIN_ROOM`, we make it join the `room` it wants. Once it has joined a room, we send 3 demo messages: 1 message to every user, 1 message to users in that room, 1 message to that client only.
@@ -121,7 +121,7 @@ import setUpSocket from './socket'
 setUpSocket(store)
 ```
 
-As you can see, we pass the Redux store to `setUpSocket`. This way whenever a Websocket message coming from the server should alter the client's Redux state, we can `dispatch` actions. We are not going to `dispatch` anything in this example.
+As you can see, we pass the Redux store to `setUpSocket`. This way whenever a Websocket message coming from the server should alter the client's Redux state, we can `dispatch` actions. We are not going to `dispatch` anything in this example though.
 
 - Create a `src/client/socket.js` file containing:
 

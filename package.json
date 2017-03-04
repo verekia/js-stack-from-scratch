@@ -10,7 +10,7 @@
     "04": "cd tutorial/04-webpack-react-hmr/code && yarn && yarn prepush",
     "05": "cd tutorial/05-redux-immutable-fetch/code && yarn && yarn prepush",
     "06": "cd tutorial/06-react-router-ssr-helmet/code && yarn && yarn prepush",
-    "07": "cd tutorial/07-socket-io",
+    "07": "cd tutorial/07-socket-io/code && yarn && yarn prepush",
     "08": "cd tutorial/08-bootstrap-jss",
     "09": "cd tutorial/09-travis-coveralls-heroku",
     "mdlint": "node mdlint.js"
