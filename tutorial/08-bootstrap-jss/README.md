@@ -33,7 +33,7 @@ For this reason, I'm going to make the tradeoff of integrating the official rele
 
 Now that we have Bootstrap's styles loaded on our page, we need the JavaScript behavior for the components.
 
-- Run `yarn add jquery tether`
+- Run `yarn add jquery tether bootstrap@4.0.0-alpha.6`
 
 - Edit `src/client/index.jsx` like so:
 
@@ -208,7 +208,7 @@ export default NotFoundPage
 // [...]
 ```
 
-- Create a `src/shared/component/footer.jsx` containing:
+- Create a `src/shared/component/footer.jsx` file containing:
 
 ```js
 // @flow
@@ -264,7 +264,7 @@ const App = () =>
 
 This is an example of a *React inline style*.
 
-This will translate into: `<div style="padding-top:54px;">` in your DOM. We need this style to push the content under the navigation bar, but that's what's important here. [React inline styles](https://speakerdeck.com/vjeux/react-css-in-js) are a great way to isolate your component's styles from the global CSS namespace, but it comes at a price: You cannot use some native CSS features like `:hover`, Media Queries, animations, or `font-face`. That's the reason why we're going to integrate a CSS-in-JS library, JSS, later in this chapter. For now, just keep in mind that you can use React inline styles this way if you don't need `:hover`.
+This will translate into: `<div style="padding-top:54px;">` in your DOM. We need this style to push the content under the navigation bar, but that's what's important here. [React inline styles](https://speakerdeck.com/vjeux/react-css-in-js) are a great way to isolate your component's styles from the global CSS namespace, but it comes at a price: You cannot use some native CSS features like `:hover`, Media Queries, animations, or `font-face`. That's the reason why we're going to integrate a CSS-in-JS library, JSS, later in this chapter. For now, just keep in mind that you can use React inline styles this way if you don't need `:hover` and such.
 
 - Edit `src/shared/component/nav.jsx` like so:
 
@@ -315,6 +315,9 @@ export default Nav
 There is something new here, `handleNavLinkClick`. One issue I encountered using Bootstrap's `navbar` in an SPA is that clicking on a link on mobile does not collapse the menu, and does not scroll back to the top of the page. This is a great opportunity to show you an example of how you would integrate some jQuery / Bootstrap-specific code in your app:
 
 ```js
+import $ from 'jquery'
+// [...]
+
 const handleNavLinkClick = () => {
   $('body').scrollTop(0)
   $('.js-navbar-collapse').collapse('hide')
@@ -335,9 +338,9 @@ SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components,
 
 The cool React kids tend to favor React inline styles, CSS-in-JS, or CSS Modules approaches though, since they integrate really well with React and solve programmatically many [issues](https://speakerdeck.com/vjeux/react-css-in-js) that regular CSS approaches struggle with.
 
-CSS Modules work fine, but they don't leverage the power of JavaScript and its many features over CSS. They just provide encapsulation, which is fine, but React inline styles and CSS-in-JS take styling to an other level in my opinion. My personal suggestion would be to use React inline styles for common styles (that's also what have to use for React Native), and use a CSS-in-JS library for things like `:hover` and media queries.
+CSS Modules work fine, but they don't leverage the power of JavaScript and its many features over CSS. They just provide encapsulation, which is fine, but React inline styles and CSS-in-JS take styling to an other level in my opinion. My personal suggestion would be to use React inline styles for common styles (that's also what you have to use for React Native), and use a CSS-in-JS library for things like `:hover` and media queries.
 
-There are tons of CSS-in-JS libraries. Two leading libraries are Aphrodite and JSS. They achieve pretty much the same thing and the syntax is basically the same. To be honest, I haven't done a comparison of the two on any significant-size project, and really just have a slight preference for JSS' API. We can discuss this topic in [this issue](https://github.com/verekia/js-stack-from-scratch/issues/139) on the repo, I would like to hear the opinion of those who have done a more thorough comparison.
+There are tons of CSS-in-JS libraries. Two leading ones are Aphrodite and JSS. They achieve pretty much the same thing and the syntax is basically the same. To be honest, I haven't done a comparison of the two on any significant-size project, and really just have a slight preference for JSS' API. We can discuss this topic in [this issue](https://github.com/verekia/js-stack-from-scratch/issues/139) on the repo. I would like to hear the opinion of those who have done a more thorough comparison.
 
 ## JSS
 
@@ -384,6 +387,9 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
       </StaticRouter>
     </Provider>)
   // [...]
+      <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
+      <style class="${JSS_SSR_CLASS}">${sheets.toString()}</style>
+  // [...]
 ```
 
 ## Client-side
@@ -393,9 +399,14 @@ The first thing the client should do after rendering the app client-side, is to 
 - Add the following to `src/client/index.jsx` after the `ReactDOM.render` calls (before `setUpSocket(store)` for instance):
 
 ```js
+import { APP_CONTAINER_SELECTOR, JSS_SSR_SELECTOR } from '../shared/config'
+// [...]
+
 const jssServerSide = document.querySelector(JSS_SSR_SELECTOR)
 // flow-disable-next-line
 jssServerSide.parentNode.removeChild(jssServerSide)
+
+setUpSocket(store)
 ```
 
 Edit `src/shared/component/page/home.jsx` like so:
@@ -430,7 +441,7 @@ export default injectSheet(styles)(HomePage)
 
 Unlike React inline styles, JSS uses classes. You pass styles to `injectSheet` and the CSS classes end up in the props of your component.
 
-🏁 Run `yarn start` and `yarn dev:wds`. Open the homepage. Show the source of the page (not in the inspector) to see that the JSS styles are present in the DOM at the initial render in the `<style class="jss-ssr">` element. They should be gone in the inspector, replaced by `<style type="text/css" data-jss data-meta="HomePage">`.
+🏁 Run `yarn start` and `yarn dev:wds`. Open the homepage. Show the source of the page (not in the inspector) to see that the JSS styles are present in the DOM at the initial render in the `<style class="jss-ssr">` element (only on the Home page). They should be gone in the inspector, replaced by `<style type="text/css" data-jss data-meta="HomePage">`.
 
 **Note**: In production mode, the `data-meta` is obfuscated. Sweet!
 
