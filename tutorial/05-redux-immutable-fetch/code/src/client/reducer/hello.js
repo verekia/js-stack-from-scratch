@@ -19,7 +19,7 @@ const helloReducer = (state: Object = initialState, action: { type: string, payl
     case SAY_HELLO:
       return state.set('message', action.payload)
     case SAY_HELLO_ASYNC_REQUEST:
-      return state.set('messageAsync', '...')
+      return state.set('messageAsync', 'Loading...')
     case SAY_HELLO_ASYNC_SUCCESS:
       return state.set('messageAsync', action.payload)
     case SAY_HELLO_ASYNC_FAILURE:

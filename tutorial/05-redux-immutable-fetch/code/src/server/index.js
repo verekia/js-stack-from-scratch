@@ -1,26 +1,30 @@
 // @flow
 
-/* eslint-disable no-console */
-
+import compression from 'compression'
 import express from 'express'
 
 import { APP_NAME, STATIC_PATH, WEB_PORT } from '../shared/config'
-import { asyncHelloRoute } from '../shared/routes'
-import staticTemplate from './static-template'
+import { helloEndpointRoute } from '../shared/routes'
+import { isProd } from '../shared/util'
+import renderApp from './render-app'
 
 const app = express()
 
+app.use(compression())
 app.use(STATIC_PATH, express.static('dist'))
 app.use(STATIC_PATH, express.static('public'))
 
 app.get('/', (req, res) => {
-  res.send(staticTemplate(APP_NAME))
+  res.send(renderApp(APP_NAME))
 })
 
-app.get(asyncHelloRoute(), (req, res) => {
-  res.json({ message: `Hello from the server! (received ${req.params.num})` })
+app.get(helloEndpointRoute(), (req, res) => {
+  res.json({ serverMessage: `Hello from the server! (received ${req.params.num})` })
 })
 
 app.listen(WEB_PORT, () => {
-  console.log(`Express running on port ${WEB_PORT}.`)
+  /* eslint-disable no-console */
+  console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
+  '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
+  /* eslint-enable no-console */
 })

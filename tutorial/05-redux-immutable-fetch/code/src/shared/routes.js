@@ -2,4 +2,4 @@
 
 /* eslint-disable import/prefer-default-export */
 
-export const asyncHelloRoute = (num: ?number) => `/async/hello/${num || ':num'}`
+export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
