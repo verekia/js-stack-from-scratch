@@ -1,3 +1,0 @@
-[ignore]
-
-.*/node_modules/gulp-flowtype/.*
