@@ -6,13 +6,13 @@ This tutorial is in constant evolution to provide the best learning experience t
 
 Here is what I think is a good workflow:
 
-- Check if there is already a translation issue open for your language. If that's the case, get in touch with the folks who opened it and consider collaborating. All maintainers will be mentioned on the English repo, so team work is encouraged! You can open issues on their translation fork project to offer your help on certain chapters for instance.
+- Check if there is already an [ongoing translation](https://github.com/verekia/js-stack-from-scratch/issues/147) for your language. If that's the case, get in touch with the folks who opened it and consider collaborating. All maintainers will be mentioned on the English repo, so team work is encouraged! You can open issues on their translation fork project to offer your help on certain chapters for instance.
 
 - Join the [Translations Gitter room](https://gitter.im/js-stack-from-scratch/Translations) if you're feeling chatty.
 
 - Fork the main [English repository](https://github.com/verekia/js-stack-from-scratch).
 
-- Open an issue on the English repo to show you're currently working on a translation.
+- Post in [this issue](https://github.com/verekia/js-stack-from-scratch/issues/147) the language and URL of your forked repo.
 
 - Translate the `README.md` files.
 
@@ -35,7 +35,7 @@ Since I want to reward you for your good work as much as possible, you can put a
 - After your original one-shot translation, if you want to update your repo with the latest change from the main English repo, [sync your fork](https://help.github.com/articles/syncing-a-fork/) with my repo. To make it easy to see what changed since your initial translation, you can use Github's feature to [compare commits](https://help.github.com/articles/comparing-commits-across-time/#comparing-commits). Set the **base** to the last commit from the English repo you used to translate, and compare it to **master**, like so:
 
 <!-- markdownlint-disable MD034 -->
-https://github.com/verekia/js-stack-from-scratch/compare/dfab78b581a3da800daeb3686b900dd9ea972da0...master
+https://github.com/verekia/js-stack-from-scratch/compare/9f6b577...master
 <!-- markdownlint-enable MD034 -->
 
 That should give you a easy-to-read diff to see exactly what changed in `README.md` files since your translation!
