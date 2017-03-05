@@ -58,6 +58,8 @@ If you want to add your translation, please read the [translation recommendation
 
 Your link here soon ;)
 
+Check out the [ongoing translations](https://github.com/verekia/js-stack-from-scratch/issues/147).
+
 ### V1
 
 - [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
