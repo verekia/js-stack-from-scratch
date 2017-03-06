@@ -174,6 +174,6 @@ What happens here should not be surprising if you understood well what we did on
 
 🏁 Run `yarn start` and `yarn dev:wds`, open `http://localhost:8000`. Then, open your browser console, and also look at the terminal of your Express server. You should see the Websocket communication between your client and server.
 
-Next section: [08 - Bootstrap, JSS](/tutorial/08-bootstrap-jss)
+Next section: [08 - Bootstrap, JSS](/tutorial/08-bootstrap-jss#readme)
 
-Back to the [previous section](/tutorial/06-react-router-ssr-helmet) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/06-react-router-ssr-helmet#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

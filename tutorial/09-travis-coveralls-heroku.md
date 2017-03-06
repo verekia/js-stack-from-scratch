@@ -151,4 +151,4 @@ You are done! Congratulations if you finished this entire tutorial starting from
 
 You deserve this emoji medal: 🏅
 
-Back to the [previous section](/tutorial/08-bootstrap-jss) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/08-bootstrap-jss#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

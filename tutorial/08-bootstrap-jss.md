@@ -447,6 +447,6 @@ Unlike React inline styles, JSS uses classes. You pass styles to `injectSheet` a
 
 If you hover over the "Hover me" label, it should turn red. If you resize your browser window to be narrower than 800px, the "Resize your window" label should turn red.
 
-Next section: [09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku)
+Next section: [09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku#readme)
 
-Back to the [previous section](/tutorial/07-socket-io) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/07-socket-io#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

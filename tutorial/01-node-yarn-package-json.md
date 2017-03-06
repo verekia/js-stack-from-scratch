@@ -138,6 +138,6 @@ There are two kinds of package dependencies, `"dependencies"` and `"devDependenc
 
 **Dev Dependencies** are libraries used during development or to build your application (Webpack, SASS, linters, testing frameworks, etc). You install those with `yarn add --dev [package]`.
 
-Next section: [02 - Babel, ES6, ESLint, Flow, Jest, Husky](/tutorial/02-babel-es6-eslint-flow-jest-husky)
+Next section: [02 - Babel, ES6, ESLint, Flow, Jest, Husky](/tutorial/02-babel-es6-eslint-flow-jest-husky#readme)
 
 Back to the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

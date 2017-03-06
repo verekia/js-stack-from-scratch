@@ -321,6 +321,6 @@ All we have to do is to create two new tasks in `scripts`, `precommit` and `prep
 
 **Note**: If you are pushing right after a commit, you can use `git push --no-verify` to avoid running all the tests again.
 
-Next section: [03 - Express, Nodemon, PM2](/tutorial/03-express-nodemon-pm2)
+Next section: [03 - Express, Nodemon, PM2](/tutorial/03-express-nodemon-pm2#readme)
 
-Back to the [previous section](/tutorial/01-node-yarn-package-json) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/tutorial/01-node-yarn-package-json#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
