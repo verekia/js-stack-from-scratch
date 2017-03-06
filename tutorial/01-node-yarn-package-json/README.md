@@ -1,5 +1,7 @@
 # 01 - Node, Yarn, and `package.json`
 
+Code available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/01-node-yarn-package-json).
+
 In this section we will set up Node, Yarn, a basic `package.json` file, and try a package.
 
 ## Node

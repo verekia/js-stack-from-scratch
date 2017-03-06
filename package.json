@@ -3,15 +3,7 @@
   "version": "2.4.2",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
-    "full-check": "yarn mdlint && yarn 01 && yarn 02 && yarn 03 && yarn 04 && yarn 05 && yarn 06 && yarn 07",
-    "01": "cd tutorial/01-node-yarn-package-json/code && yarn && yarn start",
-    "02": "cd tutorial/02-babel-es6-eslint-flow-jest-husky/code && yarn && yarn test && yarn start",
-    "03": "cd tutorial/03-express-nodemon-pm2/code && yarn && yarn test",
-    "04": "cd tutorial/04-webpack-react-hmr/code && yarn && yarn prepush",
-    "05": "cd tutorial/05-redux-immutable-fetch/code && yarn && yarn prepush",
-    "06": "cd tutorial/06-react-router-ssr-helmet/code && yarn && yarn prepush",
-    "07": "cd tutorial/07-socket-io/code && yarn && yarn prepush",
-    "mdlint": "node mdlint.js"
+    "test": "node mdlint.js"
   },
   "devDependencies": {
     "glob": "^7.1.1",
