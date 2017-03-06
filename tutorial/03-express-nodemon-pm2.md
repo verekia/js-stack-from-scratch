@@ -51,12 +51,11 @@ If the Node process used to run your app has a `process.env.PORT` environment va
 ```js
 // @flow
 
-/* eslint-disable import/prefer-default-export */
-
+// eslint-disable-next-line import/prefer-default-export
 export const isProd = process.env.NODE_ENV === 'production'
 ```
 
-That's a simple util to test if we are running in production mode or not. The `/* eslint-disable import/prefer-default-export */` comment is because we only have one named export here. You can remove it as you add other exports in this file.
+That's a simple util to test if we are running in production mode or not. The `// eslint-disable-next-line import/prefer-default-export` comment is because we only have one named export here. You can remove it as you add other exports in this file.
 
 - Run `yarn add express compression`
 
@@ -85,9 +84,8 @@ app.get('/', (req, res) => {
 })
 
 app.listen(WEB_PORT, () => {
-  /* eslint-disable no-console */
+  // eslint-disable-next-line no-console
   console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' : '(development)'}.`)
-  /* eslint-enable no-console */
 })
 ```
 

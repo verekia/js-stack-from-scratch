@@ -268,11 +268,17 @@ Just like with ESLint, you should spend some time configuring your editor / IDE 
 
 - Run `yarn add --dev jest babel-jest` to install Jest and the package to make it use Babel.
 
+- Add the following to your `.eslintrc.json` at the root of the object to allow the use of Jest's functions without having to import them in every test file:
+
+```json
+"env": {
+  "jest": true
+}
+```
+
 - Create a `src/dog.test.js` file containing:
 
 ```js
-/* eslint-disable no-undef */
-
 import Dog from './dog'
 
 test('Dog.bark', () => {

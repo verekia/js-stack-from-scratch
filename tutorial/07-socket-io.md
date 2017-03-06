@@ -38,10 +38,9 @@ app.use(STATIC_PATH, express.static('public'))
 routing(app)
 
 http.listen(WEB_PORT, () => {
-  /* eslint-disable no-console */
+  // eslint-disable-next-line no-console
   console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
     '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
-  /* eslint-enable no-console */
 })
 ```
 
@@ -66,8 +65,6 @@ As you can see, we have a `IO_CLIENT_JOIN_ROOM`, because for the sake of demonst
 ```js
 // @flow
 
-/* eslint-disable no-console */
-
 import {
   IO_CONNECT,
   IO_DISCONNECT,
@@ -76,6 +73,7 @@ import {
   IO_SERVER_HELLO,
 } from '../shared/config'
 
+/* eslint-disable no-console */
 const setUpSocket = (io: Object) => {
   io.on(IO_CONNECT, (socket) => {
     console.log('[socket.io] A client connected.')
@@ -98,6 +96,7 @@ const setUpSocket = (io: Object) => {
     })
   })
 }
+/* eslint-enable no-console */
 
 export default setUpSocket
 ```
@@ -130,8 +129,6 @@ As you can see, we pass the Redux store to `setUpSocket`. This way whenever a We
 ```js
 // @flow
 
-/* eslint-disable no-console */
-
 import socketIOClient from 'socket.io-client'
 
 import {
@@ -144,7 +141,8 @@ import {
 
 const socket = socketIOClient(window.location.host)
 
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+// eslint-disable-next-line no-unused-vars
 const setUpSocket = (store: Object) => {
   socket.on(IO_CONNECT, () => {
     console.log('[socket.io] Connected.')
@@ -160,7 +158,7 @@ const setUpSocket = (store: Object) => {
     console.log('[socket.io] Disconnected.')
   })
 }
-/* eslint-enable no-unused-vars */
+/* eslint-enable no-console */
 
 export default setUpSocket
 ```

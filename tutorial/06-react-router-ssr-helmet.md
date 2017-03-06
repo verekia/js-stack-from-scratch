@@ -263,12 +263,12 @@ export default (app: Object) => {
     res.status(404).send(renderApp(req.url))
   })
 
-  /* eslint-disable no-unused-vars, no-console */
+  // eslint-disable-next-line no-unused-vars
   app.use((err, req, res, next) => {
+    // eslint-disable-next-line no-console
     console.error(err.stack)
     res.status(500).send('Something went wrong!')
   })
-  /* eslint-disable no-unused-vars, no-console */
 }
 ```
 
@@ -348,10 +348,9 @@ app.use(STATIC_PATH, express.static('public'))
 routing(app)
 
 app.listen(WEB_PORT, () => {
-  /* eslint-disable no-console */
+  // eslint-disable-next-line no-console
   console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
     '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
-  /* eslint-enable no-console */
 })
 ```
 

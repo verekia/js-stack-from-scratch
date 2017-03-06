@@ -33,11 +33,12 @@ If you want to use some of the most recent ES features in your client code, like
 
 If you run ESLint on this file, it will complain about `document` being undefined.
 
-- Add the following to your `.eslintrc.json` at the root of the object to allow the use of `window` and `document`:
+- Add the following to `env` in your `.eslintrc.json` to allow the use of `window` and `document`:
 
 ```json
 "env": {
-  "browser": true
+  "browser": true,
+  "jest": true
 }
 ```
 
@@ -272,15 +273,14 @@ ReactDOM.render(wrapApp(App), rootEl)
 if (module.hot) {
   // flow-disable-next-line
   module.hot.accept('./app', () => {
-    /* eslint-disable global-require */
+    // eslint-disable-next-line global-require
     const NextApp = require('./app').default
-    /* eslint-enable global-require */
     ReactDOM.render(wrapApp(NextApp), rootEl)
   })
 }
 ```
 
-Please ignore the Flow and ESLint comments to focus on what we're doing here: We need to make our `App` a child of `react-hot-loader`'s `AppContainer`, and we need to `require` the next version of our `App` when hot-reloading. To make this  process clean and DRY, we create a little `wrapApp` function that we use in both places it needs to render `App`. Feel free to move the `eslint-disable global-require` to the top of the file to make this more readable.
+We need to make our `App` a child of `react-hot-loader`'s `AppContainer`, and we need to `require` the next version of our `App` when hot-reloading. To make this  process clean and DRY, we create a little `wrapApp` function that we use in both places it needs to render `App`. Feel free to move the `eslint-disable global-require` to the top of the file to make this more readable.
 
 🏁 Restart your `yarn dev:wds` process if it was still running. Open `localhost:8000`. In the Console tab, you should see some logs about HMR. Go ahead and change something in `src/client/app.jsx` and your changes should be reflected in your browser after a few seconds, without any full-page reload!
 

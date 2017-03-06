@@ -229,10 +229,9 @@ import helloReducer from './reducer/hello'
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
 import { isProd } from '../shared/util'
 
-/* eslint-disable no-underscore-dangle */
 const store = createStore(combineReducers({ hello: helloReducer }),
+  // eslint-disable-next-line no-underscore-dangle
   isProd ? undefined : window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-/* eslint-enable no-underscore-dangle */
 
 const rootEl = document.querySelector(APP_CONTAINER_SELECTOR)
 
@@ -248,15 +247,14 @@ ReactDOM.render(wrapApp(App, store), rootEl)
 if (module.hot) {
   // flow-disable-next-line
   module.hot.accept('./app', () => {
-    /* eslint-disable global-require */
+    // eslint-disable-next-line global-require
     const NextApp = require('./app').default
-    /* eslint-enable global-require */
     ReactDOM.render(wrapApp(NextApp, store), rootEl)
   })
 }
 ```
 
-Let's take a moment to review this. First, we create a *store* with `createStore`. Stores are created by passing reducers to them. Here we only have one reducer, but for the sake of future scalability, we use `combineReducers` to group all of our reducers together. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we surround that block with comments to temporarily disable this ESLint rule. Next, we conveniently wrap our entire app inside `react-redux`'s `Provider` component thanks to our `wrapApp` function, and pass our store to it.
+Let's take a moment to review this. First, we create a *store* with `createStore`. Stores are created by passing reducers to them. Here we only have one reducer, but for the sake of future scalability, we use `combineReducers` to group all of our reducers together. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we disable this ESLint rule. Next, we conveniently wrap our entire app inside `react-redux`'s `Provider` component thanks to our `wrapApp` function, and pass our store to it.
 
 🏁 You can now run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Initial reducer message" and a button. When you click the button, the message should change to "Hello!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
 
@@ -273,8 +271,7 @@ We are now going to add a second button to our app, which will trigger an AJAX c
 ```js
 // @flow
 
-/* eslint-disable import/prefer-default-export */
-
+// eslint-disable-next-line import/prefer-default-export
 export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
 ```
 
@@ -290,8 +287,6 @@ Let's actually create a test real quick to make sure this thing works well.
 - Create a `src/shared/routes.test.js` containing:
 
 ```js
-/* eslint-disable no-undef */
-
 import { helloEndpointRoute } from './routes'
 
 test('helloEndpointRoute', () => {
@@ -476,9 +471,8 @@ import helloReducer from './reducer/hello'
 import { APP_CONTAINER_SELECTOR } from '../shared/config'
 import { isProd } from '../shared/util'
 
-/* eslint-disable no-underscore-dangle */
+// eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = (isProd ? null : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose
-/* eslint-enable no-underscore-dangle */
 
 const store = createStore(combineReducers({ hello: helloReducer }),
   composeEnhancers(applyMiddleware(thunkMiddleware)))
@@ -497,9 +491,8 @@ ReactDOM.render(wrapApp(App, store), rootEl)
 if (module.hot) {
   // flow-disable-next-line
   module.hot.accept('./app', () => {
-    /* eslint-disable global-require */
+    // eslint-disable-next-line global-require
     const NextApp = require('./app').default
-    /* eslint-enable global-require */
     ReactDOM.render(wrapApp(NextApp, store), rootEl)
   })
 }
@@ -546,8 +539,6 @@ In order to isolate the logic that is specific to `action/hello.js` we are going
 - Create a `src/client/action/hello.test.js` containing:
 
 ```js
-/* eslint-disable no-undef */
-
 import fetchMock from 'fetch-mock'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
@@ -611,8 +602,6 @@ Let's now test our reducer, which is much easier.
 - Create a `src/client/reducer/hello.test.js` file containing:
 
 ```js
-/* eslint-disable no-undef */
-
 import {
   sayHello,
   sayHelloAsyncRequest,
