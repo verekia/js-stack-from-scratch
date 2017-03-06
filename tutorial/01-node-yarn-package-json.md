@@ -33,7 +33,11 @@ NPM is the default package manager for Node. It is automatically installed along
 
 Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and may soon become the package manager of choice of the JavaScript community. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --save-dev`.
 
-- Install Yarn by following the [instructions](https://yarnpkg.com/en/docs/install) for your OS.
+Install Yarn by following the [instructions](https://yarnpkg.com/en/docs/install) for your OS. I would recommend using the **Installation Script** from the *Alternatives* tab if you are on macOS or Unix, to [avoid](https://github.com/yarnpkg/yarn/issues/1505) relying on OS package managers:
+
+```sh
+curl -o- -L https://yarnpkg.com/install.sh | bash
+```
 
 ## `package.json`
 
