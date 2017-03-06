@@ -338,9 +338,9 @@ SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components,
 
 The cool React kids tend to favor React inline styles, CSS-in-JS, or CSS Modules approaches though, since they integrate really well with React and solve programmatically many [issues](https://speakerdeck.com/vjeux/react-css-in-js) that regular CSS approaches struggle with.
 
-CSS Modules work fine, but they don't leverage the power of JavaScript and its many features over CSS. They just provide encapsulation, which is fine, but React inline styles and CSS-in-JS take styling to an other level in my opinion. My personal suggestion would be to use React inline styles for common styles (that's also what you have to use for React Native), and use a CSS-in-JS library for things like `:hover` and media queries.
+CSS Modules work well, but they don't leverage the power of JavaScript and its many features over CSS. They just provide encapsulation, which is fine, but React inline styles and CSS-in-JS take styling to an other level in my opinion. My personal suggestion would be to use React inline styles for common styles (that's also what you have to use for React Native), and use a CSS-in-JS library for things like `:hover` and media queries.
 
-There are tons of CSS-in-JS libraries. Two leading ones are Aphrodite and JSS. They achieve pretty much the same thing and the syntax is basically the same. To be honest, I haven't done a comparison of the two on any significant-size project, and really just have a slight preference for JSS' API. We can discuss this topic in [this issue](https://github.com/verekia/js-stack-from-scratch/issues/139) on the repo. I would like to hear the opinion of those who have done a more thorough comparison.
+There are tons of CSS-in-JS libraries. Two leading ones are Aphrodite and JSS. They achieve pretty much the same thing and the syntax is basically the same. To be honest, I haven't done a comparison of the two on any significant-size project, and really just have a slight preference for JSS' API. We can discuss this topic in [this issue](https://github.com/verekia/js-stack-from-scratch/issues/139). I would like to hear the opinion of those who have done a more thorough comparison.
 
 ## JSS
 
