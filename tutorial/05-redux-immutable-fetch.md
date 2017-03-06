@@ -199,13 +199,12 @@ import HelloButton from './container/hello-button'
 import Message from './container/message'
 import { APP_NAME } from '../shared/config'
 
-const App = () => (
+const App = () =>
   <div>
     <h1>{APP_NAME}</h1>
     <Message />
     <HelloButton />
   </div>
-)
 
 export default App
 ```
@@ -520,7 +519,7 @@ import Message from './container/message'
 import MessageAsync from './container/message-async'
 import { APP_NAME } from '../shared/config'
 
-const App = () => (
+const App = () =>
   <div>
     <h1>{APP_NAME}</h1>
     <Message />
@@ -528,7 +527,6 @@ const App = () => (
     <MessageAsync />
     <HelloAsyncButton />
   </div>
-)
 
 export default App
 ```
