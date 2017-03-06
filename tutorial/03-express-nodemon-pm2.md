@@ -167,6 +167,8 @@ In `dev:start`, the `--ignore lib` flag is to *not* restart the server when chan
 
 We are going to use PM2 whenever we are in **production** mode.
 
+- Run `yarn add --dev pm2`
+
 In production, you want your server to be as performant as possible. `babel-node` triggers the whole Babel transpilation process for your files at each execution, which is not something you want in production. We need Babel to do all this work beforehand, and have our server serve plain old pre-compiled ES5 files.
 
 One of the main features of Babel is to take a folder of ES6 code (usually named `src`) and transpile it into a folder of ES5 code (usually named `lib`).
@@ -203,8 +205,6 @@ Let's update our `package.json` like so:
   "prepush": "yarn test"
 },
 ```
-
-- Run `yarn add --dev pm2`
 
 🏁 Run `yarn prod:build`, then run `yarn prod:start`. PM2 should show an active process. Go to `http://localhost:8000/` in your browser and you should see your app. Your terminal should show the logs, which should be "Server running on port 8000 (production).". Note that with PM2, your processes are run in the background. If you press Ctrl+C, it will kill the `pm2 logs` command, which was the last command our our `prod:start` chain, but the server should still render the page. If you want to stop the server, run `yarn prod:stop`
 
