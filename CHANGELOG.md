@@ -1,6 +1,6 @@
 # Change Log
 
-## V2 (currently v2.4.2)
+## V2 (currently v2.4.3)
 
 - Gulp is gone, replaced by NPM (Yarn) scripts.
 - Express has been added, with template strings for static HTML. Gzip compression enabled.
