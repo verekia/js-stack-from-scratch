@@ -589,6 +589,6 @@ The `<Helmet>` component doesn't actually render anything, it just injects conte
 
 🏁 Run `yarn start` and `yarn dev:wds` and navigate between pages. The title on your tab should change when you navigate, and it should also stay the same when you refresh the page. Show the source of the page to see how React Helmet sets the `title` and `meta` tags even for server-side rendering.
 
-Next section: [07 - Socket.IO](/tutorial/07-socket-io#readme)
+Next section: [07 - Socket.IO](/07-socket-io.md#readme)
 
-Back to the [previous section](/tutorial/05-redux-immutable-fetch#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/05-redux-immutable-fetch.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).

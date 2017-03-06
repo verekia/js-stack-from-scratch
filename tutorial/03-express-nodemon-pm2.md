@@ -218,6 +218,6 @@ Now that we have a `prod:build` task, it would be neat to make sure it works fin
 
 **Note**: We don't have any test here, so Jest will complain a bit. Ignore it for now.
 
-Next section: [04 - Webpack, React, HMR](/tutorial/04-webpack-react-hmr#readme)
+Next section: [04 - Webpack, React, HMR](/04-webpack-react-hmr.md#readme)
 
-Back to the [previous section](/tutorial/02-babel-es6-eslint-flow-jest-husky#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](/02-babel-es6-eslint-flow-jest-husky.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
