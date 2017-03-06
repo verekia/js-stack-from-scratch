@@ -205,7 +205,7 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 ```json
 {
   "presets": [
-    "latest",
+    "env",
     "flow",
     "react"
   ]

@@ -25,14 +25,14 @@ Babel CLI comes with [two executables](https://babeljs.io/docs/usage/cli/): `bab
 
 If you try to run `yarn start` now, it should print the correct output, but Babel is not actually doing anything. That's because we didn't give it any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
 
-- Run `yarn add --dev babel-preset-latest` to install a Babel preset package containing configurations for the most recent ECMAScript features supported by Babel.
+- Run `yarn add --dev babel-preset-env` to install a Babel preset package called `env`, which contains configurations for the most recent ECMAScript features supported by Babel.
 
-- Create a `.babelrc` file at the root of your project, which is a JSON file for your Babel configuration. Write the following to it to make Babel use the `latest` preset:
+- Create a `.babelrc` file at the root of your project, which is a JSON file for your Babel configuration. Write the following to it to make Babel use the `env` preset:
 
 ```json
 {
   "presets": [
-    "latest"
+    "env"
   ]
 }
 ```
@@ -171,7 +171,7 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
 ```json
 {
   "presets": [
-    "latest",
+    "env",
     "flow"
   ]
 }
