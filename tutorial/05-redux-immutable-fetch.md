@@ -660,6 +660,6 @@ Before each test, we initialize `helloState` with the default result of our redu
 
 🏁 Run `yarn test`. It should be all green.
 
-Next section: [06 - React Router, Server-Side Rendering, Helmet](/06-react-router-ssr-helmet.md#readme)
+Next section: [06 - React Router, Server-Side Rendering, Helmet](06-react-router-ssr-helmet.md#readme)
 
-Back to the [previous section](/04-webpack-react-hmr.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Back to the [previous section](04-webpack-react-hmr.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
