@@ -100,7 +100,7 @@ Let's update our `scripts` to implement all this, and improve some other tasks a
   "start": "yarn dev:start",
   "dev:start": "nodemon -e js,jsx --ignore lib --ignore dist --exec babel-node src/server",
   "dev:wds": "webpack-dev-server --progress",
-  "prod:build": "rimraf lib dist && babel src -d lib --ignore test.js && cross-env NODE_ENV=production webpack -p --progress",
+  "prod:build": "rimraf lib dist && babel src -d lib --ignore .test.js && cross-env NODE_ENV=production webpack -p --progress",
   "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
   "prod:stop": "pm2 delete all",
   "lint": "eslint src webpack.config.babel.js --ext .js,.jsx",
