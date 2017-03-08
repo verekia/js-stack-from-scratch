@@ -209,7 +209,7 @@ The first thing we're going to do here is to migrate most of our client code to 
 
 We have to adjust a whole bunch of imports:
 
-- In `src/client/index.jsx`, replace the 3 occurences of `'./app'` by `'../shared/app'`, and `'./reducer/hello'` by `'../shared/reducer/hello'`
+- In `src/client/index.jsx`, replace the 3 occurrences of `'./app'` by `'../shared/app'`, and `'./reducer/hello'` by `'../shared/reducer/hello'`
 
 - In `src/shared/app.jsx`, replace `'../shared/routes'` by `'./routes'` and `'../shared/config'` by `'./config'`
 
