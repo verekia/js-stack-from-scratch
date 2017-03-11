@@ -46,8 +46,6 @@ console.log(immutablePerson)
 
 - Run `yarn add immutable`
 
-**Note**: Due to the implementation of ImmutableJS, Flow does not accept importing it with `import Immutable from 'immutable'`, so use this syntax instead: `import * as Immutable from 'immutable'`. Let's cross fingers for a [fix](https://github.com/facebook/immutable-js/issues/863) soon.
-
 ## Redux
 
 > 💡 **[Redux](http://redux.js.org/)** is a library to handle the lifecycle of your application. It creates a *store*, which is the single source of truth of the state of your app at any given time.
@@ -75,7 +73,8 @@ This file exposes an *action*, `SAY_HELLO`, and its *action creator*, `sayHello`
 ```js
 // @flow
 
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
+import type { fromJS as Immut } from 'immutable'
 
 import { SAY_HELLO } from '../action/hello'
 
@@ -83,7 +82,7 @@ const initialState = Immutable.fromJS({
   message: 'Initial reducer message',
 })
 
-const helloReducer = (state: Object = initialState, action: { type: string, payload: any }) => {
+const helloReducer = (state: Immut = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
     case SAY_HELLO:
       return state.set('message', action.payload)
@@ -412,7 +411,8 @@ Let's handle these different actions in `src/client/reducer/hello.js`:
 ```js
 // @flow
 
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
+import type { fromJS as Immut } from 'immutable'
 
 import {
   SAY_HELLO,
@@ -426,7 +426,7 @@ const initialState = Immutable.fromJS({
   messageAsync: 'Initial reducer message for async call',
 })
 
-const helloReducer = (state: Object = initialState, action: { type: string, payload: any }) => {
+const helloReducer = (state: Immut = initialState, action: { type: string, payload: any }) => {
   switch (action.type) {
     case SAY_HELLO:
       return state.set('message', action.payload)
