@@ -197,7 +197,7 @@ Let's update our `package.json` like so:
   "dev:start": "nodemon --ignore lib --exec babel-node src/server",
   "prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
   "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
-  "prod:stop": "pm2 delete all",
+  "prod:stop": "pm2 delete server",
   "test": "eslint src && flow && jest --coverage",
   "precommit": "yarn test",
   "prepush": "yarn test"
