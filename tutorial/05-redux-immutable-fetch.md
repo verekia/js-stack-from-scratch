@@ -44,7 +44,7 @@ console.log(immutablePerson)
  */
 ```
 
-- Run `yarn add immutable`
+- Run `yarn add immutable@4.0.0-rc.2`
 
 ## Redux
 
@@ -129,7 +129,7 @@ Button.propTypes = {
 export default Button
 ```
 
-**Note**: You can see another case of destructuring with Flow annotations here. If `props` contains `handleClick`, instead of writing `const Button = (props) => { props.handleClick() }`, we write `const Button = ({ handleClick }: { handleClick: Function }) => { handleClick() }`. The syntax is a bit cumbersome but worth it.
+**Note**: You can see a case of Flow *type alias* here. We define the `Props` type before annotating our component's destructured `props` with it.
 
 - Create a `src/client/component/message.jsx` file containing:
 
@@ -545,7 +545,7 @@ In order to isolate the logic that is specific to `action/hello.js` we are going
 
 - Run `yarn add --dev redux-mock-store fetch-mock`
 
-- Create a `src/client/action/hello.test.js` containing:
+- Create a `src/client/action/hello.test.js` file containing:
 
 ```js
 import fetchMock from 'fetch-mock'
