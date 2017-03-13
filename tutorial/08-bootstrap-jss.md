@@ -427,6 +427,10 @@ const styles = {
       color: 'red',
     },
   },
+  specialButton: {
+    composes: ['btn', 'btn-primary'],
+    backgroundColor: 'limegreen',
+  },
 }
 
 const HomePage = ({ classes }: { classes: Object }) =>
@@ -435,6 +439,7 @@ const HomePage = ({ classes }: { classes: Object }) =>
     <h3 className="mb-3">JSS</h3>
     <p className={classes.hoverMe}>Hover me.</p>
     <p className={classes.resizeMe}>Resize the window.</p>
+    <button className={classes.specialButton}>Composition</button>
   </div>
   // [...]
 
@@ -447,7 +452,7 @@ Unlike React inline styles, JSS uses classes. You pass styles to `injectSheet` a
 
 **Note**: In production mode, the `data-meta` is obfuscated. Sweet!
 
-If you hover over the "Hover me" label, it should turn red. If you resize your browser window to be narrower than 800px, the "Resize your window" label should turn red.
+If you hover over the "Hover me" label, it should turn red. If you resize your browser window to be narrower than 800px, the "Resize your window" label should turn red. The green button is extending Bootstrap's CSS classes using JSS' `composes` property.
 
 Next section: [09 - Travis, Coveralls, Heroku](09-travis-coveralls-heroku.md#readme)
 
