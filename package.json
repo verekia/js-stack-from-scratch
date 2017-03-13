@@ -1,6 +1,6 @@
 {
   "name": "js-stack-from-scratch",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "test": "node mdlint.js"

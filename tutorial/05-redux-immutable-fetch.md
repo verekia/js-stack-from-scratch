@@ -113,7 +113,12 @@ In this section we are going to create *Components* and *Containers*.
 
 import React, { PropTypes } from 'react'
 
-const Button = ({ label, handleClick }: { label: string, handleClick: Function }) =>
+type Props = {
+  label: string,
+  handleClick: Function,
+}
+
+const Button = ({ label, handleClick }: Props) =>
   <button onClick={handleClick}>{label}</button>
 
 Button.propTypes = {
@@ -133,7 +138,11 @@ export default Button
 
 import React, { PropTypes } from 'react'
 
-const Message = ({ message }: { message: string }) =>
+type Props = {
+  message: string,
+}
+
+const Message = ({ message }: Props) =>
   <p>{message}</p>
 
 Message.propTypes = {

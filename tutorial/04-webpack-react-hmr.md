@@ -59,9 +59,9 @@ export default {
     './src/client',
   ],
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist/js'),
-    publicPath: `http://localhost:${WDS_PORT}/dist/js/`,
+    filename: 'js/bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: isProd ? '/static/' : `http://localhost:${WDS_PORT}/dist/`,
   },
   module: {
     rules: [
