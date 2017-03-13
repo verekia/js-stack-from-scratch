@@ -303,7 +303,7 @@ Here is our controller. It would typically make business logic and database call
 ```js
 // @flow
 
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 
@@ -408,7 +408,7 @@ export default renderApp
 - Edit `src/client/index.jsx` to use that preloaded state:
 
 ```js
-import * as Immutable from 'immutable'
+import Immutable from 'immutable'
 // [...]
 
 /* eslint-disable no-underscore-dangle */
