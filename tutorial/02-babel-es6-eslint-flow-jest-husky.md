@@ -325,6 +325,8 @@ All we have to do is to create two new tasks in `scripts`, `precommit` and `prep
 
 🏁 If you now try to commit or push your code, it should automatically run the `test` task.
 
+If it does not work, it is possible that `yarn add --dev husky` did not install the Git Hooks properly. I never encountered this issue but it happens for some people. If that's your case, run `yarn add --dev husky --force`, and maybe post a note in [this issue](https://github.com/typicode/husky/issues/84) to describe your case.
+
 **Note**: If you are pushing right after a commit, you can use `git push --no-verify` to avoid running all the tests again.
 
 Next section: [03 - Express, Nodemon, PM2](03-express-nodemon-pm2.md#readme)
