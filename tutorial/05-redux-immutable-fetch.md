@@ -94,7 +94,7 @@ const helloReducer = (state: Immut = initialState, action: { type: string, paylo
 export default helloReducer
 ```
 
-In this file we initialize the state of our reducer with an Immutable Map containing one property, `message`, set to `Initial reducer message`. The `helloReducer` handles `SAY_HELLO` actions by simply setting the new `message` with the action payload. The Flow annotation for `action` destructures it into a `type` and a `payload`. The `payload` can be of `any` type. It looks funky if you've never seen this before, but it remains pretty understandable. Note the usage of `Immutable.fromJS()` and `set()` as seen before.
+In this file we initialize the state of our reducer with an Immutable Map containing one property, `message`, set to `Initial reducer message`. The `helloReducer` handles `SAY_HELLO` actions by simply setting the new `message` with the action payload. The Flow annotation for `action` destructures it into a `type` and a `payload`. The `payload` can be of `any` type. It looks funky if you've never seen this before, but it remains pretty understandable. For the type of `state`, we use the `import type` Flow instruction to get the return type of `fromJS`. We rename it to `Immut` for clarity, because `state: fromJS` would be pretty confusing. The `import type` line will get stripped out like any other Flow annotation. Note the usage of `Immutable.fromJS()` and `set()` as seen before.
 
 ## React-Redux
 
