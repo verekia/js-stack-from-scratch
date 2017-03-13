@@ -21,7 +21,9 @@ For this reason, I'm going to make the tradeoff of integrating the official rele
 
 - Delete `public/css/style.css`
 
-- Download the latest official release from Bootstrap and put `bootstrap.min.css` and `bootstrap.min.css.map` in the `public/css` folder.
+- Run `yarn add bootstrap@4.0.0-alpha.6`
+
+- Copy `bootstrap.min.css` and `bootstrap.min.css.map` from `node_modules/bootstrap/dist` to your `public/css` folder.
 
 - Edit `src/server/render-app.jsx` like so:
 
@@ -33,7 +35,7 @@ For this reason, I'm going to make the tradeoff of integrating the official rele
 
 Now that we have Bootstrap's styles loaded on our page, we need the JavaScript behavior for the components.
 
-- Run `yarn add jquery tether bootstrap@4.0.0-alpha.6`
+- Run `yarn add jquery tether`
 
 - Edit `src/client/index.jsx` like so:
 
