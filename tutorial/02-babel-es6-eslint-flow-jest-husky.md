@@ -152,6 +152,36 @@ I recommend reading the [ESLint documentation about semicolons](http://eslint.or
 
 I am aware that some of you will want to keep using semicolons, which will make the code provided in this tutorial inconvenient. If you are using this tutorial just for learning, I'm sure it will remain bearable to learn without semicolons, until going back to using them on your real projects. If you want to use the code provided in this tutorial as a boilerplate though, it will require a bit of rewriting, which should be pretty quick with ESLint set to enforce semicolons to guide you through the process. I apologize if you're in such case.
 
+### Compat
+
+[Compat](https://github.com/amilajack/eslint-plugin-compat) is a neat ESLint plugin that warns you if you use some JavaScript APIs that are not available in the browsers you need to support. It uses [Browserslist](https://github.com/ai/browserslist), which relies on [Can I Use](http://caniuse.com/).
+
+- Run `yarn add --dev eslint-plugin-compat`
+
+- Add the following to your `package.json`, to indicate that we want to support browsers that have more than 1% market share:
+
+```json
+"browserslist": ["> 1%"],
+```
+
+- Edit your `.eslintrc.json` file like so:
+
+```json
+{
+  "extends": "airbnb",
+  "plugins": [
+    "compat"
+  ],
+  "rules": {
+    "semi": [2, "never"],
+    "no-unexpected-multiline": 2,
+    "compat/compat": 2
+  }
+}
+```
+
+You can try the plugin by using `navigator.serviceWorker` or `fetch` in your code for instance, which should raise an ESLint warning.
+
 ### ESLint in your editor
 
 This chapter set you up with ESLint in the terminal, which is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE for immediate feedback. Do NOT use your IDE's native ES6 linting. Configure it so the binary it uses for linting is the one in your `node_modules` folder instead. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get some generic ES6 linting.
@@ -186,11 +216,13 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
     "plugin:flowtype/recommended"
   ],
   "plugins": [
-    "flowtype"
+    "flowtype",
+    "compat"
   ],
   "rules": {
     "semi": [2, "never"],
-    "no-unexpected-multiline": 2
+    "no-unexpected-multiline": 2,
+    "compat/compat": 2
   }
 }
 ```

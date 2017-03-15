@@ -361,6 +361,16 @@ We are going to use `fetch` to make calls to the server from the client. `fetch`
 
 - Run `yarn add isomorphic-fetch`
 
+Since we're using `eslint-plugin-compat`, we need to indicate that we are using a polyfill for `fetch` to not get warnings from using it.
+
+- Add the following to your `.eslintrc.json` file:
+
+```json
+"settings": {
+  "polyfills": ["fetch"]
+},
+```
+
 ### 3 asynchronous actions
 
 `sayHelloAsync` is not going to be a regular action. Asynchronous actions are usually split into 3 actions, which trigger 3 different states: a *request* action (or "loading"), a *success* action, and a *failure* action.
