@@ -111,7 +111,7 @@ In this section we are going to create *Components* and *Containers*.
 ```js
 // @flow
 
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 type Props = {
   label: string,
@@ -120,11 +120,6 @@ type Props = {
 
 const Button = ({ label, handleClick }: Props) =>
   <button onClick={handleClick}>{label}</button>
-
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
-}
 
 export default Button
 ```
@@ -136,7 +131,7 @@ export default Button
 ```js
 // @flow
 
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 type Props = {
   message: string,
@@ -144,10 +139,6 @@ type Props = {
 
 const Message = ({ message }: Props) =>
   <p>{message}</p>
-
-Message.propTypes = {
-  message: PropTypes.string.isRequired,
-}
 
 export default Message
 ```

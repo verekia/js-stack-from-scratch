@@ -199,9 +199,9 @@ const App = () => <h1>Hello React!</h1>
 export default App
 ```
 
-Since we use the JSX syntax here, we have to tell Babel that it needs to transform it as well.
+Since we use the JSX syntax here, we have to tell Babel that it needs to transform it with the `babel-preset-react` preset. And while we're at it, we're also going to add a Babel plugin called `flow-react-proptypes` which automatically generates PropTypes from Flow annotations for your React components.
 
-- Run `yarn add --dev babel-preset-react` and add `react` to your `.babelrc` file like so:
+- Run `yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes` and edit your `.babelrc` file like so:
 
 ```json
 {
@@ -209,6 +209,9 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
     "env",
     "flow",
     "react"
+  ],
+  "plugins": [
+    "flow-react-proptypes"
   ]
 }
 ```
