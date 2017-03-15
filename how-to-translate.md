@@ -35,7 +35,7 @@ Since I want to reward you for your good work as much as possible, you can put a
 - After your original one-shot translation, if you want to update your repo with the latest change from the main English repo, [sync your fork](https://help.github.com/articles/syncing-a-fork/) with my repo. To make it easy to see what changed since your initial translation, you can use Github's feature to [compare commits](https://help.github.com/articles/comparing-commits-across-time/#comparing-commits). Set the **base** to the last commit from the English repo you used to translate, and compare it to **master**, like so:
 
 <!-- markdownlint-disable MD034 -->
-https://github.com/verekia/js-stack-from-scratch/compare/9b3852fcdf8f3000e7513abfcb26e0e58b33b230...master
+https://github.com/verekia/js-stack-from-scratch/compare/c65dfa65d02c21063d94f0955de90947ba5273ad...master
 <!-- markdownlint-enable MD034 -->
 
 That should give you a easy-to-read diff to see exactly what changed in `README.md` files since your translation!
