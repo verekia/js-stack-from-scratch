@@ -1,13 +1,13 @@
 {
   "name": "js-stack-from-scratch",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "description": "JavaScript Stack from Scratch - Step-by-step tutorial to build a modern JavaScript stack",
   "scripts": {
     "test": "node mdlint.js"
   },
   "devDependencies": {
     "glob": "^7.1.1",
-    "markdownlint": "^0.3.0"
+    "markdownlint": "^0.4.0"
   },
   "repository": "verekia/js-stack-from-scratch",
   "author": "Jonathan Verrecchia - @verekia",
