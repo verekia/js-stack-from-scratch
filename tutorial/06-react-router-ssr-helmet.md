@@ -442,7 +442,7 @@ import Helmet from 'react-helmet'
 const renderApp = (/* [...] */) => {
 
   const appHtml = ReactDOMServer.renderToString(/* [...] */)
-  const head = Helmet.rewind()
+  const head = Helmet.rewind() // must come AFTER appHtml!
 
   return (
     `<!doctype html>
