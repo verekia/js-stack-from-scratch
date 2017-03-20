@@ -442,7 +442,7 @@ import Helmet from 'react-helmet'
 const renderApp = (/* [...] */) => {
 
   const appHtml = ReactDOMServer.renderToString(/* [...] */)
-  const head = Helmet.rewind() // must come AFTER appHtml!
+  const head = Helmet.rewind()
 
   return (
     `<!doctype html>
@@ -458,7 +458,7 @@ const renderApp = (/* [...] */) => {
 }
 ```
 
-React Helmet uses [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind` to pull out some data from the rendering of our app, which will soon contain some `<Helmet />` components. Those `<Helmet />` components are where we set the `title` and other `head` details for each page.
+React Helmet uses [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind` to pull out some data from the rendering of our app, which will soon contain some `<Helmet />` components. Those `<Helmet />` components are where we set the `title` and other `head` details for each page. Note that `Helmet.rewind()` *must* come after `ReactDOMServer.renderToString()`.
 
 - Edit `src/shared/app.jsx` like so:
 
