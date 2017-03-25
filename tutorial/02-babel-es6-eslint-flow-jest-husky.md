@@ -128,7 +128,7 @@ We will use this standard `test` task to run a chain of all the commands that va
 
 - Run `yarn test`, and you should see a whole bunch of errors for missing semicolons, and a warning for using `console.log()` in `index.js`. Add `/* eslint-disable no-console */` at the top of our `index.js` file to allow the use of `console` in this file.
 
-**Note**: If you're on Windows, make sure you configure your editor and Git to use Unix LF line endings and not Windows CRLF. If your project is only used in Windows environments, you can add `"linebreak-style": [2, "windows"]` in ESLint's `rules` array (see the example below) to enforce CRLF instead.
+**Note**: If you're on Windows, make sure you configure your editor and Git to use Unix LF line endings and not Windows CRLF as well as to insert an end of file newline character. If your project is only used in Windows environments, you can add `"linebreak-style": [2, "windows"]` in ESLint's `rules` array (see the example below) to enforce CRLF instead.
 
 ### Semicolons
 
