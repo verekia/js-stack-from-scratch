@@ -175,7 +175,7 @@ This `lib` folder being auto-generated, it's a good practice to clean it up befo
 
 - Run `yarn add --dev rimraf`
 
-Let's add the following `prod:build` task to our `package.json`:
+Let's add the following `prod:build` task to our `scripts`:
 
 ```json
 "prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
