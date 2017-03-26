@@ -122,7 +122,7 @@ Update the `scripts` of your `package.json` to include a new `test` task:
 },
 ```
 
-Here we just tell ESLint that want to lint all JavaScript files under the `src` folder.
+Here we just tell ESLint that we want it to lint all JavaScript files under the `src` folder.
 
 We will use this standard `test` task to run a chain of all the commands that validate our code, whether it's linting, type checking, or unit testing.
 
