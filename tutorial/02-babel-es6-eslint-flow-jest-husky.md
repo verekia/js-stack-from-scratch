@@ -319,20 +319,25 @@ test('Dog.bark', () => {
 })
 ```
 
-- Add `jest` to your `test` script:
+- Add `jest` to your `test` script and configure jest coverage to monitor any js file in the src directory/subdirectories:
 
 ```json
 "scripts": {
   "start": "babel-node src",
   "test": "eslint src && flow && jest --coverage"
 },
+  "jest":{
+  "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*js"
+    ]
+}
 ```
-
 The `--coverage` flag makes Jest generate coverage data for your tests automatically. This is useful to see which parts of your codebase lack testing. It writes this data into a `coverage` folder.
 
 - Add `/coverage/` to your `.gitignore`
 
-🏁 Run `yarn test`. After linting and type checking, it should run Jest tests and show a coverage table. Everything should be green!
+🏁 Run `yarn test`. After linting and type checking, it should run Jest tests and show a coverage table. Files that pass will be shown in green. Notice index.js is red, this is jest's coverage working for us as we have not created a test file for index.js.
 
 ## Git Hooks with Husky
 
