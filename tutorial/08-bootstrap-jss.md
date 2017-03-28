@@ -23,7 +23,7 @@ For this reason, I'm going to make the tradeoff of integrating the official rele
 
 - Run `yarn add bootstrap@4.0.0-alpha.6`
 
-- Copy `bootstrap.min.css` and `bootstrap.min.css.map` from `node_modules/bootstrap/dist` to your `public/css` folder.
+- Copy `bootstrap.min.css` and `bootstrap.min.css.map` from `node_modules/bootstrap/dist/css` to your `public/css` folder.
 
 - Edit `src/server/render-app.jsx` like so:
 
