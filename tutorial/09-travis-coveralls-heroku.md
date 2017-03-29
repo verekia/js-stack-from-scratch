@@ -61,7 +61,7 @@ This tutorial is not sponsored in any way by Heroku, but Heroku being one hell o
 
 ### Web setup
 
-- If that's not the done yet, install the [Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs) and log in.
+- If that's not done yet, install the [Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-nodejs) and log in.
 
 - Go to your [Heroku Dashboard](https://dashboard.heroku.com/) and create 2 apps, one called `your-project` and one called `your-project-staging` for instance.
 
