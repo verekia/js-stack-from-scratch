@@ -63,6 +63,7 @@ If you want to add your translation, please read the [translation recommendation
 ### V2
 
 - [Italian](https://github.com/fbertone/guida-javascript-moderno) by [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
+- [Portuguese](https://github.com/nurycaroline/js-stack-from-scratch) by [Nurielly Caroline](https://github.com/nurycaroline)
 
 Check out the [ongoing translations](https://github.com/verekia/js-stack-from-scratch/issues/147).
 
