@@ -440,7 +440,7 @@ I purposely made you write `FIX ME` in the title to highlight the fact that even
 import Helmet from 'react-helmet'
 // [...]
 const renderApp = (/* [...] */) => {
-
+  // [...]
   const appHtml = ReactDOMServer.renderToString(/* [...] */)
   const head = Helmet.rewind()
 
