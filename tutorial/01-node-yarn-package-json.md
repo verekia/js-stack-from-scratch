@@ -140,7 +140,7 @@ console.log(redHexa)
 
 **Dependencies** са библиотеки, от които има нужда вашето приложение, за да функционира (React, Redux, Lodash, jQuery, т.н.). Инсталираме ги чрез изпълнението на: `yarn add [package]`.
 
-**Dev Dependencies** са библиотеки използвани по време на разработката или "билдването" на вашето приложение (Webpack, SASS, linters, testing frameworks, т.н.). Тях инсталираме чрез изпълнението на: `yarn add --dev [package]`.
+**Dev Dependencies** са библиотеки използвани по време на разработката или "билдването" (довеждането му в краен вид за употреба от крайния потребител) на вашето приложение (Webpack, SASS, linters, testing frameworks, т.н.). Тях инсталираме чрез изпълнението на: `yarn add --dev [package]`.
 
 Следваща глава: [02 - Babel, ES6, ESLint, Flow, Jest, Husky](02-babel-es6-eslint-flow-jest-husky.md#readme)
 
