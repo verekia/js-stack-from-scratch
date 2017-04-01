@@ -1,39 +1,39 @@
 # 01 - Node, Yarn, and `package.json`
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/01-node-yarn-package-json).
+Кода за тази глава [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/01-node-yarn-package-json).
 
-In this section we will set up Node, Yarn, a basic `package.json` file, and try a package.
+В тази глава ще започнем с настройка на Node, Yarn, основен `package.json` файл и ще екпериментираме с един пакет (package).
 
 ## Node
 
-> 💡 **[Node.js](https://nodejs.org/)** is a JavaScript runtime environment. It is mostly used for Back-End development, but also for general scripting. In the context of Front-End development, it can be used to perform a whole bunch of tasks like linting, testing, and assembling files.
+> 💡 **[Node.js](https://nodejs.org/)** е среда за изпълнение на JavaScript. Главно се използва за бекенд разработки, но също така може да бъде използван за всякакви други. В контекста на фронтенд разбработването, може да бъде използван за изпълнението на цял набор от задачи - линтинг (linting), тестване (testing), сглобяване на файлове и т.н.
 
-We will use Node for basically everything in this tutorial, so you're going to need it. Head to the [download page](https://nodejs.org/en/download/current/) for **macOS** or **Windows** binaries, or the [package manager installations page](https://nodejs.org/en/download/package-manager/) for Linux distributions.
+В това ръководство ще използваме Node за почти всичко, така че ще ви трябва. За да го свалите отидете [тук](https://nodejs.org/en/download/current/) за **макОС** или **Уиндоус**, или използвайте [package manager installations page](https://nodejs.org/en/download/package-manager/) за дистрибуции на Линукс.
 
-For instance, on **Ubuntu / Debian**, you would run the following commands to install Node:
+Например, на **Ubuntu / Debian**, можете да използвате следната команда, за да инсталирате Node:
 
 ```sh
 curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 
-You want any version of Node > 6.5.0.
+Ще имате нужда от версии на Node > 6.5.0.
 
-## Node Version Management Tools
+## Инструменти за управление на версиите на Node
 
-If you need the flexibility to use multiple versions of Node, check out [NVM](https://github.com/creationix/nvm) or [tj/n](https://github.com/tj/n).
+Ако имате нужда да бъдете гъвкави и да можете да използвате различни версии на Node, прочетете [тук](https://github.com/creationix/nvm) или [тук](https://github.com/tj/n).
 
 ## NPM
 
-NPM is the default package manager for Node. It is automatically installed alongside with Node. Package managers are used to install and manage packages (modules of code that you or someone else wrote). We are going to use a lot of packages in this tutorial, but we'll use Yarn, another package manager.
+NPM е основния мениджър за управление на пакети за Node. Инсталира се автоматично с инсталацията на Node. Мениджърите за управление на пакети се използват за инсталиране и управление на пакети (модули от код, написани от вас или някой друг). Ще използваме много пакети в това ръководство, но ще използваме друг пакетен мениджър, който се нарича Yarn.
 
 ## Yarn
 
-> 💡 **[Yarn](https://yarnpkg.com/)** is a Node.js package manager which is much faster than NPM, has offline support, and fetches dependencies [more predictably](https://yarnpkg.com/en/docs/yarn-lock).
+> 💡 **[Yarn](https://yarnpkg.com/)** е друг Node пакетен мениджър, който е много по-бърз от NPM, има офлайн подръжка и си извлича зависимостите (dependencies) [по-предсказуемо](https://yarnpkg.com/en/docs/yarn-lock).
 
-Since it [came out](https://code.facebook.com/posts/1840075619545360) in October 2016, it received a very quick adoption and may soon become the package manager of choice of the JavaScript community. If you want to stick to NPM you can simply replace all `yarn add` and `yarn add --dev` commands of this tutorial by `npm install --save` and `npm install --save-dev`.
+След като [излезе](https://code.facebook.com/posts/1840075619545360) през октомври 2016, получи доста добро приемане и скоро може да се превърне в избора за пакетен мениджър на JavaScript обществото. Ако искате да продължите да използвате NPM можете просто да замествате всички `yarn add` и `yarn add --dev` команди в това ръководство с `npm install --save` И `npm install --save-dev`.
 
-Install Yarn by following the [instructions](https://yarnpkg.com/en/docs/install) for your OS. I would recommend using the **Installation Script** from the *Alternatives* tab if you are on macOS or Unix, to [avoid](https://github.com/yarnpkg/yarn/issues/1505) relying on other package managers:
+Инсталирайте Yarn, следвайки следните [инструкчии](https://yarnpkg.com/en/docs/install) за вашата операционна система. Аз препоръчвам използването на  **инсталационния скрипт** от *Alternatives* таба ако сте с macOS или Unix, за да [не трябва](https://github.com/yarnpkg/yarn/issues/1505) да разчитате на други пакетни мениджъри:
 
 ```sh
 curl -o- -L https://yarnpkg.com/install.sh | bash
