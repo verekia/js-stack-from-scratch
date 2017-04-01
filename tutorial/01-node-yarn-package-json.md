@@ -1,6 +1,6 @@
 # 01 - Node, Yarn, and `package.json`
 
-Кода за тази глава [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/01-node-yarn-package-json).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/01-node-yarn-package-json).
 
 В тази глава ще започнем с настройка на Node, Yarn, основен `package.json` файл и ще екпериментираме с един пакет (package).
 
