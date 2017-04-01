@@ -22,17 +22,17 @@
 
 Това ръководство е съсредоточено главно върху използването на комплект от технологии необходими за разработка на съвременни JavaScript базирани приложения. Изискват се някои базови познания по програмиране и основни такива конкретно по JavaScript. **Основният фокус е хвърлен върху "свързването" на инструментите (tools) за съвместна работа** и даване на **възможно най-простия пример** за всеки един инструмент. Можете да гледате на това ръководство като на *начин за написване на ваше собствено скеле или шаблон* за такова приложение. Тъй като целта на това ръководство е "сглобяването" на различни инструменти за съвместна работа, няма да навлизам в подробности за работата на всеки един от тях. Ако искате да добиете по-задълбочени познания за някой от тях, можете да потърсите други ръководства или да прочетете документацията им.
 
-You don't need to use this entire stack if you build a simple web page with a few JS interactions of course (a combination of Browserify/Webpack + Babel + jQuery is enough to be able to write ES6 code in different files), but if you want to build a web app that scales, and need help setting things up, this tutorial will work great for you.
+Разбира се, няма нужда да използвате целия този набор от инструменти ако правите простичка уеб страница с няколко JS интеракции (комбинация от конфигурирани Browserify/Webpack + Babel + jQuery ще бъде достатъчна за писане на [ES6](http://es6-features.org/) код в различни файлове), но ако искате да изградите голямо уеб приложение, което да може да бъде променяно и подобрявано сравнително лесно, и имате нужда от помощ при първоначалната настройка на нещата, то това ръководство ще ви бъде от ползва.
 
-A big chunk of the stack described in this tutorial uses React. If you are beginning and just want to learn React, [create-react-app](https://github.com/facebookincubator/create-react-app) will get you up and running with a React environment very quickly with a pre-made configuration. I would for instance recommend this approach to someone who arrives in a team that's using React and needs to catch up with a learning playground. In this tutorial you won't use a pre-made configuration, because I want you to understand everything that's happening under the hood.
+Голяма част от нещата описани в това ръководство използват [React](https://facebook.github.io/react/). Ако сте начинаещ и просто искате да научите React, [create-react-app](https://github.com/facebookincubator/create-react-app) ще ви позволи да започнете много бързо с предварително направена конфигурация. Аз, например, бих препоръчал този подход на някой, който току що влиза в екип, който използва React и има нужда от бързо наваксване. В това ръководство няма да използваме предварително готови конфигуции, тъй като искам да разберете как се случва всичко из основи.
 
-Code examples are available for each chapter, and you can run them all with `yarn && yarn start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** though.
+За всяка от главите има примери с код, които могат да бъдат стартирани с `yarn && yarn start`. Аз препоръчвам да пишете всичко от нулата, следвайки **стъпка по стъпка интрукциите**.
 
-Final code available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate), and in the [releases](https://github.com/verekia/js-stack-from-scratch/releases). There is a [live demo](https://js-stack.herokuapp.com/) too.
 
-Works on Linux, macOS, and Windows.
+Финалната версия на кода може да бъде намерена [тук](https://github.com/verekia/js-stack-boilerplate) и [тук](https://github.com/verekia/js-stack-from-scratch/releases). Работеща версия може да бъде видяна  [тук](https://js-stack.herokuapp.com/).
+Работи на Linux, macOS и Windows.
 
-## Table of contents
+## Съдържание
 
 [01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json.md#readme)
 
@@ -52,19 +52,19 @@ Works on Linux, macOS, and Windows.
 
 [09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku.md#readme)
 
-## Coming up next
+## Какво следва
 
 Setting up your editor (Atom first), MongoDB, Progressive Web App, E2E testing.
 
-## Translations
+## Преводи
 
-If you want to add your translation, please read the [translation recommendations](/how-to-translate.md) to get started!
+Ако искате да добавите ваш превод, моля прочетете [препоръките](/how-to-translate.md), за да започнете!
 
 ### V2
 
 - [Italian](https://github.com/fbertone/guida-javascript-moderno) by [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
 
-Check out the [ongoing translations](https://github.com/verekia/js-stack-from-scratch/issues/147).
+Текущите преводи можете да видите [тук](https://github.com/verekia/js-stack-from-scratch/issues/147).
 
 ### V1
 
@@ -76,6 +76,6 @@ Check out the [ongoing translations](https://github.com/verekia/js-stack-from-sc
 
 ## Credits
 
-Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
+Създадено от [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
-License: MIT
+Лиценз: MIT
