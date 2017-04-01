@@ -1,27 +1,28 @@
 # 02 - Babel, ES6, ESLint, Flow, Jest, and Husky
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/02-babel-es6-eslint-flow-jest-husky).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/02-babel-es6-eslint-flow-jest-husky).
 
-We're now going to use some ES6 syntax, which is a great improvement over the "old" ES5 syntax. All browsers and JS environments understand ES5 well, but not ES6. That's where a tool called Babel comes to the rescue!
+Тук ще използваме ES6 синтаксис, надграждащ "добрия стар" ES5 синтаксис (познат на всички просто като JavaScript). Всички браузъри и JS среди разбират и приемат добре ES5, но не и ES6. Тук на помощ идва инструмент наречен Babel!
 
 ## Babel
 
-> 💡 **[Babel](https://babeljs.io/)** is a compiler that transforms ES6 code (and other things like React's JSX syntax) into ES5 code. It is very modular and can be used in tons of different [environments](https://babeljs.io/docs/setup/). It is by far the preferred ES5 compiler of the React community.
+> 💡 **[Babel](https://babeljs.io/)** е компилатор, който трансформира ES6 код (и дпуги неща като например React's JSX синтаксис) в ES5 код. Предимство е, че е доста модулярен и може да бъде използван в много различни [среди](https://babeljs.io/docs/setup/). Засега това е предпочитания ES5 компилатор от React обществото.
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
+- Преместете вашия `index.js` файл в нова папка наречена `src`. Това е мястото където ще пишеше вашия ES6 код. Премахнете кода, отнасящ се за `color` пакета в `index.js` файла и го заместете с:
 
 ```js
 const str = 'ES6'
 console.log(`Hello ${str}`)
 ```
 
-We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`. Note that template strings are created using **backquotes**.
+Тук използваме т.нар. *template string*, което е ново свойство, предоставено от ES6, което ни позволява директно инжектиране на променливи в стринг, без да има нужда от конкатенация, използвайки `${}`. Обърнете внимание, че това се реализира чрез използване на задни кавички **backquotes**.
 
-- Run `yarn add --dev babel-cli` to install the CLI interface for Babel.
+- Изпълнете `yarn add --dev babel-cli`, за да инсталирате CLI интерфейса за Babel.
 
-Babel CLI comes with [two executables](https://babeljs.io/docs/usage/cli/): `babel`, which compiles ES6 files into new ES5 files, and `babel-node`, which you can use to replace your call to the `node` binary and execute ES6 files directly on the fly. `babel-node` is great for development but it is heavy and not meant for production. In this chapter we are going to use `babel-node` to set up the development environment, and in the next one we'll use `babel` to build ES5 files for production.
+Babel CLI предоставя [два модула](https://babeljs.io/docs/usage/cli/): `babel`, който компилира 
+ES6 файлове до ES5 такива и `babel-node`, който можете да използвате, за да заместите извикванията към `node` и да изпълнявате директно ES6 файлове. `babel-node` е чудесен за разработка, но е прекалено тежък и не е предвиден за производствена среда (*production*). В тази глава ще използваме `babel-node` за настройка на средата за разработка, а в следващата ще използваме `babel` за приготвянето на ES5 файловете за *production*.
 
-- In `package.json`, in your `start` script, replace `node .` by `babel-node src` (`index.js` is the default file Node looks for, which is why we can omit `index.js`).
+- В `package.json`, в `start` скрипта, заместете `node .` с `babel-node src` (`index.js` е файла по подразбиране, който Node търси, поради което можем да пропуснем изричното споменаване на `index.js`).
 
 If you try to run `yarn start` now, it should print the correct output, but Babel is not actually doing anything. That's because we didn't give it any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
 
