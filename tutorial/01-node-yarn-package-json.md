@@ -100,13 +100,13 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 
 `.DS_Store` файловете са автоматично генерирани файлове от макОС, които не трябва никога да поставяте във вашето репозитори.
 
-`npm-debug.log` and `yarn-error.log` are files that are created when your package manager encounters an error, we don't want them versioned in our repository.
+`npm-debug.log` и `yarn-error.log` са файлове, които се създават когато възникне грешка при работата с вашия пакетен мениджър, тях също не бива да ги поставяме в репозиторито си, тъй като нямаме нужда от следене и контрол на версиите им.
 
-## Installing and using a package
+## Инсталиране и използване на пакет
 
-In this section we will install and use a package. A "package" is simply a piece of code that someone else wrote, and that you can use in your own code. It can be anything. Here, we're going to try a package that helps you manipulate colors for instance.
+В тази глава ще инсталираме и използваме един пакет. "Пакет" (а "package") е просто парче код, който някой е написал и вие можете да използвате в вашия код. Пакетите могат да бъдат всякакви. Тук ще използваме пакет, който ви помага да манипулирате цветовете например.
 
-- Install the community-made package called `color` by running `yarn add color`
+- Инсталирайте пакета `color` чрез изпълнение на следната команта: `yarn add color`
 
 Open `package.json` to see how Yarn automatically added `color` in  `dependencies`.
 
