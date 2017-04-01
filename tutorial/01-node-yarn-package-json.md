@@ -41,12 +41,12 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 
 ## `package.json`
 
-> 💡 **[package.json](https://yarnpkg.com/en/docs/package-json)** is the file used to describe and configure your JavaScript project. It contains general information (your project name, version, contributors, license, etc), configuration options for tools you use, and even a section to run *tasks*.
+> 💡 **[package.json](https://yarnpkg.com/en/docs/package-json)** е файлът, който се използва за описване и конфигуриране на вашият JavaScript проект. Съдържа обща информация (името на проекта ви, версия, участници в проекта, лиценз и т.н.), конфигурационни настройки за инструментите, които използвате и дори секция за стартиране на задачи (*tasks*).
 
-- Create a new folder to work in, and `cd` in it.
-- Run `yarn init` and answer the questions (`yarn init -y` to skip all questions), to generate a `package.json` file automatically.
+- Създайте нова папка, в която ще работите и влезте в нея с командата `cd`. 
+- Стартирайте `yarn init` и отговорете на въпросите (`yarn init -y` ако искате да прескочите частта с въпросите), за да генерирате `package.json` файл автоматично.
 
-Here is the basic `package.json` I'll use in this tutorial:
+По-долу можете да видите простичък `package.json` файл, който ще използвам в това ръководство:
 
 ```json
 {
@@ -58,17 +58,17 @@ Here is the basic `package.json` I'll use in this tutorial:
 
 ## Hello World
 
-- Create an `index.js` file containing `console.log('Hello world')`
+- Създайте `index.js` файл, който да съдържа `console.log('Hello world')`
 
-🏁 Run `node .` in this folder (`index.js` is the default file Node looks for in a folder). It should print "Hello world".
+🏁 Изпълнете `node .` в папката (`index.js` е файла по подразбиране, за който Node търси в една папка/директория). Това трябва да отпечата "Hello world".
 
-**Note**: See that 🏁 racing flag emoji? I will use it every time you reach a **checkpoint**. We are sometimes going to make a lot of changes in a row, and your code may not work until you reach the next checkpoint.
+**Забележка**: Виждате ли онази 🏁 флаг иконка? Ще я използвам всеки път когато достигнете до ключов момент в текущото ръковоство. Понякога ще пишем много код (и ще правим много промени на веднъж), който код ще можете да изпълните едва когато достигнете до следващ такъв ключов момент, обозначен с такава иконка.
 
 ## `start` script
 
-Running `node .` to execute our program is a bit too low-level. We are going to use an NPM/Yarn script to trigger the execution of that code instead. That will give us a nice abstraction to be able to always use `yarn start`, even when our program gets more complicated.
+Стартирането на `node .`, за да изпълним нашата програма е малко на прекалено ниско ниво. Ще използваме NPM/Yarn скрипт за стартиране на изпълнението на този код вместо нас. Това ще ни даде едно ниво на абстракция, което ще ни позволи да използваме винаги `yarn start`, дори когато нашата програма стане по-сложна.
 
-- In `package.json`, add a `scripts` object like so:
+- В `package.json`, добавете `scripts` обект, както следва:
 
 ```json
 {
@@ -81,24 +81,24 @@ Running `node .` to execute our program is a bit too low-level. We are going to 
 }
 ```
 
-`start` is the name we give to the *task* that will run our program. We are going to create a lot of different tasks in this `scripts` object throughout this tutorial. `start` is typically the name given to the default task of an application. Some other standard task names are `stop` and `test`.
+`start` е името, което даваме на *задачата*, която ще стартира нашата програма. В това ръководство ще създадем множество различни задачи в `scripts` обекта. `start` е името, което обикновено се дава на задачата по подразбиране в едно приложение. Някои други стандартни имена на задачи са`stop` и `test`.
 
-`package.json` must be a valid JSON file, which means that you cannot have trailing commas. So be careful when editing manually your `package.json` file.
+`package.json` трябва да бъде валиден JSON файл, което означава, че не може и не трябва да съдържа "trailing commas" - всеки ред се отделя от следващия със запетая с изключение на последния такъв, на него запетея не се поставя. Така че бъдете внимателни когато редактиране ръчно вашия `package.json` файл.
 
-🏁 Run `yarn start`. It should print `Hello world`.
+🏁 Изпълнее `yarn start`. Трябва да отпечата `Hello world`.
 
 ## Git and `.gitignore`
 
-- Initialize a Git repository with `git init`
+- Инициализирайте ново Git репозитори с `git init`
 
-- Create a `.gitignore` file and add the following to it:
+- Създайте `.gitignore` файл и добаведе следното в него:
 
 ```gitignore
 .DS_Store
 /*.log
 ```
 
-`.DS_Store` files are auto-generated macOS files that you should never have in your repository.
+`.DS_Store` файловете са автоматично генерирани файлове от макОС, които не трябва никога да поставяте във вашето репозитори.
 
 `npm-debug.log` and `yarn-error.log` are files that are created when your package manager encounters an error, we don't want them versioned in our repository.
 
