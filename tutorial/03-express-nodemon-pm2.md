@@ -161,13 +161,13 @@ const template = html`
 
 ## PM2
 
-> 💡 **[PM2](http://pm2.keymetrics.io/)** is a Process Manager for Node. It keeps your processes alive in production, and offers tons of features to manage them and monitor them.
+> 💡 **[PM2](http://pm2.keymetrics.io/)** е мениджър на процеси за Node. Предлага функционалност за поддържане на "живи" процесите в производствена среда, както и много други опции за управление и наблюдение на такива.
 
-We are going to use PM2 whenever we are in **production** mode.
+Ще използваме PM2 докато сме в режим на **производство** (**production** mode).
 
-- Run `yarn add --dev pm2`
+- Изпълнете `yarn add --dev pm2`
 
-In production, you want your server to be as performant as possible. `babel-node` triggers the whole Babel transpilation process for your files at each execution, which is not something you want in production. We need Babel to do all this work beforehand, and have our server serve plain old pre-compiled ES5 files.
+В производствена среда, бихме искали сървъра ни да работи колкото се може по-добре. `babel-node` стартира целия Babel процес по транспилацията на файловете при всяко изпълнение, което е нещо, което не искаме да се случва в производствена среда. Ние имаме нужда Babel да извършва цялата тази работа предварително, за да може накрая нашия сървър да сервира файлове с добре познатия стар, прекомпилиран ES5 код.
 
 One of the main features of Babel is to take a folder of ES6 code (usually named `src`) and transpile it into a folder of ES5 code (usually named `lib`).
 
