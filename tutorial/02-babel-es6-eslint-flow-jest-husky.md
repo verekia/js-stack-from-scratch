@@ -22,13 +22,13 @@ console.log(`Hello ${str}`)
 Babel CLI предоставя [два модула](https://babeljs.io/docs/usage/cli/): `babel`, който компилира 
 ES6 файлове до ES5 такива и `babel-node`, който можете да използвате, за да заместите извикванията към `node` и да изпълнявате директно ES6 файлове. `babel-node` е чудесен за разработка, но е прекалено тежък и не е предвиден за производствена среда (*production*). В тази глава ще използваме `babel-node` за настройка на средата за разработка, а в следващата ще използваме `babel` за приготвянето на ES5 файловете за *production*.
 
-- В `package.json`, в `start` скрипта, заместете `node .` с `babel-node src` (`index.js` е файла по подразбиране, който Node търси, поради което можем да пропуснем изричното споменаване на `index.js`).
+- В `package.json`, в `start` скрипта, заместете `node .` с `babel-node src` (`index.js` е файла по подразбиране, който се търси от Node при първоначалното зареждане, поради което можем да пропуснем изричното споменаване на `index.js`).
 
-If you try to run `yarn start` now, it should print the correct output, but Babel is not actually doing anything. That's because we didn't give it any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
+Ако сега опитате да изпълните `yarn start`, ще отпечата коректно резултата, но Babel всъщност все още не върши никаква работа. Това е така, закото не сме подали никаква информация за трансформациите, които искаме да се приложат. Единствената причина, поради която отпечатва правилно резултата е, че Node разбира ES6 без помощта на Babel. Но някои браузъри или стари версии на Node няма да могат!
 
-- Run `yarn add --dev babel-preset-env` to install a Babel preset package called `env`, which contains configurations for the most recent ECMAScript features supported by Babel.
+- Изпълнете `yarn add --dev babel-preset-env`, за да инсталирате един от предварително зададените пакети за Babel наречен `env`, който съдържа конфигурации за най-новите свойства на ECMAScript, поддържани от Babel.
 
-- Create a `.babelrc` file at the root of your project, which is a JSON file for your Babel configuration. Write the following to it to make Babel use the `env` preset:
+- Създайте `.babelrc` файл в основната директория на вашия проект, който файл е валиден JSON файл за вашата Babel конфигурация. Напишете следното, за да накарате Babel да използва `env`:
 
 ```json
 {
@@ -38,7 +38,7 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 }
 ```
 
-🏁 `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](#the-es6-modules-syntax) section of this chapter.
+🏁 `yarn start` все още трябва да работи, но сега наистина върши някаква работа. Ние не можем да кажем дали наистина е така, тъй като използваме `babel-node`, за да интерпретираме ES6 кода в момента на работа. Скоро ще имате доказателство, че вашия ES6 код наистина се трансформира когато достигнете до [синтаксис на ES6 модули](#the-es6-modules-syntax) секцията от тази глава.
 
 ## ES6
 
