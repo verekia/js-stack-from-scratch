@@ -63,7 +63,7 @@ If you want to add your translation, please read the [translation recommendation
 ### V2
 
 - [Italian](https://github.com/fbertone/guida-javascript-moderno) by [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
-- [Simplified Chinese](https://github.com/yepbug/js-stack-from-scratch/) by @yepbug
+- [Simplified Chinese](https://github.com/yepbug/js-stack-from-scratch/) by [@yepbug](https://github.com/yepbug)
 
 Check out the [ongoing translations](https://github.com/verekia/js-stack-from-scratch/issues/147).
 
