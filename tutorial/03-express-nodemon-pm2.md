@@ -34,7 +34,7 @@ h1 {
 
 Това е папката къдато ще поставяме *isomorphic / universal* JavaScript код – файлове, които се използват и от клиентската част, и от сървърната. Чудесен пример за такъв споделен код са *routes*, както ще видите малко по-късно в това ръководство когато ще правим асинхронни извиквания. Тук имаме просто някои конфигурационни константи, служещи за пример.
 
-- Create a `src/shared/config.js` file, containing:
+- Създайте `src/shared/config.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -44,9 +44,9 @@ export const STATIC_PATH = '/static'
 export const APP_NAME = 'Hello App'
 ```
 
-If the Node process used to run your app has a `process.env.PORT` environment variable set (that's the case when you deploy to Heroku for instance), it will use this for the port. If there is none, we default to `8000`.
+Ако Node процеса използван за стартиране на вашето приложение има променлива `process.env.PORT` (такъв би бил случая ако използвате Heroku например), ще използва нея за порта. Ако няма такава, по подразбиране порта ще бъде `8000`.
 
-- Create a `src/shared/util.js` file containing:
+- Създайте `src/shared/util.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -55,13 +55,13 @@ If the Node process used to run your app has a `process.env.PORT` environment va
 export const isProd = process.env.NODE_ENV === 'production'
 ```
 
-That's a simple util to test if we are running in production mode or not. The `// eslint-disable-next-line import/prefer-default-export` comment is because we only have one named export here. You can remove it as you add other exports in this file.
+Това е една полезна опция, с която да тествате дали сте в продукционен режим (production mode) или не. Коментарът `// eslint-disable-next-line import/prefer-default-export` е сложен, тъй като в момента имаме само един наименован файл, който експортираме. Можете да го премахнете когато добавяте други експорти в този файл.
 
-- Run `yarn add express compression`
+- Изпълнете `yarn add express compression`
 
-`compression` is an Express middleware to activate Gzip compression on the server.
+`compression` е Express middleware за активиране на Gzip компресия на сървъра.
 
-- Create a `src/server/index.js` file containing:
+- Създайте `src/server/index.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -89,9 +89,9 @@ app.listen(WEB_PORT, () => {
 })
 ```
 
-Nothing fancy here, it's almost Express' Hello World tutorial with a few additional imports. We're using 2 different static file directories here. `dist` for generated files, `public` for declarative ones.
+Нищо чрезвичайно тук, това е почти Express варианта на Hello World с няколко допълнения. Тук ще използваме 2 различни директории за статични файлове. `dist` за генерирани файлове и `public` за декларирани такива.
 
-- Create a `src/server/render-app.js` file containing:
+- Създайте `src/server/render-app.js` файл, съдържащ:
 
 ```js
 // @flow
