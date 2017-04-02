@@ -140,20 +140,20 @@ const template = html`
 
 ## Nodemon
 
-> 💡 **[Nodemon](https://nodemon.io/)** is a utility to automatically restart your Node server when file changes happen in the directory.
+> 💡 **[Nodemon](https://nodemon.io/)** е инструмент, чрез който вашия Node сървър да се рестартира автоматично когато настъпят промени в даден файл в директорията.
 
-We are going to use Nodemon whenever we are in **development** mode.
+Ще използваме Nodemon докато сме в режим на **разработка** (**development** mode).
 
-- Run `yarn add --dev nodemon`
+- Изпълнете `yarn add --dev nodemon`
 
-- Change your `scripts` like so:
+- Променете вашият `scripts` обект, както следва:
 
 ```json
 "start": "yarn dev:start",
 "dev:start": "nodemon --ignore lib --exec babel-node src/server",
 ```
 
-`start` is now just a pointer to an other task, `dev:start`. That gives us a layer of abstraction to tweak what the default task is.
+Сега `start` е просто указател към друга задача, `dev:start`. Това ни дава слой на абстракция когато настройваме какво прави основната ни задача.
 
 In `dev:start`, the `--ignore lib` flag is to *not* restart the server when changes happen in the `lib` directory. You don't have this directory yet, but we're going to generate it in the next section of this chapter, so it will soon make sense. Nodemon typically runs the `node` binary. In our case, since we're using Babel, we can tell Nodemon to use the `babel-node` binary instead. This way it will understand all the ES6/Flow code.
 
