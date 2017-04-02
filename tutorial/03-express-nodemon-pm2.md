@@ -171,25 +171,25 @@ const template = html`
 
 Едно от основните свойства на Babel е да вземе една папка с ES6 код (обикновено кръстена `src`) и да я транспилира в папка с ES5 код (обикновено кръстена `lib`).
 
-This `lib` folder being auto-generated, it's a good practice to clean it up before a new build, since it may contain unwanted old files. A neat simple package to delete files with cross platform support is `rimraf`.
+Папката `lib` се генерира автоматично, добра практика е да се чисти съдържанието й преди всеки нов билд, тъй като може да съдържа нежелани стари файлове. За тази цел съществува един чудесен пакет наречен `rimraf`.
 
-- Run `yarn add --dev rimraf`
+- Изпълнете `yarn add --dev rimraf`
 
-Let's add the following `prod:build` task to our `scripts`:
+Нека да добавим следната `prod:build` задача към нашия `scripts` обект:
 
 ```json
 "prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
 ```
 
-- Run `yarn prod:build`, and it should generate a `lib` folder containing the transpiled code, except for files ending in `.test.js` (note that `.test.jsx` files are also ignored by this parameter).
+- Изпълнете `yarn prod:build`, това би трябвало да генерира `lib` папка, съдържаща транспилирания код, с изключение на файлове завършващи на `.test.js` (обърнете внимание, че `.test.jsx` файлове също ще бъдат игнорирани с този параметър).
 
-- Add `/lib/` to your `.gitignore`
+- Добавете `/lib/` във вашия `.gitignore` файл
 
-One last thing: We are going to pass a `NODE_ENV` environment variable to our PM2 binary. With Unix, you would do this by running `NODE_ENV=production pm2`, but Windows uses a different syntax. We're going to use a small package called `cross-env` to make this syntax work on Windows as well.
+Едно последно нещо: ще подадем `NODE_ENV` променливата към нашия PM2. Ако сте с Unix, бихте могли да направите това чрез изпълнението на `NODE_ENV=production pm2`, но на Windows синтаксиса е различен. Ще използваме още един малък пакет, наречен `cross-env`, за да направим възможна работата под Windows също така.
 
-- Run `yarn add --dev cross-env`
+- Изпълнете `yarn add --dev cross-env`
 
-Let's update our `package.json` like so:
+Нека да обновим нашия `package.json`, както следва:
 
 ```json
 "scripts": {
@@ -204,18 +204,18 @@ Let's update our `package.json` like so:
 },
 ```
 
-🏁 Run `yarn prod:build`, then run `yarn prod:start`. PM2 should show an active process. Go to `http://localhost:8000/` in your browser and you should see your app. Your terminal should show the logs, which should be "Server running on port 8000 (production).". Note that with PM2, your processes are run in the background. If you press Ctrl+C, it will kill the `pm2 logs` command, which was the last command our our `prod:start` chain, but the server should still render the page. If you want to stop the server, run `yarn prod:stop`
+🏁 Изпълнете `yarn prod:build`, след това изпълнете `yarn prod:start`. PM2 би трябвало да покаже активния процес. Отворете `http://localhost:8000/` във вашия браузър и би трябвало да видите вашето приложение. Вашият терминален прозорец би трябвало да показва логовете, които би трябвало да са "Server running on port 8000 (production).". Забележете, че използвайки PM2, вашите процеси се изпълняват в бекграунда. Ако натиснете Ctrl+C, ще прекратите изпълнението на `pm2 logs` командата, което е последната команда от нашата `prod:start` поредица, но сървъра все още би трябвало да рендира страницата. Ако искате да спрете изпълнението на сървъра, изпълнете `yarn prod:stop`
 
-Now that we have a `prod:build` task, it would be neat to make sure it works fine before pushing code to the repository. Since it is probably unnecessary to run it for every commit, I suggest adding it to the `prepush` task:
+Сега, след като имаме `prod:build` задача, би било добре да проверим, че всичко работи коректно преди да запазваме (pushing) промени в репозиторито. Тъй като, вероятно не е необходимо да го стартираме при всеки опит за запазване (commit), препоръчвам да го добавите в `prepush` задачата:
 
 ```json
 "prepush": "yarn test && yarn prod:build"
 ```
 
-🏁 Run `yarn prepush` or just push your files to trigger the process.
+🏁 Изпълнете `yarn prepush` или просто запазете вашите промени (push your files), за да стартирате процеса.
 
-**Note**: We don't have any test here, so Jest will complain a bit. Ignore it for now.
+**Забележка**: В момента не разполагаме с никакви тестове за случая, така че Jest ще ни съобщи за това. Игнорирайте го за момента.
 
-Next section: [04 - Webpack, React, HMR](04-webpack-react-hmr.md#readme)
+Следваща глава: [04 - Webpack, React, HMR](04-webpack-react-hmr.md#readme)
 
-Back to the [previous section](02-babel-es6-eslint-flow-jest-husky.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](02-babel-es6-eslint-flow-jest-husky.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
