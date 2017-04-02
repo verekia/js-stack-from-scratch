@@ -1,20 +1,20 @@
 # 03 - Express, Nodemon, and PM2
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/03-express-nodemon-pm2).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/03-express-nodemon-pm2).
 
-In this section we are going to create the server that will render our web app. We will also set up a development mode and a production mode for this server.
+В тази секция ще създадем сървърът, който ще отговаря за показването на нашето уеб приложение. Също така ще настроим сървъра, така че да поддържа режими на разработка (development mode) и на производство (production mode).
 
 ## Express
 
-> 💡 **[Express](http://expressjs.com/)** is by far the most popular web application framework for Node. It provides a very simple and minimal API, and its features can be extended with *middleware*.
+> 💡 **[Express](http://expressjs.com/)** е може би най-известният фреймуърк за уеб приложения за Node. Предоставя много опростен и изчистен интерфейс за програмиране (API), и неговите свойства могат да бъдат надградени с *middleware*.
 
-Let's set up a minimal Express server to serve an HTML page with some CSS.
+Сега ще настроим минимален Express сървър за сервиране на една HTML страница с малко CSS код.
 
-- Delete everything inside `src`
+- Изтрийте всичко от папката `src`
 
-Create the following files and folders:
+Създайте следните файлове и директории:
 
-- Create a `public/css/style.css` file containing:
+- Създайте `public/css/style.css` файб, съдържащ:
 
 ```css
 body {
@@ -28,11 +28,11 @@ h1 {
 }
 ```
 
-- Create an empty `src/client/` folder.
+- Създайте празна папка `src/client/`.
 
-- Create an empty `src/shared/` folder.
+- Създайте празна папка `src/shared/`.
 
-This folder is where we put *isomorphic / universal* JavaScript code – files that are used by both the client and the server. A great use case of shared code is *routes*, as you will see later in this tutorial when we'll make an asynchronous call. Here we simply have some configuration constants as an example for now.
+Това е папката къдато ще поставяме *isomorphic / universal* JavaScript код – файлове, които се използват и от клиентската част, и от сървърната. Чудесен пример за такъв споделен код са *routes*, както ще видите малко по-късно в това ръководство когато ще правим асинхронни извиквания. Тук имаме просто някои конфигурационни константи, служещи за пример.
 
 - Create a `src/shared/config.js` file, containing:
 
