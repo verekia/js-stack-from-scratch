@@ -98,11 +98,11 @@ ESLint работи с *правила*, съществуват [много та
 npm info eslint-config-airbnb@latest peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev eslint-config-airbnb@latest
 ```
 
-It should install everything you need and add `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file automatically.
+Това би трябвало да инсталира всичко, от което имате нужда и да добави `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y` и `eslint-plugin-react` във вашия `package.json` файл автоматично.
 
-**Note**: I've replaced `npm install` by `yarn add` in this command. Also, this won't work on Windows, so take a look at the `package.json` file of this repository and just install all the ESLint-related dependencies manually using `yarn add --dev packagename@^#.#.#` with `#.#.#` being the versions given in `package.json` for each package.
+**Забележка**: Аз заместих `npm install` с `yarn add` в командата. Също така, това няма да работи на Windows, така че погледнете в `package.json` файла в това репозитори и просто инсталирайте всички неща отнасящи се до ESLint ръчно, използвайки `yarn add --dev packagename@^#.#.#`, като на мястото на `#.#.#` поставете версиите на всеки пакет посочени в `package.json` файла.
 
-- Create an `.eslintrc.json` file at the root of your project, just like we did for Babel, and write the following to it:
+- Създайте `.eslintrc.json` файл в основната директория на вашия проект, по същия начин както направихме за Babel и напишете следното в него:
 
 ```json
 {
@@ -110,11 +110,11 @@ It should install everything you need and add `eslint-config-airbnb`, `eslint-pl
 }
 ```
 
-We'll create an NPM/Yarn script to run ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
+Ще създадем NPM/Yarn скрипт, който да стартира ESLint вместо нас. Нека инсталираме `eslint` пакета, за да можем да използваме `eslint` CLI:
 
-- Run `yarn add --dev eslint`
+- Изпълнете `yarn add --dev eslint`
 
-Update the `scripts` of your `package.json` to include a new `test` task:
+Обновете `scripts` във вашия `package.json` като добавите нова `test` задача:
 
 ```json
 "scripts": {
@@ -123,13 +123,13 @@ Update the `scripts` of your `package.json` to include a new `test` task:
 },
 ```
 
-Here we just tell ESLint that we want it to lint all JavaScript files under the `src` folder.
+Тук просто казваме на ESLint, че искаме да се изпълнява варху всички JavaScript файлове в папката `src`.
 
-We will use this standard `test` task to run a chain of all the commands that validate our code, whether it's linting, type checking, or unit testing.
+Ще използваме тази стандартна `test` задача, за да изпълняваме поредица от всички команди валидиращи по някакъв начин кода ни - било то с лингинг, проверка на типовете или юнит тестване.
 
-- Run `yarn test`, and you should see a whole bunch of errors for missing semicolons, and a warning for using `console.log()` in `index.js`. Add `/* eslint-disable no-console */` at the top of our `index.js` file to allow the use of `console` in this file.
+- Изпълнете `yarn test` и би трябвало да видите цяла поредица от грешки отнасящи се до липсващи точки и запетаи, предупреждения за използвани `console.log()` в `index.js`. Добавете `/* eslint-disable no-console */` най-отгоре в вашия `index.js` файл, за да позволите използването на `console` в този файл.
 
-**Note**: If you're on Windows, make sure you configure your editor and Git to use Unix LF line endings and not Windows CRLF. If your project is only used in Windows environments, you can add `"linebreak-style": [2, "windows"]` in ESLint's `rules` array (see the example below) to enforce CRLF instead.
+**Забележка**: Ако използвате Windows, проверете дали вашия редактор и Git на настроени да използват Unix LF line endings, а не Windows CRLF. Ако вашият проект биде използван само в Windows базирани среди, бихте могли да добавите `"linebreak-style": [2, "windows"]` в `правилата` на ESLint масива (вижте примера по-долу), за да наложите използването на CRLF.
 
 ### Semicolons
 
