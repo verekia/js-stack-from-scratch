@@ -42,11 +42,11 @@ ES6 файлове до ES5 такива и `babel-node`, който может�
 
 ## ES6
 
-> 💡 **[ES6](http://es6-features.org/)**: The most significant improvement of the JavaScript language. There are too many ES6 features to list them here but typical ES6 code uses classes with `class`, `const` and `let`, template strings, and arrow functions (`(text) => { console.log(text) }`).
+> 💡 **[ES6](http://es6-features.org/)**: Най-значимото подобрение на JavaScript езика. Има прекалено много новости идващи от ES6, за да ги изложа тук, но типичен ES6 код използва класове с `class`, `const` и `let`, темплейт стрингове и arrow функции (`(text) => { console.log(text) }`).
 
-### Creating an ES6 class
+### Създаване на ES6 клас
 
-- Create a new file, `src/dog.js`, containing the following ES6 class:
+- Създайте нов файл, `src/dog.js`, съдържащ следния ES6 клас:
 
 ```js
 class Dog {
@@ -62,9 +62,9 @@ class Dog {
 module.exports = Dog
 ```
 
-It should not look surprising to you if you've done OOP in the past in any language. It's relatively recent for JavaScript though. The class is exposed to the outside world via the `module.exports` assignment.
+Ако не сте се занимавали с ООП (обектно ориентирано програмиране) преди, това не би трябвало да ви изглежда изненадващо, тъй като е сравнително ново за JavaScript също. Класът е открит за използване от външния свят чрез присвояването му на `module.exports`.
 
-In `src/index.js`, write the following:
+В `src/index.js`, напишете следното:
 
 ```js
 const Dog = require('./dog')
@@ -74,11 +74,11 @@ const toby = new Dog('Toby')
 console.log(toby.bark())
 ```
 
-As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
+Както можете да видите, за разлика от пакета `color`, който използвахме преди, тук когато искаме да използваме един от нашите файлове трябва да използваме `./` в `require()`.
 
-🏁 Run `yarn start` and it should print "Wah wah, I am Toby".
+🏁 Изпълнете `yarn start`, трябва да отпечата "Wah wah, I am Toby".
 
-### The ES6 modules syntax
+### Синтаксис на ES6 модули
 
 Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
 
