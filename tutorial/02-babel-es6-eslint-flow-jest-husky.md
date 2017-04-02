@@ -287,21 +287,21 @@ export default Dog
 
 - В `dog.js`, заместете `constructor(name: string)` с `constructor(name: number)` и изпълнете отново `yarn test`. Би трябвало да получите **Flow** грешка, указваща, че тези типове са несъвместими. Това значи, че Flow е настроен правилно.
 
-- Now replace `constructor(name: string)` by `constructor(name:string)`, and run `yarn test`. You should get an **ESLint** error telling you that Flow annotations should have a space after the colon. That means the Flow plugin for ESLint is set up correctly.
+- Сега заместете `constructor(name: string)` с `constructor(name:string)` и изпълнете `yarn test`. Би трябвало да получите **ESLint** грешка, указваща, че Flow анотациите трябва да имат разстояние след двуеточието. Това значи, че Flow плъгина за ESLint е настроен коректно.
 
-🏁 If you got the 2 different errors working, you are all set with Flow and ESLint! Remember to put the missing space back in the Flow annotation.
+🏁 Ако сте получили двете различни грешки значи сте говоти с настройването на Flow и ESLint! Не забравяйте да поставите обратно разстоянието във Flow анотацията.
 
-### Flow in your editor
+### Flow във вашия редактор
 
-Just like with ESLint, you should spend some time configuring your editor / IDE to give you immediate feedback when Flow detects issues in your code.
+Точно както направихме с ESLint, ще тябва да конфигурирате вашия редактор / IDE, за да получавате моментална обратна връзка когато Flow засече проблем във вашия код.
 
 ## Jest
 
-> 💡 **[Jest](https://facebook.github.io/jest/)**: A JavaScript testing library by Facebook. It is very simple to set up and provides everything you would need from a testing library right out of the box. It can also test React components.
+> 💡 **[Jest](https://facebook.github.io/jest/)**: JavaScript библиотека за тестване, създадена от Facebook. Много лесна за първоначална настройка и предлага всичко, от което бихте очаквали от една библиотека за тестване. Също така може да тества React компоненти.
 
-- Run `yarn add --dev jest babel-jest` to install Jest and the package to make it use Babel.
+- Изпълнете `yarn add --dev jest babel-jest`, за да инсталирате Jest и пакета, чрез който да използва Babel.
 
-- Add the following to your `.eslintrc.json` at the root of the object to allow the use of Jest's functions without having to import them in every test file:
+- Добавете следното във вашия `.eslintrc.json`, за да позволите употребата на функциите на Jest без да трябва да ги импортвате във всеки един файл:
 
 ```json
 "env": {
@@ -309,7 +309,7 @@ Just like with ESLint, you should spend some time configuring your editor / IDE 
 }
 ```
 
-- Create a `src/dog.test.js` file containing:
+- Създайте `src/dog.test.js` файл, съдържащ:
 
 ```js
 import Dog from './dog'
@@ -320,7 +320,7 @@ test('Dog.bark', () => {
 })
 ```
 
-- Add `jest` to your `test` script:
+- Добавете `jest` във вашия `test` скрипт:
 
 ```json
 "scripts": {
@@ -329,11 +329,11 @@ test('Dog.bark', () => {
 },
 ```
 
-The `--coverage` flag makes Jest generate coverage data for your tests automatically. This is useful to see which parts of your codebase lack testing. It writes this data into a `coverage` folder.
+Флагът `--coverage` кара Jest да генерира информация за покритието на вашите тестове автоматично. Това е полезно когато искате да видите кои части от вашия код не са подсигурени с тестове. Той записва тази информация в папка `coverage`.
 
-- Add `/coverage/` to your `.gitignore`
+- Добавете `/coverage/` във вашия `.gitignore`
 
-🏁 Run `yarn test`. After linting and type checking, it should run Jest tests and show a coverage table. Everything should be green!
+🏁 Изпълнете `yarn test`. След линтинга и проверката на типовете, би трябвало да изпълни Jest тестовете и да покаже таблица с тест покритието. Всичко трябва да бъде зелено!
 
 ## Git Hooks with Husky
 
