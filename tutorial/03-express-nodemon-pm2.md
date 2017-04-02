@@ -114,11 +114,11 @@ const renderApp = (title: string) =>
 export default renderApp
 ```
 
-You know how you typically have *templating engines* on the back-end? Well these are pretty much obsolete now that JavaScript supports template strings. Here we create a function that takes a `title` as a parameter and injects it in both the `title` and `h1` tags of the page, returning the complete HTML string. We also use a `STATIC_PATH` constant as the base path for all our static assets.
+Може би знаете, че обикновено се използваха *темплейт енджини* в бек-енд часта? Сега това вече не е нужно, тъй като JavaScript поддържа темплейт стрингове. Тук създаваме функция, която взима `title`(заглавието) като параметър и го инжектира в `title` и `h1` таговете на страницата, връщайки завършен HTML стринг. Също така използваме константата `STATIC_PATH`, която служи за основен път към всички наши статични ресурси.
 
-### HTML template strings syntax highlighting in Atom (optional)
+### Осветяване (highlighting) на HTML синтаксис за темплейт стрингове в Atom (незадължително)
 
-It might be possible to get syntax highlighting working for HTML code inside template strings depending on your editor. In Atom, if you prefix your template string with an `html` tag (or any tag that *ends* with `html`, like `ilovehtml`), it will automatically highlight the content of that string. I sometimes use the `html` tag of the `common-tags` library to take advantage of this:
+В зависимост от вашия редактор, можете да имате осветяване на синтаксиса, което да е в сила за HTML код в темплейт стринговете. В Atom, ако поставите `html` таг преди темплейт стринг (или какъвто и да било таг *завършващ* с `html`, като например `ilovehtml`), съдържанието ще се освети. Понякога използвам `html` таг от `common-tags` библиотеката, за да се възползвам от тази опция:
 
 ```js
 import { html } from `common-tags`
@@ -128,7 +128,7 @@ const template = html`
 `
 ```
 
-I did not include this trick in the boilerplate of this tutorial, since it seems to only work in Atom, and it's less than ideal. Some of you Atom users might find it useful though.
+Нарочно не включих този трик в основата на това ръководство, тъй като изглежда, че работи само в Atom, а и не е идеално. Някои от вас потребителите на Atom могат да го намерят за полезно.
 
 Anyway, back to business!
 
