@@ -167,9 +167,9 @@ const template = html`
 
 - Изпълнете `yarn add --dev pm2`
 
-В производствена среда, бихме искали сървъра ни да работи колкото се може по-добре. `babel-node` стартира целия Babel процес по транспилацията на файловете при всяко изпълнение, което е нещо, което не искаме да се случва в производствена среда. Ние имаме нужда Babel да извършва цялата тази работа предварително, за да може накрая нашия сървър да сервира файлове с добре познатия стар, прекомпилиран ES5 код.
+В производствена среда, бихме искали сървъра ни да работи колкото се може по-добре. `babel-node` стартира целия Babel процес по транспилацията на файловете при всяко изпълнение, което е нещо, което не искаме да се случва в производствена среда. Ние имаме нужда Babel да извършва цялата тази работа предварително, за да може накрая нашия сървър да сервира файлове с добре познатия стар, чист, прекомпилиран ES5 код.
 
-One of the main features of Babel is to take a folder of ES6 code (usually named `src`) and transpile it into a folder of ES5 code (usually named `lib`).
+Едно от основните свойства на Babel е да вземе една папка с ES6 код (обикновено кръстена `src`) и да я транспилира в папка с ES5 код (обикновено кръстена `lib`).
 
 This `lib` folder being auto-generated, it's a good practice to clean it up before a new build, since it may contain unwanted old files. A neat simple package to delete files with cross platform support is `rimraf`.
 
