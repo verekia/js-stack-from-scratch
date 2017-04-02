@@ -80,19 +80,19 @@ console.log(toby.bark())
 
 ### Синтаксис на ES6 модули
 
-Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
+Тук просто заместваме `const Dog = require('./dog')` с `import Dog from './dog'`, което идва от по-новия ES6 синтаксис за ES6 модули (точно обратното на "CommonJS" модулния синтаксис). В момента не се поддържа от NodeJS, така че това е вашето доказателство, че Babel обработва тези ES6 файлове правилно.
 
-In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`
+В `dog.js`, също така заместваме `module.exports = Dog` с `export default Dog`
 
-🏁 `yarn start` should still print "Wah wah, I am Toby".
+🏁 `yarn start` все още трябва да отпечатва "Wah wah, I am Toby".
 
 ## ESLint
 
-> 💡 **[ESLint](http://eslint.org)** is the linter of choice for ES6 code. A linter gives you recommendations about code formatting, which enforces style consistency in your code, and code you share with your team. It's also a great way to learn about JavaScript by making mistakes that ESLint will catch.
+> 💡 **[ESLint](http://eslint.org)** е *линтера* най-често избиран при работа с ES6 код. Линтер е нещо, което ви дава препоръки за форматиране на кода, което налага консистентност в стила на програмиране на вашия код и кода, който споделяте с вашия екип. Също така е много добър начин за учене JavaScript чрез правене на грешки, които ESLint хваща и ви показва.
 
-ESLint works with *rules*, and there are [many of them](http://eslint.org/docs/rules/). Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well.
+ESLint работи с *правила*, съществуват [много такива правила](http://eslint.org/docs/rules/). Вместо да конфигурираме правилата, които искаме да използваме в нашия код, ще използваме конфигурацията създадена от Airbnb. Тази конфигурация използва няколко плъгина, така че ще трябва да ги инсталираме и тях.
 
-Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2017-02-03, they recommend using the following command in your terminal:
+Проверете най-последните [инструкции](https://www.npmjs.com/package/eslint-config-airbnb) от Airbnb за инсталиране на конфигурационния пакет и всички негови зависимости (dependencies) правилно. От 03.02.2017 насам, те препоръчват използването на следната команда във вашия терминал:
 
 ```sh
 npm info eslint-config-airbnb@latest peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev eslint-config-airbnb@latest
