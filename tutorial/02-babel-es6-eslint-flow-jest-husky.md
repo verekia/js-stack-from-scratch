@@ -335,17 +335,17 @@ test('Dog.bark', () => {
 
 🏁 Изпълнете `yarn test`. След линтинга и проверката на типовете, би трябвало да изпълни Jest тестовете и да покаже таблица с тест покритието. Всичко трябва да бъде зелено!
 
-## Git Hooks with Husky
+## Git Hooks с Husky
 
-> 💡 **[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)**: Scripts that are run when certain actions like a commit or a push occur.
+> 💡 **[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)**: Скриптове, които се изпълняват когато настъпи дадено действие, например вмъкване (commit) или запазване (push) на промени в кода.
 
-Okay so we now have this neat `test` task that tells us if our code looks good or not. We're going to set up Git Hooks to automatically run this task before every `git commit` and `git push`, which will prevent us from pushing bad code to the repository if it doesn't pass the `test` task.
+Окей, до момента имаме нашата `test` задача, която ни казва дали нашия код изглежда добре или не. Ще настроим т.нар. "кукички" (Git Hooks), чрез които ще изпълняваме автоматично тази задача преди всеки `git commit` и `git push`, което ще предотврати възможността за "вмъкване" на лош код в репозиторито, т.е. код който не минава проверките в `test` задачата.
 
-[Husky](https://github.com/typicode/husky) is a package that makes this very easy to set up Git Hooks.
+[Husky](https://github.com/typicode/husky) е пакет, чрез който настройването и използването на "кукички" (Git Hooks) става много лесно.
 
-- Run `yarn add --dev husky`
+- Изпълнете `yarn add --dev husky`
 
-All we have to do is to create two new tasks in `scripts`, `precommit` and `prepush`:
+Всичко, което трябва да направим сега е да създадем две нови задачи в `scripts` - `precommit` and `prepush`:
 
 ```json
 "scripts": {
@@ -356,12 +356,12 @@ All we have to do is to create two new tasks in `scripts`, `precommit` and `prep
 },
 ```
 
-🏁 If you now try to commit or push your code, it should automatically run the `test` task.
+🏁 Ако сега се опитате да запазите промените във вашия код, ще се стартира автоматично `test` задачата.
 
-If it does not work, it is possible that `yarn add --dev husky` did not install the Git Hooks properly. I have never encountered this issue but it happens for some people. If that's your case, run `yarn add --dev husky --force`, and maybe post a note describing your situation in [this issue](https://github.com/typicode/husky/issues/84).
+Ако не работи правилно е възможно `yarn add --dev husky` да не е инсталирал Git Hooks правилно. На мен лично никога не ми се е случвало, но на други хора - да. Ако това се случи и при вас, run `yarn add --dev husky --force` и може би публикувайте пост с случилото се [тус](https://github.com/typicode/husky/issues/84).
 
-**Note**: If you are pushing right after a commit, you can use `git push --no-verify` to avoid running all the tests again.
+**Забележка**: Ако запазвате (pushing) вашите промени веднага след като сте ги вмъкнали (commit), можете да използвате `git push --no-verify`, за да избегнете пускането на всички тестове отново.
 
-Next section: [03 - Express, Nodemon, PM2](03-express-nodemon-pm2.md#readme)
+Следваща глава: [03 - Express, Nodemon, PM2](03-express-nodemon-pm2.md#readme)
 
-Back to the [previous section](01-node-yarn-package-json.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](01-node-yarn-package-json.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
