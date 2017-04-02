@@ -131,13 +131,13 @@ npm info eslint-config-airbnb@latest peerDependencies --json | command sed 's/[\
 
 **Забележка**: Ако използвате Windows, проверете дали вашия редактор и Git на настроени да използват Unix LF line endings, а не Windows CRLF. Ако вашият проект биде използван само в Windows базирани среди, бихте могли да добавите `"linebreak-style": [2, "windows"]` в `правилата` на ESLint масива (вижте примера по-долу), за да наложите използването на CRLF.
 
-### Semicolons
+### Точка и запетая
 
-Alright, this is probably the most heated debate in the JavaScript community, let's talk about it for a minute. JavaScript has this thing called Automatic Semicolon Insertion, which allows you to write your code with or without semicolons. It really comes down to personal preference and there is no right and wrong on this topic. If you like the syntax of Python, Ruby, or Scala, you will probably enjoy omitting semicolons. If you prefer the syntax of Java, C#, or PHP, you will probably prefer using semicolons.
+Добре, това е може би най-разгорещения дебат в JavaScript обществото, нека поговорим за минута за това. JavaScript притежава нещо наречено Automatic Semicolon Insertion (автоматично вмъкване на точка и запетая), което ви позволява да пишете вашия код с или без точка и запетая. Това наистина зависи главно от личните предпочитания, няма правилен или грешен подход по този въпрос. Ако харесвате синтаксиса на Python, Ruby или Scala, вероятно ще изберете да не слагата точка и запетая в края на всеки ред. Ако предпочитате синтаксиса на Java, C# или PHP, вероятно ще предпочетете да ги слагате.
 
-Most people write JavaScript with semicolons, out of habit. That was my case until I tried going semicolon-less after seeing code samples from the Redux documentation. At first it felt a bit weird, simply because I was not used to it. After just one day of writing code this way I could not see myself going back to using semicolons at all. They felt so cumbersome and unnecessary. A semicolon-less code is easier on the eyes in my opinion, and is faster to type.
+Повечето хора пишат JavaScript с точки и запетаи по навик. Същото се случи и при мен докато, след като видях няколко примера от документацията на Redux, не опитах да започна да не ги поставям. В началото ми изглеждаше малко странно, просто защото не бях свикнал. След само един ден на писане на код без точки и запетаи вече не можех да си помисля дори за връщане назад и използването им отново. Това вече ми изглеждаше толкова тромаво и излишно. Моето мнение е, че код без точки и запетаи е по-лесен за четене и по-бърз за писане.
 
-I recommend reading the [ESLint documentation about semicolons](http://eslint.org/docs/rules/semi). As mentioned in this page, if you're going semicolon-less, there are some rather rare cases where semicolons are required. ESLint can protect you from such cases with the `no-unexpected-multiline` rule. Let's set up ESLint to safely go semicolon-less in `.eslintrc.json`:
+Препоръчвам да прочетете [ESLint documentation about semicolons](http://eslint.org/docs/rules/semi). Както споменахме вече, ако изберете да не пишете точки и запетаи, трябва да имате предвид, че в някои редки случаи използването им е наложително. ESLint може да ви защити в тези случаи с правилото `no-unexpected-multiline`. Нека да настроим ESLint за безопасно преминаване към писане на код без точки и запетаи `.eslintrc.json`:
 
 ```json
 {
@@ -149,23 +149,23 @@ I recommend reading the [ESLint documentation about semicolons](http://eslint.or
 }
 ```
 
-🏁 Run `yarn test`, and it should now pass successfully. Try adding an unnecessary semicolon somewhere to make sure the rule is set up correctly.
+🏁 Изпълнете `yarn test`, сега би трябвало да минава успешно. Опитайте да добавите излишна точка и запетая някъде, за да проверим дали правилото работи коректно.
 
-I am aware that some of you will want to keep using semicolons, which will make the code provided in this tutorial inconvenient. If you are using this tutorial just for learning, I'm sure it will remain bearable to learn without semicolons, until going back to using them on your real projects. If you want to use the code provided in this tutorial as a boilerplate though, it will require a bit of rewriting, which should be pretty quick with ESLint set to enforce semicolons to guide you through the process. I apologize if you're in such case.
+Сигурен съм, че някои от вас ще предпочетат да продължат да използват точка и запетая, което ще направи кода предоставен в това ръководство малко по-неудобен за използване. Ако използвате ръководството просто да учене, сигурен съм че бихте могли да прескочите използването на точка и запетая докато се върнете към вашите ежедневни проекти. Ако искате да използвате кода предоставен в това ръководство като основа за ваш проект, то тогава ще се наложи да го преработите, което би трябвало да бъде сравнително бърза задача с помощта на ESLint настроен да използва точки и запетаи. Извинявам се ако вашият случай е такъв.
 
 ### Compat
 
-[Compat](https://github.com/amilajack/eslint-plugin-compat) is a neat ESLint plugin that warns you if you use some JavaScript APIs that are not available in the browsers you need to support. It uses [Browserslist](https://github.com/ai/browserslist), which relies on [Can I Use](http://caniuse.com/).
+[Compat](https://github.com/amilajack/eslint-plugin-compat) е един чудесен ESLint плъгин, който ви предупреждава ако се опитвате да използвате някое JavaScript API, което не е налично в браузърите, които искате да поддържате. Използва [Browserslist](https://github.com/ai/browserslist), което разчита на [Can I Use](http://caniuse.com/).
 
-- Run `yarn add --dev eslint-plugin-compat`
+- Изпълнете `yarn add --dev eslint-plugin-compat`
 
-- Add the following to your `package.json`, to indicate that we want to support browsers that have more than 1% market share:
+- Добавете следното във вашия `package.json` файл, за да покажете, че искаме да поддържаме браузъри, които имат повече от 1% пазарен дял:
 
 ```json
 "browserslist": ["> 1%"],
 ```
 
-- Edit your `.eslintrc.json` file like so:
+- Редактирайте вашия `.eslintrc.json` файл със следното:
 
 ```json
 {
@@ -181,23 +181,23 @@ I am aware that some of you will want to keep using semicolons, which will make 
 }
 ```
 
-You can try the plugin by using `navigator.serviceWorker` or `fetch` in your code for instance, which should raise an ESLint warning.
+Можете да опитате плъгина чрез използването на `navigator.serviceWorker` или `fetch` във вашия код например, което би трябвало да доведе до ESLint предупреждение.
 
-### ESLint in your editor
+### ESLint във вашия редактор
 
-This chapter set you up with ESLint in the terminal, which is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE for immediate feedback. Do NOT use your IDE's native ES6 linting. Configure it so the binary it uses for linting is the one in your `node_modules` folder instead. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get some generic ES6 linting.
+В тази глава настроихме ESLint за работа в терминала, което е чудесно за хващане на грешки по време на билдването на проекта (build time) или преди запазване на промените (before pushing), но вие бихте искали също така то да бъде интегрирано във вашата среда за разработка (IDE), за да получавате моментална обратна връзка при възникване на грешка или предупреждение. Не използвайте вградените във вашата среда за разработка опции за линтване.Конфигурирайте го така, че да се използват пакетите във вашата `node_modules` папка. По този начин ще може да използва всички конфигурации на вашия проект, Airbnb настройките и т.н. В противен случай ще използвате само някои общи правила и опции за линтване.
 
 ## Flow
 
-> 💡 **[Flow](https://flowtype.org/)**: A static type checker by Facebook. It detects inconsistent types in your code. For instance, it will give you an error if you try to use a string where should be using a number.
+> 💡 **[Flow](https://flowtype.org/)**: Инструмент за проверка на типовете, създаден от Facebook. Засича неконсистентните типове във вашия код. Например, ще ви даде грешка ако се опитате да използвате стрингова променлива на място, на което се очаква числова такава.
 
-Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScript to give us some insights, but in order to use its full power, we need to add type annotations in our code, which will make it non-standard. We need to teach Babel and ESLint what those type annotations are in order for these tools to not freak out when parsing our files.
+В момента нашия JavaScript код е валиден ES6 код. Flow може да анализира чист JavaScript и да ви даде някои препоръки, но за да използвами пълните му възможности ще трябва да добавим анотации в нашия код, които анотации ще го превърнат в нестандартен JavaScript код. Трябва да покажем на Babel и ESLint какво означават тези анотации, за да предотвратим грешките, които биха дали когато парсваме нашите файлове.
 
-- Run `yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype`
+- Изпълнете `yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype`
 
-`flow-bin` is the binary to run Flow in our `scripts` tasks, `babel-preset-flow` is the preset for Babel to understand Flow annotations, `babel-eslint` is a package to enable ESLint *to rely on Babel's parser* instead of its own, and `eslint-plugin-flowtype` is an ESLint plugin to lint Flow annotations. Phew.
+`flow-bin` е пакета, който ни трябва за да можем да стартираме Flow чрез нашите `scripts` задачи, `babel-preset-flow` е предварително дефиниран пакет за Babel, за да може да разбира Flow анотациите, `babel-eslint` е пакет, който позволява ESLint *да разчита на парсъра на Babel* вместо на своя собствен и `eslint-plugin-flowtype` е ESLint плъгин за линтване на Flow анотации.
 
-- Update your `.babelrc` file like so:
+- Обновете вашия `.babelrc` файл със следното::
 
 ```json
 {
@@ -208,7 +208,7 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
 }
 ```
 
-- And update `.eslintrc.json` as well:
+- Обновете също и `.eslintrc.json` файла:
 
 ```json
 {
@@ -228,11 +228,11 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
 }
 ```
 
-**Note**: The `plugin:flowtype/recommended` contains the instruction for ESLint to use Babel's parser. If you want to be more explicit, feel free to add `"parser": "babel-eslint"` in `.eslintrc.json`.
+**Забележка**: `plugin:flowtype/recommended` съдържа инструкцията за ESLint за използване на парсъра на Babel. Ако искате да бъдете още по-изчерпателни, можете да добавите `"parser": "babel-eslint"` в `.eslintrc.json`.
 
-I know this is a lot to take in, so take a minute to think about it. I'm still amazed that it is even possible for ESLint to use Babel's parser to understand Flow annotations. These 2 tools are really incredible for being so modular.
+Знам, че инфромацията до тук е много за възприемане, така че си вземете минутка и помислете малко. Аз съм още измуне, че дори и възможно за ESLint да използва парсъра на Babel, за да може да разбира Flow анотации. Тези два инструмента са наистина невероятни от гледна точка на модулярността, която предлагат.
 
-- Chain `flow` to your `test` task:
+- Добавете `flow` във вашата `test` задача:
 
 ```json
 "scripts": {
@@ -241,23 +241,23 @@ I know this is a lot to take in, so take a minute to think about it. I'm still a
 },
 ```
 
-- Create a `.flowconfig` file at the root of your project containing:
+- Създайте `.flowconfig` файл в основната директория на вашия проект:
 
 ```flowconfig
 [options]
 suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
 ```
 
-This is a little utility that we set up to make Flow ignore any warning detected on the next line. You would use it like this, similarly to `eslint-disable`:
+Това е една полезна настройка, която използваме, за да накараме Flow да игнорира всякакви предупреждения и съобщения на следващия ред. Използва се по следния начин, подобно на `eslint-disable`:
 
 ```js
 // flow-disable-next-line
 something.flow(doesnt.like).for.instance()
 ```
 
-Alright, we should be all set for the configuration part.
+Добре, до тук би трябвало да сме готови с конфигуриционната част.
 
-- Add Flow annotations to `src/dog.js` like so:
+- Добавете Flow анотации в `src/dog.js` по следния начин:
 
 ```js
 // @flow
@@ -277,15 +277,15 @@ class Dog {
 export default Dog
 ```
 
-The `// @flow` comment tells Flow that we want this file to be type-checked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check out the [documentation](https://flowtype.org/docs/quick-reference.html) for more details.
+`// @flow` коментарът казва на Flow, че искаме типовете в този файл да бъдат проверени. В останалата си част, Flow анотациите са просто две точки след параметър на функция или име на функция. Проверете [документацията](https://flowtype.org/docs/quick-reference.html) за повече подробности.
 
-- Add `// @flow` at the top of `index.js` as well.
+- Добавете `// @flow` най-отгоре във вашия `index.js` файл.
 
-`yarn test` should now both lint and type-check your code fine.
+`yarn test` сега би трябвало да извърши линтването и да провери типовете във вашия код.
 
-There are 2 things that I want you to try:
+Има 2 неща, които искам да опитате:
 
-- In `dog.js`, replace `constructor(name: string)` by `constructor(name: number)`, and run `yarn test`. You should get a **Flow** error telling you that those types are incompatible. That means Flow is set up correctly.
+- В `dog.js`, заместете `constructor(name: string)` с `constructor(name: number)` и изпълнете отново `yarn test`. Би трябвало да получите **Flow** грешка, указваща, че тези типове са несъвместими. Това значи, че Flow е настроен правилно.
 
 - Now replace `constructor(name: string)` by `constructor(name:string)`, and run `yarn test`. You should get an **ESLint** error telling you that Flow annotations should have a space after the colon. That means the Flow plugin for ESLint is set up correctly.
 
