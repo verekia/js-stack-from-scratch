@@ -8,15 +8,15 @@
 
 - Проверете дали вече няма [започнат превод](https://github.com/verekia/js-stack-from-scratch/issues/147) на вашия език. Ако случая е такъв, свържете се с хората, които са го започнали и разберете дали можете да се включите и да помогнете. Всички, които взимат участие ще бъдат споменати в репозиторито с английската версия, така че екипната работа се възнаглаждава! Можете да отправите искане към техните проекти с превода и да предложите помощта си за дадена глава например.
 
-- Join the [Translations Gitter room](https://gitter.im/js-stack-from-scratch/Translations) if you're feeling chatty.
+- Присъединете се към [Translations Gitter room](https://gitter.im/js-stack-from-scratch/Translations) ако искате да говорите с някого от другите участници.
 
-- Fork the main [English repository](https://github.com/verekia/js-stack-from-scratch).
+- Вземете копие на основното репозитори [English repository](https://github.com/verekia/js-stack-from-scratch).
 
-- Post in [this issue](https://github.com/verekia/js-stack-from-scratch/issues/147) the language and URL of your forked repo.
+- Напишете [тук](https://github.com/verekia/js-stack-from-scratch/issues/147) езика и URL адреса на вашето копирано репозитори.
 
-- Translate the `README.md` files.
+- Преведете `README.md` файлове.
 
-- Add a note somewhere explaining on the main `README.md` that this is a translation, with a link to the English repository. If you don't plan to make the translation evolve over time, you can maybe add a little note saying to refer to the English one for an up-to-date version of the tutorial. I'll leave that up to your preference.
+- Някъде в основното `README.md` добавете забележка, че това е превод на основното репозитори от английски и поставете линк към него. Ако не планирате да поддържате преводите обновени с течение на времето, може също да посочите, че съдържанието е най-актуално в английската версия на ръководството. Ще оставя това на вашата преценка.
 
 - Submit a Pull Request to the English repo to add a link to your forked repository under the Translations section of the main `README.md`. It could look like this:
 
