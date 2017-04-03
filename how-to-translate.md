@@ -1,12 +1,12 @@
-# How to translate this tutorial
+# Как да правим преводи на това ръководство
 
-Thank you for your interest in translating my tutorial! Here are a few recommendations to get started.
+Благодаря ви за интереса към моето ръководство и желанието да го преведете! Ето няколко препоръки, с които да започнете.
 
-This tutorial is in constant evolution to provide the best learning experience to readers. Both the code and `README.md` files will change over time. It is great if you do a one-shot translation that won't evolve, but it would be even better if you could try to keep up with the original English version as it changes!
+Това ръководство се променя постоянно, за да може да предложи максимално добро качество на читателите. Кодът и `README.md` файловете ще се променят с времето. Самият факт, че сте решили да го преведете е страхотен, но би било още по-добре ако опитате да го обновявате, за да бъде в крак с английската версия и промените в нея!
 
-Here is what I think is a good workflow:
+Ето какво мисля, че би бил добър подход:
 
-- Check if there is already an [ongoing translation](https://github.com/verekia/js-stack-from-scratch/issues/147) for your language. If that's the case, get in touch with the folks who opened it and consider collaborating. All maintainers will be mentioned on the English repo, so team work is encouraged! You can open issues on their translation fork project to offer your help on certain chapters for instance.
+- Проверете дали вече няма [започнат превод](https://github.com/verekia/js-stack-from-scratch/issues/147) на вашия език. Ако случая е такъв, свържете се с хората, които са го започнали и разберете дали можете да се включите и да помогнете. Всички, които взимат участие ще бъдат споменати в репозиторито с английската версия, така че екипната работа се възнаглаждава! Можете да отправите искане към техните проекти с превода и да предложите помощта си за дадена глава например.
 
 - Join the [Translations Gitter room](https://gitter.im/js-stack-from-scratch/Translations) if you're feeling chatty.
 
