@@ -21,7 +21,7 @@
 - Изпратете искане (Pull Request) към английското репозитори, за да добавя линк в секцията с преводите на основното `README.md` към вашето репозитори. Ето пример как може да изглежда:
 
 ```md
-## Преводи
+## Translations
 
 - [Language](http://github.com/yourprofile/your-fork) by [You](http://yourwebsite.com)
 or
