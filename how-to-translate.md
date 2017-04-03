@@ -18,10 +18,10 @@
 
 - Някъде в основното `README.md` добавете забележка, че това е превод на основното репозитори от английски и поставете линк към него. Ако не планирате да поддържате преводите обновени с течение на времето, може също да посочите, че съдържанието е най-актуално в английската версия на ръководството. Ще оставя това на вашата преценка.
 
-- Submit a Pull Request to the English repo to add a link to your forked repository under the Translations section of the main `README.md`. It could look like this:
+- Изпратете искане (Pull Request) към английското репозитори, за да добавя линк в секцията с преводите на основното `README.md` към вашето репозитори. Може да изглежда така:
 
 ```md
-## Translations
+## Преводи
 
 - [Language](http://github.com/yourprofile/your-fork) by [You](http://yourwebsite.com)
 or
@@ -30,12 +30,12 @@ or
 - [Language](http://github.com/yourprofile/your-fork) by [@You](http://github.com/yourprofile)
 ```
 
-Since I want to reward you for your good work as much as possible, you can put any link you like on your name (to your personal website, Twitter profile, or Github profile for instance).
+Тъй като бих искал да ви наградя колкото е възможно повече за вашата добра работа, можете да поставите какъвто пожелаете линк на вашето име (към личния ви сайт, към Туитър акаунта си, към Гитхъб профил и т.н.).
 
-- After your original one-shot translation, if you want to update your repo with the latest change from the main English repo, [sync your fork](https://help.github.com/articles/syncing-a-fork/) with my repo. To make it easy to see what changed since your initial translation, you can use Github's feature to [compare commits](https://help.github.com/articles/comparing-commits-across-time/#comparing-commits). Set the **base** to the last commit from the English repo you used to translate, and compare it to **master**, like so:
+- След приключването на оригиналния превод, ако искате обновите своето репозитори с последните промени от основното английско репозитори, [синхронизирайте вашата версия](https://help.github.com/articles/syncing-a-fork/) с моето репозитори. За да можете лесно да видите какво е променено след първоначалния ви превод, можете да използвате опцията [compare commits](https://help.github.com/articles/comparing-commits-across-time/#comparing-commits). Изберете **base** да бъде последния къмит от английското репозитори, което сте използвали за превод и го сравнете с **master**, ето пример:
 
 <!-- markdownlint-disable MD034 -->
 https://github.com/verekia/js-stack-from-scratch/compare/c65dfa65d02c21063d94f0955de90947ba5273ad...master
 <!-- markdownlint-enable MD034 -->
 
-That should give you a easy-to-read diff to see exactly what changed in `README.md` files since your translation!
+Това би трябвало да ви помогне лесно да разчетете разликите и да видите какво точно е променено в `README.md` файловете от последния ви превод!
