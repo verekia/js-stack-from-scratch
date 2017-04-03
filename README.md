@@ -63,6 +63,7 @@ Setting up your editor (Atom first), MongoDB, Progressive Web App, E2E testing.
 ### V2
 
 - [Italian](https://github.com/fbertone/guida-javascript-moderno) by [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
+- [Simplified Chinese](https://github.com/yepbug/js-stack-from-scratch/) by [@yepbug](https://github.com/yepbug)
 
 Текущите преводи можете да видите [тук](https://github.com/verekia/js-stack-from-scratch/issues/147).
 
