@@ -80,15 +80,15 @@ export default {
 
 Този файл съдържа описанието на това как реално ще работи нашият паке: `entry` е началната/входната точка на нашето приложение, `output.filename` е името на изходния файл, който ще се генерира, `output.path` и `output.publicPath` указват изходната папка и URL. Ще поставим нашия пакет в `dist` папката, която ще съдържа автоматично генерираните неща (с изключение на CSS кода, който е в `public`). `module.rules` е мястото където указвате на Webpack да приложи някои неща на някои типове файлове. Тук ние указваме, че искаме всички `.js` и `.jsx` (за React) файлове, с изключение на тези в `node_modules` да минат през нещо, наречено `babel-loader`. Също така искаме тези две разширения да бъдат използвани да `resolve`-нат модулите когато ги импортваме (`import`). И накрая, декларираме порта за Webpack Dev Server.
 
-**Note**: The `.babel.js` extension is a Webpack feature to apply our Babel transformations to this config file.
+**Забележка**: `.babel.js` разширението е свойство на Webpack, с което прилагаме Babel трансформациите към този конфигурационен файл.
 
-`babel-loader` is a plugin for Webpack that transpiles your code just like we've been doing since the beginning of this tutorial. The only difference is that this time, the code will end up running in the browser instead of your server.
+`babel-loader` е плъгин за Webpack, който транспелира кода по същия начин, по който го правихте от началото на това ръководство. Единствената разлика този път е, че кода се изпълнява в браузъра ви, а не на сървъра.
 
-- Run `yarn add --dev webpack webpack-dev-server babel-core babel-loader`
+- Изпълнете `yarn add --dev webpack webpack-dev-server babel-core babel-loader`
 
-`babel-core` is a peer-dependency of `babel-loader`, so we installed it as well.
+`babel-core` е peer-dependency на `babel-loader`, така че инсталираме и него.
 
-- Add `/dist/` to your `.gitignore`
+- Добавете `/dist/` във вашия `.gitignore`
 
 ### Tasks update
 
