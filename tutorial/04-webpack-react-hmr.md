@@ -1,14 +1,14 @@
 # 04 - Webpack, React, and Hot Module Replacement
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/04-webpack-react-hmr).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/04-webpack-react-hmr).
 
 ## Webpack
 
-> 💡 **[Webpack](https://webpack.js.org/)** is a *module bundler*. It takes a whole bunch of various source files, processes them, and assembles them into one (usually) JavaScript file called a bundle, which is the only file your client will execute.
+> 💡 **[Webpack](https://webpack.js.org/)** е *module bundler* (нещо като пакетен мениджър или програма, с която сравнително лесно се настройват и използват код модули/пакети). Като входни настройки приема файловете на различни пакети със сорс код, обработва ги и ги събира в един, обикновено JavaScript, файл, наречен "пакет" (bundle), който файл е единствения, който се използва и изпълнява от вашия клиент (напр. браузъра ви).
 
-Let's create some very basic *hello world* and bundle it with Webpack.
+Нека да създадем простичката програмка *hello world* и да я "пакетираме" с Webpack.
 
-- In `src/shared/config.js`, add the following constants:
+- В `src/shared/config.js`, добавете следните константи:
 
 ```js
 export const WDS_PORT = 7000
@@ -17,7 +17,7 @@ export const APP_CONTAINER_CLASS = 'js-app'
 export const APP_CONTAINER_SELECTOR = `.${APP_CONTAINER_CLASS}`
 ```
 
-- Create an `src/client/index.js` file containing:
+- Създайте `src/client/index.js` файл, съдържащ:
 
 ```js
 import 'babel-polyfill'
@@ -27,11 +27,11 @@ import { APP_CONTAINER_SELECTOR } from '../shared/config'
 document.querySelector(APP_CONTAINER_SELECTOR).innerHTML = '<h1>Hello Webpack!</h1>'
 ```
 
-If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) before anything else in your bundle.
+Ако искате да използвате едно от най-новите неща, добавени в ES във вашия код, а именно `Promises`, ще трябва да включите [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) преди всичко друго във вашия пакет.
 
-- Run `yarn add babel-polyfill`
+- Изпълнете `yarn add babel-polyfill`
 
-If you run ESLint on this file, it will complain about `document` being undefined.
+Ако изпълните ESLint върху този файл, ще получите грешка за това, че `document` не е дефиниран (undefined).
 
 - Add the following to `env` in your `.eslintrc.json` to allow the use of `window` and `document`:
 
