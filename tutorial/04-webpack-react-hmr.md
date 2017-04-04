@@ -33,7 +33,7 @@ document.querySelector(APP_CONTAINER_SELECTOR).innerHTML = '<h1>Hello Webpack!</
 
 Ако изпълните ESLint върху този файл, ще получите грешка за това, че `document` не е дефиниран (undefined).
 
-- Add the following to `env` in your `.eslintrc.json` to allow the use of `window` and `document`:
+- Добавете следното към `env` във вашия `.eslintrc.json`, за да може да използвате `window` и `document`:
 
 ```json
 "env": {
@@ -42,9 +42,9 @@ document.querySelector(APP_CONTAINER_SELECTOR).innerHTML = '<h1>Hello Webpack!</
 }
 ```
 
-Alright, we now need to bundle this ES6 client app into an ES5 bundle.
+Добрем, сега ще трябва "пакетираме" това ES6 клиентско приложение в ES5 пакет.
 
-- Create a `webpack.config.babel.js` file containing:
+- Създайте `webpack.config.babel.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -56,29 +56,29 @@ import { isProd } from './src/shared/util'
 
 export default {
   entry: [
-    './src/client',
+    './src/client'
   ],
   output: {
     filename: 'js/bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: isProd ? '/static/' : `http://localhost:${WDS_PORT}/dist/`,
+    publicPath: isProd ? '/static/' : `http://localhost:${WDS_PORT}/dist/`
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
-    ],
+      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ }
+    ]
   },
   devtool: isProd ? false : 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx']
   },
   devServer: {
-    port: WDS_PORT,
+    port: WDS_PORT
   },
 }
 ```
 
-This file is used to describe how our bundle should be assembled: `entry` is the starting point of our app, `output.filename` is the name of the bundle to generate, `output.path` and `output.publicPath` describe the destination folder and URL. We put the bundle in a `dist` folder, which will contain things that are generated automatically (unlike the declarative CSS we created earlier which lives in `public`). `module.rules` is where you tell Webpack to apply some treatment to some type of files. Here we say that we want all `.js` and `.jsx` (for React) files except the ones in `node_modules` to go through something called `babel-loader`. We also want these two extensions to be used to `resolve` modules when we `import` them. Finally, we declare a port for Webpack Dev Server.
+Този файл съдържа описанието на това как реално ще работи нашият паке: `entry` е началната/входната точка на нашето приложение, `output.filename` е името на изходния файл, който ще се генерира, `output.path` и `output.publicPath` указват изходната папка и URL. Ще поставим нашия пакет в `dist` папката, която ще съдържа автоматично генерираните неща (с изключение на CSS кода, който е в `public`). `module.rules` е мястото където указвате на Webpack да приложи някои неща на някои типове файлове. Here we say that we want all `.js` and `.jsx` (for React) files except the ones in `node_modules` to go through something called `babel-loader`. We also want these two extensions to be used to `resolve` modules when we `import` them. Finally, we declare a port for Webpack Dev Server.
 
 **Note**: The `.babel.js` extension is a Webpack feature to apply our Babel transformations to this config file.
 
