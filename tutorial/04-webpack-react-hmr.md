@@ -78,7 +78,7 @@ export default {
 }
 ```
 
-Този файл съдържа описанието на това как реално ще работи нашият паке: `entry` е началната/входната точка на нашето приложение, `output.filename` е името на изходния файл, който ще се генерира, `output.path` и `output.publicPath` указват изходната папка и URL. Ще поставим нашия пакет в `dist` папката, която ще съдържа автоматично генерираните неща (с изключение на CSS кода, който е в `public`). `module.rules` е мястото където указвате на Webpack да приложи някои неща на някои типове файлове. Here we say that we want all `.js` and `.jsx` (for React) files except the ones in `node_modules` to go through something called `babel-loader`. We also want these two extensions to be used to `resolve` modules when we `import` them. Finally, we declare a port for Webpack Dev Server.
+Този файл съдържа описанието на това как реално ще работи нашият паке: `entry` е началната/входната точка на нашето приложение, `output.filename` е името на изходния файл, който ще се генерира, `output.path` и `output.publicPath` указват изходната папка и URL. Ще поставим нашия пакет в `dist` папката, която ще съдържа автоматично генерираните неща (с изключение на CSS кода, който е в `public`). `module.rules` е мястото където указвате на Webpack да приложи някои неща на някои типове файлове. Тук ние указваме, че искаме всички `.js` и `.jsx` (за React) файлове, с изключение на тези в `node_modules` да минат през нещо, наречено `babel-loader`. Също така искаме тези две разширения да бъдат използвани да `resolve`-нат модулите когато ги импортваме (`import`). И накрая, декларираме порта за Webpack Dev Server.
 
 **Note**: The `.babel.js` extension is a Webpack feature to apply our Babel transformations to this config file.
 
