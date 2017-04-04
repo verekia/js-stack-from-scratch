@@ -90,7 +90,7 @@ export default {
 
 - Добавете `/dist/` във вашия `.gitignore`
 
-### Tasks update
+### Tasks update - обновления на задачите
 
 In development mode, we are going to use `webpack-dev-server` to take advantage of Hot Module Reloading (later in this chapter), and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code, and the `NODE_ENV` variable set to `production`.
 
