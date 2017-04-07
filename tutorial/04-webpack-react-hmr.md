@@ -155,23 +155,23 @@ Tова ще помогне на други програмисти да разб
 
 🏁 Изпълнете `yarn start` в терминала. Отворете още един прозорец на терминала и изпълнете `yarn dev:wds` в него. Когато Webpack Dev Server приключи с генерирането на пакетите (които би трябвало да са файлове с размер приблизително ~600kB) и двата процеса са готови за работа, отворете `http://localhost:8000/` в браузъра и би трябвало да видите "Hello Webpack!". Отворете конзолата на вашия Chrome и вижте кои файлове са включени в Source таба. Би трябвало да виждате само `static/css/style.css` под `localhost:8000/`, а всички ES6 файломе да са под `webpack://./src`. Това означава, че sourcemaps работят правилно. Във вашия редактор, в `src/client/index.js`, променете `Hello Webpack!` като напишете нещо друго. В момента, в който запазите вашите промени, Webpack Dev Server би трябвало да генерира нов пакет терминала и Chrome таба трябва да опресни съдържанието си автоматично.
 
-- Kill the previous processes in your terminals with Ctrl+C, then run `yarn prod:build`, and then `yarn prod:start`. Open `http://localhost:8000/` and you should still see "Hello Webpack!". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified. Run `yarn prod:stop`.
+- Прекратете стартираните процеси в отворените прозорци на терминала ви като използвате клавишната комбинация Ctrl+C, след това изпълнете `yarn prod:build` и `yarn prod:start`. Отворете `http://localhost:8000/`, все още би трябвало да виждате "Hello Webpack!". В Source таба на конзолата на Chrome този път би трябвало да видите `static/js/bundle.js` под `localhost:8000/` вместо `webpack://` генериран код (sources). Кликнете на `bundle.js`, за да проверите дали е минифициран. Изпълнете `yarn prod:stop`.
 
-Good job, I know this was quite dense. You deserve a break! The next section is easier.
+Добра работа! Заслужавате почивка! Следващата секция ще бъде по-лесна.
 
-**Note**: I would recommend to have at least 3 terminals open, one for your Express server, one for the Webpack Dev Server, and one for Git, tests, and general commands like installing packages with `yarn`. Ideally, you should split your terminal screen in multiple panes to see them all.
+**Забележка**: Препоръчвам да имате поне 3 отворени терминала, един за вашия Express сървър, един за Webpack Dev Server и един за Git, тестове и общи команди, като например инсталиране на пакети с `yarn`. Идеална ситуация би била ако можете да резделите екрана с терминала си на няколко панела и да ги виждате всичките едновременно.
 
 ## React
 
-> 💡 **[React](https://facebook.github.io/react/)** is a library for building user interfaces by Facebook. It uses the **[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)** syntax to represent HTML elements and components while leveraging the power of JavaScript.
+> 💡 **[React](https://facebook.github.io/react/)** е библиотека за създаване на потребителски интерфейси, създадена от Фейсбук. Използва **[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)** синтаксис за работа с HTML елементи и компоненти докато в същото време изплозва силата на JavaScript.
 
-In this section we are going to render some text using React and JSX.
+В тази секция ще покажем малко текст използвайки React и JSX.
 
-First, let's install React and ReactDOM:
+Първо нека инсталираме React и ReactDOM:
 
-- Run `yarn add react react-dom`
+- Изпълнете `yarn add react react-dom`
 
-Rename your `src/client/index.js` file into `src/client/index.jsx` and write some React code in it:
+Преименувайте вашия `src/client/index.js` файл на `src/client/index.jsx` и напишете следния React код в него:
 
 ```js
 // @flow
@@ -187,7 +187,7 @@ import { APP_CONTAINER_SELECTOR } from '../shared/config'
 ReactDOM.render(<App />, document.querySelector(APP_CONTAINER_SELECTOR))
 ```
 
-- Create a `src/client/app.jsx` file containing:
+- Създайте `src/client/app.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -199,9 +199,9 @@ const App = () => <h1>Hello React!</h1>
 export default App
 ```
 
-Since we use the JSX syntax here, we have to tell Babel that it needs to transform it with the `babel-preset-react` preset. And while we're at it, we're also going to add a Babel plugin called `flow-react-proptypes` which automatically generates PropTypes from Flow annotations for your React components.
+Тъй като тук използваме JSX синтаксис, трябва да укажем на Babel, че трябва да го трансформира, използвайки `babel-preset-react` пакета. И докато все още сме на това, ще инсталираме още един Babel плъгин, наречен `flow-react-proptypes`, който автоматично генерира PropTypes от Flow анотации за вашите React компоненти.
 
-- Run `yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes` and edit your `.babelrc` file like so:
+- Изпълнете `yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes` и редактирайте вашия `.babelrc` файл, както следва:
 
 ```json
 {
@@ -216,19 +216,19 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 }
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Hello React!".
+🏁 Изпълнете `yarn start` и `yarn dev:wds` и отворете `http://localhost:8000`. Би трябвало да видите "Hello React!".
 
-Now try changing the text in `src/client/app.jsx` to something else. Webpack Dev Server should reload the page automatically, which is pretty neat, but we are going to make it even better.
+Сега променете текста в `src/client/app.jsx` на нещо друго. Webpack Dev Server би трябвало да опресни страницата автоматично, което е доста яко, но ние ще го направим още по-яко :).
 
 ## Hot Module Replacement
 
-> 💡 **[Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)** (*HMR*) is a powerful Webpack feature to replace a module on the fly without reloading the entire page.
+> 💡 **[Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)** (*HMR*) е мощно средство на Webpack, с което може да се замести един модул с друг по време на работа, без да се налага да се опреснява цялата страница.
 
-To make HMR work with React, we are going to need to tweak a few things.
+За да може HMR да работи с React ще трябва да настроим няколко неща.
 
-- Run `yarn add react-hot-loader@next`
+- Изпълнете `yarn add react-hot-loader@next`
 
-- Edit your `webpack.config.babel.js` like so:
+- Редактиратия вашия `webpack.config.babel.js`, както следва:
 
 ```js
 import webpack from 'webpack'
@@ -250,7 +250,7 @@ plugins: [
 ],
 ```
 
-- Edit your `src/client/index.jsx` file:
+- Редактирайте вашия `src/client/index.jsx` файл:
 
 ```js
 // @flow
@@ -283,10 +283,10 @@ if (module.hot) {
 }
 ```
 
-We need to make our `App` a child of `react-hot-loader`'s `AppContainer`, and we need to `require` the next version of our `App` when hot-reloading. To make this  process clean and DRY, we create a little `wrapApp` function that we use in both places it needs to render `App`. Feel free to move the `eslint-disable global-require` to the top of the file to make this more readable.
+Трябва да направим нашия `App` да е "дете" на `AppContainer`-а на `react-hot-loader` и да изискаме (`require`) следващата версия на `App` когато използваме моменталното презареждане (hot-reloading). За да направим този процес чист и DRY (don't repeat yourself), ще създаден една малка функция `wrapApp` function, която ще използваме на двете места където трябва да се интерпретира (render) `App`. Можете да преместите `eslint-disable global-require` в горната част на файла, за да го направите по-четим.
 
-🏁 Restart your `yarn dev:wds` process if it was still running. Open `localhost:8000`. In the Console tab, you should see some logs about HMR. Go ahead and change something in `src/client/app.jsx` and your changes should be reflected in your browser after a few seconds, without any full-page reload!
+🏁 Рестартирайте вашия `yarn dev:wds` процес ако все още се изпълнява. Отворете `localhost:8000`. В Console таба би трябвало да виждате логове за HMR. Променете нещо в `src/client/app.jsx` и вашите промени би трябвало да се отразят в браузъра ви след няколко секунди, без да се опреснява цялата страница!
 
-Next section: [05 - Redux, Immutable, Fetch](05-redux-immutable-fetch.md#readme)
+Следваща глава: [05 - Redux, Immutable, Fetch](05-redux-immutable-fetch.md#readme)
 
-Back to the [previous section](03-express-nodemon-pm2.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](03-express-nodemon-pm2.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
