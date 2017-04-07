@@ -111,11 +111,11 @@ export default {
 },
 ```
 
-In `dev:start` we explicitly declare file extensions to monitor, `.js` and `.jsx`, and add `dist` in the ignored directories.
+В `dev:start` декларираме изрично кои файлови разширения да бъдат следени, както и че папката `dist` да се игнорира.
 
-We created a separate `lint` task and added `webpack.config.babel.js` to the files to lint.
+Създадохме отделна `lint` задача и добавихме `webpack.config.babel.js` към файловете, които ще се обработват от линтера.
 
-- Next, let's create the container for our app in `src/server/render-app.js`, and include the bundle that will be generated:
+- Следващата стъпка е да създадем контейнер за приложението ни в `src/server/render-app.js` и да включим пакета, който ще бъде генериран:
 
 ```js
 // @flow
@@ -140,20 +140,20 @@ const renderApp = (title: string) =>
 export default renderApp
 ```
 
-Depending on the environment we're in, we'll include either the Webpack Dev Server bundle, or the production bundle. Note that the path to Webpack Dev Server's bundle is *virtual*, `dist/js/bundle.js` is not actually read from your hard drive in development mode. It's also necessary to give Webpack Dev Server a different port than your main web port.
+Избираме дали да включим Webpack Dev Server пакета или този за продукционната среда според зависимост от средата, в която сме. Обърнете внимание, че пътя до Webpack Dev Server пакета е *виртуален*, `dist/js/bundle.js` не съществува физически на твърдия ви диск когато сте в среда за разработка (development mode). Също така е необходимо да дадете на Webpack Dev Server различен от основния ви уеб порт.
 
-- Finally, in `src/server/index.js`, tweak your `console.log` message like so:
+- И накрая, в `src/server/index.js`, напишете вашите `console.log` съобщения по следния начин:
 
 ```js
 console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
   '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
 ```
 
-That will give other developers a hint about what to do if they try to just run `yarn start` without Webpack Dev Server.
+Tова ще помогне на други програмисти да разберат какво да правят ако просто са стартирали `yarn start` без Webpack Dev Server.
 
-Alright that was a lot of changes, let's see if everything works as expected:
+Окей, това бяха доста промени, нека да видим сега дали всичко работи както се очаква:
 
-🏁 Run `yarn start` in a terminal. Open an other terminal tab or window, and run `yarn dev:wds` in it. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should both be ~600kB files) and both processes hang in your terminals, open `http://localhost:8000/` and you should see "Hello Webpack!". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In your editor, in `src/client/index.js`, try changing `Hello Webpack!` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should reload automatically.
+🏁 Изпълнете `yarn start` в терминала. Отворете още един прозорец на терминала и изпълнете `yarn dev:wds` в него. Когато Webpack Dev Server приключи с генерирането на пакетите (които би трябвало да са файлове с размер приблизително ~600kB) и двата процеса са готови за работа, отворете `http://localhost:8000/` в браузъра и би трябвало да видите "Hello Webpack!". Отворете конзолата на вашия Chrome и вижте кои файлове са включени в Source таба. Би трябвало да виждате само `static/css/style.css` под `localhost:8000/`, а всички ES6 файломе да са под `webpack://./src`. Това означава, че sourcemaps работят правилно. Във вашия редактор, в `src/client/index.js`, променете `Hello Webpack!` като напишете нещо друго. В момента, в който запазите вашите промени, Webpack Dev Server би трябвало да генерира нов пакет терминала и Chrome таба трябва да опресни съдържанието си автоматично.
 
 - Kill the previous processes in your terminals with Ctrl+C, then run `yarn prod:build`, and then `yarn prod:start`. Open `http://localhost:8000/` and you should still see "Hello Webpack!". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified. Run `yarn prod:stop`.
 
