@@ -100,13 +100,13 @@ export default helloReducer
 
 > 💡 **[react-redux](https://github.com/reactjs/react-redux)** *свързва* Redux "склада" (store) с React компонентите. Чрез `react-redux` си гарантираме, че когато се промени Redux store обекта, React компонентите ще се обновят автоматично, отразявайки тази промяна. Също така те могат да предизвикват Redux действия (actions).
 
-- Run `yarn add react-redux`
+- Изпълнете `yarn add react-redux`
 
-In this section we are going to create *Components* and *Containers*.
+В тази секция ще създадем компоненти (*Components*) и контейнери (*Containers*).
 
-**Components** are *dumb* React components, in a sense that they don't know anything about the Redux state. **Containers** are *smart* components that know about the state and that we are going to *connect* to our dumb components.
+**Компонентите** са *глупави* React компоненти, в смисъл такъв, че те не знаят нищо за състоянието на Redux (Redux state). **Контейнерите** са *умни* компоненти, които знаят за състоянието и които ще *свържем* с нашите "глупави" компоненти.
 
-- Create a `src/client/component/button.jsx` file containing:
+- Създайте `src/client/component/button.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -115,7 +115,7 @@ import React from 'react'
 
 type Props = {
   label: string,
-  handleClick: Function,
+  handleClick: Function
 }
 
 const Button = ({ label, handleClick }: Props) =>
@@ -124,9 +124,9 @@ const Button = ({ label, handleClick }: Props) =>
 export default Button
 ```
 
-**Note**: You can see a case of Flow *type alias* here. We define the `Props` type before annotating our component's destructured `props` with it.
+**Забележка**: Тук можете да видите пример за Flow *type alias*. Дефинираме `Props` типа преди да анотираме деструктурираните свойства (`props`) на нашия компонент с него.
 
-- Create a `src/client/component/message.jsx` file containing:
+- Създайте `src/client/component/message.jsx` файл, който съдържа следното:
 
 ```js
 // @flow
@@ -134,7 +134,7 @@ export default Button
 import React from 'react'
 
 type Props = {
-  message: string,
+  message: string
 }
 
 const Message = ({ message }: Props) =>
@@ -143,11 +143,11 @@ const Message = ({ message }: Props) =>
 export default Message
 ```
 
-These are examples of *dumb* components. They are logic-less, and just show whatever they are asked to show via React **props**. The main difference between `button.jsx` and `message.jsx` is that `Button` contains a reference to an action dispatcher in its props, where `Message` just contains some data to show.
+Това са примери за "глупави" (*dumb*) компоненти. В тях няма логика и просто показват това, за което са направени да показват чрез React **props**. Основната разлика между `button.jsx` и `message.jsx` е това, че `Button` съдържа референция към изпращач на действия (action dispatcher) в своите свойства, докато `Message` просто съдържа информация, която ще показва.
 
-Again, *components* don't know anything about Redux **actions** or the **state** of our app, which is why we are going to create smart **containers** that will feed the proper action dispatchers and data to these 2 dumb components.
+Отново споменаваме, че компонентите (*components*) не знаят нищо за Redux действията (**actions**) или за състоянието (**state**) на нашето приложение, което е причината, поради която ще създадем и "умни" контейнери (**containers**), които ще предоставят необходимите изпращачи на действия (action dispatchers) и информация на двата "глупави" компонента.
 
-- Create a `src/client/container/hello-button.js` file containing:
+- Създайте `src/client/container/hello-button.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -168,9 +168,9 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Button)
 ```
 
-This container hooks up the `Button` component with the `sayHello` action and Redux's `dispatch` method.
+Този бутон свързва комтонента `Button` с `sayHello` действието и метода `dispatch` на Redux.
 
-- Create a `src/client/container/message.js` file containing:
+- Създайте `src/client/container/message.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -186,9 +186,9 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Message)
 ```
 
-This container hooks up the Redux's app state with the `Message` component. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
+Този контейнер свързва състоянието (state) на приложението на Redux с `Message` компонента. Когато се промени състоянието, `Message` ще се обнови автоматично с новата стойност идваща от `message` свойството (prop). Тези връзки са осъществени чрез използването на `connect` функцията от `react-redux`.
 
-- Update your `src/client/app.jsx` file like so:
+- Обновете `src/client/app.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -208,9 +208,9 @@ const App = () =>
 export default App
 ```
 
-We still haven't initialized the Redux store and haven't put the 2 containers anywhere in our app yet:
+Все още не сме инициализирали Redux store обекта и не сме добавили в приложението нашите два контенейра:
 
-- Edit `src/client/index.jsx` like so:
+- Редактирайте `src/client/index.jsx`, както следва:
 
 ```js
 // @flow
@@ -253,7 +253,7 @@ if (module.hot) {
 }
 ```
 
-Let's take a moment to review this. First, we create a *store* with `createStore`. Stores are created by passing reducers to them. Here we only have one reducer, but for the sake of future scalability, we use `combineReducers` to group all of our reducers together. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we disable this ESLint rule. Next, we conveniently wrap our entire app inside `react-redux`'s `Provider` component thanks to our `wrapApp` function, and pass our store to it.
+Нека да отделим малко време и да разгледаме това по-подробно. Като начало, създаваме *store*, използвайки `createStore`. Store обектите се създават, чрез подаване на reducers обекти към тях. В нашия пример имаме само един reducer обект, но за да покажем как това би се направило в едно бъдещо приложение с много redurer обекти, използваме `combineReducers`, за да групираме всички reducer обекти заедно. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we disable this ESLint rule. Next, we conveniently wrap our entire app inside `react-redux`'s `Provider` component thanks to our `wrapApp` function, and pass our store to it.
 
 🏁 You can now run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Initial reducer message" and a button. When you click the button, the message should change to "Hello!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
 
