@@ -359,11 +359,11 @@ export default connect(mapStateToProps)(MessageAsync)
 
 Ще използваме `fetch`, за да правим извиквания (calls) от клиента към сървъра. Тъй като `fetch` не се поддържа от всички браузъри, ще използваме полифил (polyfill). `isomorphic-fetch` е такъв полифил, който работи еднакво добре както в различните браузъри, така и в Node среда!
 
-- Run `yarn add isomorphic-fetch`
+- Изпълнете `yarn add isomorphic-fetch`
 
-Since we're using `eslint-plugin-compat`, we need to indicate that we are using a polyfill for `fetch` to not get warnings from using it.
+Заради използването на `eslint-plugin-compat` ще трябва да укажем изрично, че използваме полифил за `fetch`, за да не получаваме предупредителни съобщения от това, че го използваме.
 
-- Add the following to your `.eslintrc.json` file:
+- Добавете следното във вашия `.eslintrc.json` файл:
 
 ```json
 "settings": {
@@ -371,11 +371,11 @@ Since we're using `eslint-plugin-compat`, we need to indicate that we are using 
 },
 ```
 
-### 3 asynchronous actions
+### 3 асинхронни действия (3 asynchronous actions)
 
-`sayHelloAsync` is not going to be a regular action. Asynchronous actions are usually split into 3 actions, which trigger 3 different states: a *request* action (or "loading"), a *success* action, and a *failure* action.
+`sayHelloAsync` няма да бъде обикновено действие (action). Асинхронните действия (actions) обикновено се делят на 3 фази, които инициират три различни състояния (states): "заявка" (*request*) действие или "зареждане ("loading"), *успех* действие (action) и "провал" (*failure*) действие.
 
-- Edit `src/client/action/hello.js` like so:
+- Редактирайте `src/client/action/hello.js` файла, както следва:
 
 ```js
 // @flow
@@ -412,7 +412,7 @@ export const sayHelloAsync = (num: number) => (dispatch: Function) => {
 }
 ```
 
-Instead of returning an action, `sayHelloAsync` returns a function which launches the `fetch` call. `fetch` returns a `Promise`, which we use to *dispatch* different actions depending on the current state of our asynchronous call.
+Вместо да върне действие (action), `sayHelloAsync` връща функция, която изпълнява `fetch` извикване (call). `fetch` връща `Promise` (име на тиб данни наречени "обещания" или Promises), което използваме, за да изпратим (*dispatch*) или реагираме с различки действия, в сависимост от текущата сигуацие на нашите асинхронни извиквания.
 
 ### 3 asynchronous action handlers
 
