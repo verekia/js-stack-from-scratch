@@ -253,19 +253,19 @@ if (module.hot) {
 }
 ```
 
-Нека да отделим малко време и да разгледаме това по-подробно. Като начало, създаваме *store*, използвайки `createStore`. Store обектите се създават, чрез подаване на reducers обекти към тях. В нашия пример имаме само един reducer обект, но за да покажем как това би се направило в едно бъдещо приложение с много redurer обекти, използваме `combineReducers`, за да групираме всички reducer обекти заедно. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we disable this ESLint rule. Next, we conveniently wrap our entire app inside `react-redux`'s `Provider` component thanks to our `wrapApp` function, and pass our store to it.
+Нека да отделим малко време и да разгледаме това по-подробно. Като начало, създаваме *store*, използвайки `createStore`. Store обектите се създават, чрез подаване на reducers обекти към тях. В нашия пример имаме само един reducer обект, но за да покажем как това би се направило в едно бъдещо приложение с много redurer обекти, използваме `combineReducers`, за да групираме всички reducer обекти заедно. Последния странен параметър, който се използва от `createStore` е нещо, което използваме, за да свържем Redux с интрументите за дебъгване на нашия браузър - [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), тези инструменти са много полезни когато дебъгваме приложенията си. За да може ESLint да не се оплаква от използването на подчерти в`__REDUX_DEVTOOLS_EXTENSION__`, забраняваме това ESLint правило. След това поставяме цялото приложение в `Provider` компонента на `react-redux`, брагодарение на нашата `wrapApp` функция, и подаваме store обекта като входен параметър.
 
-🏁 You can now run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Initial reducer message" and a button. When you click the button, the message should change to "Hello!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
+🏁 Сега вече можете да изпълните `yarn start` и `yarn dev:wds` и да отворите `http://localhost:8000`. Би трябвало да видите "Initial reducer message" и един бутон. Когато натиснете бутона съобщението трябва да се промени на "Hello!". Ако сте инсталирали Redux Devtools във вашия браузър, би трябвало да виждате как се променя състоянието (state) на приложението всеки път когато се натисне бутона.
 
-Congratulations, we finally made an app that does something! Okay it's not a *super* impressive from the outside, but we all know that it is powered by one badass stack under the hood.
+Поздравления, най-накрая направихме приложение, което прави нещо наистина! Добре де, не е *super* впечатляващо погледнато отвън, но поне всички знаем, че е разработено чрез използването на "супер-дуперския" пакет от инструменти описвани в това ръководство :).
 
-## Extending our app with an asynchronous call
+## Разширяване на нашето приложение чрез използване на асинхронни извиквания (Extending our app with an asynchronous call)
 
-We are now going to add a second button to our app, which will trigger an AJAX call to retrieve a message from the server. For the sake of demonstration, this call will also send some data, the hard-coded number `1234`.
+Тук ще добавим втори бутон в нашето приложение, който ще стартира AJAX извикване (call), за да изтегли ново съобщение от сървъра. За по-добра демонстрация, това извикване (call) и ще изпрати информация към сървъра - статично число `1234`.
 
 ### The server endpoint
 
-- Create a `src/shared/routes.js` file containing:
+- Създайте `src/shared/routes.js` файл, който да съдържа следното:
 
 ```js
 // @flow
@@ -281,7 +281,7 @@ helloEndpointRoute()     // -> '/ajax/hello/:num' (for Express)
 helloEndpointRoute(1234) // -> '/ajax/hello/1234' (for the actual call)
 ```
 
-Let's actually create a test real quick to make sure this thing works well.
+Всъщност, нека набързо да създадем тест за това, за да сме сигурни, че работи както трябва.
 
 - Create a `src/shared/routes.test.js` containing:
 
