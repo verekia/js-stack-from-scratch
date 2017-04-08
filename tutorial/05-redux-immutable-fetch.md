@@ -283,7 +283,7 @@ helloEndpointRoute(1234) // -> '/ajax/hello/1234' (for the actual call)
 
 Всъщност, нека набързо да създадем тест за това, за да сме сигурни, че работи както трябва.
 
-- Create a `src/shared/routes.test.js` containing:
+- Създайте `src/shared/routes.test.js` файл, съдържащ:
 
 ```js
 import { helloEndpointRoute } from './routes'
@@ -333,7 +333,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Button)
 
 За да демонстрираме как бихте изпратили параметър към асинхронната функция и да се придържаме към простички примери, отново използвам статична стойност `1234`. Обикновено стойности като тази бихме взимали от поле във форма попълвана от потребителя.
 
-- Create a `src/client/container/message-async.js` file containing:
+- Създайте `src/client/container/message-async.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -349,13 +349,13 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(MessageAsync)
 ```
 
-You can see that in this container, we are referring to a `messageAsync` property, which we're going to add to our reducer soon.
+Както ще видите тук, използваме `messageAsync` свойството, което скоро ще добавим в нашия reducer обект.
 
-What we need now is to create the `sayHelloAsync` action.
+Сега трябва да създадем действието `sayHelloAsync`.
 
 ### Fetch
 
-> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** is a standardized JavaScript function to make asynchronous calls inspired by jQuery's AJAX methods.
+> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** е стандартизирана JavaScript функция, за изпълняване на асинхронни извиквания (asynchronous call), инспирирана от AJAX методите на jQuery.
 
 We are going to use `fetch` to make calls to the server from the client. `fetch` is not supported by all browsers yet, so we are going to need a polyfill. `isomorphic-fetch` is a polyfill that makes it work cross-browsers and in Node too!
 
