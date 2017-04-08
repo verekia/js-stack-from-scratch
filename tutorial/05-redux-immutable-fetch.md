@@ -357,7 +357,7 @@ export default connect(mapStateToProps)(MessageAsync)
 
 > 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** е стандартизирана JavaScript функция, за изпълняване на асинхронни извиквания (asynchronous call), инспирирана от AJAX методите на jQuery.
 
-We are going to use `fetch` to make calls to the server from the client. `fetch` is not supported by all browsers yet, so we are going to need a polyfill. `isomorphic-fetch` is a polyfill that makes it work cross-browsers and in Node too!
+Ще използваме `fetch`, за да правим извиквания (calls) от клиента към сървъра. Тъй като `fetch` не се поддържа от всички браузъри, ще използваме полифил (polyfill). `isomorphic-fetch` е такъв полифил, който работи еднакво добре както в различните браузъри, така и в Node среда!
 
 - Run `yarn add isomorphic-fetch`
 
