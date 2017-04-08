@@ -416,7 +416,7 @@ export const sayHelloAsync = (num: number) => (dispatch: Function) => {
 
 ### 3 asynchronous action handlers
 
-Let's handle these different actions in `src/client/reducer/hello.js`:
+Нека обработим различните действия в `src/client/reducer/hello.js`:
 
 ```js
 // @flow
@@ -454,15 +454,15 @@ const helloReducer = (state: Immut = initialState, action: { type: string, paylo
 export default helloReducer
 ```
 
-We added a new field to our store, `messageAsync`, and we update it with different messages depending on the action we receive. During `SAY_HELLO_ASYNC_REQUEST`, we show `Loading...`. `SAY_HELLO_ASYNC_SUCCESS` updates `messageAsync` similarly to how `SAY_HELLO` updates `message`. `SAY_HELLO_ASYNC_FAILURE` gives an error message.
+Добавяме ново поле в нашия store обект, `messageAsync`, и ще го обновяваме с различни съобщения в зависимост от действието (action), което получим. По време на `SAY_HELLO_ASYNC_REQUEST` показваме `Loading...`. `SAY_HELLO_ASYNC_SUCCESS` обновява `messageAsync` подобно на начина, по който `SAY_HELLO` обновява `message`. `SAY_HELLO_ASYNC_FAILURE` връща съобщение за грешка.
 
 ### Redux-thunk
 
-In `src/client/action/hello.js`, we made `sayHelloAsync`, an action creator that returns a function. This is actually not a feature that is natively supported by Redux. In order to perform these async actions, we need to extend Redux's functionality with the `redux-thunk` *middleware*.
+В `src/client/action/hello.js` създадохме `sayHelloAsync`, което е нещо, което създава действие ("action creator"), което връща функция. Това не е нещо, което се поддържа от Redux по подразбиране. За да можем да изпълняваме подобен род действия ще трябва да разширим функционалността на Redux с `redux-thunk` *middleware*.
 
-- Run `yarn add redux-thunk`
+- Изпълнете `yarn add redux-thunk`
 
-- Update your `src/client/index.jsx` file like so:
+- Обновете `src/client/index.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -508,9 +508,9 @@ if (module.hot) {
 }
 ```
 
-Here we pass `redux-thunk` to Redux's `applyMiddleware` function. In order for the Redux Devtools to keep working, we also need to use Redux's `compose` function. Don't worry too much about this part, just remember that we enhance Redux with `redux-thunk`.
+Тук подаваме `redux-thunk` на `applyMiddleware` функцията на React. За да може Redux Devtools да продължат да работят, също така трябва да използваме `compose` функцията на React. Не се притеснявайте прекалено много за тази част, просто запомнете, че разширяваме Redux с `redux-thunk`.
 
-- Update `src/client/app.jsx` like so:
+- Обновете `src/client/app.jsx`, както следва:
 
 ```js
 // @flow
@@ -534,15 +534,15 @@ const App = () =>
 export default App
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds` and you should now be able to click the "Say hello asynchronously and send 1234" button and retrieve a corresponding message from the server! Since you're working locally, the call is instantaneous, but if you open the Redux Devtools, you will notice that each click triggers both `SAY_HELLO_ASYNC_REQUEST` and `SAY_HELLO_ASYNC_SUCCESS`, making the message go through the intermediate `Loading...` state as expected.
+🏁 Изпълнете `yarn start` и `yarn dev:wds`, и сега би трябвало да можете да натиснете бутона "Say hello asynchronously and send 1234" и да получите съответното съобщение от сървъра! Тъя като работим на локалните си машини, извикването и резултата се получават моментално. Но ако отворите Redux Devtools ще забележите, че всяко натискане на бутона е причина за нови `SAY_HELLO_ASYNC_REQUEST` и `SAY_HELLO_ASYNC_SUCCESS` събития, карайки съобщенията да минават през междинната фаза `Loading...` на състояниего, както се очаква.
 
-You can congratulate yourself, that was an intense section! Let's wrap it up with some testing.
+Можете да се поздравите, това беше една доста трудна и изморителна глава! Нека да обобщим резултатите с малко тестване.
 
-## Testing
+## Тестване / Testing
 
-In this section, we are going to test our actions and reducer. Let's start with the actions.
+В тази секция ще тестваме нашите дествия (actions) и reducer обект. Нека да започнем с действията.
 
-In order to isolate the logic that is specific to `action/hello.js` we are going to need to *mock* things that don't concern it, and also mock that AJAX `fetch` request which should not trigger an actual AJAX in our tests.
+За да можем да изолираме логиката, която е специфична за `action/hello.js` ще имаме нужда от *mock* неща, които нямат връзка с него и също така могат да симулират AJAX `fetch` извикване, което не би трябвало да инициира истинско AJAX извикване.
 
 - Run `yarn add --dev redux-mock-store fetch-mock`
 
