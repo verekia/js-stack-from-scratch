@@ -185,7 +185,7 @@ Let's add the following `prod:build` task to our `scripts`:
 
 - Add `/lib/` to your `.gitignore`
 
-One last thing: We are going to pass a `NODE_ENV` environment variable to our PM2 binary. With Unix, you would do this by running `NODE_ENV=production pm2`, but Windows uses a different syntax. We're going to use a small package called `cross-env` to make this syntax work on Windows as well.
+One last thing: We are going to pass a `NODE_ENV` environment variable to our PM2 binary. With Unix, you would do this by running `NODE_ENV=production`, but Windows uses a different syntax. We're going to use a small package called `cross-env` to make this syntax work on Windows as well.
 
 - Run `yarn add --dev cross-env`
 
@@ -196,7 +196,7 @@ Let's update our `package.json` like so:
   "start": "yarn dev:start",
   "dev:start": "nodemon --ignore lib --exec babel-node src/server",
   "prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
-  "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
+  "prod:start": "cross-env NODE_ENV=production && pm2 start lib/server && pm2 logs",
   "prod:stop": "pm2 delete server",
   "test": "eslint src && flow && jest --coverage",
   "precommit": "yarn test",
