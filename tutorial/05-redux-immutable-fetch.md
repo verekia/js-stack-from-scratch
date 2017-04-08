@@ -274,7 +274,7 @@ if (module.hot) {
 export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
 ```
 
-This function is a little helper to produce the following:
+Тази функция ще ни помага да създаваме следното:
 
 ```js
 helloEndpointRoute()     // -> '/ajax/hello/:num' (for Express)
@@ -294,9 +294,9 @@ test('helloEndpointRoute', () => {
 })
 ```
 
-- Run `yarn test` and it should pass successfully.
+- Изпълнете `yarn test`, би трябвало да се изпълни успешно.
 
-- In `src/server/index.js`, add the following:
+- В `src/server/index.js` файла добавете следното:
 
 ```js
 import { helloEndpointRoute } from '../shared/routes'
@@ -308,9 +308,9 @@ app.get(helloEndpointRoute(), (req, res) => {
 })
 ```
 
-### New containers
+### Нови контейнери
 
-- Create a `src/client/container/hello-async-button.js` file containing:
+- Създайте `src/client/container/hello-async-button.js` файл, съдържащ следното:
 
 ```js
 // @flow
@@ -325,13 +325,13 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: () => { dispatch(sayHelloAsync(1234)) },
+  handleClick: () => { dispatch(sayHelloAsync(1234)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Button)
 ```
 
-In order to demonstrate how you would pass a parameter to your asynchronous call and to keep things simple, I am hard-coding a `1234` value here. This value would typically come from a form field filled by the user.
+За да демонстрираме как бихте изпратили параметър към асинхронната функция и да се придържаме към простички примери, отново използвам статична стойност `1234`. Обикновено стойности като тази бихме взимали от поле във форма попълвана от потребителя.
 
 - Create a `src/client/container/message-async.js` file containing:
 
