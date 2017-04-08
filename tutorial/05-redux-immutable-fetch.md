@@ -1,23 +1,23 @@
 # 05 - Redux, Immutable, and Fetch
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/05-redux-immutable-fetch).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/05-redux-immutable-fetch).
 
-In this chapter we will hook up React and Redux to make a very simple app. The app will consist of a message and a button. The message changes when the user clicks the button.
+В тази глава ще свържем React с Redux и ще направим едно простичко приложение. Приложението ще се състои от едно съобщение и един бутон. Съобщението ще се променя когато потребителя натисне бутона.
 
-Before we start, here is a very quick introduction to ImmutableJS, which is completely unrelated to React and Redux, but will be used in this chapter.
+Преди да започнем, ви предлагам едно много бързо въведение за ImmutableJS, което няма нищо обще с React и Redux, но ще бъде използвано в тази глава.
 
 ## ImmutableJS
 
-> 💡 **[ImmutableJS](https://facebook.github.io/immutable-js/)** (or just Immutable) is a library by Facebook to manipulate immutable collections, like lists and maps. Any change made on an immutable object returns a new object without mutating the original object.
+> 💡 **[ImmutableJS](https://facebook.github.io/immutable-js/)** (или само Immutable) е библиотека, създадена от Facebook, за манипулиране на непроменящи се колекции (immutable collections), като например списъци (lists) и карти (maps). Всяка промяна направена върху такъв обект (immutable) дава като резултат нов обект без да променя оригиналния такъв.
 
-For instance, instead of doing:
+Например, следното вместо да го направите така:
 
 ```js
 const obj = { a: 1 }
 obj.a = 2 // Mutates `obj`
 ```
 
-You would do:
+Бихте го направили така:
 
 ```js
 const obj = Immutable.Map({ a: 1 })
