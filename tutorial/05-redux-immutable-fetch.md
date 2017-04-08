@@ -544,9 +544,9 @@ export default App
 
 За да можем да изолираме логиката, която е специфична за `action/hello.js` ще имаме нужда от *mock* неща, които нямат връзка с него и също така могат да симулират AJAX `fetch` извикване, което не би трябвало да инициира истинско AJAX извикване.
 
-- Run `yarn add --dev redux-mock-store fetch-mock`
+- Изпълнете `yarn add --dev redux-mock-store fetch-mock`
 
-- Create a `src/client/action/hello.test.js` file containing:
+- Създайте `src/client/action/hello.test.js` файл, съдържащ:
 
 ```js
 import fetchMock from 'fetch-mock'
@@ -605,11 +605,11 @@ test('sayHelloAsync data error', () => {
 })
 ```
 
-Alright, Let's look at what's happening here. First we mock the Redux store using `const mockStore = configureMockStore([thunkMiddleware])`. By doing this we can dispatch actions without them triggering any reducer logic. For each test, we mock `fetch` using `fetchMock.get()` and make it return whatever we want. What we actually test using `expect()` is which series of actions have been dispatched by the store, thanks to the `store.getActions()` function from `redux-mock-store`. After each test we restore the normal behavior of `fetch` with `fetchMock.restore()`.
+Добре, нека да видим какво се случва тук. Като за начало "мокваме" (създаваме изкуствен източник на информация, която се използва при създаването на тестове) Redux store обекта, използвайки `const mockStore = configureMockStore([thunkMiddleware])`. Това ще ни позволи да можем изпращаме действия (actions), без те да стартирта каквато и да била reducer логика. За всеки тест, използваме спациални протрами за управление на входната информация, като например "мокването" на `fetch`, използвайки `fetchMock.get()` и правейки го да върне като резултат каквото ние поискаме. Това, което всъщност тестваме, използвайки `expect()`, е кои серии от дествия са били изпратени от store обекта благодарение на `store.getActions()` функцията от `redux-mock-store`. След всеки тест възтановяваме нормалното поведение на `fetch` с `fetchMock.restore()`.
 
-Let's now test our reducer, which is much easier.
+Хайде сега да изместваме reducer обекти, което е доста по-лесна.
 
-- Create a `src/client/reducer/hello.test.js` file containing:
+- Създаней` `src/client/reducer/hello.test.js` файл, съдържащ:
 
 ```js
 import {
@@ -653,7 +653,7 @@ test('handle SAY_HELLO_ASYNC_FAILURE', () => {
 })
 ```
 
-Before each test, we initialize `helloState` with the default result of our reducer (the `default` case of our `switch` statement in the reducer, which returns `initialState`). The tests are then very explicit, we just make sure the reducer updates `message` and `messageAsync` correctly depending on which action it received.
+Преди всеки тест стартираме `helloState`, за да могаг да  with the default result of our reducer (the `default` case of our `switch` statement in the reducer, which returns `initialState`). The tests are then very explicit, we just make sure the reducer updates `message` and `messageAsync` correctly depending on which action it received.
 
 🏁 Run `yarn test`. It should be all green.
 
