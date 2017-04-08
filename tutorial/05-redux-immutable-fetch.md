@@ -10,7 +10,7 @@
 
 > 💡 **[ImmutableJS](https://facebook.github.io/immutable-js/)** (или само Immutable) е библиотека, създадена от Facebook, за манипулиране на непроменящи се колекции (immutable collections), като например списъци (lists) и карти (maps). Всяка промяна направена върху такъв обект (immutable) дава като резултат нов обект без да променя оригиналния такъв.
 
-Например, следното вместо да го направите така:
+Например следното, вместо да го направите така:
 
 ```js
 const obj = { a: 1 }
@@ -24,14 +24,14 @@ const obj = Immutable.Map({ a: 1 })
 obj.set('a', 2) // Returns a new object without mutating `obj`
 ```
 
-This approach follows the **functional programming** paradigm, which works really well with Redux.
+Този подход се осланя на парадигмата от **функционалното програмиране**, което се получава доста добре с Redux.
 
-When creating immutable collections, a very convenient method is `Immutable.fromJS()`, which takes any regular JS object or array and returns a deeply immutable version of it:
+Когато създавате immutable колекции можете да използвате един много удобен метод, а именно `Immutable.fromJS()`, който метод взима като входен артумент всеки стандартен JS обект или масив и връща "непроменяща" се негова версия (deeply immutable version):
 
 ```js
 const immutablePerson = Immutable.fromJS({
   name: 'Stan',
-  friends: ['Kyle', 'Cartman', 'Kenny'],
+  friends: ['Kyle', 'Cartman', 'Kenny']
 })
 
 console.log(immutablePerson)
@@ -44,17 +44,17 @@ console.log(immutablePerson)
  */
 ```
 
-- Run `yarn add immutable@4.0.0-rc.2`
+- Изпълнете `yarn add immutable@4.0.0-rc.2`
 
 ## Redux
 
-> 💡 **[Redux](http://redux.js.org/)** is a library to handle the lifecycle of your application. It creates a *store*, which is the single source of truth of the state of your app at any given time.
+> 💡 **[Redux](http://redux.js.org/)** е библиотека за работа с процесите по време на живота на вашето приложение. Създава обект наречен *store*, чиято идея е да бъде основният източник на информация за състоянието на вашето приложение във всеки един момент (single source of truth of the state of your app).
 
-Let's start with the easy part, declaring our Redux actions:
+Нека да започнем с лесната част, декларирането на нашите Redux actions:
 
-- Run `yarn add redux redux-actions`
+- Изпълнете `yarn add redux redux-actions`
 
-- Create a `src/client/action/hello.js` file containing:
+- Създайте `src/client/action/hello.js` файл, съдържащ следното:
 
 ```js
 // @flow
@@ -66,9 +66,9 @@ export const SAY_HELLO = 'SAY_HELLO'
 export const sayHello = createAction(SAY_HELLO)
 ```
 
-This file exposes an *action*, `SAY_HELLO`, and its *action creator*, `sayHello`, which is a function. We use [`redux-actions`](https://github.com/acdlite/redux-actions) to reduce the boilerplate associated with Redux actions. `redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which makes *action creators* return objects with the `type` and `payload` attributes.
+Този файл ни позволява да използваме "действие" (*action*), `SAY_HELLO`, и неговия създадел (*action creator*), `sayHello`, което е функция. Използваме [`redux-actions`](https://github.com/acdlite/redux-actions), за да редуцираме т.нар. boilerplate код (нещо което се трябва да се направи първо, за да може да се използва друго нещо), който е свързан с използването на Redux actions. `redux-actions` имплементира [Flux Standard Action](https://github.com/acdlite/flux-standard-action) модела, който позволява на *action creators* или функциите за създаване на действия (actions) да връщат като резултат обекти с атрибути `type` и `payload`.
 
-- Create a `src/client/reducer/hello.js` file containing:
+- Създайте `src/client/reducer/hello.js` файл, който съдържа следното:
 
 ```js
 // @flow
@@ -94,11 +94,11 @@ const helloReducer = (state: Immut = initialState, action: { type: string, paylo
 export default helloReducer
 ```
 
-In this file we initialize the state of our reducer with an Immutable Map containing one property, `message`, set to `Initial reducer message`. The `helloReducer` handles `SAY_HELLO` actions by simply setting the new `message` with the action payload. The Flow annotation for `action` destructures it into a `type` and a `payload`. The `payload` can be of `any` type. It looks funky if you've never seen this before, but it remains pretty understandable. For the type of `state`, we use the `import type` Flow instruction to get the return type of `fromJS`. We rename it to `Immut` for clarity, because `state: fromJS` would be pretty confusing. The `import type` line will get stripped out like any other Flow annotation. Note the usage of `Immutable.fromJS()` and `set()` as seen before.
+В този файл инициализираме състоянието на нашия reducer с Immutable Map обект, съдържащ едно свойство, `message`, чиято стойност е `Initial reducer message`. `helloReducer` обработва `SAY_HELLO` действията като просто прилага на `message` нова стойност, идваща от свойството payload на обекта action. Flow анотацията за `action` го деструктурира до `type` и `payload`. `payload` може да бъде от всякакъв (`any`) тип type. Изглежда странно ако не сте виждали такова нещо преди, но все пак остава разбираемо. За типа на `state` използваме `import type` Flow инструкцията, за да го вземем типа, който се връща от `fromJS`. Преименуваме го на `Immut` за по-голяма яснота, тъй като `state: fromJS` би било доста объркващо. `import type` реда ще беда премахнат както и всички останали Flow анотации. Обърнете внимание на начина, по който се използват `Immutable.fromJS()` и `set()`, както беше показано по-горе.
 
 ## React-Redux
 
-> 💡 **[react-redux](https://github.com/reactjs/react-redux)** *connects* a Redux store with React components. With `react-redux`, when the Redux store changes, React components get automatically updated. They can also fire Redux actions.
+> 💡 **[react-redux](https://github.com/reactjs/react-redux)** *свързва* Redux "склада" (store) с React компонентите. Чрез `react-redux` си гарантираме, че когато се промени Redux store обекта, React компонентите ще се обновят автоматично, отразявайки тази промяна. Също така те могат да предизвикват Redux действия (actions).
 
 - Run `yarn add react-redux`
 
