@@ -422,9 +422,9 @@ const store = createStore(combineReducers(
   composeEnhancers(applyMiddleware(thunkMiddleware)))
 ```
 
-Here with feed our client-side store with the `preloadedState` that was received from the server.
+Тук подаваме на нашия клиентски store обект `preloadedState`, което идва от сървъра.
 
-🏁 You can now run `yarn start` and `yarn dev:wds` and navigate between pages. Refreshing the page on `/hello`, `/hello-async`, and `/404` (or any other URI), should now work correctly. Notice how the `message` and `messageAsync` vary depending on if you navigated to that page from the client or if it comes from server-side rendering.
+🏁 Сега можете да изпълните `yarn start` и `yarn dev:wds` и да навигирате между страниците. Опресняването на страницата `/hello`, `/hello-async` и `/404` (или което и да е друго URI) сега би трябвало да работи както правилно. Обърнете внимание как `message` и `messageAsync` варират в зависимост от това дали идвате на тази страница чрез рендирането от клиента или от сървъра.
 
 ### React Helmet
 
