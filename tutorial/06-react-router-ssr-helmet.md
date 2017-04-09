@@ -1,6 +1,6 @@
 # 06 - React Router, Server-Side Rendering, and Helmet
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/06-react-router-ssr-helmet).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/06-react-router-ssr-helmet).
 
 In this chapter we are going to create different pages for our app and make it possible to navigate between them.
 
@@ -587,6 +587,6 @@ The `<Helmet>` component doesn't actually render anything, it just injects conte
 
 🏁 Run `yarn start` and `yarn dev:wds` and navigate between pages. The title on your tab should change when you navigate, and it should also stay the same when you refresh the page. Show the source of the page to see how React Helmet sets the `title` and `meta` tags even for server-side rendering.
 
-Next section: [07 - Socket.IO](07-socket-io.md#readme)
+Следваща глава: [07 - Socket.IO](07-socket-io.md#readme)
 
-Back to the [previous section](05-redux-immutable-fetch.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](05-redux-immutable-fetch.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
