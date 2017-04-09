@@ -428,13 +428,13 @@ const store = createStore(combineReducers(
 
 ### React Helmet
 
-> 💡 **[React Helmet](https://github.com/nfl/react-helmet)**: A library to inject content to the `head` of a React app, on both the client and the server.
+> 💡 **[React Helmet](https://github.com/nfl/react-helmet)**: библиотека за инжектиране на съдържание в `head` частта на едно React приложение, работи от страната на клиента и на сървъра (on both the client and the server).
 
-I purposely made you write `FIX ME` in the title to highlight the fact that even though we are doing server-side rendering, we currently do not fill the `title` tag properly (or any of the tags in `head` that vary depending on the page you're on).
+Нарочно ви накарах да напишете `FIX ME` в заглавието, за да подчертаем факта, че въпреки че използваме рендиране от страна на сървъра в момента, не попълваме `title` тага правилно (или който и да било друг таг в `head` частта, което варира според зависимост на коя страница сте).
 
-- Run `yarn add react-helmet`
+- Изпълнете `yarn add react-helmet`
 
-- Edit `src/server/render-app.jsx` like so:
+- Редактирайте `src/server/render-app.jsx` файла, както следва:
 
 ```js
 import Helmet from 'react-helmet'
@@ -458,9 +458,9 @@ const renderApp = (/* [...] */) => {
 }
 ```
 
-React Helmet uses [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind` to pull out some data from the rendering of our app, which will soon contain some `<Helmet />` components. Those `<Helmet />` components are where we set the `title` and other `head` details for each page. Note that `Helmet.rewind()` *must* come after `ReactDOMServer.renderToString()`.
+React Helmet използва [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind`, за да добива информация от рендирането на нашето приложение, което скоро ще съдържа `<Helmet />` компоненти. Тези `<Helmet />` компоненти са мястото където ще добавим нашето заглавие (`title`) и друга `head` информация за всяка страница. Обърнете внимание, че `Helmet.rewind()` *трябва* да бъде използвано след `ReactDOMServer.renderToString()`.
 
-- Edit `src/shared/app.jsx` like so:
+- Редактирайте `src/shared/app.jsx` файле, както следва:
 
 ```js
 import Helmet from 'react-helmet'
@@ -472,7 +472,7 @@ const App = () =>
     // [...]
 ```
 
-- Edit `src/shared/component/page/home.jsx` like so:
+- Редактирайте `src/shared/component/page/home.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -497,7 +497,7 @@ export default HomePage
 
 ```
 
-- Edit `src/shared/component/page/hello.jsx` like so:
+- Редактирайте `src/shared/component/page/hello.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -527,7 +527,7 @@ const HelloPage = () =>
 export default HelloPage
 ```
 
-- Edit `src/shared/component/page/hello-async.jsx` like so:
+- Редактирайте `src/shared/component/page/hello-async.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -558,7 +558,7 @@ export default HelloAsyncPage
 
 ```
 
-- Edit `src/shared/component/page/not-found.jsx` like so:
+- Редактирайте `src/shared/component/page/not-found.jsx`, както следва:
 
 ```js
 // @flow
@@ -583,9 +583,9 @@ const NotFoundPage = () =>
 export default NotFoundPage
 ```
 
-The `<Helmet>` component doesn't actually render anything, it just injects content in the `head` of your document and exposes the same data to the server.
+`<Helmet>` компонента всъщност не рендира нищо сам по себе си, просто инжектира съдържание в `head` частта на вашия документ и предлага за използване същата информация и на сървъра.
 
-🏁 Run `yarn start` and `yarn dev:wds` and navigate between pages. The title on your tab should change when you navigate, and it should also stay the same when you refresh the page. Show the source of the page to see how React Helmet sets the `title` and `meta` tags even for server-side rendering.
+🏁 Изпълнете `yarn start` и `yarn dev:wds` и навигирайте между страниците. Заглавието във вашия таб би трябвало да се променя докато навигирате и също така трява да остава същото когато опресните страницата. Отворете сорс кода на страницата и вижке как React Helmet попълва `title` и `meta` таговете дори за server-side рендирането.
 
 Следваща глава: [07 - Socket.IO](07-socket-io.md#readme)
 
