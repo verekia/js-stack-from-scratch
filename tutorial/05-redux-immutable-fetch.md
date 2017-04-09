@@ -1,4 +1,4 @@
-# 05 - Redux, Immutable, and Fetch
+# 05 - Redux, Immutable и Fetch
 
 Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/05-redux-immutable-fetch).
 

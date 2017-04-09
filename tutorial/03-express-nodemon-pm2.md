@@ -1,4 +1,4 @@
-# 03 - Express, Nodemon, and PM2
+# 03 - Express, Nodemon и PM2
 
 Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/03-express-nodemon-pm2).
 

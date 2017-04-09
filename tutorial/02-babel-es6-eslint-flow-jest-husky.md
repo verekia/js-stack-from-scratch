@@ -1,4 +1,4 @@
-# 02 - Babel, ES6, ESLint, Flow, Jest, and Husky
+# 02 - Babel, ES6, ESLint, Flow, Jest и Husky
 
 Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/02-babel-es6-eslint-flow-jest-husky).
 

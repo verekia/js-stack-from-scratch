@@ -1,4 +1,4 @@
-# 01 - Node, Yarn, and `package.json`
+# 01 - Node, Yarn и `package.json`
 
 Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/01-node-yarn-package-json).
 

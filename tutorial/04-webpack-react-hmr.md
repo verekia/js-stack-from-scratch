@@ -1,4 +1,4 @@
-# 04 - Webpack, React, and Hot Module Replacement
+# 04 - Webpack, React и Hot Module Replacement
 
 Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/04-webpack-react-hmr).
 
