@@ -6,15 +6,15 @@
 
 ## React Router
 
-> 💡 **[React Router](https://reacttraining.com/react-router/)** is a library to navigate between pages in your React app. It can be used on both the client and the server.
+> 💡 **[React Router](https://reacttraining.com/react-router/)** е библиотека за навигиране между страниците във вашето React приложение. Може да бъде използвано както от страна на клиента, така и от страна на сървъра.
 
-React Router has received a major update with its v4 release which is still in beta. Since I want this tutorial to be future-proof, we'll be using v4.
+След v4 релийз React Router получи доста нови неща и въпреки че е още в бета версия, ще използвам него, тъй като искам това ръководство да бъде валидно и в бъдеще.
 
-- Run `yarn add react-router@next react-router-dom@next`
+- Изпълнете `yarn add react-router@next react-router-dom@next`
 
-On the client side, we first need to wrap our app inside a `BrowserRouter` component.
+От страна на клиента, първо ще трябва да вмъкнем нашето приложение в `BrowserRouter` компонент.
 
-- Update your `src/client/index.jsx` like so:
+- Редактирайте `src/client/index.jsx` файла, както следва:
 
 ```js
 // [...]
@@ -30,16 +30,16 @@ const wrapApp = (AppComponent, reduxStore) =>
   </Provider>
 ```
 
-## Pages
+## Страници
 
-Our app will have 4 pages:
+Нашето приложение ще има 4 страници:
 
-- A Home page.
-- A Hello page showing a button and message for the synchronous action.
-- A Hello Async page showing a button and message for the asynchronous action.
-- A 404 "Not Found" page.
+- Home page - начална страница
+- A Hello page - показваща бутон и съобщение за синхронните действия.
+- A Hello Async - показваща бутон и съобщение за асинхронните действия.
+- A 404 "Not Found" page - страница, показваща се когато търсената страница не е налична, стандартното име за такъв тип страници е 404 Not Found.
 
-- Create a `src/client/component/page/home.jsx` file containing:
+- Създайте `src/client/component/page/home.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -51,7 +51,7 @@ const HomePage = () => <p>Home</p>
 export default HomePage
 ```
 
-- Create a `src/client/component/page/hello.jsx` file containing:
+- Създайте `src/client/component/page/hello.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -71,7 +71,7 @@ export default HelloPage
 
 ```
 
-- Create a `src/client/component/page/hello-async.jsx` file containing:
+- Създайте `src/client/component/page/hello-async.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -90,7 +90,7 @@ const HelloAsyncPage = () =>
 export default HelloAsyncPage
 ```
 
-- Create a `src/client/component/page/not-found.jsx` file containing:
+- Създайте `src/client/component/page/not-found.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -102,11 +102,11 @@ const NotFoundPage = () => <p>Page not found</p>
 export default NotFoundPage
 ```
 
-## Navigation
+## Навигация
 
-Let's add some routes in the shared config file.
+Нека да добавим пътищата (routes) в конфигурационния файл, който може да се използва от всички части на приложението ни.
 
-- Edit your `src/shared/routes.js` like so:
+- Редактирайте `src/shared/routes.js` файла, както следва:
 
 ```js
 // @flow
@@ -119,9 +119,9 @@ export const NOT_FOUND_DEMO_PAGE_ROUTE = '/404'
 export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
 ```
 
-The `/404` route is just going to be used in a navigation link for the sake of demonstrating what happens when you click on a broken link.
+`/404` пътя ще бъде използван в навигацията просто, за да се покаже какво се случва по принцип когато се кликне на неработеща хипервръзка (broken link).
 
-- Create a `src/client/component/nav.jsx` file containing:
+- Създайте `src/client/component/nav.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -142,7 +142,7 @@ const Nav = () =>
         { route: HOME_PAGE_ROUTE, label: 'Home' },
         { route: HELLO_PAGE_ROUTE, label: 'Say Hello' },
         { route: HELLO_ASYNC_PAGE_ROUTE, label: 'Say Hello Asynchronously' },
-        { route: NOT_FOUND_DEMO_PAGE_ROUTE, label: '404 Demo' },
+        { route: NOT_FOUND_DEMO_PAGE_ROUTE, label: '404 Demo' }
       ].map(link => (
         <li key={link.route}>
           <NavLink to={link.route} activeStyle={{ color: 'limegreen' }} exact>{link.label}</NavLink>
@@ -154,9 +154,9 @@ const Nav = () =>
 export default Nav
 ```
 
-Here we simply create a bunch of `NavLink`s that use the previously declared routes.
+Тук просто създаваме няколко `NavLink` елемента, които използват пътищата, които декларирахме преди малко.
 
-- Finally, edit `src/client/app.jsx` like so:
+- И накрая редактирайте `src/client/app.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -191,7 +191,7 @@ const App = () =>
 export default App
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds`. Open `http://localhost:8000`, and click on the links to navigate between our different pages. You should see the URL changing dynamically. Switch between different pages and use the back button of your browser to see that the browsing history is working as expected.
+🏁 Изпълнете `yarn start` и `yarn dev:wds`. Отворете `http://localhost:8000` и кликнете на хипервръзките, за да навигирате между различните страници. Би трябвало да виждате, че URL адреса се променя динамично. Променете текущата страница като отидете на друга и използвайте бутона "Назад" (Back) на вашия браузър, за да се върнете на предишната страница - по този начин виждаме, че историята на браузъра (browsing history) все още работи коректно.
 
 Now, let's say you navigated to `http://localhost:8000/hello` this way. Hit the refresh button. You now get a 404, because our Express server only responds to `/`. As you navigated between pages, you were actually only doing it on the client-side. Let's add server-side rendering to the mix to get the expected behavior.
 
