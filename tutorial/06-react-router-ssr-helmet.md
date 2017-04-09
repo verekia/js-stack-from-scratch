@@ -193,31 +193,31 @@ export default App
 
 🏁 Изпълнете `yarn start` и `yarn dev:wds`. Отворете `http://localhost:8000` и кликнете на хипервръзките, за да навигирате между различните страници. Би трябвало да виждате, че URL адреса се променя динамично. Променете текущата страница като отидете на друга и използвайте бутона "Назад" (Back) на вашия браузър, за да се върнете на предишната страница - по този начин виждаме, че историята на браузъра (browsing history) все още работи коректно.
 
-Now, let's say you navigated to `http://localhost:8000/hello` this way. Hit the refresh button. You now get a 404, because our Express server only responds to `/`. As you navigated between pages, you were actually only doing it on the client-side. Let's add server-side rendering to the mix to get the expected behavior.
+Сега, да кажем, че сте отворили `http://localhost:8000/hello` по този начин. Натиснете бутона за опресняване на страницата (refresh button), обикновено това е F5 от клавиатурата ви ако използвате операционна система Windows. Би трябвало да видите 404, тъй като нашия Express сървър отговаря само на `/`. И тъй като навигирайки между страниците вие всъщност го правехте само от страна на клиента, нека сега да добавим тази функционалност и от страна на сървъра, за да получим накрая желаното поведение.
 
-## Server-Side Rendering
+## Рендиране от страна на сървъра (Server-Side Rendering)
 
-> 💡 **Server-Side Rendering** means rendering your app at the initial load of the page instead of relying on JavaScript to render it in the client's browser.
+> 💡 **Server-Side Rendering** означава показване/рендиране на вашето приложение при първоначалното зареждане на страницата, вместо да се разчита на JavaScript да я рендира в браузъра на клиента.
 
-SSR is essential for SEO and provides a better user experience by showing the app to your users right away.
+SSR е от основно значение за оптимизациите, които се правят за търсещите машини(SEO - search engine optimization) и предоставя по-добро изживяване (user experience) на крайния потребител като му показва приложението моментално.
 
-The first thing we're going to do here is to migrate most of our client code to the shared / isomorphic / universal part of our codebase, since the server is now going to render our React app too.
+Първото нещо, което ще направим тук е да преместим по-голямата част от нашия клиентски код в частта със споделения код (shared / isomorphic / universal part of our codebase), тъй като сега сървърът също ще рендира нашето React приложение.
 
-### The big migration to `shared`
+### Голямото местене към `shared` (The big migration to `shared`)
 
-- Move all the files located under `client` to `shared`, except `src/client/index.jsx`.
+- Преместете всички файлове от `client` в `shared`, с изключение на `src/client/index.jsx`.
 
-We have to adjust a whole bunch of imports:
+Ще трябва да отразим промените от местенето в няколко import команди:
 
-- In `src/client/index.jsx`, replace the 3 occurrences of `'./app'` by `'../shared/app'`, and `'./reducer/hello'` by `'../shared/reducer/hello'`
+- В `src/client/index.jsx`, заместете `'./app'` с `'../shared/app'` на трите места където се среща и `'./reducer/hello'` с `'../shared/reducer/hello'`
 
-- In `src/shared/app.jsx`, replace `'../shared/routes'` by `'./routes'` and `'../shared/config'` by `'./config'`
+- В `src/shared/app.jsx`, зъместете `'../shared/routes'` с `'./routes'` и `'../shared/config'` с `'./config'`
 
-- In `src/shared/component/nav.jsx`, replace `'../../shared/routes'` by `'../routes'`
+- В `src/shared/component/nav.jsx`, заместете `'../../shared/routes'` с `'../routes'`
 
-### Server changes
+### Промени на сървъра (Server changes)
 
-- Create a `src/server/routing.js` file containing:
+- Създайте `src/server/routing.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -272,11 +272,11 @@ export default (app: Object) => {
 }
 ```
 
-This file is where we deal with requests and responses. The calls to business logic are externalized to a different `controller` module.
+Това е файла, където обработваме заявките към и отговорите от сървъра (requests and responses). Обръщенията (calls ) към бизнес логиката са отделени в отделен `controller` модул.
 
-**Note**: You will find a lot of React Router examples using `*` as the route on the server, leaving the entire routing handling to React Router. Since all requests go through the same function, that makes it inconvenient to implement MVC-style pages. Instead of doing that, we're here explicitly declaring the routes and their dedicated responses, to be able to fetch data from the database and pass it to a given page easily.
+**Забележка**: Ще видите в доста React Router примери, че се използва `*` като път към сървъра. По този начин цялата работа по рутирането се оставя на React Router компонента. Тъй като всички заявки се изпълняват от една и съща функция, това би направило доста неудобно имплементирането на страници в стил MVC (model-view-controller). Вместо това, ние декларираме изрично нашите пътища и отговорите (responses), които трябва да се получат при използването им. По този начин ще можем лесно да зареждаме информация от база с данни и да я показваме на определена страница от нашето приложение.
 
-- Create a `src/server/controller.js` file containing:
+- Създайте `src/server/controller.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -296,9 +296,9 @@ export const helloEndpoint = (num: number) => ({
 })
 ```
 
-Here is our controller. It would typically make business logic and database calls, but in our case we just hard-code some results. Those results are passed back to the `routing` module to be used to initialize our server-side Redux store.
+Това е нашия контролер. Обикновено тук би била бизнес логиката и обръщенията към базата с данни, но в нашия случай просто добавяме някои резултати. Тези резултати се подават обратно на `routing` модула, за да бъдат използвани да се инициализира нашия server-side Redux store компонент.
 
-- Create a `src/server/init-store.js` file containing:
+- Създайте `src/server/init-store.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -325,9 +325,9 @@ const initStore = (plainPartialState: ?Object) => {
 export default initStore
 ```
 
-The only thing we do here, besides calling `createStore` and applying middleware, is to merge the plain JS object we received from the `controller` into a default Redux state containing Immutable objects.
+Единственото нещо, което правим тук освен извикването на `createStore` и прилагането на middleware частта, е да комбинираме чистия JS обект, който получаваме от `controller` с Redux state обекта по подразбиране, който съдържа немутиращи обекти (Immutable objects).
 
-- Edit `src/server/index.js` like so:
+- Редактирайте `src/server/index.js` файла, както следва:
 
 ```js
 // @flow
@@ -354,9 +354,9 @@ app.listen(WEB_PORT, () => {
 })
 ```
 
-Nothing special here, we just call `routing(app)` instead of implementing routing in this file.
+Нищо специално тук, просто извикваме `routing(app)` вместо да имплементираме рутирането в този файл.
 
-- Rename `src/server/render-app.js` to `src/server/render-app.jsx` and edit it like so:
+- Преименувайте `src/server/render-app.js` на `src/server/render-app.jsx` и го редактирайте както следва:
 
 ```js
 // @flow
@@ -401,11 +401,11 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
 export default renderApp
 ```
 
-`ReactDOMServer.renderToString` is where the magic happens. React will evaluate our entire `shared` `App`, and return a plain string of HTML elements. `Provider` works the same as on the client, but on the server, we wrap our app inside `StaticRouter` instead of `BrowserRouter`. In order to pass the Redux store from the server to the client, we pass it to `window.__PRELOADED_STATE__` which is just some arbitrary variable name.
+`ReactDOMServer.renderToString` е мястото където се случва магията. React ще обработи всичко от нашия `shared` `App` и ще върне обикновен стринг от HTML елементи. `Provider` работи по същия начин както от страна на клиента, само че в този случай е от страна на сървъра, поставяме нашето приложение в `StaticRouter` вместо в `BrowserRouter`. За да можем да подадем Redux store обекта от сървъра към клиента го подаваме на `window.__PRELOADED_STATE__`, което е просто случайно избрано име на променливата.
 
-**Note**: Immutable objects implement the `toJSON()` method which means you can use `JSON.stringify` to turn them into plain JSON strings.
+**Забележка**: Immutable обектите имплементират `toJSON()` метода, което значи, че можете да използвате `JSON.stringify`, за да ги превръщате в обикновени JSON стрингове.
 
-- Edit `src/client/index.jsx` to use that preloaded state:
+- Редактирайте `src/client/index.jsx`, за да използва това предварително заредено състояние (preloaded state):
 
 ```js
 import Immutable from 'immutable'
