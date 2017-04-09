@@ -414,7 +414,7 @@ export const sayHelloAsync = (num: number) => (dispatch: Function) => {
 
 Вместо да върне действие (action), `sayHelloAsync` връща функция, която изпълнява `fetch` извикване (call). `fetch` връща `Promise` (име на тиб данни наречени "обещания" или Promises), което използваме, за да изпратим (*dispatch*) или реагираме с различки действия, в сависимост от текущата сигуацие на нашите асинхронни извиквания.
 
-### 3 asynchronous action handlers
+### 3 "обработвачи" на асинхронни действия (3 asynchronous action handlers)
 
 Нека обработим различните действия в `src/client/reducer/hello.js`:
 
