@@ -2,7 +2,7 @@
 
 Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/06-react-router-ssr-helmet).
 
-In this chapter we are going to create different pages for our app and make it possible to navigate between them.
+В тази глава ще създадем различни страници на нашето приложение и ще направим възможно навигирането между тях.
 
 ## React Router
 
