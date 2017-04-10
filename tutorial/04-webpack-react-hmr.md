@@ -228,7 +228,7 @@ export default App
 
 - Изпълнете `yarn add react-hot-loader@next`
 
-- Редактиратия вашия `webpack.config.babel.js`, както следва:
+- Редактирайте вашия `webpack.config.babel.js`, както следва:
 
 ```js
 import webpack from 'webpack'
