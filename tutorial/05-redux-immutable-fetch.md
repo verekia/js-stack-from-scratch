@@ -66,7 +66,7 @@ export const SAY_HELLO = 'SAY_HELLO'
 export const sayHello = createAction(SAY_HELLO)
 ```
 
-Този файл ни позволява да използваме "действие" (*action*), `SAY_HELLO`, и неговия създадел (*action creator*), `sayHello`, което е функция. Използваме [`redux-actions`](https://github.com/acdlite/redux-actions), за да редуцираме т.нар. boilerplate код (нещо което се трябва да се направи първо, за да може да се използва друго нещо), който е свързан с използването на Redux actions. `redux-actions` имплементира [Flux Standard Action](https://github.com/acdlite/flux-standard-action) модела, който позволява на *action creators* или функциите за създаване на действия (actions) да връщат като резултат обекти с атрибути `type` и `payload`.
+Този файл ни позволява да използваме "действие" (*action*), `SAY_HELLO`, и неговия създадел (*action creator*), `sayHello`, което е функция. Използваме [`redux-actions`](https://github.com/acdlite/redux-actions), за да редуцираме т.нар. boilerplate код (нещо което трябва да се направи първо, за да може да се използва друго нещо), който е свързан с използването на Redux actions. `redux-actions` имплементира [Flux Standard Action](https://github.com/acdlite/flux-standard-action) модела, който позволява на *action creators* или функциите за създаване на действия (actions) да връщат като резултат обекти с атрибути `type` и `payload`.
 
 - Създайте `src/client/reducer/hello.js` файл, който съдържа следното:
 
