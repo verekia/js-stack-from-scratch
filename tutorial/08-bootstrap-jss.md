@@ -1,12 +1,12 @@
 # 08 - Bootstrap and JSS
 
-Code for this chapter available in the [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) branch of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).
+Кода за тази глава можете да намерите в [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) клон на [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).
 
-Alright! It's time to give our ugly app a facelift. We are going to use Twitter Bootstrap to give it some base styles. We'll then add a CSS-in-JS library to add some custom styles.
+Окей! Време е да направите приложението си да изгежда красиво. Ще използваме Twitter Bootstrap, за да приложим основни стилове върху него. След това ще добавим една CSS-in-JS библиотека, за да добавим още някои по-специфични стилове.
 
 ## Twitter Bootstrap
 
-> 💡 **[Twitter Bootstrap](http://getbootstrap.com/)** is a library of UI components.
+> 💡 **[Twitter Bootstrap](http://getbootstrap.com/)** е библиотека с компоненти за построяване на *потребителски интерфейс* (UI components).
 
 There are 2 options to integrate Bootstrap in a React app. Both have their pros and cons:
 
