@@ -19,25 +19,25 @@ Third-party библиотеките предлагат доста удобни 
 
 ### Bootstrap's CSS
 
-- Delete `public/css/style.css`
+- Изтрийте `public/css/style.css`
 
-- Run `yarn add bootstrap@4.0.0-alpha.6`
+- Изпълнете `yarn add bootstrap@4.0.0-alpha.6`
 
-- Copy `bootstrap.min.css` and `bootstrap.min.css.map` from `node_modules/bootstrap/dist/css` to your `public/css` folder.
+- Копирайте `bootstrap.min.css` и `bootstrap.min.css.map` от `node_modules/bootstrap/dist/css` във вашата `public/css` папка.
 
-- Edit `src/server/render-app.jsx` like so:
+- Редактирайте `src/server/render-app.jsx`, както следва:
 
 ```html
 <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
 ```
 
-### Bootstrap's JS with jQuery and Tether
+### Bootstrap's JS с jQuery и Tether
 
-Now that we have Bootstrap's styles loaded on our page, we need the JavaScript behavior for the components.
+Сега, след като вече сме заредили стиловете от Bootstrap на нашата страница, ще ни трябват JavaScript функционалността на компонентите.
 
-- Run `yarn add jquery tether`
+- Изпълнете `yarn add jquery tether`
 
-- Edit `src/client/index.jsx` like so:
+- Редактирайте `src/client/index.jsx`, както следва:
 
 ```js
 import $ from 'jquery'
@@ -50,13 +50,13 @@ window.Tether = Tether
 require('bootstrap')
 ```
 
-That will load Bootstrap's JavaScript code.
+Това ще зареди JavaScript кода на Bootstrap.
 
-### Bootstrap Components
+### Bootstrap компоненти
 
-Alright, it's time for you to copy-paste a whole bunch of files.
+Окей, време е да копирате няколко файла.
 
-- Edit `src/shared/component/page/hello-async.jsx` like so:
+- Редактирайте `src/shared/component/page/hello-async.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -90,7 +90,7 @@ const HelloAsyncPage = () =>
 export default HelloAsyncPage
 ```
 
-- Edit `src/shared/component/page/hello.jsx` like so:
+- Редактирайте `src/shared/component/page/hello.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -124,7 +124,7 @@ const HelloPage = () =>
 export default HelloPage
 ```
 
-- Edit `src/shared/component/page/home.jsx` like so:
+- Редактирайте `src/shared/component/page/home.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -171,7 +171,7 @@ const HomePage = () =>
 export default HomePage
 ```
 
-- Edit `src/shared/component/page/not-found.jsx` like so:
+- Редактирайте `src/shared/component/page/not-found.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -197,7 +197,7 @@ const NotFoundPage = () =>
 export default NotFoundPage
 ```
 
-- Edit `src/shared/component/button.jsx` like so:
+- Редактирайте `src/shared/component/button.jsx`, както следва:
 
 ```js
 // [...]
@@ -210,7 +210,7 @@ export default NotFoundPage
 // [...]
 ```
 
-- Create a `src/shared/component/footer.jsx` file containing:
+- Създайте `src/shared/component/footer.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -229,7 +229,7 @@ const Footer = () =>
 export default Footer
 ```
 
-- Create a `src/shared/component/modal-example.jsx` containing:
+- Създайте `src/shared/component/modal-example.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -257,16 +257,16 @@ const ModalExample = () =>
 export default ModalExample
 ```
 
-- Edit `src/shared/app.jsx` like so:
+- Редактирайте `src/shared/app.jsx` файла, както следва:
 
 ```js
 const App = () =>
   <div style={{ paddingTop: 54 }}>
 ```
 
-This is an example of a *React inline style*.
+Това е пример за  *React inline style*.
 
-This will translate into: `<div style="padding-top:54px;">` in your DOM. We need this style to push the content under the navigation bar, but that's what's important here. [React inline styles](https://speakerdeck.com/vjeux/react-css-in-js) are a great way to isolate your component's styles from the global CSS namespace, but it comes at a price: You cannot use some native CSS features like `:hover`, Media Queries, animations, or `font-face`. That's [one of the reasons](https://github.com/cssinjs/jss/blob/master/docs/benefits.md#compared-to-inline-styles) we're going to integrate a CSS-in-JS library, JSS, later in this chapter.
+Това ще се преведе в: `<div style="padding-top:54px;">` във вашия DOM. Искаме този стил да избута съдържанието под лентата за навигация. [React inline styles](https://speakerdeck.com/vjeux/react-css-in-js) е чудесен начин за изолиране на стиловете на вашите компоненти от глобалната CSS зона на действие (namespace), но като всяко нещо и това си има цена : Не можете да използвате някои вградени CSS свойства като `:hover`, Media Queries, анимации или `font-face`. Това е [една от причините](https://github.com/cssinjs/jss/blob/master/docs/benefits.md#compared-to-inline-styles), поради която ще интегрираме CSS-in-JS библиотека, JSS, по-късно в тази глава.
 
 - Edit `src/shared/component/nav.jsx` like so:
 
