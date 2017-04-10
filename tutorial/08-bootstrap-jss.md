@@ -268,7 +268,7 @@ const App = () =>
 
 Това ще се преведе в: `<div style="padding-top:54px;">` във вашия DOM. Искаме този стил да избута съдържанието под лентата за навигация. [React inline styles](https://speakerdeck.com/vjeux/react-css-in-js) е чудесен начин за изолиране на стиловете на вашите компоненти от глобалната CSS зона на действие (namespace), но като всяко нещо и това си има цена : Не можете да използвате някои вградени CSS свойства като `:hover`, Media Queries, анимации или `font-face`. Това е [една от причините](https://github.com/cssinjs/jss/blob/master/docs/benefits.md#compared-to-inline-styles), поради която ще интегрираме CSS-in-JS библиотека, JSS, по-късно в тази глава.
 
-- Edit `src/shared/component/nav.jsx` like so:
+- Редактирайте `src/shared/component/nav.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -314,7 +314,7 @@ const Nav = () =>
 export default Nav
 ```
 
-There is something new here, `handleNavLinkClick`. One issue I encountered using Bootstrap's `navbar` in an SPA is that clicking on a link on mobile does not collapse the menu, and does not scroll back to the top of the page. This is a great opportunity to show you an example of how you would integrate some jQuery / Bootstrap-specific code in your app:
+Тук използваме нещо ново - `handleNavLinkClick`. Един от проблемите, който срещнах при използването на компонента `navbar` на Bootstrap в едно SPA (single page application) или приложение състоящо се от една страница, е, че кликването върху линк при мобилните устройства не работи правилно, тоест не затваря менюто и не премества страницата до най-горната й част (not collapse the menu and does not scroll back to the top of the page). Това е чудесна възможност да ви покажа пример как да използвате jQuery / Bootstrap-specific код във вашето приложение:
 
 ```js
 import $ from 'jquery'
@@ -328,21 +328,21 @@ const handleNavLinkClick = () => {
 <NavLink /* [...] */ onClick={handleNavLinkClick}>
 ```
 
-**Note**: I've removed accessibility-related attributes (like `aria` attributes) to make the code more readable *in the context of this tutorial*. **You should absolutely put them back**. Refer to Bootstrap's documentation and code samples to see how to use them.
+**Забележка**: Нарочно съм премахнал кода, който отговаря за достъпността (accessibility-related attributes, such as `aria` attributes), за да го направя по-четим *в контекста на това ръководство*. **Задължително трябва да го върнете обратно**. Прочетете повече в документацията на Bootstrap и примерите с код.
 
-🏁 Your app should now be entirely styled with Bootstrap.
+🏁 Сега вашето приложение би трябвало да бъде изцяло стилизирано с Bootstrap.
 
-## The current state of CSS
+## Моментно състояние на CSS
 
-In 2016, the typical modern JavaScript stack settled. The different libraries and tools this tutorial made you set up are pretty much the *cutting-edge industry standard* (*cough – even though it could become completely outdated in a year from now – cough*). Yes, that's a complex stack to set up, but at least, most front-end devs agree that React-Redux-Webpack is the way to go. Now regarding CSS, I have some pretty bad news. Nothing settled, there is no standard way to go, no standard stack.
+През 2016, това би бил типичен Javascript пакет от инструменти (JavaScript stack). Различните библиотеки и инструменти използвани в това ръководство са *най-новото в индустрията* (*въпреки че за една година могат да се окажат вече остарели*). Да, това е доста комплексен набор от инструменти, но поне повечето от фронт-енд програмистите са съгласни, че React-Redux-Webpack пътя, по който трябва да се върви. Сега, относно CSS, имам някои доста лоши новини. Все още няма нищо определено, никакви стандарти и прочие.
 
-SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components, CSSX, JSS, Radium, Web Components, CSS Modules, OOCSS, Tachyons, Stylus, Atomic CSS, PostCSS, Aphrodite, React Native for Web, and many more that I forget are all different approaches or tools to get the job done. They all do it well, which is the problem, there is no clear winner, it's a big mess.
+SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components, CSSX, JSS, Radium, Web Components, CSS Modules, OOCSS, Tachyons, Stylus, Atomic CSS, PostCSS, Aphrodite, React Native for Web и много други, които забравям са различни подходи или инструменти, за да се свърши работата. Всички те се справят добре, което е проблема, няма ясен победител и всичко е една голяма бъркотия.
 
-The cool React kids tend to favor React inline styles, CSS-in-JS, or CSS Modules approaches though, since they integrate really well with React and solve programmatically many [issues](https://speakerdeck.com/vjeux/react-css-in-js) that regular CSS approaches struggle with.
+Феновете на React да привърженици на React inline styles, CSS-in-JS, или CSS Modules подходите, тъй като те се интегрират доста добре с React и решават доста [проблеми](https://speakerdeck.com/vjeux/react-css-in-js), които стандартните CSS подходи не могат.
 
-CSS Modules work well, but they don't leverage the power of JavaScript and its many features over CSS. They just provide encapsulation, which is fine, but React inline styles and CSS-in-JS take styling to an other level in my opinion. My personal suggestion would be to use React inline styles for common styles (that's also what you have to use for React Native), and use a CSS-in-JS library for things like `:hover` and media queries.
+CSS Modules вършат добра работа, но не използват силата на JavaScript и неговите предимства пред обикновения CSS. Те предлагат просто енкапсулация, който е добре, но по мое мнение React inline styles и CSS-in-JS отнасят стилиризирането на едно друго ниво. Личната ми препоръка би била използването на React inline styles за общи неща (за които също бихте могли да използвате React Native) и наCSS-in-JS библиотека за неща като `:hover` and media queries.
 
-There are [tons of CSS-in-JS libraries](https://github.com/MicheleBertoli/css-in-js). JSS is a full-featured, well-rounded, and [performant](https://github.com/cssinjs/jss/blob/master/docs/performance.md) one.
+Съществуват [тонове CSS-in-JS библиотеки](https://github.com/MicheleBertoli/css-in-js). JSS е богата на функционалност, добре обоснована и представяща се добре от гледна точка на [производителността](https://github.com/cssinjs/jss/blob/master/docs/performance.md).
 
 ## JSS
 
