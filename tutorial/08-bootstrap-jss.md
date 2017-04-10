@@ -346,31 +346,31 @@ CSS Modules вършат добра работа, но не използват �
 
 ## JSS
 
-> 💡 **[JSS](http://cssinjs.org/)** is a CSS-in-JS library to write your styles in JavaScript and inject them into your app.
+> 💡 **[JSS](http://cssinjs.org/)** e една CSS-in-JS библиотека за писане на стилове в JavaScript и инжектирането им във вашето приложение.
 
-Now that we have some base template with Bootstrap, let's write some custom CSS. I mentioned earlier that React inline styles could not handle `:hover` and media queries, so we'll show a simple example of this on the homepage using JSS. JSS can be used via `react-jss`, a library that is convenient to use with React components.
+Сега, след като имаме основен Bootstrap темплейт, нека напишем малко собствен CSS код. По-рано споменах, че React inline styles нямат поддръжка за `:hover` and media queries, така че ще покажем просто примерче с JSS на началната ни страница. JSS може да бъде използван чрез `react-jss`, една библиотека, която е удобна за употреба когато се работи с React компоненти.
 
-- Run `yarn add react-jss`
+- Изпълнете `yarn add react-jss`
 
-Add the following to your `.flowconfig` file, as there is currently a Flow [issue](https://github.com/cssinjs/jss/issues/411) with JSS:
+Добавете следното във вашия `.flowconfig` файл, тъй като в момента има Flow [проблем](https://github.com/cssinjs/jss/issues/411) с JSS:
 
 ```flowconfig
 [ignore]
 .*/node_modules/jss/.*
 ```
 
-### Server-side
+### Сървърна част (Server-side)
 
-JSS can render styles on the server for the initial rendering.
+JSS може да рендира стилове от страната на сървъра при началното зареждане.
 
-- Add the following constants to `src/shared/config.js`:
+- Добавете следните константи в `src/shared/config.js`:
 
 ```js
 export const JSS_SSR_CLASS = 'jss-ssr'
 export const JSS_SSR_SELECTOR = `.${JSS_SSR_CLASS}`
 ```
 
-- Edit `src/server/render-app.jsx` like so:
+- Редактирайте `src/server/render-app.jsx`, както следва:
 
 ```js
 import { SheetsRegistry, SheetsRegistryProvider } from 'react-jss'
@@ -394,11 +394,11 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
   // [...]
 ```
 
-## Client-side
+## Клиентска част (Client-side)
 
-The first thing the client should do after rendering the app client-side, is to get rid of the server-generated JSS styles.
+Първото нещо, което клиента трябва да направи след зареждането на приложението, е да се отърве от сървърно генерираните JSS стилове.
 
-- Add the following to `src/client/index.jsx` after the `ReactDOM.render` calls (before `setUpSocket(store)` for instance):
+- Добавете следното в `src/client/index.jsx` след `ReactDOM.render` извикванията (преди `setUpSocket(store)` например):
 
 ```js
 import { APP_CONTAINER_SELECTOR, JSS_SSR_SELECTOR } from '../shared/config'
@@ -411,7 +411,7 @@ jssServerSide.parentNode.removeChild(jssServerSide)
 setUpSocket(store)
 ```
 
-Edit `src/shared/component/page/home.jsx` like so:
+Редактирайте `src/shared/component/page/home.jsx`, както следва:
 
 ```js
 import injectSheet from 'react-jss'
@@ -446,14 +446,14 @@ const HomePage = ({ classes }: { classes: Object }) =>
 export default injectSheet(styles)(HomePage)
 ```
 
-Unlike React inline styles, JSS uses classes. You pass styles to `injectSheet` and the CSS classes end up in the props of your component.
+За разлика от React inline styles, JSS използва класове. Подаваме стилове към `injectSheet` и CSS класовете се превръщат в свойства на вашия компонент.
 
-🏁 Run `yarn start` and `yarn dev:wds`. Open the homepage. Show the source of the page (not in the inspector) to see that the JSS styles are present in the DOM at the initial render in the `<style class="jss-ssr">` element (only on the Home page). They should be gone in the inspector, replaced by `<style type="text/css" data-jss data-meta="HomePage">`.
+🏁 Изпълнете `yarn start` и `yarn dev:wds`. Отворете началната страница. Вижте сорс кода на вашата страница (не в инспектора), за да видите, че JSS стиловете са в DOM при началното зареждане в `<style class="jss-ssr">` елемента (само на началната страница). Те не бива да се виждат в инспектора, тъй като би трябвало да са заместени от `<style type="text/css" data-jss data-meta="HomePage">`.
 
-**Note**: In production mode, the `data-meta` is obfuscated. Sweet!
+**Забележка**: В производствена среда (In production mode), `data-meta` е обфускирано. Идеално!
 
-If you hover over the "Hover me" label, it should turn red. If you resize your browser window to be narrower than 800px, the "Resize your window" label should turn red. The green button is extending Bootstrap's CSS classes using JSS' `composes` property.
+Ако посочите с мишката върху елемента "Hover me", би трябвало да стане червен. Ако оразмерите процореца на вашия браузър да стане по-тесен от 800px, "Resize your window" етикета би трябвало да стане червен. Зеленият button разширява CSS класовете на Bootstrap, използвайки JSS свойството `composes`.
 
-Next section: [09 - Travis, Coveralls, Heroku](09-travis-coveralls-heroku.md#readme)
+Следваща глава: [09 - Travis, Coveralls, Heroku](09-travis-coveralls-heroku.md#readme)
 
-Back to the [previous section](07-socket-io.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](07-socket-io.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
