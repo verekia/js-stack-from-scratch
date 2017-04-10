@@ -1,4 +1,4 @@
-# 08 - Bootstrap and JSS
+# 08 - Bootstrap и JSS
 
 Кода за тази глава можете да намерите в [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) клон на [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).
 
@@ -8,14 +8,14 @@
 
 > 💡 **[Twitter Bootstrap](http://getbootstrap.com/)** е библиотека с компоненти за построяване на *потребителски интерфейс* (UI components).
 
-There are 2 options to integrate Bootstrap in a React app. Both have their pros and cons:
+Има два начина за интегриране на Bootstrap в React приложение. И двата имат техните предимства и недостатъци:
 
-- Using the official release, **which uses jQuery and Tether** for the behavior of its components.
-- Using a third-party library that re-implements all of Bootstrap's components in React, like [React-Bootstrap](https://react-bootstrap.github.io/) or [Reactstrap](https://reactstrap.github.io/).
+- Да се използва официалния релийз, **който използва jQuery и Tether** за функционалността на компонентите.
+- Да се използва отделна библиотека, която реимплементира всички Bootstrap компоненти в React, като например [React-Bootstrap](https://react-bootstrap.github.io/) или [Reactstrap](https://reactstrap.github.io/).
 
-Third-party libraries provide very convenient React components that dramatically reduce the code bloat compared to the official HTML components, and integrate greatly with your React codebase. That being said, I must say that I am quite reluctant to use them, because they will always be *behind* the official releases (sometimes potentially far behind). They also won't work with Bootstrap themes that implement their own JS. That's a pretty tough drawback considering that one major strength of Bootstrap is its huge community of designers who make beautiful themes.
+Third-party библиотеките предлагат доста удобни за употреба React компоненти, които намаляват значително много кода, който се използва, в сравнение с официалните HTML компоненти, а освен това интеграцията им с React е много добре направена. И въпреки казаното до тук, аз не съм голям привърженик на използването им, тъй като те винаги остават *назад* от официалните релийзи (понякога значително назад). Също така те биха били несъвестими с Bootstrap теми, които използват свой собствен JS. Това е доста сериозен недостатък, имайки предвид, че едно от основните предимства на Bootstrap е голямата му поддръжка от дизайнери, които създават красиви теми.
 
-For this reason, I'm going to make the tradeoff of integrating the official release, alongside with jQuery and Tether. One of the concerns of this approach is the file size of our bundle of course. For your information, the bundle weights about 200KB (Gzipped) with jQuery, Tether, and Bootstrap's JS included. I think that's reasonable, but if that's too much for you, you should probably consider an other option for Bootstrap, or even not using Bootstrap at all.
+Поради тази причина ще използвам официалния релийз, който върви с jQuery и Tether. One of the concerns of this approach is the file size of our bundle of course. For your information, the bundle weights about 200KB (Gzipped) with jQuery, Tether, and Bootstrap's JS included. I think that's reasonable, but if that's too much for you, you should probably consider an other option for Bootstrap, or even not using Bootstrap at all.
 
 ### Bootstrap's CSS
 
