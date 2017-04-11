@@ -336,7 +336,7 @@ const handleNavLinkClick = () => {
 
 През 2016, това би бил типичен Javascript пакет от инструменти (JavaScript stack). Различните библиотеки и инструменти използвани в това ръководство са *най-новото в индустрията* (*въпреки че за една година могат да се окажат вече остарели*). Да, това е доста комплексен набор от инструменти, но поне повечето от фронт-енд програмистите са съгласни, че React-Redux-Webpack е пътя, по който трябва да се върви. Сега, относно CSS, имам някои доста лоши новини - все още няма нищо определено, никакви стандарти и прочие.
 
-SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components, CSSX, JSS, Radium, Web Components, CSS Modules, OOCSS, Tachyons, Stylus, Atomic CSS, PostCSS, Aphrodite, React Native for Web и много други, които забравям са различни подходи или инструменти, за да се свърши работата. Всички те се справят добре, което е проблема, няма ясен победител и всичко е една голяма бъркотия.
+SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components, CSSX, JSS, Radium, Web Components, CSS Modules, OOCSS, Tachyons, Stylus, Atomic CSS, PostCSS, Aphrodite, React Native for Web и много други, които забравям, са различни подходи или инструменти, за да се свърши работата. Всички те се справят добре, което всъщност е проблема, че няма ясен победител и всичко е една голяма бъркотия.
 
 Феновете на React да привърженици на React inline styles, CSS-in-JS, или CSS Modules подходите, тъй като те се интегрират доста добре с React и решават доста [проблеми](https://speakerdeck.com/vjeux/react-css-in-js), които стандартните CSS подходи не могат.
 
