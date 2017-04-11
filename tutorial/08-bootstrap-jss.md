@@ -338,11 +338,11 @@ const handleNavLinkClick = () => {
 
 SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components, CSSX, JSS, Radium, Web Components, CSS Modules, OOCSS, Tachyons, Stylus, Atomic CSS, PostCSS, Aphrodite, React Native for Web и много други, които забравям, са различни подходи или инструменти, за да се свърши работата. Всички те се справят добре, което всъщност е проблема, че няма ясен победител и всичко е една голяма бъркотия.
 
-Феновете на React да привърженици на React inline styles, CSS-in-JS, или CSS Modules подходите, тъй като те се интегрират доста добре с React и решават доста [проблеми](https://speakerdeck.com/vjeux/react-css-in-js), които стандартните CSS подходи не могат.
+Феновете на React са привърженици на React inline styles, CSS-in-JS, или CSS Modules подходите, тъй като те се интегрират доста добре с React и решават доста [проблеми](https://speakerdeck.com/vjeux/react-css-in-js), които стандартните CSS подходи не могат.
 
-CSS Modules вършат добра работа, но не използват силата на JavaScript и неговите предимства пред обикновения CSS. Те предлагат просто енкапсулация, който е добре, но по мое мнение React inline styles и CSS-in-JS отнасят стилиризирането на едно друго ниво. Личната ми препоръка би била използването на React inline styles за общи неща (за които също бихте могли да използвате React Native) и наCSS-in-JS библиотека за неща като `:hover` and media queries.
+CSS Modules вършат добра работа, но не използват силата на JavaScript и неговите предимства пред обикновения CSS. Те предлагат просто енкапсулация, което е добре, но по мое мнение React inline styles и CSS-in-JS отнасят стилиризирането на приложенията на едно по-високо ниво. Личната ми препоръка би била използването на React inline styles за общи неща (за които също бихте могли да използвате React Native) и на CSS-in-JS библиотека за неща като `:hover` and media queries.
 
-Съществуват [тонове CSS-in-JS библиотеки](https://github.com/MicheleBertoli/css-in-js). JSS е богата на функционалност, добре обоснована и представяща се добре от гледна точка на [производителността](https://github.com/cssinjs/jss/blob/master/docs/performance.md).
+Съществуват [тонове CSS-in-JS библиотеки](https://github.com/MicheleBertoli/css-in-js). JSS е една от тях - богата на функционалност, добре обоснована и представяща се добре от гледна точка на [производителността](https://github.com/cssinjs/jss/blob/master/docs/performance.md).
 
 ## JSS
 
