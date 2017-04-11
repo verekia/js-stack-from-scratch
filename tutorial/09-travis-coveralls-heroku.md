@@ -8,9 +8,9 @@
 
 > 💡 **[Travis CI](https://travis-ci.org/)** е популярна continuous integration платформа, безплатна за проекти с отворен код.
 
-If your project is hosted publicly on Github, integrating Travis is very simple. First, authenticate with your Github account on Travis, and add your repository.
+Ако вашият проект е публично достъпен в Github, интеграцията с Travis е много лесна. Идентифицирайте се с вашия Github акаунт в Travis и добавете вашето репозитори.
 
-- Then, create a `.travis.yml` file containing:
+- След това създайте `.travis.yml` файб, съдържащ:
 
 ```yaml
 language: node_js
