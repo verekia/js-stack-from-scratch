@@ -460,7 +460,7 @@ const renderApp = (/* [...] */) => {
 
 React Helmet използва [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind`, за да добива информация от рендирането на нашето приложение, което скоро ще съдържа `<Helmet />` компоненти. Тези `<Helmet />` компоненти са мястото където ще добавим нашето заглавие (`title`) и друга `head` информация за всяка страница. Обърнете внимание, че `Helmet.rewind()` *трябва* да бъде използвано след `ReactDOMServer.renderToString()`.
 
-- Редактирайте `src/shared/app.jsx` файле, както следва:
+- Редактирайте `src/shared/app.jsx` файла, както следва:
 
 ```js
 import Helmet from 'react-helmet'
