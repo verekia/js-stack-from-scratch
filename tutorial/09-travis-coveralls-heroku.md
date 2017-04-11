@@ -2,7 +2,7 @@
 
 Кода за тази глава можете да намерите в `master` клона на [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).
 
-В тази глава използвам услуги предоставяни от трети страни в нашето приложение. These services offer free and paid plans. It is a bit controversial to use such services in a tutorial that relies exclusively on community-driven and free open source tools, which is why I maintain 2 different branches of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate), `master` and `master-no-services`.
+В тази глава използвам услуги, предоставяни от трети страни, в нашето приложение. Тези услуги се предлагат с безплатни и с платени планове. Ще бъде малко противоречиво да използвам такъв тип услуги в това ръководство,  тъй като то разчита главно на community-driven и безплатни open source инструменти, поради което поддържам 2 различни клона на [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate), `master` и `master-no-services`.
 
 ## Travis
 
