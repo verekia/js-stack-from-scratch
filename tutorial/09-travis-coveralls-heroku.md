@@ -1,8 +1,8 @@
-# 09 - Travis, Coveralls, and Heroku
+# 09 - Travis, Coveralls и Heroku
 
-Code for this chapter available in the `master` branch of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).
+Кода за тази глава можете да намерите в `master` клона на [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).
 
-In this chapter, I integrate our app with third-party services. These services offer free and paid plans. It is a bit controversial to use such services in a tutorial that relies exclusively on community-driven and free open source tools, which is why I maintain 2 different branches of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate), `master` and `master-no-services`.
+В тази глава използвам услуги предоставяни от трети страни в нашето приложение. These services offer free and paid plans. It is a bit controversial to use such services in a tutorial that relies exclusively on community-driven and free open source tools, which is why I maintain 2 different branches of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate), `master` and `master-no-services`.
 
 ## Travis
 
