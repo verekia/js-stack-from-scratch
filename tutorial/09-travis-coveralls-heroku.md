@@ -18,7 +18,7 @@ node_js: node
 script: yarn test && yarn prod:build
 ```
 
-Travis ще засече автоматично, че използвате Yarn, защото имате `yarn.lock` файб. Всеки път когато запазвате кода си във вашето Github репозитори, той ще стартира `yarn test && yarn prod:build`. Ако всичко е наред, би трябвало билдът ви да е успешен (you should get a green build).
+Travis ще засече автоматично, че използвате Yarn, защото имате `yarn.lock` файл. Всеки път когато запазвате кода си във вашето Github репозитори, той ще стартира `yarn test && yarn prod:build`. Ако всичко е наред, би трябвало билдът ви да е успешен (you should get a green build).
 
 ## Coveralls
 
