@@ -144,4 +144,4 @@ console.log(redHexa)
 
 Следваща глава: [02 - Babel, ES6, ESLint, Flow, Jest, Husky](02-babel-es6-eslint-flow-jest-husky.md#readme)
 
-Назад към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание)..

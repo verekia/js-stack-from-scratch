@@ -589,4 +589,4 @@ export default NotFoundPage
 
 Следваща глава: [07 - Socket.IO](07-socket-io.md#readme)
 
-Назад към [предишната глава](05-redux-immutable-fetch.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](05-redux-immutable-fetch.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

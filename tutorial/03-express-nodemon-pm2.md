@@ -218,4 +218,4 @@ const template = html`
 
 Следваща глава: [04 - Webpack, React, HMR](04-webpack-react-hmr.md#readme)
 
-Назад към [предишната глава](02-babel-es6-eslint-flow-jest-husky.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](02-babel-es6-eslint-flow-jest-husky.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

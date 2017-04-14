@@ -289,4 +289,4 @@ if (module.hot) {
 
 Следваща глава: [05 - Redux, Immutable, Fetch](05-redux-immutable-fetch.md#readme)
 
-Назад към [предишната глава](03-express-nodemon-pm2.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](03-express-nodemon-pm2.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

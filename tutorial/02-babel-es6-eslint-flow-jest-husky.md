@@ -364,4 +364,4 @@ test('Dog.bark', () => {
 
 Следваща глава: [03 - Express, Nodemon, PM2](03-express-nodemon-pm2.md#readme)
 
-Назад към [предишната глава](01-node-yarn-package-json.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](01-node-yarn-package-json.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

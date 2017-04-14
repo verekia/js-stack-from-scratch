@@ -456,4 +456,4 @@ export default injectSheet(styles)(HomePage)
 
 Следваща глава: [09 - Travis, Coveralls, Heroku](09-travis-coveralls-heroku.md#readme)
 
-Назад към [предишната глава](07-socket-io.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](07-socket-io.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

@@ -659,4 +659,4 @@ test('handle SAY_HELLO_ASYNC_FAILURE', () => {
 
 Следваща глава: [06 - React Router, Server-Side Rendering, Helmet](06-react-router-ssr-helmet.md#readme)
 
-Назад към [предишната глава](04-webpack-react-hmr.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](04-webpack-react-hmr.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

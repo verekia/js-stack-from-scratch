@@ -174,4 +174,4 @@ export default setUpSocket
 
 Следваща глава: [08 - Bootstrap, JSS](08-bootstrap-jss.md#readme)
 
-Назад към [предишната глава](06-react-router-ssr-helmet.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](06-react-router-ssr-helmet.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).
