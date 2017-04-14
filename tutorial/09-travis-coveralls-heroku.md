@@ -118,11 +118,11 @@ web: node lib/server
 "heroku-postbuild": "yarn prod:build",
 ```
 
-`heroku-postbuild` is a task that will be run every time you deploy an app to Heroku.
+`heroku-postbuild` е задача, която ще бъде стартирана всеки път когато публикувате приложение в Heroku.
 
-You will also probably want to specify a specific version of Node or Yarn for Heroku to use.
+Също така може би ще желаете да укажете определени версии на Node или Yarn, които да бъдат използвани от Heroku.
 
-- Add this to your `package.json`:
+- Добавете това във вашия `package.json` файл:
 
 ```json
 "engines": {
@@ -131,7 +131,7 @@ You will also probably want to specify a specific version of Node or Yarn for He
 },
 ```
 
-- Create an `app.json` file containing:
+- Създайте `app.json` файл, съдържащ:
 
 ```json
 {
@@ -141,14 +141,14 @@ You will also probably want to specify a specific version of Node or Yarn for He
 }
 ```
 
-This is for your Review Apps to use.
+Това ще се използва от Review Apps.
 
-You should now be all set to use Heroku Pipeline deployments.
+Сега вече би трябвало да сте готови да използвате Heroku Pipeline deployments.
 
-🏁 Create a new git branch, make changes and open a Github Pull Request to instantiate a Review App. Check your changes on the Review App URL, and if everything looks good, merge your Pull Request with `master` on Github. A few minutes later, your staging app should have been automatically deployed. Check your changes on the staging app URL, and if everything still looks good, promote staging to production.
+🏁 Създайте нов git клон (branch), направете някакви промени и направете Github Pull Request, за да инстанцирате Review App. Проверете промените си чрез Review App URL и ако всичко изглежда добре, приложете вашия Pull Request в `master` в Github. Няколко минути по-късно вашето staging приложение трябва да беде публикувано автоматично. Проверете вашите промени на staging app URL-а и ако всичко все още е наред, стартирайте процедурата за публикуване на приложението в производствена среда (promote staging to production).
 
-You are done! Congratulations if you finished this entire tutorial starting from scratch.
+Това беше! Моите поздравления ако сте стигнали до тук и сте направили всеки урок от това ръководство от нулата!.
 
-You deserve this emoji medal: 🏅
+Заслужавате този emoji медал: 🏅
 
-Back to the [previous section](08-bootstrap-jss.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](08-bootstrap-jss.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
