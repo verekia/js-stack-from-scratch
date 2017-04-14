@@ -65,54 +65,54 @@ script: yarn test && yarn prod:build && cat ./coverage/lcov.info | ./node_module
 
 - Отидете във вашия [Heroku Dashboard](https://dashboard.heroku.com/) и създайте 2 приложения, едното кръстете `your-project`, а другото `your-project-staging` например.
 
-We are going to let Heroku take care of transpiling our ES6/Flow code with Babel, and generate client bundles with Webpack. But since these are `devDependencies`, Yarn won't install them in a production environment like Heroku. Let's change this behavior with the `NPM_CONFIG_PRODUCTION` env variable.
+Работата по превеждането на нашия ES6/Flow код с Babel и генерирането на клиентските пакети с Webpack ще оставим на Heroku. Но тъй като това са `devDependencies`, Yarn няма да ги инсталира ако сме в производствена среда, както Heroku би направил. Нека да променим това поведение чрез променливата `NPM_CONFIG_PRODUCTION`.
 
-- In both apps, under Settings > Config Variables, add `NPM_CONFIG_PRODUCTION` set to `false`.
+- В двете приложения, в Settings > Config Variables, добавете `NPM_CONFIG_PRODUCTION` да е равна на `false`.
 
-- Create a Pipeline, and grant Heroku access to your Github.
+- Създайте Pipeline и дайте достъп на Heroku до вашия Github акаунт.
 
-- Add both apps to the pipeline, make the staging one auto-deploy on changes in `master`, and enable Review Apps.
+- Добавете двете приложения в pipeline-а, направете приложението -staging да се публикува автоматично при промени в `master` (auto-deploy) и включете опцията Review Apps.
 
-Alright, let's prepare our project for a deployment to Heroku.
+Нека сега подготвим нашия проект за публикуване в Heroku.
 
 ### Running in production mode locally
 
-- Create a `.env` file containing:
+- Създайте `.env` файл, съдържащ:
 
 ```.env
 NODE_ENV='production'
 PORT='8000'
 ```
 
-That's in this file that you should put your local-only variables and secret variables. Don't commit it to a public repository if your project is private.
+В този файл трябва да слагате само вашите локални променливи или променливи с пароли. Не го публикувайте в публични репозиторита ако проектът ви е частен.
 
-- Add `/.env` to your `.gitignore`
+- Добавете `/.env` във вашия `.gitignore` файл.
 
-- Create a `Procfile` file containing:
+- Създайте `Procfile` файл, съдържащ:
 
 ```Procfile
 web: node lib/server
 ```
 
-That's where we specify the entry point of our server.
+Това е мястото където указваме началната точка на нашия сървър.
 
-We are not going to use PM2 anymore, we'll use `heroku local` instead to run in production mode locally.
+Повече няма да използваме PM2, вместо това ще използваме `heroku local`, за да работим в "производствен режим" (production mode) локално.
 
-- Run `yarn remove pm2`
+- Изпълнете `yarn remove pm2`
 
-- Edit your `prod:start` script in `package.json`:
+- Редактирайте `prod:start` скрипта в `package.json`:
 
 ```json
 "prod:start": "heroku local",
 ```
 
-- Remove `prod:stop` from `package.json`. We don't need it anymore since `heroku local` is a hanging process that we can kill with Ctrl+C, unlike `pm2 start`.
+- Изтрийте `prod:stop` от `package.json`. Няма да имаме нужда повече от това, тъй като `heroku local` е непрекъснат процес, който прекратяваме с Ctrl+C, за разлика от `pm2 start`.
 
-🏁 Run `yarn prod:build` and `yarn prod:start`. It should start your server and show you the logs.
+🏁 Изпълнете `yarn prod:build` и `yarn prod:start`. Това би трябвало да стартира вашия сървър и да ви покаже логовете.
 
-### Deploying to production
+### Публикуване в производствена среда (Deploying to production)
 
-- Add the following line to your `scripts` in `package.json`:
+- Добавете следния ред в `scripts` в `package.json`:
 
 ```json
 "heroku-postbuild": "yarn prod:build",
