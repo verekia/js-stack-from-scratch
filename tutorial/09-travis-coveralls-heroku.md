@@ -151,4 +151,4 @@ web: node lib/server
 
 Заслужавате този emoji медал: 🏅
 
-Назад към [предишната глава](08-bootstrap-jss.md#readme) или към [съдържанието](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](08-bootstrap-jss.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#table-of-contents).
