@@ -1,16 +1,16 @@
 # 07 - Socket.IO
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/07-socket-io).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/07-socket-io).
 
-> 💡 **[Socket.IO](https://github.com/socketio/socket.io)** is a library to easily deal with Websockets. It provides a convenient API and fallback for browsers that don't support Websockets.
+> 💡 **[Socket.IO](https://github.com/socketio/socket.io)** е библиотека за работа с Websockets. Предоставя удобно API и има резервен вариант за браузъри, които не поддържат Websockets.
 
-In this chapter, we are going to set up a basic message exchange between the client and the server. In order to not add more pages and components – which would be unrelated to the core feature we're interested in here – we are going to make this exchange happen in the browser console. No UI stuff in this chapter.
+В тази глава ще направим простичък обмен на съобщения между клиента и сървъра. За да не се налага добавянето на нови страници и компоненти, което не е нещо релевантно за тази тази глава, ще направим този обмен да се случва в конзолата на браузъра. В тази глава няма да има неща свързани с потребителския интерфейс.
 
-- Run `yarn add socket.io socket.io-client`
+- Изпълнете `yarn add socket.io socket.io-client`
 
 ## Server-side
 
-- Edit your `src/server/index.js` like so:
+- Редактирайте `src/server/index.js` файла, както следва:
 
 ```js
 // @flow
@@ -44,9 +44,9 @@ http.listen(WEB_PORT, () => {
 })
 ```
 
-Note that in order for Socket.IO to work, you need to use `Server` from `http` to `listen` to incoming requests, and not the Express `app`. Fortunately, that doesn't change much of the code. All the Websocket details are externalized in a different file, called with `setUpSocket`.
+Забележете, ча за да може Socket.IO да работи трябва да използвате `Server` от `http` да `слуша` за идващите заявки, а не Express `app`. За щастие, това не променя много кода ни. Всички детайли отнасящи се до Websocket са отделени в отделен файл, наречен `setUpSocket`.
 
-- Add the following constants to `src/shared/config.js`:
+- Добавете следните константи в `src/shared/config.js`:
 
 ```js
 export const IO_CONNECT = 'connect'
@@ -56,11 +56,11 @@ export const IO_CLIENT_JOIN_ROOM = 'IO_CLIENT_JOIN_ROOM'
 export const IO_SERVER_HELLO = 'IO_SERVER_HELLO'
 ```
 
-These are the *type of messages* your client and your server will exchange. I suggest prefixing them with either `IO_CLIENT` or `IO_SERVER` to make it clearer *who* is sending the message. Otherwise, things can get pretty confusing when you have a lot of message types.
+Това са *типовете съобщения*, които вашия клиент и сървър ще обменят. Препоръчвам ви да им добавите префикс, който ще направи по-лесно разпознаването на това кой изпраща и кой получава съобщението. Можете да използвате например `IO_CLIENT` или `IO_SERVER`. В противен случай, нещата могат да станат доста объркващи когато съобщенията станат прекалено много.
 
-As you can see, we have a `IO_CLIENT_JOIN_ROOM`, because for the sake of demonstration, we are going to make clients join a room (like a chatroom). Rooms are useful to broadcast messages to specific groups of users.
+Както може би сте видели, имаме и `IO_CLIENT_JOIN_ROOM`, тъй като в името на по-добрата демонстрация, ще направим така че клиентите да могат да се присъединяват в стая (например чат стая). Стаите се използват за изпращане на съобщения до определена група от потребители.
 
-- Create a `src/server/socket.js` file containing:
+- Създайте `src/server/socket.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -101,18 +101,18 @@ const setUpSocket = (io: Object) => {
 export default setUpSocket
 ```
 
-Okay, so in this file, we implement *how our server should react when clients connect and send messages to it*:
+Oк, в този файл имплементираме *как нашия сървър трябва да реагира когато клиент се свърже с него и му изпрати съобщение*:
 
-- When the client connects, we log it in the server console, and get access to the `socket` object, which we can use to communicate back with that client.
-- When a client sends `IO_CLIENT_JOIN_ROOM`, we make it join the `room` it wants. Once it has joined a room, we send 3 demo messages: 1 message to every user, 1 message to users in that room, 1 message to that client only.
-- When the client sends `IO_CLIENT_HELLO`, we log its message in the server console.
-- When the client disconnects, we log it as well.
+- Когато клиент се свърже, ние го записваме в сървърната конзола и получаваме достъп до `socket` обекта, чрез който можем да комуникираме с този клиент.
+- Когато клиент изпрати `IO_CLIENT_JOIN_ROOM`, ние го присъединяваме към `стаята`, която иска. След като се присъедини в стая, ние изпращаме 3 демо съобщения: 1 съобщение към всички потребители, 1 съобщение към потребителите в тази стая, 1 съобщение само към клиента.
+- Когато клиент изпрати `IO_CLIENT_HELLO`, ние записваме неговото съобщение в сървърната конзола.
+- Записваме, също така, когато клиентът се отпише.
 
-## Client-side
+## Клиент (Client-side)
 
-The client-side of things is going to look very similar.
+Клиентската част на нещата ще изглежда доста подобно.
 
-- Edit `src/client/index.jsx` like so:
+- Редактирайте `src/client/index.jsx` файла, както следва:
 
 ```js
 // [...]
@@ -122,9 +122,9 @@ import setUpSocket from './socket'
 setUpSocket(store)
 ```
 
-As you can see, we pass the Redux store to `setUpSocket`. This way whenever a Websocket message coming from the server should alter the client's Redux state, we can `dispatch` actions. We are not going to `dispatch` anything in this example though.
+Както можете да видите, подаваме Redux store обекта на `setUpSocket`. По този начин всеки път когато пристигне Websocket съобщение от сървъра ще трябва да се запише в клиентския Redux state обект и ще знаем, че трябва да изпратим действия (`dispatch` actions). Но в този пример няма да се занимаваме с това.
 
-- Create a `src/client/socket.js` file containing:
+- Създайте `src/client/socket.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -163,15 +163,15 @@ const setUpSocket = (store: Object) => {
 export default setUpSocket
 ```
 
-What happens here should not be surprising if you understood well what we did on the server:
+Ако сте разбрали какво направихме от страна на сървъра значи това, което се случва тук не би трябвало да ви изненадва:
 
-- As soon as the client is connected, we log it in the browser console and join the room `hello-1234` with a `IO_CLIENT_JOIN_ROOM` message.
-- We then send `Hello!` with a `IO_CLIENT_HELLO` message.
-- If the server sends us a `IO_SERVER_HELLO` message, we log it in the browser console.
-- We also log any disconnection.
+- Веднага след като клиентът се свърже, го записваме в конзолата на браузъра и го присъединяваме към стая `hello-1234` чрез `IO_CLIENT_JOIN_ROOM` съобщението.
+- След това изпращаме `Hello!` с `IO_CLIENT_HELLO` съобщението.
+- Ако сървърът ни изпрати `IO_SERVER_HELLO` съобщение, го записваме в конзолата на браузъра.
+- Също така записваме когато връзката прекъсне.
 
-🏁 Run `yarn start` and `yarn dev:wds`, open `http://localhost:8000`. Then, open your browser console, and also look at the terminal of your Express server. You should see the Websocket communication between your client and server.
+🏁 Изпълнете `yarn start` и `yarn dev:wds`, отворете `http://localhost:8000`. След това отворете конзолата на браузъра ви и също така гледайте в терминала на вашия Express сървър. Би трябвало да видите Websocket комуникацията между клиента и сървъра.
 
-Next section: [08 - Bootstrap, JSS](08-bootstrap-jss.md#readme)
+Следваща глава: [08 - Bootstrap, JSS](08-bootstrap-jss.md#readme)
 
-Back to the [previous section](06-react-router-ssr-helmet.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](06-react-router-ssr-helmet.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

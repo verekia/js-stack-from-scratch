@@ -1,37 +1,37 @@
-# 05 - Redux, Immutable, and Fetch
+# 05 - Redux, Immutable и Fetch
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/05-redux-immutable-fetch).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/05-redux-immutable-fetch).
 
-In this chapter we will hook up React and Redux to make a very simple app. The app will consist of a message and a button. The message changes when the user clicks the button.
+В тази глава ще свържем React с Redux и ще направим едно простичко приложение. Приложението ще се състои от едно съобщение и един бутон. Съобщението ще се променя когато потребителя натисне бутона.
 
-Before we start, here is a very quick introduction to ImmutableJS, which is completely unrelated to React and Redux, but will be used in this chapter.
+Преди да започнем, ви предлагам едно много бързо въведение за ImmutableJS, което няма нищо общо с React и Redux, но ще бъде използвано в тази глава.
 
 ## ImmutableJS
 
-> 💡 **[ImmutableJS](https://facebook.github.io/immutable-js/)** (or just Immutable) is a library by Facebook to manipulate immutable collections, like lists and maps. Any change made on an immutable object returns a new object without mutating the original object.
+> 💡 **[ImmutableJS](https://facebook.github.io/immutable-js/)** (или само Immutable) е библиотека, създадена от Facebook, за манипулиране на непроменящи се колекции (immutable collections), като например списъци (lists) и карти (maps). Всяка промяна направена върху такъв обект (immutable) дава като резултат нов обект без да променя оригиналния такъв.
 
-For instance, instead of doing:
+Например следното, вместо да го направите така:
 
 ```js
 const obj = { a: 1 }
 obj.a = 2 // Mutates `obj`
 ```
 
-You would do:
+Бихте го направили така:
 
 ```js
 const obj = Immutable.Map({ a: 1 })
 obj.set('a', 2) // Returns a new object without mutating `obj`
 ```
 
-This approach follows the **functional programming** paradigm, which works really well with Redux.
+Този подход се осланя на парадигмата от **функционалното програмиране**, което се получава доста добре с Redux.
 
-When creating immutable collections, a very convenient method is `Immutable.fromJS()`, which takes any regular JS object or array and returns a deeply immutable version of it:
+Когато създавате immutable колекции можете да използвате един много удобен метод, а именно `Immutable.fromJS()`, който метод взима като входен аргумент всеки стандартен JS обект или масив и връща "непроменяща" се негова версия (deeply immutable version):
 
 ```js
 const immutablePerson = Immutable.fromJS({
   name: 'Stan',
-  friends: ['Kyle', 'Cartman', 'Kenny'],
+  friends: ['Kyle', 'Cartman', 'Kenny']
 })
 
 console.log(immutablePerson)
@@ -44,17 +44,17 @@ console.log(immutablePerson)
  */
 ```
 
-- Run `yarn add immutable@4.0.0-rc.2`
+- Изпълнете `yarn add immutable@4.0.0-rc.2`
 
 ## Redux
 
-> 💡 **[Redux](http://redux.js.org/)** is a library to handle the lifecycle of your application. It creates a *store*, which is the single source of truth of the state of your app at any given time.
+> 💡 **[Redux](http://redux.js.org/)** е библиотека за работа с процесите по време на живота на вашето приложение. Създава обект наречен *store*, чиято идея е да бъде основният източник на информация за състоянието на вашето приложение във всеки един момент (single source of truth of the state of your app).
 
-Let's start with the easy part, declaring our Redux actions:
+Нека да започнем с лесната част, декларирането на нашите Redux actions:
 
-- Run `yarn add redux redux-actions`
+- Изпълнете `yarn add redux redux-actions`
 
-- Create a `src/client/action/hello.js` file containing:
+- Създайте `src/client/action/hello.js` файл, съдържащ следното:
 
 ```js
 // @flow
@@ -66,9 +66,9 @@ export const SAY_HELLO = 'SAY_HELLO'
 export const sayHello = createAction(SAY_HELLO)
 ```
 
-This file exposes an *action*, `SAY_HELLO`, and its *action creator*, `sayHello`, which is a function. We use [`redux-actions`](https://github.com/acdlite/redux-actions) to reduce the boilerplate associated with Redux actions. `redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which makes *action creators* return objects with the `type` and `payload` attributes.
+Този файл ни позволява да използваме "действие" (*action*), `SAY_HELLO`, и неговия създадел (*action creator*), `sayHello`, което е функция. Използваме [`redux-actions`](https://github.com/acdlite/redux-actions), за да редуцираме т.нар. boilerplate код (нещо което трябва да се направи първо, за да може да се използва друго нещо), който е свързан с използването на Redux actions. `redux-actions` имплементира [Flux Standard Action](https://github.com/acdlite/flux-standard-action) модела, който позволява на *action creators* или функциите за създаване на действия (actions) да връщат като резултат обекти с атрибути `type` и `payload`.
 
-- Create a `src/client/reducer/hello.js` file containing:
+- Създайте `src/client/reducer/hello.js` файл, който съдържа следното:
 
 ```js
 // @flow
@@ -94,19 +94,19 @@ const helloReducer = (state: Immut = initialState, action: { type: string, paylo
 export default helloReducer
 ```
 
-In this file we initialize the state of our reducer with an Immutable Map containing one property, `message`, set to `Initial reducer message`. The `helloReducer` handles `SAY_HELLO` actions by simply setting the new `message` with the action payload. The Flow annotation for `action` destructures it into a `type` and a `payload`. The `payload` can be of `any` type. It looks funky if you've never seen this before, but it remains pretty understandable. For the type of `state`, we use the `import type` Flow instruction to get the return type of `fromJS`. We rename it to `Immut` for clarity, because `state: fromJS` would be pretty confusing. The `import type` line will get stripped out like any other Flow annotation. Note the usage of `Immutable.fromJS()` and `set()` as seen before.
+В този файл инициализираме състоянието на нашия reducer с Immutable Map обект, съдържащ едно свойство, `message`, чиято стойност е `Initial reducer message`. `helloReducer` обработва `SAY_HELLO` действията като просто прилага на `message` нова стойност, идваща от свойството payload на обекта action. Flow анотацията за `action` го деструктурира до `type` и `payload`. `payload` може да бъде от всякакъв (`any`) тип type. Изглежда странно ако не сте виждали такова нещо преди, но все пак остава разбираемо. За типа на `state` използваме `import type` Flow инструкцията, за да вземем типа, който се връща от `fromJS`. Преименуваме го на `Immut` за по-голяма яснота, тъй като `state: fromJS` би било доста объркващо. `import type` реда ще беда премахнат както и всички останали Flow анотации. Обърнете внимание на начина, по който се използват `Immutable.fromJS()` и `set()`, както беше показано по-горе.
 
 ## React-Redux
 
-> 💡 **[react-redux](https://github.com/reactjs/react-redux)** *connects* a Redux store with React components. With `react-redux`, when the Redux store changes, React components get automatically updated. They can also fire Redux actions.
+> 💡 **[react-redux](https://github.com/reactjs/react-redux)** *свързва* Redux "склада" (store) с React компонентите. Чрез `react-redux` си гарантираме, че когато се промени Redux store обекта, React компонентите ще се обновят автоматично, отразявайки тази промяна. Също така те могат да предизвикват Redux действия (actions).
 
-- Run `yarn add react-redux`
+- Изпълнете `yarn add react-redux`
 
-In this section we are going to create *Components* and *Containers*.
+В тази секция ще създадем компоненти (*Components*) и контейнери (*Containers*).
 
-**Components** are *dumb* React components, in a sense that they don't know anything about the Redux state. **Containers** are *smart* components that know about the state and that we are going to *connect* to our dumb components.
+**Компонентите** са *глупави* React компоненти, в смисъл такъв, че те не знаят нищо за състоянието на Redux (Redux state). **Контейнерите** са *умни* компоненти, които знаят за състоянието и които ще *свържем* с нашите "глупави" компоненти.
 
-- Create a `src/client/component/button.jsx` file containing:
+- Създайте `src/client/component/button.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -115,7 +115,7 @@ import React from 'react'
 
 type Props = {
   label: string,
-  handleClick: Function,
+  handleClick: Function
 }
 
 const Button = ({ label, handleClick }: Props) =>
@@ -124,9 +124,9 @@ const Button = ({ label, handleClick }: Props) =>
 export default Button
 ```
 
-**Note**: You can see a case of Flow *type alias* here. We define the `Props` type before annotating our component's destructured `props` with it.
+**Забележка**: Тук можете да видите пример за Flow *type alias*. Дефинираме `Props` типа преди да анотираме деструктурираните свойства (`props`) на нашия компонент с него.
 
-- Create a `src/client/component/message.jsx` file containing:
+- Създайте `src/client/component/message.jsx` файл, който съдържа следното:
 
 ```js
 // @flow
@@ -134,7 +134,7 @@ export default Button
 import React from 'react'
 
 type Props = {
-  message: string,
+  message: string
 }
 
 const Message = ({ message }: Props) =>
@@ -143,11 +143,11 @@ const Message = ({ message }: Props) =>
 export default Message
 ```
 
-These are examples of *dumb* components. They are logic-less, and just show whatever they are asked to show via React **props**. The main difference between `button.jsx` and `message.jsx` is that `Button` contains a reference to an action dispatcher in its props, where `Message` just contains some data to show.
+Това са примери за "глупави" (*dumb*) компоненти. В тях няма логика и просто показват това, за което са направени да показват чрез React **props**. Основната разлика между `button.jsx` и `message.jsx` е това, че `Button` съдържа референция към изпращач на действия (action dispatcher) в своите свойства, докато `Message` просто съдържа информация, която ще показва.
 
-Again, *components* don't know anything about Redux **actions** or the **state** of our app, which is why we are going to create smart **containers** that will feed the proper action dispatchers and data to these 2 dumb components.
+Отново споменаваме, че компонентите (*components*) не знаят нищо за Redux действията (**actions**) или за състоянието (**state**) на нашето приложение, което е причината, поради която ще създадем и "умни" контейнери (**containers**), които ще предоставят необходимите изпращачи на действия (action dispatchers) и информация на двата "глупави" компонента.
 
-- Create a `src/client/container/hello-button.js` file containing:
+- Създайте `src/client/container/hello-button.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -168,9 +168,9 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Button)
 ```
 
-This container hooks up the `Button` component with the `sayHello` action and Redux's `dispatch` method.
+Този бутон свързва компонента `Button` с `sayHello` действието и метода `dispatch` на Redux.
 
-- Create a `src/client/container/message.js` file containing:
+- Създайте `src/client/container/message.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -186,9 +186,9 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Message)
 ```
 
-This container hooks up the Redux's app state with the `Message` component. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
+Този контейнер свързва състоянието (state) на приложението на Redux с `Message` компонента. Когато се промени състоянието, `Message` ще се обнови автоматично с новата стойност идваща от `message` свойството (prop). Тези връзки са осъществени чрез използването на `connect` функцията от `react-redux`.
 
-- Update your `src/client/app.jsx` file like so:
+- Обновете `src/client/app.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -208,9 +208,9 @@ const App = () =>
 export default App
 ```
 
-We still haven't initialized the Redux store and haven't put the 2 containers anywhere in our app yet:
+Все още не сме инициализирали Redux store обекта и не сме добавили в приложението нашите два контенейра:
 
-- Edit `src/client/index.jsx` like so:
+- Редактирайте `src/client/index.jsx`, както следва:
 
 ```js
 // @flow
@@ -253,19 +253,19 @@ if (module.hot) {
 }
 ```
 
-Let's take a moment to review this. First, we create a *store* with `createStore`. Stores are created by passing reducers to them. Here we only have one reducer, but for the sake of future scalability, we use `combineReducers` to group all of our reducers together. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we disable this ESLint rule. Next, we conveniently wrap our entire app inside `react-redux`'s `Provider` component thanks to our `wrapApp` function, and pass our store to it.
+Нека да отделим малко време и да разгледаме това по-подробно. Като начало, създаваме *store*, използвайки `createStore`. Store обектите се създават, чрез подаване на reducers обекти към тях. В нашия пример имаме само един reducer обект, но за да покажем как това би се направило в едно бъдещо приложение с много reducer обекти, използваме `combineReducers`, за да групираме всички reducer обекти заедно. Последният "странен" параметър, който се използва от `createStore` е нещо, което използваме, за да свържем Redux с интрументите за дебъгване на нашия браузър - [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), тези инструменти са много полезни когато дебъгваме приложенията си. За да може ESLint да не се оплаква от използването на подчерти в`__REDUX_DEVTOOLS_EXTENSION__`, забраняваме това ESLint правило. След това поставяме цялото приложение в `Provider` компонента на `react-redux`, благодарение на нашата `wrapApp` функция, и подаваме store обекта като входен параметър.
 
-🏁 You can now run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Initial reducer message" and a button. When you click the button, the message should change to "Hello!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
+🏁 Сега вече можете да изпълните `yarn start` и `yarn dev:wds` и да отворите `http://localhost:8000`. Би трябвало да видите "Initial reducer message" и един бутон. Когато натиснете бутона съобщението трябва да се промени на "Hello!". Ако сте инсталирали Redux Devtools във вашия браузър, би трябвало да виждате как се променя състоянието (state) на приложението всеки път когато се натисне бутона.
 
-Congratulations, we finally made an app that does something! Okay it's not a *super* impressive from the outside, but we all know that it is powered by one badass stack under the hood.
+Поздравления, най-накрая направихме приложение, което прави нещо наистина! Добре де, не е *супер* впечатляващо погледнато отвън, но поне всички знаем, че е разработено чрез използването на "супер-дуперския" пакет от инструменти описвани в това ръководство :).
 
-## Extending our app with an asynchronous call
+## Разширяване на нашето приложение чрез използване на асинхронни извиквания (Extending our app with an asynchronous call)
 
-We are now going to add a second button to our app, which will trigger an AJAX call to retrieve a message from the server. For the sake of demonstration, this call will also send some data, the hard-coded number `1234`.
+Тук ще добавим втори бутон в нашето приложение, който ще стартира AJAX извикване (call), за да изтегли ново съобщение от сървъра. За по-добра демонстрация, това извикване (call) ще изпрати и информация към сървъра - статично число `1234`.
 
 ### The server endpoint
 
-- Create a `src/shared/routes.js` file containing:
+- Създайте `src/shared/routes.js` файл, който да съдържа следното:
 
 ```js
 // @flow
@@ -274,16 +274,16 @@ We are now going to add a second button to our app, which will trigger an AJAX c
 export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
 ```
 
-This function is a little helper to produce the following:
+Тази функция ще ни помага да създаваме следното:
 
 ```js
 helloEndpointRoute()     // -> '/ajax/hello/:num' (for Express)
 helloEndpointRoute(1234) // -> '/ajax/hello/1234' (for the actual call)
 ```
 
-Let's actually create a test real quick to make sure this thing works well.
+Всъщност, нека набързо да създадем тест за това, за да сме сигурни, че работи както трябва.
 
-- Create a `src/shared/routes.test.js` containing:
+- Създайте `src/shared/routes.test.js` файл, съдържащ:
 
 ```js
 import { helloEndpointRoute } from './routes'
@@ -294,9 +294,9 @@ test('helloEndpointRoute', () => {
 })
 ```
 
-- Run `yarn test` and it should pass successfully.
+- Изпълнете `yarn test`, би трябвало да се изпълни успешно.
 
-- In `src/server/index.js`, add the following:
+- В `src/server/index.js` файла добавете следното:
 
 ```js
 import { helloEndpointRoute } from '../shared/routes'
@@ -308,9 +308,9 @@ app.get(helloEndpointRoute(), (req, res) => {
 })
 ```
 
-### New containers
+### Нови контейнери
 
-- Create a `src/client/container/hello-async-button.js` file containing:
+- Създайте `src/client/container/hello-async-button.js` файл, съдържащ следното:
 
 ```js
 // @flow
@@ -325,15 +325,15 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleClick: () => { dispatch(sayHelloAsync(1234)) },
+  handleClick: () => { dispatch(sayHelloAsync(1234)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Button)
 ```
 
-In order to demonstrate how you would pass a parameter to your asynchronous call and to keep things simple, I am hard-coding a `1234` value here. This value would typically come from a form field filled by the user.
+За да демонстрираме как бихте изпратили параметър към асинхронната функция и да се придържаме към простички примери, отново използвам статична стойност `1234`. Обикновено стойности като тази бихме взимали от поле във форма попълвана от потребителя.
 
-- Create a `src/client/container/message-async.js` file containing:
+- Създайте `src/client/container/message-async.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -349,21 +349,21 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(MessageAsync)
 ```
 
-You can see that in this container, we are referring to a `messageAsync` property, which we're going to add to our reducer soon.
+Както ще видите тук, използваме `messageAsync` свойството, което скоро ще добавим в нашия reducer обект.
 
-What we need now is to create the `sayHelloAsync` action.
+Сега трябва да създадем действието `sayHelloAsync`.
 
 ### Fetch
 
-> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** is a standardized JavaScript function to make asynchronous calls inspired by jQuery's AJAX methods.
+> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** е стандартизирана JavaScript функция, за изпълняване на асинхронни извиквания (asynchronous call), инспирирана от AJAX методите на jQuery.
 
-We are going to use `fetch` to make calls to the server from the client. `fetch` is not supported by all browsers yet, so we are going to need a polyfill. `isomorphic-fetch` is a polyfill that makes it work cross-browsers and in Node too!
+Ще използваме `fetch`, за да правим извиквания (calls) от клиента към сървъра. Тъй като `fetch` не се поддържа от всички браузъри, ще използваме полифил (polyfill). `isomorphic-fetch` е такъв полифил, който работи еднакво добре както в различните браузъри, така и в Node среда!
 
-- Run `yarn add isomorphic-fetch`
+- Изпълнете `yarn add isomorphic-fetch`
 
-Since we're using `eslint-plugin-compat`, we need to indicate that we are using a polyfill for `fetch` to not get warnings from using it.
+Заради използването на `eslint-plugin-compat` ще трябва да укажем изрично, че използваме полифил за `fetch`, за да не получаваме предупредителни съобщения от това, че го използваме.
 
-- Add the following to your `.eslintrc.json` file:
+- Добавете следното във вашия `.eslintrc.json` файл:
 
 ```json
 "settings": {
@@ -371,11 +371,11 @@ Since we're using `eslint-plugin-compat`, we need to indicate that we are using 
 },
 ```
 
-### 3 asynchronous actions
+### 3 асинхронни действия (3 asynchronous actions)
 
-`sayHelloAsync` is not going to be a regular action. Asynchronous actions are usually split into 3 actions, which trigger 3 different states: a *request* action (or "loading"), a *success* action, and a *failure* action.
+`sayHelloAsync` няма да бъде обикновено действие (action). Асинхронните действия (actions) обикновено се делят на 3 фази, които инициират три различни състояния (states): "заявка" (*request*) действие или "зареждане ("loading"), *успех* действие (action) и "провал" (*failure*) действие.
 
-- Edit `src/client/action/hello.js` like so:
+- Редактирайте `src/client/action/hello.js` файла, както следва:
 
 ```js
 // @flow
@@ -412,11 +412,11 @@ export const sayHelloAsync = (num: number) => (dispatch: Function) => {
 }
 ```
 
-Instead of returning an action, `sayHelloAsync` returns a function which launches the `fetch` call. `fetch` returns a `Promise`, which we use to *dispatch* different actions depending on the current state of our asynchronous call.
+Вместо да върне действие (action), `sayHelloAsync` връща функция, която изпълнява `fetch` извикване (call). `fetch` връща `Promise` (име на тип данни наречени "обещания" или Promises), което използваме, за да изпратим (*dispatch*) или реагираме с различни действия, в зависимост от текущата сигуация на нашите асинхронни извиквания.
 
-### 3 asynchronous action handlers
+### 3 "обработвачи" на асинхронни действия (3 asynchronous action handlers)
 
-Let's handle these different actions in `src/client/reducer/hello.js`:
+Нека обработим различните действия в `src/client/reducer/hello.js`:
 
 ```js
 // @flow
@@ -454,15 +454,15 @@ const helloReducer = (state: Immut = initialState, action: { type: string, paylo
 export default helloReducer
 ```
 
-We added a new field to our store, `messageAsync`, and we update it with different messages depending on the action we receive. During `SAY_HELLO_ASYNC_REQUEST`, we show `Loading...`. `SAY_HELLO_ASYNC_SUCCESS` updates `messageAsync` similarly to how `SAY_HELLO` updates `message`. `SAY_HELLO_ASYNC_FAILURE` gives an error message.
+Добавяме ново поле в нашия store обект, `messageAsync`, и ще го обновяваме с различни съобщения в зависимост от действието (action), което получим. По време на `SAY_HELLO_ASYNC_REQUEST` показваме `Loading...`. `SAY_HELLO_ASYNC_SUCCESS` обновява `messageAsync` подобно на начина, по който `SAY_HELLO` обновява `message`. `SAY_HELLO_ASYNC_FAILURE` връща съобщение за грешка.
 
 ### Redux-thunk
 
-In `src/client/action/hello.js`, we made `sayHelloAsync`, an action creator that returns a function. This is actually not a feature that is natively supported by Redux. In order to perform these async actions, we need to extend Redux's functionality with the `redux-thunk` *middleware*.
+В `src/client/action/hello.js` създадохме `sayHelloAsync`, което е нещо, което създава действие ("action creator"), което връща функция. Това не е нещо, което се поддържа от Redux по подразбиране. За да можем да изпълняваме подобен род действия ще трябва да разширим функционалността на Redux с `redux-thunk` *middleware*.
 
-- Run `yarn add redux-thunk`
+- Изпълнете `yarn add redux-thunk`
 
-- Update your `src/client/index.jsx` file like so:
+- Обновете `src/client/index.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -508,9 +508,9 @@ if (module.hot) {
 }
 ```
 
-Here we pass `redux-thunk` to Redux's `applyMiddleware` function. In order for the Redux Devtools to keep working, we also need to use Redux's `compose` function. Don't worry too much about this part, just remember that we enhance Redux with `redux-thunk`.
+Тук подаваме `redux-thunk` на `applyMiddleware` функцията на React. За да може Redux Devtools да продължат да работят, също така трябва да използваме `compose` функцията на React. Не се притеснявайте прекалено много за тази част, просто запомнете, че разширяваме Redux с `redux-thunk`.
 
-- Update `src/client/app.jsx` like so:
+- Обновете `src/client/app.jsx`, както следва:
 
 ```js
 // @flow
@@ -534,19 +534,19 @@ const App = () =>
 export default App
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds` and you should now be able to click the "Say hello asynchronously and send 1234" button and retrieve a corresponding message from the server! Since you're working locally, the call is instantaneous, but if you open the Redux Devtools, you will notice that each click triggers both `SAY_HELLO_ASYNC_REQUEST` and `SAY_HELLO_ASYNC_SUCCESS`, making the message go through the intermediate `Loading...` state as expected.
+🏁 Изпълнете `yarn start` и `yarn dev:wds`, и сега би трябвало да можете да натиснете бутона "Say hello asynchronously and send 1234" и да получите съответното съобщение от сървъра! Тъй като работим на локалните си машини, извикването и резултата се получават моментално. Но ако отворите Redux Devtools ще забележите, че всяко натискане на бутона е причина за нови `SAY_HELLO_ASYNC_REQUEST` и `SAY_HELLO_ASYNC_SUCCESS` събития, карайки съобщенията да минават през междинната фаза `Loading...` на състоянието, както се очаква.
 
-You can congratulate yourself, that was an intense section! Let's wrap it up with some testing.
+Можете да се поздравите, това беше една доста трудна и изморителна глава! Нека да обобщим резултатите с малко тестване.
 
-## Testing
+## Тестване / Testing
 
-In this section, we are going to test our actions and reducer. Let's start with the actions.
+В тази секция ще тестваме нашите действия (actions) и reducer обект. Нека да започнем с действията.
 
-In order to isolate the logic that is specific to `action/hello.js` we are going to need to *mock* things that don't concern it, and also mock that AJAX `fetch` request which should not trigger an actual AJAX in our tests.
+За да можем да изолираме логиката, която е специфична за `action/hello.js` ще имаме нужда от *mock* неща, които нямат връзка с него и също така могат да симулират AJAX `fetch` извикване, което не би трябвало да инициира истинско AJAX извикване.
 
-- Run `yarn add --dev redux-mock-store fetch-mock`
+- Изпълнете `yarn add --dev redux-mock-store fetch-mock`
 
-- Create a `src/client/action/hello.test.js` file containing:
+- Създайте `src/client/action/hello.test.js` файл, съдържащ:
 
 ```js
 import fetchMock from 'fetch-mock'
@@ -605,11 +605,11 @@ test('sayHelloAsync data error', () => {
 })
 ```
 
-Alright, Let's look at what's happening here. First we mock the Redux store using `const mockStore = configureMockStore([thunkMiddleware])`. By doing this we can dispatch actions without them triggering any reducer logic. For each test, we mock `fetch` using `fetchMock.get()` and make it return whatever we want. What we actually test using `expect()` is which series of actions have been dispatched by the store, thanks to the `store.getActions()` function from `redux-mock-store`. After each test we restore the normal behavior of `fetch` with `fetchMock.restore()`.
+Добре, нека да видим какво се случва тук. Като за начало "мокваме" (изкуствено създаваме източник на информация, която се използва при създаването на тестове) Redux store обекта, използвайки `const mockStore = configureMockStore([thunkMiddleware])`. Това ще ни позволи да можем да изпращаме действия (actions), без те да стартиртат каквато и да била reducer логика. За всеки тест, използваме спациални програми за управление на входната информация, като например "мокването" на `fetch`, използвайки `fetchMock.get()` и правейки го да върне като резултат каквото ние поискаме. Това, което всъщност тестваме, използвайки `expect()`, е кои серии от действия са били изпратени от store обекта благодарение на `store.getActions()` функцията от `redux-mock-store`. След всеки тест възстановяваме нормалното състояние на `fetch` с `fetchMock.restore()`.
 
-Let's now test our reducer, which is much easier.
+Хайде сега да изтестваме reducer обектите, което е доста по-лесна.
 
-- Create a `src/client/reducer/hello.test.js` file containing:
+- Създайте` `src/client/reducer/hello.test.js` файл, съдържащ:
 
 ```js
 import {
@@ -653,10 +653,10 @@ test('handle SAY_HELLO_ASYNC_FAILURE', () => {
 })
 ```
 
-Before each test, we initialize `helloState` with the default result of our reducer (the `default` case of our `switch` statement in the reducer, which returns `initialState`). The tests are then very explicit, we just make sure the reducer updates `message` and `messageAsync` correctly depending on which action it received.
+Преди всеки тест инициализираме `helloState` с резултата, който се връща от reducer обекта ни по подразбиране (`default` стойността от `switch` операцията в reducer обекта, който връща `initialState`). Иначе самите тестове са сравнително ясни - просто проверяваме дали reducer-а обновява `message` и `messageAsync` правилно, в зависимост от това кое действие (action) е получено.
 
-🏁 Run `yarn test`. It should be all green.
+🏁 Изпълнете `yarn test`. Всичко би трябвало да е зелено.
 
-Next section: [06 - React Router, Server-Side Rendering, Helmet](06-react-router-ssr-helmet.md#readme)
+Следваща глава: [06 - React Router, Server-Side Rendering, Helmet](06-react-router-ssr-helmet.md#readme)
 
-Back to the [previous section](04-webpack-react-hmr.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](04-webpack-react-hmr.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

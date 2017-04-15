@@ -1,43 +1,43 @@
-# 08 - Bootstrap and JSS
+# 08 - Bootstrap и JSS
 
-Code for this chapter available in the [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) branch of the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).
+Кода за тази глава можете да намерите в [`master-no-services`](https://github.com/verekia/js-stack-boilerplate/tree/master-no-services) клон на [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate).
 
-Alright! It's time to give our ugly app a facelift. We are going to use Twitter Bootstrap to give it some base styles. We'll then add a CSS-in-JS library to add some custom styles.
+Окей! Време е да направите приложението си да изгежда красиво. Ще използваме Twitter Bootstrap, за да приложим основни стилове върху него. След това ще добавим една CSS-in-JS библиотека, за да добавим още някои по-специфични стилове.
 
 ## Twitter Bootstrap
 
-> 💡 **[Twitter Bootstrap](http://getbootstrap.com/)** is a library of UI components.
+> 💡 **[Twitter Bootstrap](http://getbootstrap.com/)** е библиотека с компоненти за построяване на *потребителски интерфейс* (UI components).
 
-There are 2 options to integrate Bootstrap in a React app. Both have their pros and cons:
+Има два начина за интегриране на Bootstrap в React приложение. И двата имат техните предимства и недостатъци:
 
-- Using the official release, **which uses jQuery and Tether** for the behavior of its components.
-- Using a third-party library that re-implements all of Bootstrap's components in React, like [React-Bootstrap](https://react-bootstrap.github.io/) or [Reactstrap](https://reactstrap.github.io/).
+- Да се използва официалния релийз, **който използва jQuery и Tether** за функционалността на компонентите.
+- Да се използва отделна библиотека, която реимплементира всички Bootstrap компоненти в React, като например [React-Bootstrap](https://react-bootstrap.github.io/) или [Reactstrap](https://reactstrap.github.io/).
 
-Third-party libraries provide very convenient React components that dramatically reduce the code bloat compared to the official HTML components, and integrate greatly with your React codebase. That being said, I must say that I am quite reluctant to use them, because they will always be *behind* the official releases (sometimes potentially far behind). They also won't work with Bootstrap themes that implement their own JS. That's a pretty tough drawback considering that one major strength of Bootstrap is its huge community of designers who make beautiful themes.
+Third-party библиотеките предлагат доста удобни за употреба React компоненти, които намаляват значително много кода, който се използва, в сравнение с официалните HTML компоненти, а освен това интеграцията им с React е много добре направена. И въпреки казаното до тук, аз не съм голям привърженик на използването им, тъй като те винаги остават *назад* от официалните релийзи (понякога значително назад). Също така те биха били несъвестими с Bootstrap теми, които използват свой собствен JS. Това е доста сериозен недостатък, имайки предвид, че едно от основните предимства на Bootstrap е голямата му поддръжка от дизайнери, които създават красиви теми.
 
-For this reason, I'm going to make the tradeoff of integrating the official release, alongside with jQuery and Tether. One of the concerns of this approach is the file size of our bundle of course. For your information, the bundle weights about 200KB (Gzipped) with jQuery, Tether, and Bootstrap's JS included. I think that's reasonable, but if that's too much for you, you should probably consider an other option for Bootstrap, or even not using Bootstrap at all.
+Поради тази причина ще използвам официалния релийз, който върви с jQuery и Tether. Едно от нещата, на които трябва да обърнем внимание когато използваме този подход е размера на файловете на нашия пакет. За ваша информация, размерът на пакета е около 200Кб (Gzipped) с включени jQuery, Tether и JavaScript-a на Bootstrap. Мисля, че това е разумно, но в случай че е прекалено много за вас, може би трябва да помислите за алтернатива на Bootstrap или дори за вариант да не го използвате въобще.
 
 ### Bootstrap's CSS
 
-- Delete `public/css/style.css`
+- Изтрийте `public/css/style.css`
 
-- Run `yarn add bootstrap@4.0.0-alpha.6`
+- Изпълнете `yarn add bootstrap@4.0.0-alpha.6`
 
-- Copy `bootstrap.min.css` and `bootstrap.min.css.map` from `node_modules/bootstrap/dist/css` to your `public/css` folder.
+- Копирайте `bootstrap.min.css` и `bootstrap.min.css.map` от `node_modules/bootstrap/dist/css` във вашата `public/css` папка.
 
-- Edit `src/server/render-app.jsx` like so:
+- Редактирайте `src/server/render-app.jsx`, както следва:
 
 ```html
 <link rel="stylesheet" href="${STATIC_PATH}/css/bootstrap.min.css">
 ```
 
-### Bootstrap's JS with jQuery and Tether
+### Bootstrap's JS с jQuery и Tether
 
-Now that we have Bootstrap's styles loaded on our page, we need the JavaScript behavior for the components.
+Сега, след като вече сме заредили стиловете от Bootstrap на нашата страница, ще ни трябват JavaScript функционалността на компонентите.
 
-- Run `yarn add jquery tether`
+- Изпълнете `yarn add jquery tether`
 
-- Edit `src/client/index.jsx` like so:
+- Редактирайте `src/client/index.jsx`, както следва:
 
 ```js
 import $ from 'jquery'
@@ -50,13 +50,13 @@ window.Tether = Tether
 require('bootstrap')
 ```
 
-That will load Bootstrap's JavaScript code.
+Това ще зареди JavaScript кода на Bootstrap.
 
-### Bootstrap Components
+### Bootstrap компоненти
 
-Alright, it's time for you to copy-paste a whole bunch of files.
+Окей, време е да копирате няколко файла.
 
-- Edit `src/shared/component/page/hello-async.jsx` like so:
+- Редактирайте `src/shared/component/page/hello-async.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -90,7 +90,7 @@ const HelloAsyncPage = () =>
 export default HelloAsyncPage
 ```
 
-- Edit `src/shared/component/page/hello.jsx` like so:
+- Редактирайте `src/shared/component/page/hello.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -124,7 +124,7 @@ const HelloPage = () =>
 export default HelloPage
 ```
 
-- Edit `src/shared/component/page/home.jsx` like so:
+- Редактирайте `src/shared/component/page/home.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -171,7 +171,7 @@ const HomePage = () =>
 export default HomePage
 ```
 
-- Edit `src/shared/component/page/not-found.jsx` like so:
+- Редактирайте `src/shared/component/page/not-found.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -197,7 +197,7 @@ const NotFoundPage = () =>
 export default NotFoundPage
 ```
 
-- Edit `src/shared/component/button.jsx` like so:
+- Редактирайте `src/shared/component/button.jsx`, както следва:
 
 ```js
 // [...]
@@ -210,7 +210,7 @@ export default NotFoundPage
 // [...]
 ```
 
-- Create a `src/shared/component/footer.jsx` file containing:
+- Създайте `src/shared/component/footer.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -229,7 +229,7 @@ const Footer = () =>
 export default Footer
 ```
 
-- Create a `src/shared/component/modal-example.jsx` containing:
+- Създайте `src/shared/component/modal-example.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -257,18 +257,18 @@ const ModalExample = () =>
 export default ModalExample
 ```
 
-- Edit `src/shared/app.jsx` like so:
+- Редактирайте `src/shared/app.jsx` файла, както следва:
 
 ```js
 const App = () =>
   <div style={{ paddingTop: 54 }}>
 ```
 
-This is an example of a *React inline style*.
+Това е пример за  *React inline style*.
 
-This will translate into: `<div style="padding-top:54px;">` in your DOM. We need this style to push the content under the navigation bar, but that's what's important here. [React inline styles](https://speakerdeck.com/vjeux/react-css-in-js) are a great way to isolate your component's styles from the global CSS namespace, but it comes at a price: You cannot use some native CSS features like `:hover`, Media Queries, animations, or `font-face`. That's [one of the reasons](https://github.com/cssinjs/jss/blob/master/docs/benefits.md#compared-to-inline-styles) we're going to integrate a CSS-in-JS library, JSS, later in this chapter.
+Това ще се преведе в: `<div style="padding-top:54px;">` във вашия DOM. Искаме този стил да избута съдържанието под лентата за навигация. [React inline styles](https://speakerdeck.com/vjeux/react-css-in-js) е чудесен начин за изолиране на стиловете на вашите компоненти от глобалната CSS зона на действие (namespace), но като всяко нещо и това си има цена : Не можете да използвате някои вградени CSS свойства като `:hover`, Media Queries, анимации или `font-face`. Това е [една от причините](https://github.com/cssinjs/jss/blob/master/docs/benefits.md#compared-to-inline-styles), поради която ще интегрираме CSS-in-JS библиотека, JSS, по-късно в тази глава.
 
-- Edit `src/shared/component/nav.jsx` like so:
+- Редактирайте `src/shared/component/nav.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -314,7 +314,7 @@ const Nav = () =>
 export default Nav
 ```
 
-There is something new here, `handleNavLinkClick`. One issue I encountered using Bootstrap's `navbar` in an SPA is that clicking on a link on mobile does not collapse the menu, and does not scroll back to the top of the page. This is a great opportunity to show you an example of how you would integrate some jQuery / Bootstrap-specific code in your app:
+Тук използваме нещо ново - `handleNavLinkClick`. Един от проблемите, който срещнах при използването на компонента `navbar` на Bootstrap в едно SPA (single page application) или приложение състоящо се от една страница, е, че кликването върху линк при мобилните устройства не работи правилно, тоест не затваря менюто и не премества страницата до най-горната й част (not collapse the menu and does not scroll back to the top of the page). Това е чудесна възможност да ви покажа пример как да използвате jQuery / Bootstrap-specific код във вашето приложение:
 
 ```js
 import $ from 'jquery'
@@ -328,49 +328,49 @@ const handleNavLinkClick = () => {
 <NavLink /* [...] */ onClick={handleNavLinkClick}>
 ```
 
-**Note**: I've removed accessibility-related attributes (like `aria` attributes) to make the code more readable *in the context of this tutorial*. **You should absolutely put them back**. Refer to Bootstrap's documentation and code samples to see how to use them.
+**Забележка**: Нарочно съм премахнал кода, който отговаря за достъпността (accessibility-related attributes, such as `aria` attributes), за да го направя по-четим *в контекста на това ръководство*. **Задължително трябва да го върнете обратно**. Прочетете повече в документацията на Bootstrap и примерите с код.
 
-🏁 Your app should now be entirely styled with Bootstrap.
+🏁 Сега вашето приложение би трябвало да бъде изцяло стилизирано с Bootstrap.
 
-## The current state of CSS
+## Моментно състояние на CSS
 
-In 2016, the typical modern JavaScript stack settled. The different libraries and tools this tutorial made you set up are pretty much the *cutting-edge industry standard* (*cough – even though it could become completely outdated in a year from now – cough*). Yes, that's a complex stack to set up, but at least, most front-end devs agree that React-Redux-Webpack is the way to go. Now regarding CSS, I have some pretty bad news. Nothing settled, there is no standard way to go, no standard stack.
+През 2016, това би бил типичен Javascript пакет от инструменти (JavaScript stack). Различните библиотеки и инструменти използвани в това ръководство са *най-новото в индустрията* (*въпреки че за една година могат да се окажат вече остарели*). Да, това е доста комплексен набор от инструменти, но поне повечето от фронт-енд програмистите са съгласни, че React-Redux-Webpack е пътя, по който трябва да се върви. Сега, относно CSS, имам някои доста лоши новини - все още няма нищо определено, никакви стандарти и прочие.
 
-SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components, CSSX, JSS, Radium, Web Components, CSS Modules, OOCSS, Tachyons, Stylus, Atomic CSS, PostCSS, Aphrodite, React Native for Web, and many more that I forget are all different approaches or tools to get the job done. They all do it well, which is the problem, there is no clear winner, it's a big mess.
+SASS, BEM, SMACSS, SUIT, Bass CSS, React Inline Styles, LESS, Styled Components, CSSX, JSS, Radium, Web Components, CSS Modules, OOCSS, Tachyons, Stylus, Atomic CSS, PostCSS, Aphrodite, React Native for Web и много други, които забравям, са различни подходи или инструменти, за да се свърши работата. Всички те се справят добре, което всъщност е проблема, че няма ясен победител и всичко е една голяма бъркотия.
 
-The cool React kids tend to favor React inline styles, CSS-in-JS, or CSS Modules approaches though, since they integrate really well with React and solve programmatically many [issues](https://speakerdeck.com/vjeux/react-css-in-js) that regular CSS approaches struggle with.
+Феновете на React са привърженици на React inline styles, CSS-in-JS, или CSS Modules подходите, тъй като те се интегрират доста добре с React и решават доста [проблеми](https://speakerdeck.com/vjeux/react-css-in-js), които стандартните CSS подходи не могат.
 
-CSS Modules work well, but they don't leverage the power of JavaScript and its many features over CSS. They just provide encapsulation, which is fine, but React inline styles and CSS-in-JS take styling to an other level in my opinion. My personal suggestion would be to use React inline styles for common styles (that's also what you have to use for React Native), and use a CSS-in-JS library for things like `:hover` and media queries.
+CSS Modules вършат добра работа, но не използват силата на JavaScript и неговите предимства пред обикновения CSS. Те предлагат просто енкапсулация, което е добре, но по мое мнение React inline styles и CSS-in-JS отнасят стилиризирането на приложенията на едно по-високо ниво. Личната ми препоръка би била използването на React inline styles за общи неща (за които също бихте могли да използвате React Native) и на CSS-in-JS библиотека за неща като `:hover` and media queries.
 
-There are [tons of CSS-in-JS libraries](https://github.com/MicheleBertoli/css-in-js). JSS is a full-featured, well-rounded, and [performant](https://github.com/cssinjs/jss/blob/master/docs/performance.md) one.
+Съществуват [тонове CSS-in-JS библиотеки](https://github.com/MicheleBertoli/css-in-js). JSS е една от тях - богата на функционалност, добре обоснована и представяща се добре от гледна точка на [производителността](https://github.com/cssinjs/jss/blob/master/docs/performance.md).
 
 ## JSS
 
-> 💡 **[JSS](http://cssinjs.org/)** is a CSS-in-JS library to write your styles in JavaScript and inject them into your app.
+> 💡 **[JSS](http://cssinjs.org/)** e една CSS-in-JS библиотека за писане на стилове в JavaScript и инжектирането им във вашето приложение.
 
-Now that we have some base template with Bootstrap, let's write some custom CSS. I mentioned earlier that React inline styles could not handle `:hover` and media queries, so we'll show a simple example of this on the homepage using JSS. JSS can be used via `react-jss`, a library that is convenient to use with React components.
+Сега, след като имаме основен Bootstrap темплейт, нека напишем малко собствен CSS код. По-рано споменах, че React inline styles нямат поддръжка за `:hover` and media queries, затова ще покажем едно просто примерче с JSS на началната ни страница. JSS може да бъде използван чрез `react-jss`, библиотека, която е удобна за употреба когато се работи с React компоненти.
 
-- Run `yarn add react-jss`
+- Изпълнете `yarn add react-jss`
 
-Add the following to your `.flowconfig` file, as there is currently a Flow [issue](https://github.com/cssinjs/jss/issues/411) with JSS:
+Добавете следното във вашия `.flowconfig` файл, тъй като в момента Flow има [проблем](https://github.com/cssinjs/jss/issues/411) с JSS:
 
 ```flowconfig
 [ignore]
 .*/node_modules/jss/.*
 ```
 
-### Server-side
+### Сървърна част (Server-side)
 
-JSS can render styles on the server for the initial rendering.
+JSS може да рендира стилове от страната на сървъра при началното зареждане.
 
-- Add the following constants to `src/shared/config.js`:
+- Добавете следните константи в `src/shared/config.js`:
 
 ```js
 export const JSS_SSR_CLASS = 'jss-ssr'
 export const JSS_SSR_SELECTOR = `.${JSS_SSR_CLASS}`
 ```
 
-- Edit `src/server/render-app.jsx` like so:
+- Редактирайте `src/server/render-app.jsx`, както следва:
 
 ```js
 import { SheetsRegistry, SheetsRegistryProvider } from 'react-jss'
@@ -394,11 +394,11 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
   // [...]
 ```
 
-## Client-side
+## Клиентска част (Client-side)
 
-The first thing the client should do after rendering the app client-side, is to get rid of the server-generated JSS styles.
+Първото нещо, което клиента трябва да направи след зареждането на приложението, е да се отърве от сървърно генерираните JSS стилове.
 
-- Add the following to `src/client/index.jsx` after the `ReactDOM.render` calls (before `setUpSocket(store)` for instance):
+- Добавете следното в `src/client/index.jsx` след `ReactDOM.render` извикванията (преди `setUpSocket(store)` например):
 
 ```js
 import { APP_CONTAINER_SELECTOR, JSS_SSR_SELECTOR } from '../shared/config'
@@ -411,7 +411,7 @@ jssServerSide.parentNode.removeChild(jssServerSide)
 setUpSocket(store)
 ```
 
-Edit `src/shared/component/page/home.jsx` like so:
+Редактирайте `src/shared/component/page/home.jsx`, както следва:
 
 ```js
 import injectSheet from 'react-jss'
@@ -446,14 +446,14 @@ const HomePage = ({ classes }: { classes: Object }) =>
 export default injectSheet(styles)(HomePage)
 ```
 
-Unlike React inline styles, JSS uses classes. You pass styles to `injectSheet` and the CSS classes end up in the props of your component.
+За разлика от React inline styles, JSS използва класове. Подаваме стилове към `injectSheet` и CSS класовете се превръщат в свойства на вашия компонент.
 
-🏁 Run `yarn start` and `yarn dev:wds`. Open the homepage. Show the source of the page (not in the inspector) to see that the JSS styles are present in the DOM at the initial render in the `<style class="jss-ssr">` element (only on the Home page). They should be gone in the inspector, replaced by `<style type="text/css" data-jss data-meta="HomePage">`.
+🏁 Изпълнете `yarn start` и `yarn dev:wds`. Отворете началната страница и вижте сорс кода й (не в инспектора). Ще видите, че JSS стиловете са в DOM при началното зареждане, в `<style class="jss-ssr">` елемента (само на началната страница). Важно е да се спомене, че те не бива да се виждат в инспектора, тъй като би трябвало да са заместени от `<style type="text/css" data-jss data-meta="HomePage">`.
 
-**Note**: In production mode, the `data-meta` is obfuscated. Sweet!
+**Забележка**: В производствена среда (production mode), `data-meta` е обфускирано (obfuscated).
 
-If you hover over the "Hover me" label, it should turn red. If you resize your browser window to be narrower than 800px, the "Resize your window" label should turn red. The green button is extending Bootstrap's CSS classes using JSS' `composes` property.
+Ако посочите с мишката върху елемента "Hover me", би трябвало да стане червен. Ако оразмерите прозореца на вашия браузър да стане по-тесен от 800px, "Resize your window" надписа би трябвало да стане червен. Зеленият бутон разширява CSS класовете на Bootstrap, използвайки JSS свойството `composes`.
 
-Next section: [09 - Travis, Coveralls, Heroku](09-travis-coveralls-heroku.md#readme)
+Следваща глава: [09 - Travis, Coveralls, Heroku](09-travis-coveralls-heroku.md#readme)
 
-Back to the [previous section](07-socket-io.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](07-socket-io.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

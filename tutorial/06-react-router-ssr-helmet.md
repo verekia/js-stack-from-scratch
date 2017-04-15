@@ -1,20 +1,20 @@
-# 06 - React Router, Server-Side Rendering, and Helmet
+# 06 - React Router, Server-Side Rendering и Helmet
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/06-react-router-ssr-helmet).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/06-react-router-ssr-helmet).
 
-In this chapter we are going to create different pages for our app and make it possible to navigate between them.
+В тази глава ще създадем различни страници на нашето приложение и ще направим възможно навигирането между тях.
 
 ## React Router
 
-> 💡 **[React Router](https://reacttraining.com/react-router/)** is a library to navigate between pages in your React app. It can be used on both the client and the server.
+> 💡 **[React Router](https://reacttraining.com/react-router/)** е библиотека за навигиране между страниците във вашето React приложение. Може да бъде използвано както от страна на клиента, така и от страна на сървъра.
 
-React Router has received a major update with its v4 release which is still in beta. Since I want this tutorial to be future-proof, we'll be using v4.
+След v4 релийз React Router получи доста нови неща и въпреки че е още в бета версия, ще използвам него, тъй като искам това ръководство да бъде валидно и в бъдеще.
 
-- Run `yarn add react-router@next react-router-dom@next`
+- Изпълнете `yarn add react-router@next react-router-dom@next`
 
-On the client side, we first need to wrap our app inside a `BrowserRouter` component.
+От страна на клиента, първо ще трябва да вмъкнем нашето приложение в `BrowserRouter` компонент.
 
-- Update your `src/client/index.jsx` like so:
+- Редактирайте `src/client/index.jsx` файла, както следва:
 
 ```js
 // [...]
@@ -30,16 +30,16 @@ const wrapApp = (AppComponent, reduxStore) =>
   </Provider>
 ```
 
-## Pages
+## Страници
 
-Our app will have 4 pages:
+Нашето приложение ще има 4 страници:
 
-- A Home page.
-- A Hello page showing a button and message for the synchronous action.
-- A Hello Async page showing a button and message for the asynchronous action.
-- A 404 "Not Found" page.
+- Home page - начална страница
+- A Hello page - показваща бутон и съобщение за синхронните действия.
+- A Hello Async - показваща бутон и съобщение за асинхронните действия.
+- A 404 "Not Found" page - страница, показваща се когато търсената страница не е налична, стандартното име за такъв тип страници е 404 Not Found.
 
-- Create a `src/client/component/page/home.jsx` file containing:
+- Създайте `src/client/component/page/home.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -51,7 +51,7 @@ const HomePage = () => <p>Home</p>
 export default HomePage
 ```
 
-- Create a `src/client/component/page/hello.jsx` file containing:
+- Създайте `src/client/component/page/hello.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -71,7 +71,7 @@ export default HelloPage
 
 ```
 
-- Create a `src/client/component/page/hello-async.jsx` file containing:
+- Създайте `src/client/component/page/hello-async.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -90,7 +90,7 @@ const HelloAsyncPage = () =>
 export default HelloAsyncPage
 ```
 
-- Create a `src/client/component/page/not-found.jsx` file containing:
+- Създайте `src/client/component/page/not-found.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -102,11 +102,11 @@ const NotFoundPage = () => <p>Page not found</p>
 export default NotFoundPage
 ```
 
-## Navigation
+## Навигация
 
-Let's add some routes in the shared config file.
+Нека да добавим пътищата (routes) в конфигурационния файл, който може да се използва от всички части на приложението ни.
 
-- Edit your `src/shared/routes.js` like so:
+- Редактирайте `src/shared/routes.js` файла, както следва:
 
 ```js
 // @flow
@@ -119,9 +119,9 @@ export const NOT_FOUND_DEMO_PAGE_ROUTE = '/404'
 export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
 ```
 
-The `/404` route is just going to be used in a navigation link for the sake of demonstrating what happens when you click on a broken link.
+`/404` пътя ще бъде използван в навигацията просто, за да се покаже какво се случва по принцип когато се кликне на неработеща хипервръзка (broken link).
 
-- Create a `src/client/component/nav.jsx` file containing:
+- Създайте `src/client/component/nav.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -142,7 +142,7 @@ const Nav = () =>
         { route: HOME_PAGE_ROUTE, label: 'Home' },
         { route: HELLO_PAGE_ROUTE, label: 'Say Hello' },
         { route: HELLO_ASYNC_PAGE_ROUTE, label: 'Say Hello Asynchronously' },
-        { route: NOT_FOUND_DEMO_PAGE_ROUTE, label: '404 Demo' },
+        { route: NOT_FOUND_DEMO_PAGE_ROUTE, label: '404 Demo' }
       ].map(link => (
         <li key={link.route}>
           <NavLink to={link.route} activeStyle={{ color: 'limegreen' }} exact>{link.label}</NavLink>
@@ -154,9 +154,9 @@ const Nav = () =>
 export default Nav
 ```
 
-Here we simply create a bunch of `NavLink`s that use the previously declared routes.
+Тук просто създаваме няколко `NavLink` елемента, които използват пътищата, които декларирахме преди малко.
 
-- Finally, edit `src/client/app.jsx` like so:
+- И накрая редактирайте `src/client/app.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -191,33 +191,33 @@ const App = () =>
 export default App
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds`. Open `http://localhost:8000`, and click on the links to navigate between our different pages. You should see the URL changing dynamically. Switch between different pages and use the back button of your browser to see that the browsing history is working as expected.
+🏁 Изпълнете `yarn start` и `yarn dev:wds`. Отворете `http://localhost:8000` и кликнете на хипервръзките, за да навигирате между различните страници. Би трябвало да виждате, че URL адреса се променя динамично. Променете текущата страница като отидете на друга и използвайте бутона "Назад" (Back) на вашия браузър, за да се върнете на предишната страница - по този начин виждаме, че историята на браузъра (browsing history) все още работи коректно.
 
-Now, let's say you navigated to `http://localhost:8000/hello` this way. Hit the refresh button. You now get a 404, because our Express server only responds to `/`. As you navigated between pages, you were actually only doing it on the client-side. Let's add server-side rendering to the mix to get the expected behavior.
+Сега, да кажем, че сте отворили `http://localhost:8000/hello` по този начин. Натиснете бутона за опресняване на страницата (refresh button), обикновено това е F5 от клавиатурата ви ако използвате операционна система Windows. Би трябвало да видите 404, тъй като нашия Express сървър отговаря само на `/`. И тъй като навигирайки между страниците вие всъщност го правехте само от страна на клиента, нека сега да добавим тази функционалност и от страна на сървъра, за да получим накрая желаното поведение.
 
-## Server-Side Rendering
+## Рендиране от страна на сървъра (Server-Side Rendering)
 
-> 💡 **Server-Side Rendering** means rendering your app at the initial load of the page instead of relying on JavaScript to render it in the client's browser.
+> 💡 **Server-Side Rendering** означава показване/рендиране на вашето приложение при първоначалното зареждане на страницата, вместо да се разчита на JavaScript да я рендира в браузъра на клиента.
 
-SSR is essential for SEO and provides a better user experience by showing the app to your users right away.
+SSR е от основно значение за оптимизациите, които се правят за търсещите машини(SEO - search engine optimization) и предоставя по-добро изживяване (user experience) на крайния потребител като му показва приложението моментално.
 
-The first thing we're going to do here is to migrate most of our client code to the shared / isomorphic / universal part of our codebase, since the server is now going to render our React app too.
+Първото нещо, което ще направим тук е да преместим по-голямата част от нашия клиентски код в частта със споделения код (shared / isomorphic / universal part of our codebase), тъй като сега сървърът също ще рендира нашето React приложение.
 
-### The big migration to `shared`
+### Голямото местене към `shared` (The big migration to `shared`)
 
-- Move all the files located under `client` to `shared`, except `src/client/index.jsx`.
+- Преместете всички файлове от `client` в `shared`, с изключение на `src/client/index.jsx`.
 
-We have to adjust a whole bunch of imports:
+Ще трябва да отразим промените от местенето в няколко import команди:
 
-- In `src/client/index.jsx`, replace the 3 occurrences of `'./app'` by `'../shared/app'`, and `'./reducer/hello'` by `'../shared/reducer/hello'`
+- В `src/client/index.jsx`, заместете `'./app'` с `'../shared/app'` на трите места където се среща и `'./reducer/hello'` с `'../shared/reducer/hello'`
 
-- In `src/shared/app.jsx`, replace `'../shared/routes'` by `'./routes'` and `'../shared/config'` by `'./config'`
+- В `src/shared/app.jsx`, заместете `'../shared/routes'` с `'./routes'` и `'../shared/config'` с `'./config'`
 
-- In `src/shared/component/nav.jsx`, replace `'../../shared/routes'` by `'../routes'`
+- В `src/shared/component/nav.jsx`, заместете `'../../shared/routes'` с `'../routes'`
 
-### Server changes
+### Промени на сървъра (Server changes)
 
-- Create a `src/server/routing.js` file containing:
+- Създайте `src/server/routing.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -272,11 +272,11 @@ export default (app: Object) => {
 }
 ```
 
-This file is where we deal with requests and responses. The calls to business logic are externalized to a different `controller` module.
+Това е файлът, където обработваме заявките към и отговорите от сървъра (requests and responses). Обръщенията (calls ) към бизнес логиката са отделени в отделен `controller` модул.
 
-**Note**: You will find a lot of React Router examples using `*` as the route on the server, leaving the entire routing handling to React Router. Since all requests go through the same function, that makes it inconvenient to implement MVC-style pages. Instead of doing that, we're here explicitly declaring the routes and their dedicated responses, to be able to fetch data from the database and pass it to a given page easily.
+**Забележка**: Ще видите в доста React Router примери, че се използва `*` като път към сървъра. По този начин цялата работа по рутирането се оставя на React Router компонента. Тъй като всички заявки се изпълняват от една и съща функция, това би направило доста неудобно имплементирането на страници в стил MVC (model-view-controller). Вместо това, ние декларираме изрично нашите пътища и отговорите (responses), които трябва да се получат при използването им. По този начин ще можем лесно да зареждаме информация от база с данни и да я показваме на определена страница от нашето приложение.
 
-- Create a `src/server/controller.js` file containing:
+- Създайте `src/server/controller.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -296,9 +296,9 @@ export const helloEndpoint = (num: number) => ({
 })
 ```
 
-Here is our controller. It would typically make business logic and database calls, but in our case we just hard-code some results. Those results are passed back to the `routing` module to be used to initialize our server-side Redux store.
+Това е нашия контролер. Обикновено тук би била бизнес логиката и обръщенията към базата с данни, но в нашия случай просто добавяме някои резултати. Тези резултати се подават обратно на `routing` модула, за да бъдат използвани да се инициализира нашия server-side Redux store компонент.
 
-- Create a `src/server/init-store.js` file containing:
+- Създайте `src/server/init-store.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -325,9 +325,9 @@ const initStore = (plainPartialState: ?Object) => {
 export default initStore
 ```
 
-The only thing we do here, besides calling `createStore` and applying middleware, is to merge the plain JS object we received from the `controller` into a default Redux state containing Immutable objects.
+Единственото нещо, което правим тук освен извикването на `createStore` и прилагането на middleware частта, е да комбинираме чистия JS обект, който получаваме от `controller` с Redux state обекта по подразбиране, който съдържа немутиращи обекти (Immutable objects).
 
-- Edit `src/server/index.js` like so:
+- Редактирайте `src/server/index.js` файла, както следва:
 
 ```js
 // @flow
@@ -354,9 +354,9 @@ app.listen(WEB_PORT, () => {
 })
 ```
 
-Nothing special here, we just call `routing(app)` instead of implementing routing in this file.
+Нищо специално тук, просто извикваме `routing(app)` вместо да имплементираме рутирането в този файл.
 
-- Rename `src/server/render-app.js` to `src/server/render-app.jsx` and edit it like so:
+- Преименувайте `src/server/render-app.js` на `src/server/render-app.jsx` и го редактирайте както следва:
 
 ```js
 // @flow
@@ -401,11 +401,11 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
 export default renderApp
 ```
 
-`ReactDOMServer.renderToString` is where the magic happens. React will evaluate our entire `shared` `App`, and return a plain string of HTML elements. `Provider` works the same as on the client, but on the server, we wrap our app inside `StaticRouter` instead of `BrowserRouter`. In order to pass the Redux store from the server to the client, we pass it to `window.__PRELOADED_STATE__` which is just some arbitrary variable name.
+`ReactDOMServer.renderToString` е мястото където се случва магията. React ще обработи всичко от нашия `shared` `App` и ще върне обикновен стринг от HTML елементи. `Provider` работи по същия начин както от страна на клиента, само че в този случай е от страна на сървъра, поставяме нашето приложение в `StaticRouter` вместо в `BrowserRouter`. За да можем да подадем Redux store обекта от сървъра към клиента го подаваме на `window.__PRELOADED_STATE__`, което е просто случайно избрано име на променливата.
 
-**Note**: Immutable objects implement the `toJSON()` method which means you can use `JSON.stringify` to turn them into plain JSON strings.
+**Забележка**: Immutable обектите имплементират `toJSON()` метода, което значи, че можете да използвате `JSON.stringify`, за да ги превръщате в обикновени JSON стрингове.
 
-- Edit `src/client/index.jsx` to use that preloaded state:
+- Редактирайте `src/client/index.jsx`, за да използва това предварително заредено състояние (preloaded state):
 
 ```js
 import Immutable from 'immutable'
@@ -422,19 +422,19 @@ const store = createStore(combineReducers(
   composeEnhancers(applyMiddleware(thunkMiddleware)))
 ```
 
-Here with feed our client-side store with the `preloadedState` that was received from the server.
+Тук подаваме на нашия клиентски store обект `preloadedState`, което идва от сървъра.
 
-🏁 You can now run `yarn start` and `yarn dev:wds` and navigate between pages. Refreshing the page on `/hello`, `/hello-async`, and `/404` (or any other URI), should now work correctly. Notice how the `message` and `messageAsync` vary depending on if you navigated to that page from the client or if it comes from server-side rendering.
+🏁 Сега можете да изпълните `yarn start` и `yarn dev:wds` и да навигирате между страниците. Опресняването на страницата `/hello`, `/hello-async` и `/404` (или което и да е друго URI) сега би трябвало да работи правилно. Обърнете внимание как `message` и `messageAsync` варират в зависимост от това дали идвате на тази страница чрез рендирането от клиента или от сървъра.
 
 ### React Helmet
 
-> 💡 **[React Helmet](https://github.com/nfl/react-helmet)**: A library to inject content to the `head` of a React app, on both the client and the server.
+> 💡 **[React Helmet](https://github.com/nfl/react-helmet)**: библиотека за инжектиране на съдържание в `head` частта на едно React приложение, работи от страната на клиента и на сървъра (on both the client and the server).
 
-I purposely made you write `FIX ME` in the title to highlight the fact that even though we are doing server-side rendering, we currently do not fill the `title` tag properly (or any of the tags in `head` that vary depending on the page you're on).
+Нарочно ви накарах да напишете `FIX ME` в заглавието, за да подчертаем факта, че въпреки че използваме рендиране от страна на сървъра в момента, не попълваме `title` тага правилно (или който и да било друг таг в `head` частта, което варира според зависимост на коя страница сте).
 
-- Run `yarn add react-helmet`
+- Изпълнете `yarn add react-helmet`
 
-- Edit `src/server/render-app.jsx` like so:
+- Редактирайте `src/server/render-app.jsx` файла, както следва:
 
 ```js
 import Helmet from 'react-helmet'
@@ -458,9 +458,9 @@ const renderApp = (/* [...] */) => {
 }
 ```
 
-React Helmet uses [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind` to pull out some data from the rendering of our app, which will soon contain some `<Helmet />` components. Those `<Helmet />` components are where we set the `title` and other `head` details for each page. Note that `Helmet.rewind()` *must* come after `ReactDOMServer.renderToString()`.
+React Helmet използва [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind`, за да добива информация от рендирането на нашето приложение, което скоро ще съдържа `<Helmet />` компоненти. Тези `<Helmet />` компоненти са мястото където ще добавим нашето заглавие (`title`) и друга `head` информация за всяка страница. Обърнете внимание, че `Helmet.rewind()` *трябва* да бъде използвано след `ReactDOMServer.renderToString()`.
 
-- Edit `src/shared/app.jsx` like so:
+- Редактирайте `src/shared/app.jsx` файла, както следва:
 
 ```js
 import Helmet from 'react-helmet'
@@ -472,7 +472,7 @@ const App = () =>
     // [...]
 ```
 
-- Edit `src/shared/component/page/home.jsx` like so:
+- Редактирайте `src/shared/component/page/home.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -497,7 +497,7 @@ export default HomePage
 
 ```
 
-- Edit `src/shared/component/page/hello.jsx` like so:
+- Редактирайте `src/shared/component/page/hello.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -527,7 +527,7 @@ const HelloPage = () =>
 export default HelloPage
 ```
 
-- Edit `src/shared/component/page/hello-async.jsx` like so:
+- Редактирайте `src/shared/component/page/hello-async.jsx` файла, както следва:
 
 ```js
 // @flow
@@ -558,7 +558,7 @@ export default HelloAsyncPage
 
 ```
 
-- Edit `src/shared/component/page/not-found.jsx` like so:
+- Редактирайте `src/shared/component/page/not-found.jsx`, както следва:
 
 ```js
 // @flow
@@ -583,10 +583,10 @@ const NotFoundPage = () =>
 export default NotFoundPage
 ```
 
-The `<Helmet>` component doesn't actually render anything, it just injects content in the `head` of your document and exposes the same data to the server.
+`<Helmet>` компонента всъщност не рендира нищо сам по себе си, просто инжектира съдържание в `head` частта на вашия документ и предлага за използване същата информация и на сървъра.
 
-🏁 Run `yarn start` and `yarn dev:wds` and navigate between pages. The title on your tab should change when you navigate, and it should also stay the same when you refresh the page. Show the source of the page to see how React Helmet sets the `title` and `meta` tags even for server-side rendering.
+🏁 Изпълнете `yarn start` и `yarn dev:wds` и навигирайте между страниците. Заглавието във вашия таб би трябвало да се променя докато навигирате и да остава същото когато опресните страницата. Отворете сорс кода на страницата и вижте как React Helmet попълва `title` и `meta` таговете дори за server-side рендирането.
 
-Next section: [07 - Socket.IO](07-socket-io.md#readme)
+Следваща глава: [07 - Socket.IO](07-socket-io.md#readme)
 
-Back to the [previous section](05-redux-immutable-fetch.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](05-redux-immutable-fetch.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

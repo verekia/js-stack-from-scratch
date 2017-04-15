@@ -1,14 +1,14 @@
-# 04 - Webpack, React, and Hot Module Replacement
+# 04 - Webpack, React и Hot Module Replacement
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/04-webpack-react-hmr).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/04-webpack-react-hmr).
 
 ## Webpack
 
-> 💡 **[Webpack](https://webpack.js.org/)** is a *module bundler*. It takes a whole bunch of various source files, processes them, and assembles them into one (usually) JavaScript file called a bundle, which is the only file your client will execute.
+> 💡 **[Webpack](https://webpack.js.org/)** е *module bundler* - нещо като пакетен мениджър или програма, с която сравнително лесно се настройват и използват код модули/пакети. Като входни настройки приема файловете на различни пакети (т.е. файлове с код), обработва ги и ги събира в един, обикновено JavaScript файл, наречен "пакет" (bundle), който файл е единственият, който се използва и изпълнява от вашия клиент (напр. браузъра ви).
 
-Let's create some very basic *hello world* and bundle it with Webpack.
+Нека да създадем простичката програмка *hello world* и да я "пакетираме" с Webpack.
 
-- In `src/shared/config.js`, add the following constants:
+- В `src/shared/config.js`, добавете следните константи:
 
 ```js
 export const WDS_PORT = 7000
@@ -17,7 +17,7 @@ export const APP_CONTAINER_CLASS = 'js-app'
 export const APP_CONTAINER_SELECTOR = `.${APP_CONTAINER_CLASS}`
 ```
 
-- Create an `src/client/index.js` file containing:
+- Създайте `src/client/index.js` файл, съдържащ:
 
 ```js
 import 'babel-polyfill'
@@ -27,13 +27,13 @@ import { APP_CONTAINER_SELECTOR } from '../shared/config'
 document.querySelector(APP_CONTAINER_SELECTOR).innerHTML = '<h1>Hello Webpack!</h1>'
 ```
 
-If you want to use some of the most recent ES features in your client code, like `Promise`s, you need to include the [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) before anything else in your bundle.
+Ако искате да използвате едно от най-новите неща, добавени в ES, а именно `Promises`, ще трябва да включите [Babel Polyfill](https://babeljs.io/docs/usage/polyfill/) преди всичко друго във вашия пакет.
 
-- Run `yarn add babel-polyfill`
+- Изпълнете `yarn add babel-polyfill`
 
-If you run ESLint on this file, it will complain about `document` being undefined.
+Ако изпълните ESLint върху този файл, ще получите грешка за това, че `document` не е дефиниран (undefined).
 
-- Add the following to `env` in your `.eslintrc.json` to allow the use of `window` and `document`:
+- Добавете следното към `env` във вашия `.eslintrc.json`, за да може да използвате `window` и `document`:
 
 ```json
 "env": {
@@ -42,9 +42,9 @@ If you run ESLint on this file, it will complain about `document` being undefine
 }
 ```
 
-Alright, we now need to bundle this ES6 client app into an ES5 bundle.
+Добрееем, сега ще трябва да "пакетираме" това ES6 приложение в ES5 пакет.
 
-- Create a `webpack.config.babel.js` file containing:
+- Създайте `webpack.config.babel.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -56,45 +56,45 @@ import { isProd } from './src/shared/util'
 
 export default {
   entry: [
-    './src/client',
+    './src/client'
   ],
   output: {
     filename: 'js/bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: isProd ? '/static/' : `http://localhost:${WDS_PORT}/dist/`,
+    publicPath: isProd ? '/static/' : `http://localhost:${WDS_PORT}/dist/`
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
-    ],
+      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ }
+    ]
   },
   devtool: isProd ? false : 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx']
   },
   devServer: {
-    port: WDS_PORT,
+    port: WDS_PORT
   },
 }
 ```
 
-This file is used to describe how our bundle should be assembled: `entry` is the starting point of our app, `output.filename` is the name of the bundle to generate, `output.path` and `output.publicPath` describe the destination folder and URL. We put the bundle in a `dist` folder, which will contain things that are generated automatically (unlike the declarative CSS we created earlier which lives in `public`). `module.rules` is where you tell Webpack to apply some treatment to some type of files. Here we say that we want all `.js` and `.jsx` (for React) files except the ones in `node_modules` to go through something called `babel-loader`. We also want these two extensions to be used to `resolve` modules when we `import` them. Finally, we declare a port for Webpack Dev Server.
+Този файл съдържа описанието на това как реално ще работи нашият пакет: `entry` е началната/входната точка на нашето приложение, `output.filename` е името на изходния файл, който ще се генерира, `output.path` и `output.publicPath` указват изходната папка и URL. Ще поставим нашия пакет в `dist` папката, която ще съдържа автоматично генерираните неща (с изключение на CSS кода, който е в `public`). `module.rules` е мястото където указвате на Webpack да приложи някои неща на някои типове файлове. Тук ние указваме, че искаме всички `.js` и `.jsx` (за React) файлове, с изключение на тези в `node_modules` да минат през нещо, наречено `babel-loader`. Също така искаме тези две разширения да бъдат използвани да `resolve`-нат модулите когато ги импортваме (`import`). И накрая, декларираме порта за Webpack Dev Server.
 
-**Note**: The `.babel.js` extension is a Webpack feature to apply our Babel transformations to this config file.
+**Забележка**: `.babel.js` разширението е свойство на Webpack, с което прилагаме Babel трансформациите към този конфигурационен файл.
 
-`babel-loader` is a plugin for Webpack that transpiles your code just like we've been doing since the beginning of this tutorial. The only difference is that this time, the code will end up running in the browser instead of your server.
+`babel-loader` е плъгин за Webpack, който "превежда" кода по същия начин, по който го правите от началото на това ръководство. Единствената разлика този път е, че кода се изпълнява в браузъра ви, а не на сървъра.
 
-- Run `yarn add --dev webpack webpack-dev-server babel-core babel-loader`
+- Изпълнете `yarn add --dev webpack webpack-dev-server babel-core babel-loader`
 
-`babel-core` is a peer-dependency of `babel-loader`, so we installed it as well.
+`babel-core` е peer-dependency (`babel-loader` зависи от него, за да работи) на `babel-loader`, така че инсталираме и него.
 
-- Add `/dist/` to your `.gitignore`
+- Добавете `/dist/` във вашия `.gitignore`
 
-### Tasks update
+### Tasks update - обновления на задачите
 
-In development mode, we are going to use `webpack-dev-server` to take advantage of Hot Module Reloading (later in this chapter), and in production we'll simply use `webpack` to generate bundles. In both cases, the `--progress` flag is useful to display additional information when Webpack is compiling your files. In production, we'll also pass the `-p` flag to `webpack` to minify our code, and the `NODE_ENV` variable set to `production`.
+В режим на разработване (development mode) ще използваме `webpack-dev-server`, за да можем да се възползваме от Hot Module Reloading (обяснен малко по-нататък в тази глава), а в производствена среда (production mode) ще използваме просто `webpack`, за да генерираме пакетите. И в двата случая флагът `--progress` е полезен, тъй като ни показва допълнителна инфромация когато Webpack компилира вашите файлове. Също така ще използваме и флага `-p`, за да укажем на `webpack` да минифицира изходния код  когато го пускаме "лайф", както и променливата `NODE_ENV` приема стойност `production`.
 
-Let's update our `scripts` to implement all this, and improve some other tasks as well:
+Хайде сега да обновим нашия `scripts` обект и да имплементираме всичко, което научихме досега. Ще подобрим и някои от съществуващите вече задачи:
 
 ```json
 "scripts": {
@@ -111,11 +111,11 @@ Let's update our `scripts` to implement all this, and improve some other tasks a
 },
 ```
 
-In `dev:start` we explicitly declare file extensions to monitor, `.js` and `.jsx`, and add `dist` in the ignored directories.
+В `dev:start` декларираме изрично кои файлови разширения да бъдат следени, както и че папката `dist` да се игнорира.
 
-We created a separate `lint` task and added `webpack.config.babel.js` to the files to lint.
+Създадохме отделна `lint` задача и добавихме `webpack.config.babel.js` към файловете, които ще се обработват от линтера.
 
-- Next, let's create the container for our app in `src/server/render-app.js`, and include the bundle that will be generated:
+- Следващата стъпка е да създадем контейнер за приложението ни в `src/server/render-app.js` и да включим пакета, който ще бъде генериран:
 
 ```js
 // @flow
@@ -140,38 +140,38 @@ const renderApp = (title: string) =>
 export default renderApp
 ```
 
-Depending on the environment we're in, we'll include either the Webpack Dev Server bundle, or the production bundle. Note that the path to Webpack Dev Server's bundle is *virtual*, `dist/js/bundle.js` is not actually read from your hard drive in development mode. It's also necessary to give Webpack Dev Server a different port than your main web port.
+Избираме дали да включим Webpack Dev Server пакета или този за продукционната среда според зависимост от средата, в която сме. Обърнете внимание, че пътя до Webpack Dev Server пакета е *виртуален*, `dist/js/bundle.js` не съществува физически на твърдия ви диск когато сте в среда за разработка (development mode). Също така е необходимо да дадете на Webpack Dev Server различен от основния ви уеб порт.
 
-- Finally, in `src/server/index.js`, tweak your `console.log` message like so:
+- И накрая, в `src/server/index.js`, напишете вашите `console.log` съобщения по следния начин:
 
 ```js
 console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
   '(development).\nKeep "yarn dev:wds" running in an other terminal'}.`)
 ```
 
-That will give other developers a hint about what to do if they try to just run `yarn start` without Webpack Dev Server.
+Tова ще помогне на други програмисти да разберат какво да правят ако просто са стартирали `yarn start` без Webpack Dev Server.
 
-Alright that was a lot of changes, let's see if everything works as expected:
+Окей, това бяха доста промени, нека да видим сега дали всичко работи както се очаква:
 
-🏁 Run `yarn start` in a terminal. Open an other terminal tab or window, and run `yarn dev:wds` in it. Once Webpack Dev Server is done generating the bundle and its sourcemaps (which should both be ~600kB files) and both processes hang in your terminals, open `http://localhost:8000/` and you should see "Hello Webpack!". Open your Chrome console, and under the Source tab, check which files are included. You should only see `static/css/style.css` under `localhost:8000/`, and have all your ES6 source files under `webpack://./src`. That means sourcemaps are working. In your editor, in `src/client/index.js`, try changing `Hello Webpack!` into any other string. As you save the file, Webpack Dev Server in your terminal should generate a new bundle and the Chrome tab should reload automatically.
+🏁 Изпълнете `yarn start` в терминала. Отворете още един прозорец на терминала и изпълнете `yarn dev:wds` в него. Когато Webpack Dev Server приключи с генерирането на пакетите (които би трябвало да са файлове с размер приблизително ~600kB) и двата процеса са готови за работа, отворете `http://localhost:8000/` в браузъра и би трябвало да видите "Hello Webpack!". Отворете конзолата на вашия Chrome и вижте кои файлове са включени в Source таба. Би трябвало да виждате само `static/css/style.css` под `localhost:8000/`, а всички ES6 файлове да са под `webpack://./src`. Това означава, че sourcemaps работят правилно. Във вашия редактор, в `src/client/index.js`, променете `Hello Webpack!` като напишете нещо друго. В момента, в който запазите вашите промени, Webpack Dev Server би трябвало да генерира нов пакет терминала и Chrome таба трябва да опресни съдържанието си автоматично.
 
-- Kill the previous processes in your terminals with Ctrl+C, then run `yarn prod:build`, and then `yarn prod:start`. Open `http://localhost:8000/` and you should still see "Hello Webpack!". In the Source tab of the Chrome console, you should this time find `static/js/bundle.js` under `localhost:8000/`, but no `webpack://` sources. Click on `bundle.js` to make sure it is minified. Run `yarn prod:stop`.
+- Прекратете стартираните процеси в отворените прозорци на терминала ви като използвате клавишната комбинация Ctrl+C, след това изпълнете `yarn prod:build` и `yarn prod:start`. Отворете `http://localhost:8000/`, все още би трябвало да виждате "Hello Webpack!". В Source таба на конзолата на Chrome този път би трябвало да видите `static/js/bundle.js` под `localhost:8000/` вместо `webpack://` генериран код (sources). Кликнете на `bundle.js`, за да проверите дали е минифициран. Изпълнете `yarn prod:stop`.
 
-Good job, I know this was quite dense. You deserve a break! The next section is easier.
+Добра работа! Заслужавате почивка! Следващата секция ще бъде по-лесна.
 
-**Note**: I would recommend to have at least 3 terminals open, one for your Express server, one for the Webpack Dev Server, and one for Git, tests, and general commands like installing packages with `yarn`. Ideally, you should split your terminal screen in multiple panes to see them all.
+**Забележка**: Препоръчвам да имате поне 3 отворени терминала, един за вашия Express сървър, един за Webpack Dev Server и един за Git, тестове и общи команди, като например инсталиране на пакети с `yarn`. Идеална ситуация би била ако можете да резделите екрана с терминала си на няколко панела и да ги виждате всичките едновременно.
 
 ## React
 
-> 💡 **[React](https://facebook.github.io/react/)** is a library for building user interfaces by Facebook. It uses the **[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)** syntax to represent HTML elements and components while leveraging the power of JavaScript.
+> 💡 **[React](https://facebook.github.io/react/)** е библиотека за създаване на потребителски интерфейси, създадена от Фейсбук. Използва **[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html)** синтаксис за работа с HTML елементи и компоненти докато в същото време изплозва силата на JavaScript.
 
-In this section we are going to render some text using React and JSX.
+В тази секция ще покажем малко текст използвайки React и JSX.
 
-First, let's install React and ReactDOM:
+Първо нека инсталираме React и ReactDOM:
 
-- Run `yarn add react react-dom`
+- Изпълнете `yarn add react react-dom`
 
-Rename your `src/client/index.js` file into `src/client/index.jsx` and write some React code in it:
+Преименувайте вашия `src/client/index.js` файл на `src/client/index.jsx` и напишете следния React код в него:
 
 ```js
 // @flow
@@ -187,7 +187,7 @@ import { APP_CONTAINER_SELECTOR } from '../shared/config'
 ReactDOM.render(<App />, document.querySelector(APP_CONTAINER_SELECTOR))
 ```
 
-- Create a `src/client/app.jsx` file containing:
+- Създайте `src/client/app.jsx` файл, съдържащ:
 
 ```js
 // @flow
@@ -199,9 +199,9 @@ const App = () => <h1>Hello React!</h1>
 export default App
 ```
 
-Since we use the JSX syntax here, we have to tell Babel that it needs to transform it with the `babel-preset-react` preset. And while we're at it, we're also going to add a Babel plugin called `flow-react-proptypes` which automatically generates PropTypes from Flow annotations for your React components.
+Тъй като тук използваме JSX синтаксис, трябва да укажем на Babel, че трябва да го трансформира, използвайки `babel-preset-react` пакета. И докато все още сме на това, ще инсталираме още един Babel плъгин, наречен `flow-react-proptypes`, който автоматично генерира PropTypes от Flow анотации за вашите React компоненти.
 
-- Run `yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes` and edit your `.babelrc` file like so:
+- Изпълнете `yarn add --dev babel-preset-react babel-plugin-flow-react-proptypes` и редактирайте вашия `.babelrc` файл, както следва:
 
 ```json
 {
@@ -216,19 +216,19 @@ Since we use the JSX syntax here, we have to tell Babel that it needs to transfo
 }
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Hello React!".
+🏁 Изпълнете `yarn start` и `yarn dev:wds` и отворете `http://localhost:8000`. Би трябвало да видите "Hello React!".
 
-Now try changing the text in `src/client/app.jsx` to something else. Webpack Dev Server should reload the page automatically, which is pretty neat, but we are going to make it even better.
+Сега променете текста в `src/client/app.jsx` на нещо друго. Webpack Dev Server би трябвало да опресни страницата автоматично, което е доста яко, но ние ще го направим още по-яко :).
 
 ## Hot Module Replacement
 
-> 💡 **[Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)** (*HMR*) is a powerful Webpack feature to replace a module on the fly without reloading the entire page.
+> 💡 **[Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/)** (*HMR*) е мощно средство на Webpack, с което може да се замести един модул с друг по време на работа, без да се налага да се опреснява цялата страница.
 
-To make HMR work with React, we are going to need to tweak a few things.
+За да може HMR да работи с React ще трябва да настроим няколко неща.
 
-- Run `yarn add react-hot-loader@next`
+- Изпълнете `yarn add react-hot-loader@next`
 
-- Edit your `webpack.config.babel.js` like so:
+- Редактирайте вашия `webpack.config.babel.js`, както следва:
 
 ```js
 import webpack from 'webpack'
@@ -250,7 +250,7 @@ plugins: [
 ],
 ```
 
-- Edit your `src/client/index.jsx` file:
+- Редактирайте вашия `src/client/index.jsx` файл:
 
 ```js
 // @flow
@@ -283,10 +283,10 @@ if (module.hot) {
 }
 ```
 
-We need to make our `App` a child of `react-hot-loader`'s `AppContainer`, and we need to `require` the next version of our `App` when hot-reloading. To make this  process clean and DRY, we create a little `wrapApp` function that we use in both places it needs to render `App`. Feel free to move the `eslint-disable global-require` to the top of the file to make this more readable.
+Трябва да направим нашия `App` да е "дете" на `AppContainer`-а на `react-hot-loader` и да изискаме (`require`) следващата версия на `App` когато използваме моменталното презареждане (hot-reloading). За да направим този процес чист и DRY (don't repeat yourself), ще създаден една малка функция `wrapApp` function, която ще използваме на двете места където трябва да се интерпретира (render) `App`. Можете да преместите `eslint-disable global-require` в горната част на файла, за да го направите по-четим.
 
-🏁 Restart your `yarn dev:wds` process if it was still running. Open `localhost:8000`. In the Console tab, you should see some logs about HMR. Go ahead and change something in `src/client/app.jsx` and your changes should be reflected in your browser after a few seconds, without any full-page reload!
+🏁 Рестартирайте вашия `yarn dev:wds` процес ако все още се изпълнява. Отворете `localhost:8000`. В Console таба би трябвало да виждате логове за HMR. Променете нещо в `src/client/app.jsx` и вашите промени би трябвало да се отразят в браузъра ви след няколко секунди, без да се опреснява цялата страница!
 
-Next section: [05 - Redux, Immutable, Fetch](05-redux-immutable-fetch.md#readme)
+Следваща глава: [05 - Redux, Immutable, Fetch](05-redux-immutable-fetch.md#readme)
 
-Back to the [previous section](03-express-nodemon-pm2.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](03-express-nodemon-pm2.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).

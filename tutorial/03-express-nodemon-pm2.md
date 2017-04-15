@@ -1,20 +1,20 @@
-# 03 - Express, Nodemon, and PM2
+# 03 - Express, Nodemon и PM2
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/03-express-nodemon-pm2).
+Кода за тази глава можете да намерите [тук](https://github.com/verekia/js-stack-walkthrough/tree/master/03-express-nodemon-pm2).
 
-In this section we are going to create the server that will render our web app. We will also set up a development mode and a production mode for this server.
+В тази секция ще създадем сървърът, който ще отговаря за показването на нашето уеб приложение. Също така ще настроим сървъра, така че да поддържа режими на разработка (development mode) и на производство (production mode).
 
 ## Express
 
-> 💡 **[Express](http://expressjs.com/)** is by far the most popular web application framework for Node. It provides a very simple and minimal API, and its features can be extended with *middleware*.
+> 💡 **[Express](http://expressjs.com/)** е може би най-известният фреймуърк за уеб приложения за Node. Предоставя много опростен и изчистен интерфейс за програмиране (API), и неговите свойства могат да бъдат надградени с *middleware*.
 
-Let's set up a minimal Express server to serve an HTML page with some CSS.
+Сега ще настроим минимален Express сървър за сервиране на една HTML страница с малко CSS код.
 
-- Delete everything inside `src`
+- Изтрийте всичко от папката `src`
 
-Create the following files and folders:
+Създайте следните файлове и директории:
 
-- Create a `public/css/style.css` file containing:
+- Създайте `public/css/style.css` файл, съдържащ:
 
 ```css
 body {
@@ -28,13 +28,13 @@ h1 {
 }
 ```
 
-- Create an empty `src/client/` folder.
+- Създайте празна папка `src/client/`.
 
-- Create an empty `src/shared/` folder.
+- Създайте празна папка `src/shared/`.
 
-This folder is where we put *isomorphic / universal* JavaScript code – files that are used by both the client and the server. A great use case of shared code is *routes*, as you will see later in this tutorial when we'll make an asynchronous call. Here we simply have some configuration constants as an example for now.
+Това е папката къдато ще поставяме *isomorphic / universal* JavaScript код – файлове, които се използват и от клиентската част, и от сървърната. Чудесен пример за такъв споделен код са *routes*, както ще видите малко по-късно в това ръководство когато ще правим асинхронни извиквания. Тук имаме просто някои конфигурационни константи, служещи за пример.
 
-- Create a `src/shared/config.js` file, containing:
+- Създайте `src/shared/config.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -44,9 +44,9 @@ export const STATIC_PATH = '/static'
 export const APP_NAME = 'Hello App'
 ```
 
-If the Node process used to run your app has a `process.env.PORT` environment variable set (that's the case when you deploy to Heroku for instance), it will use this for the port. If there is none, we default to `8000`.
+Ако Node процеса използван за стартиране на вашето приложение има променлива `process.env.PORT` (такъв би бил случая ако използвате Heroku например), ще използва нея за порта. Ако няма такава, по подразбиране порта ще бъде `8000`.
 
-- Create a `src/shared/util.js` file containing:
+- Създайте `src/shared/util.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -55,13 +55,13 @@ If the Node process used to run your app has a `process.env.PORT` environment va
 export const isProd = process.env.NODE_ENV === 'production'
 ```
 
-That's a simple util to test if we are running in production mode or not. The `// eslint-disable-next-line import/prefer-default-export` comment is because we only have one named export here. You can remove it as you add other exports in this file.
+Това е една полезна опция, с която да тествате дали сте в продукционен режим (production mode) или не. Коментарът `// eslint-disable-next-line import/prefer-default-export` е сложен, тъй като в момента имаме само един наименован файл, който експортираме. Можете да го премахнете когато добавяте други експорти в този файл.
 
-- Run `yarn add express compression`
+- Изпълнете `yarn add express compression`
 
-`compression` is an Express middleware to activate Gzip compression on the server.
+`compression` е Express middleware за активиране на Gzip компресия на сървъра.
 
-- Create a `src/server/index.js` file containing:
+- Създайте `src/server/index.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -89,9 +89,9 @@ app.listen(WEB_PORT, () => {
 })
 ```
 
-Nothing fancy here, it's almost Express' Hello World tutorial with a few additional imports. We're using 2 different static file directories here. `dist` for generated files, `public` for declarative ones.
+Нищо чрезвичайно тук, това е почти Express варианта на Hello World с няколко допълнения. Тук ще използваме 2 различни директории за статични файлове. `dist` за генерирани файлове и `public` за декларирани такива.
 
-- Create a `src/server/render-app.js` file containing:
+- Създайте `src/server/render-app.js` файл, съдържащ:
 
 ```js
 // @flow
@@ -114,11 +114,11 @@ const renderApp = (title: string) =>
 export default renderApp
 ```
 
-You know how you typically have *templating engines* on the back-end? Well these are pretty much obsolete now that JavaScript supports template strings. Here we create a function that takes a `title` as a parameter and injects it in both the `title` and `h1` tags of the page, returning the complete HTML string. We also use a `STATIC_PATH` constant as the base path for all our static assets.
+Може би знаете, че обикновено се използваха *темплейт енджини* в бек-енд часта? Сега това вече не е нужно, тъй като JavaScript поддържа темплейт стрингове. Тук създаваме функция, която взима `title`(заглавието) като параметър и го инжектира в `title` и `h1` таговете на страницата, връщайки завършен HTML стринг. Също така използваме константата `STATIC_PATH`, която служи за основен път към всички наши статични ресурси.
 
-### HTML template strings syntax highlighting in Atom (optional)
+### Осветяване (highlighting) на HTML синтаксис за темплейт стрингове в Atom (незадължително)
 
-It might be possible to get syntax highlighting working for HTML code inside template strings depending on your editor. In Atom, if you prefix your template string with an `html` tag (or any tag that *ends* with `html`, like `ilovehtml`), it will automatically highlight the content of that string. I sometimes use the `html` tag of the `common-tags` library to take advantage of this:
+В зависимост от вашия редактор, можете да имате осветяване на синтаксиса, което да е в сила за HTML код в темплейт стринговете. В Atom, ако поставите `html` таг преди темплейт стринг (или какъвто и да било таг *завършващ* с `html`, като например `ilovehtml`), съдържанието ще се освети. Понякога използвам `html` таг от `common-tags` библиотеката, за да се възползвам от тази опция:
 
 ```js
 import { html } from `common-tags`
@@ -128,68 +128,68 @@ const template = html`
 `
 ```
 
-I did not include this trick in the boilerplate of this tutorial, since it seems to only work in Atom, and it's less than ideal. Some of you Atom users might find it useful though.
+Нарочно не включих този трик в основата на това ръководство, тъй като изглежда, че работи само в Atom, а и не е идеално. Някои от вас потребителите на Atom могат да го намерят за полезно.
 
-Anyway, back to business!
+Както и да е, обратно на работа!
 
-- In `package.json` change your `start` script like so: `"start": "babel-node src/server",`
+- В `package.json` променете вашия `start` скрипт както следва: `"start": "babel-node src/server",`
 
-🏁 Run `yarn start`, and hit `localhost:8000` in your browser. If everything works as expected you should see a blank page with "Hello App" written both on the tab title and as a green heading on the page.
+🏁 Изпълнете `yarn start` и отворете `localhost:8000` във вашия браузър. Ако всичко работи както се очаква би трябвало да видите празна страница с "Hello App" написано на заглавната лента и на самата страница, във вид на зелен текст.
 
-**Note**: Some processes – typically processes that wait for things to happen, like a server for instance – will prevent you from entering commands in your terminal until they're done. To interrupt such processes and get your prompt back, press **Ctrl+C**. You can alternatively open a new terminal tab if you want to keep them running while being able to enter commands. You can also make these processes run in the background but that's out of the scope of this tutorial.
+**Забележка**: Някои процеси – обикновено такива, които очакват нещо да се случи, като например сървърните процеси – няма да ви позволят да въвеждате команди във вашия терминал докато не приключат работата си. За да прекратите такива процеси и да можете да използвате терминала си отново натиснете **Ctrl+C**. Ако искате да можете да въвеждате команди докато тези процеси работят можете да отворите нов таб на терминалния прозорец и да пишете в него. Също така има възможност тези процеси да бъдат стартирани и да работят в бекграунда, но това не е в обхвата на това ръководство.
 
 ## Nodemon
 
-> 💡 **[Nodemon](https://nodemon.io/)** is a utility to automatically restart your Node server when file changes happen in the directory.
+> 💡 **[Nodemon](https://nodemon.io/)** е инструмент, чрез който вашия Node сървър се рестартира автоматично когато настъпят промени в даден файл в директорията.
 
-We are going to use Nodemon whenever we are in **development** mode.
+Ще използваме Nodemon докато сме в режим на **разработка** (**development** mode).
 
-- Run `yarn add --dev nodemon`
+- Изпълнете `yarn add --dev nodemon`
 
-- Change your `scripts` like so:
+- Променете вашият `scripts` обект, както следва:
 
 ```json
 "start": "yarn dev:start",
 "dev:start": "nodemon --ignore lib --exec babel-node src/server",
 ```
 
-`start` is now just a pointer to an other task, `dev:start`. That gives us a layer of abstraction to tweak what the default task is.
+Сега `start` е просто указател към друга задача, `dev:start`. Това ни дава слой на абстракция когато настройваме какво прави основната ни задача.
 
-In `dev:start`, the `--ignore lib` flag is to *not* restart the server when changes happen in the `lib` directory. You don't have this directory yet, but we're going to generate it in the next section of this chapter, so it will soon make sense. Nodemon typically runs the `node` binary. In our case, since we're using Babel, we can tell Nodemon to use the `babel-node` binary instead. This way it will understand all the ES6/Flow code.
+В задачата `dev:start`, флагът `--ignore lib` е, за да *не* се рестартира сървъра когато настъпят някакви промени в `lib` директорията. Все още нямате такава директория, но ще я създадем в следващата секция и ще можем да видим ефекта му в действие. Nodemon обикновено използва `node` функционалността, за да работи. В нашия случай, тъй като използваме Babel, ще настроим Nodemon да използва `babel-node`. По този начин ще може да използваме цялата функционалност произлизаща от ES6/Flow кода.
 
-🏁 Run `yarn start` and open `localhost:8000`. Go ahead and change the `APP_NAME` constant in `src/shared/config.js`, which should trigger a restart of your server in the terminal. Refresh the page to see the updated title. Note that this automatic restart of the server is different from *Hot Module Replacement*, which is when components on the page update in real-time. Here we still need a manual refresh, but at least we don't need to kill the process and restart it manually to see changes. Hot Module Replacement will be introduced in the next chapter.
+🏁 Изпълнете `yarn start` и отворете `localhost:8000`. Променете `APP_NAME` константата в `src/shared/config.js`, което действие би трябвало да инициира рестартирането на сървъра в терминала. Опреснете страницата, за да видите обновеното заглавие. Обърнете внимание, че този автоматичен рестарт на сървъра е нещо различно от *Hot Module Replacement*, което е когато компонентите на страницата се обновяват в реално време. В нашия случай все още имаме нужда от ръчно опресняване, но поне не трябва да спираме процеса и да го рестартираме ръчно отново за да видим промените. Hot Module Replacement (моментално опресняване без нужда от ръчно такова, т.е. без нужда от натискане на *F5*, за Windows например) ще бъде представено в следващата секция.
 
 ## PM2
 
-> 💡 **[PM2](http://pm2.keymetrics.io/)** is a Process Manager for Node. It keeps your processes alive in production, and offers tons of features to manage them and monitor them.
+> 💡 **[PM2](http://pm2.keymetrics.io/)** е мениджър на процеси за Node. Предлага функционалност за поддържане на "живи" процесите в производствена среда, както и много други опции за управление и наблюдение на такива.
 
-We are going to use PM2 whenever we are in **production** mode.
+Ще използваме PM2 докато сме в режим на **производство** (**production** mode).
 
-- Run `yarn add --dev pm2`
+- Изпълнете `yarn add --dev pm2`
 
-In production, you want your server to be as performant as possible. `babel-node` triggers the whole Babel transpilation process for your files at each execution, which is not something you want in production. We need Babel to do all this work beforehand, and have our server serve plain old pre-compiled ES5 files.
+В производствена среда, бихме искали сървъра ни да работи колкото се може по-добре. `babel-node` стартира целия Babel процес по транспилацията на файловете при всяко изпълнение, което е нещо, което не искаме да се случва в производствена среда. Ние имаме нужда Babel да извършва цялата тази работа предварително, за да може накрая нашия сървър да сервира файлове с добре познатия стар, чист, прекомпилиран ES5 код.
 
-One of the main features of Babel is to take a folder of ES6 code (usually named `src`) and transpile it into a folder of ES5 code (usually named `lib`).
+Едно от основните свойства на Babel е да вземе една папка с ES6 код (обикновено кръстена `src`) и да я транспилира в папка с ES5 код (обикновено кръстена `lib`).
 
-This `lib` folder being auto-generated, it's a good practice to clean it up before a new build, since it may contain unwanted old files. A neat simple package to delete files with cross platform support is `rimraf`.
+Папката `lib` се генерира автоматично, добра практика е да се чисти съдържанието й преди всеки нов билд, тъй като може да съдържа нежелани стари файлове. За тази цел съществува един чудесен пакет наречен `rimraf`.
 
-- Run `yarn add --dev rimraf`
+- Изпълнете `yarn add --dev rimraf`
 
-Let's add the following `prod:build` task to our `scripts`:
+Нека да добавим следната `prod:build` задача към нашия `scripts` обект:
 
 ```json
 "prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
 ```
 
-- Run `yarn prod:build`, and it should generate a `lib` folder containing the transpiled code, except for files ending in `.test.js` (note that `.test.jsx` files are also ignored by this parameter).
+- Изпълнете `yarn prod:build`, това би трябвало да генерира `lib` папка, съдържаща транспилирания код, с изключение на файлове завършващи на `.test.js` (обърнете внимание, че `.test.jsx` файлове също ще бъдат игнорирани с този параметър).
 
-- Add `/lib/` to your `.gitignore`
+- Добавете `/lib/` във вашия `.gitignore` файл
 
-One last thing: We are going to pass a `NODE_ENV` environment variable to our PM2 binary. With Unix, you would do this by running `NODE_ENV=production pm2`, but Windows uses a different syntax. We're going to use a small package called `cross-env` to make this syntax work on Windows as well.
+Едно последно нещо: ще подадем `NODE_ENV` променливата към нашия PM2. Ако сте с Unix, бихте могли да направите това чрез изпълнението на `NODE_ENV=production pm2`, но на Windows синтаксиса е различен. Ще използваме още един малък пакет, наречен `cross-env`, за да направим възможна работата под Windows също така.
 
-- Run `yarn add --dev cross-env`
+- Изпълнете `yarn add --dev cross-env`
 
-Let's update our `package.json` like so:
+Нека да обновим нашия `package.json`, както следва:
 
 ```json
 "scripts": {
@@ -204,18 +204,18 @@ Let's update our `package.json` like so:
 },
 ```
 
-🏁 Run `yarn prod:build`, then run `yarn prod:start`. PM2 should show an active process. Go to `http://localhost:8000/` in your browser and you should see your app. Your terminal should show the logs, which should be "Server running on port 8000 (production).". Note that with PM2, your processes are run in the background. If you press Ctrl+C, it will kill the `pm2 logs` command, which was the last command our our `prod:start` chain, but the server should still render the page. If you want to stop the server, run `yarn prod:stop`
+🏁 Изпълнете `yarn prod:build`, след това изпълнете `yarn prod:start`. PM2 би трябвало да покаже активния процес. Отворете `http://localhost:8000/` във вашия браузър и би трябвало да видите вашето приложение. Вашият терминален прозорец би трябвало да показва логовете, които би трябвало да са "Server running on port 8000 (production).". Забележете, че използвайки PM2, вашите процеси се изпълняват в бекграунда. Ако натиснете Ctrl+C, ще прекратите изпълнението на `pm2 logs` командата, което е последната команда от нашата `prod:start` поредица, но сървъра все още би трябвало да рендира страницата. Ако искате да спрете изпълнението на сървъра, изпълнете `yarn prod:stop`
 
-Now that we have a `prod:build` task, it would be neat to make sure it works fine before pushing code to the repository. Since it is probably unnecessary to run it for every commit, I suggest adding it to the `prepush` task:
+Сега, след като имаме `prod:build` задача, би било добре да проверим, че всичко работи коректно преди да запазваме (pushing) промени в репозиторито. Тъй като, вероятно не е необходимо да го стартираме при всеки опит за запазване (commit), препоръчвам да го добавите в `prepush` задачата:
 
 ```json
 "prepush": "yarn test && yarn prod:build"
 ```
 
-🏁 Run `yarn prepush` or just push your files to trigger the process.
+🏁 Изпълнете `yarn prepush` или просто запазете вашите промени (push your files), за да стартирате процеса.
 
-**Note**: We don't have any test here, so Jest will complain a bit. Ignore it for now.
+**Забележка**: В момента не разполагаме с никакви тестове за случая, така че Jest ще ни съобщи за това. Игнорирайте го за момента.
 
-Next section: [04 - Webpack, React, HMR](04-webpack-react-hmr.md#readme)
+Следваща глава: [04 - Webpack, React, HMR](04-webpack-react-hmr.md#readme)
 
-Back to the [previous section](02-babel-es6-eslint-flow-jest-husky.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Назад към [предишната глава](02-babel-es6-eslint-flow-jest-husky.md#readme) или към [съдържанието](https://github.com/mihailgaberov/js-stack-from-scratch#Съдържание).
