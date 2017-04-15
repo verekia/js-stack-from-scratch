@@ -61,7 +61,7 @@ Setting up your editor (Atom first), MongoDB, Progressive Web App, E2E testing.
 Ако искате да добавите ваш превод, моля прочетете [препоръките](/how-to-translate.md), за да започнете!
 
 ### V2
-
+- [Български](https://github.com/mihailgaberov/js-stack-from-scratch) by [mihailgaberov](http://github.com/mihailgaberov)
 - [Italian](https://github.com/fbertone/guida-javascript-moderno) by [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
 - [Simplified Chinese](https://github.com/yepbug/js-stack-from-scratch/) by [@yepbug](https://github.com/yepbug)
 
@@ -69,7 +69,6 @@ Setting up your editor (Atom first), MongoDB, Progressive Web App, E2E testing.
 
 ### V1
 
-- [Български](https://github.com/mihailgaberov/js-stack-from-scratch) by [mihailgaberov](http://github.com/mihailgaberov)
 - [中文](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
 - [Italiano](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
 - [日本語](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
