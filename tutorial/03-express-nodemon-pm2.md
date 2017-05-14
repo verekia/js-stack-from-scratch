@@ -116,6 +116,27 @@ export default renderApp
 
 You know how you typically have *templating engines* on the back-end? Well these are pretty much obsolete now that JavaScript supports template strings. Here we create a function that takes a `title` as a parameter and injects it in both the `title` and `h1` tags of the page, returning the complete HTML string. We also use a `STATIC_PATH` constant as the base path for all our static assets.
 
+At this point your directory structure should match:
+```
+├── public
+│   └── css
+│       └── style.css
+├── src
+│   ├── client
+│   ├── server
+│   │   ├── index.js
+│   │   └── render-app.js
+│   └── shared
+│       ├── config.js
+│       └── util.js
+├── .babelrc
+├── .eslintrc.json
+├── .flowconfig
+├── .gitignore
+├── package.json
+└── yarn.lock
+```
+
 ### HTML template strings syntax highlighting in Atom (optional)
 
 It might be possible to get syntax highlighting working for HTML code inside template strings depending on your editor. In Atom, if you prefix your template string with an `html` tag (or any tag that *ends* with `html`, like `ilovehtml`), it will automatically highlight the content of that string. I sometimes use the `html` tag of the `common-tags` library to take advantage of this:
