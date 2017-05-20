@@ -244,7 +244,7 @@ I know this is a lot to take in, so take a minute to think about it. I'm still a
 
 ```flowconfig
 [ignore]
-.*/node_modules/.*
+<PROJECT_ROOT>/node_modules/
 [options]
 suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
 ```
