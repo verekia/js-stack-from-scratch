@@ -74,6 +74,9 @@ export default {
   },
   devServer: {
     port: WDS_PORT,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
 }
 ```
