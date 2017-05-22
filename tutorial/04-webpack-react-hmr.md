@@ -74,9 +74,6 @@ export default {
   },
   devServer: {
     port: WDS_PORT,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
   },
 }
 ```
@@ -244,6 +241,9 @@ entry: [
 devServer: {
   port: WDS_PORT,
   hot: true,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
 },
 plugins: [
   new webpack.optimize.OccurrenceOrderPlugin(),
@@ -252,6 +252,8 @@ plugins: [
   new webpack.NoEmitOnErrorsPlugin(),
 ],
 ```
+
+The `headers` bit is to allow Cross-Origin Resource Sharing which is necessary for HMR.
 
 - Edit your `src/client/index.jsx` file:
 
