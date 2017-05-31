@@ -230,12 +230,6 @@ eb deploy
 eb open
 ```
 
-- In both apps, under Settings > Config Variables, add `NPM_CONFIG_PRODUCTION` set to `false`.
-
-- Create a Pipeline, and grant Heroku access to your Github.
-
-- Add both apps to the pipeline, make the staging one auto-deploy on changes in `master`, and enable Review Apps.
-
 Alright, let's prepare our project for a deployment to Heroku.
 
 ### Running in production mode locally
