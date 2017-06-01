@@ -65,6 +65,7 @@ If you want to add your translation, please read the [translation recommendation
 - [Bulgarian](https://github.com/mihailgaberov/js-stack-from-scratch) by [mihailgaberov](http://github.com/mihailgaberov)
 - [Italian](https://github.com/fbertone/guida-javascript-moderno) by [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
 - [Simplified Chinese](https://github.com/yepbug/js-stack-from-scratch/) by [@yepbug](https://github.com/yepbug)
+- [French](https://github.com/naomihauret/js-stack-from-scratch/) by [Naomi Hauret](https://twitter.com/naomihauret)
 
 Check out the [ongoing translations](https://github.com/verekia/js-stack-from-scratch/issues/147).
 
