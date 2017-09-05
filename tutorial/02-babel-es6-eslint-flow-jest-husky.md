@@ -245,6 +245,9 @@ I know this is a lot to take in, so take a minute to think about it. I'm still a
 ```flowconfig
 [options]
 suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
+
+[ignore]
+.*/node_modules/eslint-plugin-jsx-a11y/*
 ```
 
 This is a little utility that we set up to make Flow ignore any warning detected on the next line. You would use it like this, similarly to `eslint-disable`:
