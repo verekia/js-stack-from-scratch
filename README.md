@@ -32,7 +32,7 @@ Final code available in the [JS-Stack-Boilerplate repository](https://github.com
 
 Works on Linux, macOS, and Windows.
 
-> **Note**: Since the tutorial was last edited in May 2017, a few libraries have slightly changed their APIs. 95% of the tutorial is still perfectly valid, but if you run into an issue, make sure to check out the [open issues](https://github.com/verekia/js-stack-from-scratch/issues?q=is%3Aopen+is%3Aissue+label%3Abug).
+> **Note**: Since the tutorial was last edited in May 2017, a few libraries have slightly changed their APIs. 95% of the tutorial is still perfectly valid, but if you run into something weird, make sure to check out the [open issues](https://github.com/verekia/js-stack-from-scratch/issues?q=is%3Aopen+is%3Aissue+label%3Abug).
 
 ## Table of contents
 
