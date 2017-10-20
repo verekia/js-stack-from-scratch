@@ -130,7 +130,7 @@ const template = html`
 
 I did not include this trick in the boilerplate of this tutorial, since it seems to only work in Atom, and it's less than ideal. Some of you Atom users might find it useful though.
 
-### Anyway, back to business!
+### Anyway, back to business
 
 - In `package.json` change your `start` script like so: `"start": "babel-node src/server",`
 
