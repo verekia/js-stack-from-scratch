@@ -1,33 +1,33 @@
-# 02 - Babel, ES6, ESLint, Flow, Jest, and Husky
+# 02 - Babel, ES6, ESLint, Flow, Jest, i Husky
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/02-babel-es6-eslint-flow-jest-husky).
+Kod dla tego rozdziału dostępny jest [tutaj](https://github.com/verekia/js-stack-walkthrough/tree/master/02-babel-es6-eslint-flow-jest-husky).
 
-We're now going to use some ES6 syntax, which is a great improvement over the "old" ES5 syntax. All browsers and JS environments understand ES5 well, but not ES6. That's where a tool called Babel comes to the rescue!
+Użyjemy teraz składni ES6, co stanowi wielką poprawę w stosunku do "starej" składni ES5. Wszystkie przeglądarki i środowiska JS dobrze rozumieją ES5, ale nie ES6. Tam właśnie na ratunek przychodzi narzędzie o nazwie Babel!
 
 ## Babel
 
-> 💡 **[Babel](https://babeljs.io/)** is a compiler that transforms ES6 code (and other things like React's JSX syntax) into ES5 code. It is very modular and can be used in tons of different [environments](https://babeljs.io/docs/setup/). It is by far the preferred ES5 compiler of the React community.
+> 💡 **[Babel](https://babeljs.io/)** to kompilator, który przekształca kod ES6 (i inne rzeczy, takie jak składnia JSX Reacta) w kod ES5. Jest bardzo modułowy i może być używany w przeróżnych [środowiskach](https://babeljs.io/docs/setup/). Jest to zdecydowanie preferowany kompilator ES5 społeczności React.
 
-- Move your `index.js` into a new `src` folder. This is where you will write your ES6 code. Remove the previous `color`-related code in `index.js`, and replace it with a simple:
+- Przenieś swój `index.js` do nowego `src` folderu. Tutaj napiszesz swój kod ES6. Usuń poprzedni kod związany z `color` w `index.js`, i zamień prostym:
 
 ```js
 const str = 'ES6'
 console.log(`Hello ${str}`)
 ```
 
-We're using a *template string* here, which is an ES6 feature that lets us inject variables directly inside the string without concatenation using `${}`. Note that template strings are created using **backquotes**.
+Używamy tutaj *template string*, który jest w ES6 i pozwala nam wstrzykiwać zmienne bezpośrednio do ciągu znaków bez konkatenacji za pomocą `${}`. Zauważ, że ciągi szablonów są tworzone przy użyciu **backquotes**.
 
-- Run `yarn add --dev babel-cli` to install the CLI interface for Babel.
+- Uruchom `yarn add --dev babel-cli` aby zainstalować interfejs CLI dla Babel.
 
-Babel CLI comes with [two executables](https://babeljs.io/docs/usage/cli/): `babel`, which compiles ES6 files into new ES5 files, and `babel-node`, which you can use to replace your call to the `node` binary and execute ES6 files directly on the fly. `babel-node` is great for development but it is heavy and not meant for production. In this chapter we are going to use `babel-node` to set up the development environment, and in the next one we'll use `babel` to build ES5 files for production.
+Babel CLI pochodzi z [dwóch plików wykonalnych](https://babeljs.io/docs/usage/cli/): `babel`, który kompiluje pliki ES6 w nowe pliki ES5, oraz `babel-node`, którego możesz użyć do zastąpienia połączenia z binarką `node` i uruchamiać pliki ES6 bezpośrednio w locie. `babel-node` jest świetny do programowania, ale jest ciężki i nie jest przeznaczony do produkcji. W tym rozdziale będziemy korzystać z `babel-node` aby skonfigurować środowisko programistyczne, a w następnym użyjemy `babel` do zbudowania plików ES5 do produkcji.
 
-- In `package.json`, in your `start` script, replace `node .` with `babel-node src` (`index.js` is the default file Node looks for, which is why we can omit `index.js`).
+- W `package.json`, w Twoim skrypcie `start`, zamień `node .` z `babel-node src` (`index.js` jest domyślnym plikiem, którego szuka Node, dlatego możemy pominąć `index.js`).
 
-If you try to run `yarn start` now, it should print the correct output, but Babel is not actually doing anything. That's because we didn't give it any information about which transformations we want to apply. The only reason it prints the right output is because Node natively understands ES6 without Babel's help. Some browsers or older versions of Node would not be so successful though!
+Jeśli spróbujesz uruchomić teraz `yarn start`, powinien wypisać poprawne wyjście, ale Babel tak naprawdę nic nie robi. To dlatego, że nie podaliśmy żadnych informacji o transformacjach, które chcemy zastosować. Jedynym powodem, dla którego drukuje prawidłowe dane wyjściowe, jest to, że Node natywnie rozumie ES6 bez pomocy Babela. Niektóre przeglądarki lub starsze wersje Node nie byłyby jednak tak skuteczne!
 
-- Run `yarn add --dev babel-preset-env` to install a Babel preset package called `env`, which contains configurations for the most recent ECMAScript features supported by Babel.
+- Uruchom `yarn add --dev babel-preset-env` aby zainstalować pakiet ustawień Babel o nazwie `env`, który zawiera konfiguracje dla najnowszych funkcji ECMAScript obsługiwanych przez Babel.
 
-- Create a `.babelrc` file at the root of your project, which is a JSON file for your Babel configuration. Write the following to it to make Babel use the `env` preset:
+- Stwórz plik `.babelrc`  w katalogu głównym projektu, który jest plikiem JSON dla konfiguracji Babel. Wpisz do niego następujące polecenie, aby Babel użył ustawienia wstępnego `env`:
 
 ```json
 {
@@ -37,15 +37,15 @@ If you try to run `yarn start` now, it should print the correct output, but Babe
 }
 ```
 
-🏁 `yarn start` should still work, but it's actually doing something now. We can't really tell if it is though, since we're using `babel-node` to interpret ES6 code on the fly. You'll soon have a proof that your ES6 code is actually transformed when you reach the [ES6 modules syntax](#the-es6-modules-syntax) section of this chapter.
+🏁 `yarn start` powinien nadal działać, ale w rzeczywistości teraz coś robi. Nie możemy jednak stwierdzić, czy tak jest, ponieważ używamy `babel-node` do interpretacji kodu ES6 w locie. Wkrótce będziesz mieć dowód, że Twój kod ES6 jest faktycznie przekształcany, gdy dojdziesz do [ES6 modules syntax](#the-es6-modules-syntax) sekcji w tym rozdziale.
 
 ## ES6
 
-> 💡 **[ES6](http://es6-features.org/)**: The most significant improvement of the JavaScript language. There are too many ES6 features to list them here but typical ES6 code uses classes with `class`, `const` and `let`, template strings, and arrow functions (`(text) => { console.log(text) }`).
+> 💡 **[ES6](http://es6-features.org/)**: Najbardziej znacząca poprawa języka JavaScript. Istnieje zbyt wiele funkcji ES6, aby je tutaj wymienić, ale typowy kod ES6 używa klas z `class`, `const` i `let`, template strings, i arrow functions (`(text) => { console.log(text) }`).
 
-### Creating an ES6 class
+### Tworzenie klasy ES6
 
-- Create a new file, `src/dog.js`, containing the following ES6 class:
+- Stwórz nowy plik, `src/dog.js`, zawierający następującą klasę ES6:
 
 ```js
 class Dog {
@@ -61,9 +61,9 @@ class Dog {
 module.exports = Dog
 ```
 
-It should not look surprising to you if you've done OOP in the past in any language. It's relatively recent for JavaScript though. The class is exposed to the outside world via the `module.exports` assignment.
+Nie powinno cię to dziwić, jeśli robiłeś coś z OOP w przeszłości w jakimkolwiek języku. Jest jednak stosunkowo nowy dla JavaScript. Klasa jest wystawiona na świat zewnętrzny poprzez zadanie `module.exports`.
 
-In `src/index.js`, write the following:
+W `src/index.js`, wpisz następująco:
 
 ```js
 const Dog = require('./dog')
@@ -73,35 +73,35 @@ const toby = new Dog('Toby')
 console.log(toby.bark())
 ```
 
-As you can see, unlike the community-made package `color` that we used before, when we require one of our files, we use `./` in the `require()`.
+Jak widać, w przeciwieństwie do tworzonego przez społeczność pakietu `color`, którego używaliśmy wcześniej, kiedy wymagamy jednego z naszych plików, używamy `./` w `require()`.
 
-🏁 Run `yarn start` and it should print "Wah wah, I am Toby".
+🏁 Uruchom `yarn start` i powinno wypisać "Wah wah, I am Toby".
 
 ### The ES6 modules syntax
 
-Here we simply replace `const Dog = require('./dog')` by `import Dog from './dog'`, which is the newer ES6 modules syntax (as opposed to "CommonJS" modules syntax). It is currently not natively supported by NodeJS, so this is your proof that Babel processes those ES6 files correctly.
+Tutaj po prostu zastępujemy `const Dog = require('./dog')` poprzez `import Dog from './dog'`, która jest nowszą składnią modułów ES6 (w przeciwieństwie do składni modułów "CommonJS"). Obecnie nie jest natywnie obsługiwany przez NodeJS, więc jest to dowód na to, że Babel poprawnie przetwarza te pliki ES6.
 
-In `dog.js`, we also replace `module.exports = Dog` by `export default Dog`
+W `dog.js`, również zamieńmy `module.exports = Dog` poprzez `export default Dog`
 
-🏁 `yarn start` should still print "Wah wah, I am Toby".
+🏁 `yarn start` powinien znów wypisać "Wah wah, I am Toby".
 
 ## ESLint
 
-> 💡 **[ESLint](http://eslint.org)** is the linter of choice for ES6 code. A linter gives you recommendations about code formatting, which enforces style consistency in your code, and code you share with your team. It's also a great way to learn about JavaScript by making mistakes that ESLint will catch.
+> 💡 **[ESLint](http://eslint.org)** jest linterem z wyboru dla kodu ES6. Linter zawiera zalecenia dotyczące formatowania kodu, które wymuszają spójność stylu w kodzie i kodzie udostępnianym zespołowi. Jest to również świetny sposób na naukę JavaScript, popełniając błędy, które wyłapie ESLint.
 
-ESLint works with *rules*, and there are [many of them](http://eslint.org/docs/rules/). Instead of configuring the rules we want for our code ourselves, we will use the config created by Airbnb. This config uses a few plugins, so we need to install those as well.
+ESLint działa z *regułami* i istnieje [wiele z nich](http://eslint.org/docs/rules/). Zamiast samodzielnie konfigurować reguły dla naszego kodu, użyjemy konfiguracji stworzonej przez Airbnb. Ta konfiguracja wykorzystuje kilka wtyczek, więc musimy je również zainstalować.
 
-Check out Airbnb's most recent [instructions](https://www.npmjs.com/package/eslint-config-airbnb) to install the config package and all its dependencies correctly. As of 2017-02-03, they recommend using the following command in your terminal:
+Sprawdź dla Airbnb najnowsze [instrukcje](https://www.npmjs.com/package/eslint-config-airbnb) aby poprawnie zainstalować pakiet konfiguracyjny i wszystkie jego zależności. W dniu 2017-02-03 zalecamy użycie następującego polecenia w terminalu:
 
 ```sh
 npm info eslint-config-airbnb@latest peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs yarn add --dev eslint-config-airbnb@latest
 ```
 
-It should install everything you need and add `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, and `eslint-plugin-react` to your `package.json` file automatically.
+Powinien zainstalować wszystko, czego potrzebujesz i dodać `eslint-config-airbnb`, `eslint-plugin-import`, `eslint-plugin-jsx-a11y`, oraz `eslint-plugin-react` do Twojego pliku `package.json` automatycznie.
 
-**Note**: I've replaced `npm install` by `yarn add` in this command. Also, this won't work on Windows, so take a look at the `package.json` file of this repository and just install all the ESLint-related dependencies manually using `yarn add --dev packagename@^#.#.#` with `#.#.#` being the versions given in `package.json` for each package.
+**Uwaga**: Zamieniłem `npm install` poprzez `yarn add` w tym poleceniu. To również nie będzie działać w systemie Windows, więc spójrz na plik `package.json` tego repozytorium i po prostu ręcznie zainstaluj wszystkie zależności związane z ESLint używając `yarn add --dev packagename@^#.#.#` z `#.#.#` będące wersjami podanymi w `package.json` dla każdego pakietu.
 
-- Create an `.eslintrc.json` file at the root of your project, just like we did for Babel, and write the following to it:
+- Stwórz plik `.eslintrc.json` na górze projektu, tak jak zrobiliśmy to dla Babel, i wpisz do niego:
 
 ```json
 {
@@ -109,11 +109,11 @@ It should install everything you need and add `eslint-config-airbnb`, `eslint-pl
 }
 ```
 
-We'll create an NPM/Yarn script to run ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
+Stworzymy skrypt NPM/Yarn do uruchomienia ESLint. Zainstalujmy pakiet `eslint`, aby móc korzystać z CLI `eslint`:
 
-- Run `yarn add --dev eslint`
+- Uruchom `yarn add --dev eslint`
 
-Update the `scripts` of your `package.json` to include a new `test` task:
+Zaktualizuj `scripts` Twojego `package.json` aby zawierało nowe zadanie `test`:
 
 ```json
 "scripts": {
