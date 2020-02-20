@@ -122,21 +122,21 @@ Zaktualizuj `scripts` Twojego `package.json` aby zawierało nowe zadanie `test`:
 },
 ```
 
-Here we just tell ESLint that we want it to lint all JavaScript files under the `src` folder.
+Tutaj po prostu mówimy ESLint, że chcemy, aby robił swoje z wszystkimi plikami JavaScript w folderze `src`.
 
-We will use this standard `test` task to run a chain of all the commands that validate our code, whether it's linting, type checking, or unit testing.
+Użyjemy ten standarowy `test` aby uruchomić łańcuch wszystkich poleceń, które sprawdzają poprawność naszego kodu, niezależnie od tego, czy jest to linting, sprawdzanie typu, czy testowanie jednostkowe.
 
-- Run `yarn test`, and you should see a whole bunch of errors for missing semicolons, and a warning for using `console.log()` in `index.js`. Add `/* eslint-disable no-console */` at the top of our `index.js` file to allow the use of `console` in this file.
+- Uruchom `yarn test`, i powinieneś zobaczyć całą masę błędów za brakujące średniki oraz ostrzeżenie o używaniu `console.log()` w `index.js`. Dodaj `/* eslint-disable no-console */` na górze naszego pliku `index.js` aby pozwolić korzystać z `console` w tym pliku.
 
-**Note**: If you're on Windows, make sure you configure your editor and Git to use Unix LF line endings and not Windows CRLF. If your project is only used in Windows environments, you can add `"linebreak-style": [2, "windows"]` in ESLint's `rules` array (see the example below) to enforce CRLF instead.
+**Uwaga**: Jeśli pracujesz na systemie Windows, upewnij się, że skonfigurowałeś edytor i Git, aby używały zakończeń linii LX w systemie Unix, a nie Windows CRLF. Jeśli Twój projekt jest używany tylko w środowisku Windows, możesz dodać `"linebreak-style": [2, "windows"]` w ESLint-wej tablicy `rules` (zobacz przykład poniżej) aby wymusić CRLF.
 
-### Semicolons
+### Średniki
 
-Alright, this is probably the most heated debate in the JavaScript community, let's talk about it for a minute. JavaScript has this thing called Automatic Semicolon Insertion, which allows you to write your code with or without semicolons. It really comes down to personal preference and there is no right and wrong on this topic. If you like the syntax of Python, Ruby, or Scala, you will probably enjoy omitting semicolons. If you prefer the syntax of Java, C#, or PHP, you will probably prefer using semicolons.
+Dobra, to prawdopodobnie najbardziej gorąca debata w społeczności JavaScript, porozmawiajmy o tym przez chwilę. JavaScript ma tę funkcję o nazwie Automatic Semicolon Insertion, która umożliwia pisanie kodu z lub bez średników. To naprawdę sprowadza się do osobistych preferencji i nie ma w tym temacie dobra i zła. Jeśli podoba Ci się składnia Pythona, Ruby lub Scali, prawdopodobnie spodoba Ci się pomijanie średników. Jeśli wolisz składnię Java, C # lub PHP, prawdopodobnie wolisz używać średników.
 
-Most people write JavaScript with semicolons, out of habit. That was my case until I tried going semicolon-less after seeing code samples from the Redux documentation. At first it felt a bit weird, simply because I was not used to it. After just one day of writing code this way I could not see myself going back to using semicolons at all. They felt so cumbersome and unnecessary. A semicolon-less code is easier on the eyes in my opinion, and is faster to type.
+Większość ludzi pisze JavaScript ze średnikami z przyzwyczajenia. Tak było w moim przypadku, dopóki nie spróbowałem przejść bez średnika po obejrzeniu próbek kodu z dokumentacji Redux. Na początku wydawało się to trochę dziwne, po prostu dlatego, że nie byłem do tego przyzwyczajony. Po zaledwie jednym dniu pisania kodu w ten sposób nie wiedziałem, że wrócę do używania średników. Czuły się takie nieporadne i niepotrzebne. Moim zdaniem kod bez średników jest łatwiejszy dla oczu i szybszy.
 
-I recommend reading the [ESLint documentation about semicolons](http://eslint.org/docs/rules/semi). As mentioned in this page, if you're going semicolon-less, there are some rather rare cases where semicolons are required. ESLint can protect you from such cases with the `no-unexpected-multiline` rule. Let's set up ESLint to safely go semicolon-less in `.eslintrc.json`:
+Polecam przeczytać [dokumentację ESLint odnośnie średników](http://eslint.org/docs/rules/semi). Jak wspomniano na stronie, jeśli używasz semicolon-less, istnieją raczej rzadkie przypadki, w których wymagane są średniki. ESLint może chronić cię przed takimi przypadkami dzięki zasadzie `no-unexpected-multiline`. Skonfigurujmy ESLint, aby bezpiecznie przechodził bez średnika w `.eslintrc.json`:
 
 ```json
 {
@@ -148,7 +148,7 @@ I recommend reading the [ESLint documentation about semicolons](http://eslint.or
 }
 ```
 
-🏁 Run `yarn test`, and it should now pass successfully. Try adding an unnecessary semicolon somewhere to make sure the rule is set up correctly.
+🏁 Uruchom `yarn test`, i powinien teraz przejść pomyślnie. Spróbuj dodać gdzieś niepotrzebny średnik, aby upewnić się, że reguła jest poprawnie skonfigurowana.
 
 I am aware that some of you will want to keep using semicolons, which will make the code provided in this tutorial inconvenient. If you are using this tutorial just for learning, I'm sure it will remain bearable to learn without semicolons, until going back to using them on your real projects. If you want to use the code provided in this tutorial as a boilerplate though, it will require a bit of rewriting, which should be pretty quick with ESLint set to enforce semicolons to guide you through the process. I apologize if you're in such case.
 
