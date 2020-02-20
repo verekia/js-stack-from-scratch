@@ -1,4 +1,4 @@
-# JavaScript Stack from Scratch
+# JavaScript Stack od Scratch
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch)
 [![Release](https://img.shields.io/github/release/verekia/js-stack-from-scratch.svg?style=flat-square)](https://github.com/verekia/js-stack-from-scratch/releases)
@@ -16,25 +16,25 @@
 [![Webpack](/img/webpack-padded-90.png)](https://webpack.github.io/)
 [![Bootstrap](/img/bootstrap-padded-90.png)](http://getbootstrap.com/)
 
-Welcome to my modern JavaScript stack tutorial: **JavaScript Stack from Scratch**.
+Witaj w moim nowoczesnym samouczku stosu JavaScript: **JavaScript Stack od Scratch**.
 
-> 🎉 **This is the V2 of the tutorial, major changes happened since the 2016 release. Check the [Change Log](/CHANGELOG.md)!**
+> 🎉 **To jest wersja V2 tego samouczka, główne zmiany nastąpiły od wydania 2016. Sprawdź [Change Log](/CHANGELOG.md)!**
 
-This is a straight-to-the-point guide to assembling a JavaScript stack. It requires some general programming knowledge, and JavaScript basics. **It focuses on wiring tools together** and giving you the **simplest possible example** for each tool. You can see this tutorial as *a way to write your own boilerplate from scratch*. Since the goal of this tutorial is to assemble various tools, I do not go into details about how these tools work individually. Refer to their documentation or find other tutorials if you want to acquire deeper knowledge in them.
+Jest to prosty przewodnik po stosie JavaScript. Wymaga to ogólnej wiedzy programistycznej i podstaw JavaScript. **Skupia się na łączeniu narzędzi razem** i pokazuje **możliwie najprostszy przykład** dla każdego narzędzia. Możesz traktować ten samouczek także jako *sposób na napisanie własnego schematu od podstaw*. Ponieważ celem tego samouczka jest zestawienie różnych narzędzi, nie wchodzę w szczegóły na temat tego, jak działają one indywidualnie. Zapoznaj się z ich dokumentacją lub znajdź inne samouczki, jeśli chcesz zdobyć w nich głębszą wiedzę.
 
-You don't need to use this entire stack if you build a simple web page with a few JS interactions of course (a combination of Browserify/Webpack + Babel + jQuery is enough to be able to write ES6 code in different files), but if you want to build a web app that scales, and need help setting things up, this tutorial will work great for you.
+Nie musisz używać całego tego stosu, jeśli zbudujesz prostą stronę internetową z kilkoma interakcjami JS (kombinacja Browserify / Webpack + Babel + jQuery jest wystarczająca, aby móc pisać kod ES6 w różnych plikach), ale jeśli chcesz zbudować skalowalną aplikację internetową i potrzebujesz pomocy w konfigurowaniu, ten samouczek będzie dla Ciebie odpowiedni.
 
-A big chunk of the stack described in this tutorial uses React. If you are beginning and just want to learn React, [create-react-app](https://github.com/facebookincubator/create-react-app) will get you up and running with a React environment very quickly with a pre-made configuration. I would for instance recommend this approach to someone who arrives in a team that's using React and needs to catch up with a learning playground. In this tutorial you won't use a pre-made configuration, because I want you to understand everything that's happening under the hood.
+Duża część stosu opisanego w tym samouczku używa React. Jeśli zaczynasz i chcesz się nauczyć Reacta, [create-react-app](https://github.com/facebookincubator/create-react-app) szybko uruchomisz środowisko React ze wstępną konfiguracją. Poleciłbym na przykład to podejście komuś, kto przybywa do zespołu korzystającego z React i musi nadrobić zaległości w nauce. W tym samouczku nie będziesz używać gotowej konfiguracji, ponieważ chcę, abyś zrozumiał wszystko, co dzieje się pod maską.
 
-Code examples are available for each chapter, and you can run them all with `yarn && yarn start`. I recommend writing everything from scratch yourself by following the **step-by-step instructions** though.
+Przykłady kodów są dostępne dla każdego rozdziału i można je wszystkie uruchomić z `yarn && yarn start`. Zalecam jednak pisanie wszystkiego od podstaw, postępując zgodnie z **instrukcjami krok po kroku**.
 
-Final code available in the [JS-Stack-Boilerplate repository](https://github.com/verekia/js-stack-boilerplate), and in the [releases](https://github.com/verekia/js-stack-from-scratch/releases). There is a [live demo](https://js-stack.herokuapp.com/) too.
+Końcowy kod dostępny w [repozytorium JS-Stack-Boilerplate](https://github.com/verekia/js-stack-boilerplate), oraz w [wydaniach](https://github.com/verekia/js-stack-from-scratch/releases). Tam jest także [live demo](https://js-stack.herokuapp.com/).
 
-Works on Linux, macOS, and Windows.
+Działa w systemach Linux, macOS i Windows.
 
-> **Note**: Since the tutorial was last edited in May 2017, a few libraries have slightly changed their APIs. 95% of the tutorial is still perfectly valid, but if you run into something weird, make sure to check out the [open issues](https://github.com/verekia/js-stack-from-scratch/issues?q=is%3Aopen+is%3Aissue+label%3Abug).
+> **Uwaga**: Od czasu ostatniej edycji tego samouczka w maju 2017 r. Kilka bibliotek nieznacznie zmieniło swoje interfejsy API. 95% samouczka jest nadal w pełni poprawnych, ale jeśli wpadniesz na coś dziwnego, koniecznie sprawdź [open issues](https://github.com/verekia/js-stack-from-scratch/issues?q=is%3Aopen+is%3Aissue+label%3Abug).
 
-## Table of contents
+## Spis treści
 
 [01 - Node, Yarn, `package.json`](/tutorial/01-node-yarn-package-json.md#readme)
 
@@ -54,33 +54,33 @@ Works on Linux, macOS, and Windows.
 
 [09 - Travis, Coveralls, Heroku](/tutorial/09-travis-coveralls-heroku.md#readme)
 
-## Coming up next
+## Już wkrótce
 
-Setting up your editor (Atom first), MongoDB, Progressive Web App, E2E testing.
+Konfigurowanie edytora (pierwszy Atom), MongoDB, Progressive Web App, testowanie E2E.
 
-## Translations
+## Tłumaczenia
 
-If you want to add your translation, please read the [translation recommendations](/how-to-translate.md) to get started!
+Jeśli chcesz dodać swoje tłumaczenie, przeczytaj [rekomendacje dotyczące tłumaczeń](/how-to-translate.md) aby zacząć!
 
 ### V2
 
-- [Bulgarian](https://github.com/mihailgaberov/js-stack-from-scratch) by [mihailgaberov](http://github.com/mihailgaberov)
-- [Chinese (simplified)](https://github.com/yepbug/js-stack-from-scratch/) by [@yepbug](https://github.com/yepbug)
-- [French](https://github.com/naomihauret/js-stack-from-scratch/) by [Naomi Hauret](https://twitter.com/naomihauret)
-- [Italian](https://github.com/fbertone/guida-javascript-moderno) by [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
+- [bułgarski](https://github.com/mihailgaberov/js-stack-from-scratch) od [mihailgaberov](http://github.com/mihailgaberov)
+- [chiński (uproszczony)](https://github.com/yepbug/js-stack-from-scratch/) od [@yepbug](https://github.com/yepbug)
+- [francuski](https://github.com/naomihauret/js-stack-from-scratch/) od [Naomi Hauret](https://twitter.com/naomihauret)
+- [włoski](https://github.com/fbertone/guida-javascript-moderno) od [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
 
-Check out the [ongoing translations](https://github.com/verekia/js-stack-from-scratch/issues/147).
+Sprawdź [bieżące tłumaczenia](https://github.com/verekia/js-stack-from-scratch/issues/147).
 
 ### V1
 
-- [Chinese (simplified)](https://github.com/pd4d10/js-stack-from-scratch) by [@pd4d10](http://github.com/pd4d10)
-- [Italian](https://github.com/fbertone/js-stack-from-scratch) by [Fabrizio Bertone](https://github.com/fbertone)
-- [Japanese](https://github.com/takahashim/js-stack-from-scratch) by [@takahashim](https://github.com/takahashim)
-- [Russian](https://github.com/UsulPro/js-stack-from-scratch) by [React Theming](https://github.com/sm-react/react-theming)
-- [Thai](https://github.com/MicroBenz/js-stack-from-scratch) by [MicroBenz](https://github.com/MicroBenz)
+- [chiński (uproszczony)](https://github.com/pd4d10/js-stack-from-scratch) od [@pd4d10](http://github.com/pd4d10)
+- [włoski](https://github.com/fbertone/js-stack-from-scratch) od [Fabrizio Bertone](https://github.com/fbertone)
+- [japoński](https://github.com/takahashim/js-stack-from-scratch) od [@takahashim](https://github.com/takahashim)
+- [rosyjski](https://github.com/UsulPro/js-stack-from-scratch) od [React Theming](https://github.com/sm-react/react-theming)
+- [tajski](https://github.com/MicroBenz/js-stack-from-scratch) od [MicroBenz](https://github.com/MicroBenz)
 
-## Credits
+## Zasługi
 
-Created by [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
+Stworzone przez [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
 
-License: MIT
+Licencja: MIT
