@@ -1,4 +1,4 @@
-# 06 - React Router, Server-Side Rendering, and Helmet
+# 06 - React Router, Server-Side Rendering, oraz Helmet
 
 Kod dla tego rozdziału dostępny jest [tutaj](https://github.com/verekia/js-stack-walkthrough/tree/master/06-react-router-ssr-helmet).
 
