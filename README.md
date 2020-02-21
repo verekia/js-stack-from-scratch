@@ -81,6 +81,6 @@ Sprawdź [bieżące tłumaczenia](https://github.com/verekia/js-stack-from-scrat
 
 ## Zasługi
 
-Stworzone przez [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/).
+Stworzone przez [@verekia](https://twitter.com/verekia) – [verekia.com](http://verekia.com/). Przetłumaczone przez Michał Biesiada [@michalbiesiada](https://twitter.com/michalbiesiada) – [@mbiesiad](https://github.com/mbiesiad)
 
 Licencja: MIT
