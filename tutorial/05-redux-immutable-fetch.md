@@ -1,32 +1,32 @@
 # 05 - Redux, Immutable, and Fetch
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/05-redux-immutable-fetch).
+Kod dla tego rozdziału dostępny jest [tutaj](https://github.com/verekia/js-stack-walkthrough/tree/master/05-redux-immutable-fetch).
 
-In this chapter we will hook up React and Redux to make a very simple app. The app will consist of a message and a button. The message changes when the user clicks the button.
+W tym rozdziale połączymy React i Redux, aby stworzyć bardzo prostą aplikację. Aplikacja będzie składać się z wiadomości i przycisku. Komunikat zmienia się, gdy użytkownik kliknie przycisk.
 
-Before we start, here is a very quick introduction to ImmutableJS, which is completely unrelated to React and Redux, but will be used in this chapter.
+Zanim zaczniemy, oto bardzo szybkie wprowadzenie do ImmutableJS, które jest całkowicie niezwiązane z React i Redux, ale zostanie wykorzystane w tym rozdziale.
 
 ## ImmutableJS
 
-> 💡 **[ImmutableJS](https://facebook.github.io/immutable-js/)** (or just Immutable) is a library by Facebook to manipulate immutable collections, like lists and maps. Any change made on an immutable object returns a new object without mutating the original object.
+> 💡 **[ImmutableJS](https://facebook.github.io/immutable-js/)** (lub poprostu Immutable) to biblioteka Facebooka do manipulowania niezmiennymi kolekcjami, takimi jak listy i mapy. Każda zmiana dokonana na niezmiennym obiekcie zwraca nowy obiekt bez mutowania oryginalnego obiektu.
 
-For instance, instead of doing:
+Na przykład zamiast robić:
 
 ```js
 const obj = { a: 1 }
 obj.a = 2 // Mutates `obj`
 ```
 
-You would do:
+Możesz tak:
 
 ```js
 const obj = Immutable.Map({ a: 1 })
 obj.set('a', 2) // Returns a new object without mutating `obj`
 ```
 
-This approach follows the **functional programming** paradigm, which works really well with Redux.
+Podejście to jest zgodne z paradygmatem **programowania funkcyjnego**, który działa naprawdę dobrze z Redux.
 
-When creating immutable collections, a very convenient method is `Immutable.fromJS()`, which takes any regular JS object or array and returns a deeply immutable version of it:
+Podczas tworzenia niezmiennych kolekcji bardzo wygodną metodą jest `Immutable.fromJS ()`, która pobiera dowolny zwykły obiekt JS lub tablicę i zwraca jego głęboko niezmienną wersję:
 
 ```js
 const immutablePerson = Immutable.fromJS({
@@ -44,17 +44,17 @@ console.log(immutablePerson)
  */
 ```
 
-- Run `yarn add immutable@4.0.0-rc.2`
+- Uruchom `yarn add immutable@4.0.0-rc.2`
 
 ## Redux
 
-> 💡 **[Redux](http://redux.js.org/)** is a library to handle the lifecycle of your application. It creates a *store*, which is the single source of truth of the state of your app at any given time.
+> 💡 **[Redux](http://redux.js.org/)** to biblioteka do obsługi cyklu życia aplikacji. Tworzy *magazyn*, który jest jedynym źródłem prawdy o stanie twojej aplikacji w danym momencie.
 
-Let's start with the easy part, declaring our Redux actions:
+Zacznijmy od prostej części, ogłaszając nasze działania Redux:
 
-- Run `yarn add redux redux-actions`
+- Uruchom `yarn add redux redux-actions`
 
-- Create a `src/client/action/hello.js` file containing:
+- Stwórz plik `src/client/action/hello.js` zawierający:
 
 ```js
 // @flow
@@ -66,9 +66,9 @@ export const SAY_HELLO = 'SAY_HELLO'
 export const sayHello = createAction(SAY_HELLO)
 ```
 
-This file exposes an *action*, `SAY_HELLO`, and its *action creator*, `sayHello`, which is a function. We use [`redux-actions`](https://github.com/acdlite/redux-actions) to reduce the boilerplate associated with Redux actions. `redux-actions` implement the [Flux Standard Action](https://github.com/acdlite/flux-standard-action) model, which makes *action creators* return objects with the `type` and `payload` attributes.
+  Ten plik ujawnia *action*, `SAY_HELLO`, i jej *action creator*, `sayHello`, co jest funkcją. Użyjemy [`redux-actions`](https://github.com/acdlite/redux-actions) aby zmniejszyć boilerplate związaną z działaniami Redux. `redux-actions` implementuje model [Flux Standard Action](https://github.com/acdlite/flux-standard-action), który robi *action creators* zwraca obiekty z atrybutami `type` i `payload`.
 
-- Create a `src/client/reducer/hello.js` file containing:
+- Utwórz plik `src/client/reducer/hello.js` zawierający:
 
 ```js
 // @flow
@@ -94,19 +94,19 @@ const helloReducer = (state: Immut = initialState, action: { type: string, paylo
 export default helloReducer
 ```
 
-In this file we initialize the state of our reducer with an Immutable Map containing one property, `message`, set to `Initial reducer message`. The `helloReducer` handles `SAY_HELLO` actions by simply setting the new `message` with the action payload. The Flow annotation for `action` destructures it into a `type` and a `payload`. The `payload` can be of `any` type. It looks funky if you've never seen this before, but it remains pretty understandable. For the type of `state`, we use the `import type` Flow instruction to get the return type of `fromJS`. We rename it to `Immut` for clarity, because `state: fromJS` would be pretty confusing. The `import type` line will get stripped out like any other Flow annotation. Note the usage of `Immutable.fromJS()` and `set()` as seen before.
+W tym pliku inicjujemy stan naszego reduktora za pomocą Immutable Map zawierający jedną właściwość, `message`, ustawiające `Initial reducer message`. `helloReducer` obsługuje `SAY_HELLO` działania po prostu ustawiając nowe `message` z akcją ładowania. The Flow anotacja dla `action` niszczy `type` i `payload`. `payload` może być typem `any`. Wygląda odjechanie, jeśli nigdy wcześniej tego nie widziałeś, ale nadal jest całkiem zrozumiałe. Dla rodzaju `state`, używamy `import type` Flow instrukcji do zwrotu typu `fromJS`. Zmienimy nazwę `Immut` dla klarowności, ponieważ `state: fromJS` byłoby dość mylące. Linia `import type`  zostanie usunięta jak każda inna adnotacja Flow. Zwróć uwagę na użycie `Immutable.fromJS()` i `set()` tak jak wcześniej.
 
 ## React-Redux
 
-> 💡 **[react-redux](https://github.com/reactjs/react-redux)** *connects* a Redux store with React components. With `react-redux`, when the Redux store changes, React components get automatically updated. They can also fire Redux actions.
+> 💡 **[react-redux](https://github.com/reactjs/react-redux)** *połączenie* Redux store z komponentami React. Z `react-redux`, wtedy gdy Redux store zmienia, komponenty React będą automatycznie aktualizowane. Mogą także wystrzelić akcje Redux.
 
-- Run `yarn add react-redux`
+- uruchom `yarn add react-redux`
 
-In this section we are going to create *Components* and *Containers*.
+W tej sekcji zamierzamy stworzyć *Komponenty* and *Kontenery*.
 
-**Components** are *dumb* React components, in a sense that they don't know anything about the Redux state. **Containers** are *smart* components that know about the state and that we are going to *connect* to our dumb components.
+**Komponenty** są *głupimi* komponentami React, w tym sensie, że nic nie wiedzą o stanie Redux. **Kontenery** to *inteligentne* komponenty, które wiedzą o stanie i zamierzamy *połączyć* nasze głupie komponenty.
 
-- Create a `src/client/component/button.jsx` file containing:
+- Stwórz plik `src/client/component/button.jsx` zawierający:
 
 ```js
 // @flow
@@ -124,9 +124,9 @@ const Button = ({ label, handleClick }: Props) =>
 export default Button
 ```
 
-**Note**: You can see a case of Flow *type alias* here. We define the `Props` type before annotating our component's destructured `props` with it.
+**Uwaga**: Tutaj możesz zobaczyć przypadek Flow *type alias*. Definiujemy typ `Rekwizyty` przed dodaniem do niego adnotacji zniszczonych rekwizytów naszego komponentu.
 
-- Create a `src/client/component/message.jsx` file containing:
+- Stwórz plik `src/client/component/message.jsx` zawierający:
 
 ```js
 // @flow
@@ -143,11 +143,11 @@ const Message = ({ message }: Props) =>
 export default Message
 ```
 
-These are examples of *dumb* components. They are logic-less, and just show whatever they are asked to show via React **props**. The main difference between `button.jsx` and `message.jsx` is that `Button` contains a reference to an action dispatcher in its props, where `Message` just contains some data to show.
+To są przykłady *głupich* komponentów. Są pozbawione logiki i po prostu pokazują wszystko, o co proszą o pokazanie za pomocą React **props**. Główna różnica pomiędzy `button.jsx` i `message.jsx` jest taka że `Button` zawiera odniesienie do dyspozytora akcji w jego rekwizytach, gdzie 'Wiadomoś' zawiera tylko pewne dane do pokazania.
 
-Again, *components* don't know anything about Redux **actions** or the **state** of our app, which is why we are going to create smart **containers** that will feed the proper action dispatchers and data to these 2 dumb components.
+Ponownie, *komponenty* nie wiedzą nic o **akcjach** lub **stanie** Reduxa naszej aplikacji, dlatego stworzymy inteligentne **kontenery**, które będą dostarczać odpowiednie dyspozytory działań i dane do tych 2 głupich komponentów.
 
-- Create a `src/client/container/hello-button.js` file containing:
+- Utwórz plik `src/client/container/hello-button.js` zawierający:
 
 ```js
 // @flow
@@ -168,9 +168,9 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Button)
 ```
 
-This container hooks up the `Button` component with the `sayHello` action and Redux's `dispatch` method.
+Ten kontener łączy komponent `Button` z akcją `sayHello` i metodą `dispatch` Redux.
 
-- Create a `src/client/container/message.js` file containing:
+- Stwórz plik `src/client/container/message.js` zawierający:
 
 ```js
 // @flow
@@ -186,9 +186,9 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Message)
 ```
 
-This container hooks up the Redux's app state with the `Message` component. When the state changes, `Message` will now automatically re-render with the proper `message` prop. These connections are done via the `connect` function of `react-redux`.
+Ten kontener łączy stan aplikacji Redux ze składnikiem 'Wiadomość'. Kiedy stan się zmienia, `Wiadomość` będzie teraz automatycznie ponownie renderowana z odpowiednim prop. Połączenia te są wykonywane za pośrednictwem `connect` funkcji `react-redux`.
 
-- Update your `src/client/app.jsx` file like so:
+- Zaktualizuj swój plik `src/client/app.jsx` tak oto:
 
 ```js
 // @flow
@@ -208,9 +208,9 @@ const App = () =>
 export default App
 ```
 
-We still haven't initialized the Redux store and haven't put the 2 containers anywhere in our app yet:
+Nadal nie zainicjowaliśmy store Reduxa i nie umieściliśmy jeszcze 2 pojemników w naszej aplikacji:
 
-- Edit `src/client/index.jsx` like so:
+- Edytuj `src/client/index.jsx` tak:
 
 ```js
 // @flow
@@ -253,19 +253,19 @@ if (module.hot) {
 }
 ```
 
-Let's take a moment to review this. First, we create a *store* with `createStore`. Stores are created by passing reducers to them. Here we only have one reducer, but for the sake of future scalability, we use `combineReducers` to group all of our reducers together. The last weird parameter of `createStore` is something to hook up Redux to browser [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), which are incredibly useful when debugging. Since ESLint will complain about the underscores in `__REDUX_DEVTOOLS_EXTENSION__`, we disable this ESLint rule. Next, we conveniently wrap our entire app inside `react-redux`'s `Provider` component thanks to our `wrapApp` function, and pass our store to it.
+Poświęćmy chwilę na przejrzenie tego. Najpierw tworzymy *store* z `createStore`. Store są tworzone przez przekazywanie do nich reduktorów. Tutaj mamy tylko jeden reduktor, ale ze względu na przyszłą skalowalność, używamy `CombineReducers` do grupowania wszystkich naszych reduktorów. Ostatni dziwny parametr `createStore` to coś do podłączenia Redux do przeglądarki [Devtools](https://github.com/zalmoxisus/redux-devtools-extension), które są niezwykle przydatne podczas debugowania. Ponieważ ESLint będzie narzekać na podkreślenia w `__REDUX_DEVTOOLS_EXTENSION__`, wyłączamy tę regułę ESLint. Następnie wygodnie zawijamy całą naszą aplikację do komponentu `Provider` programu 'reag-redux' dzięki naszej funkcji `wrapApp` i przekazujemy do niego nasz sklep.
 
-🏁 You can now run `yarn start` and `yarn dev:wds` and hit `http://localhost:8000`. You should see "Initial reducer message" and a button. When you click the button, the message should change to "Hello!". If you installed the Redux Devtools in your browser, you should see the app state change over time as you click on the button.
+🏁 Możesz teraz uruchomić `yarn start` i `yarn dev:wds` oraz załadować `http://localhost:8000`. Powinien zostać wyświetlony komunikat 'Początkowa wiadomość reduktora' i przycisk. Po kliknięciu przycisku wiadomość powinna zmienić się na 'Cześć!'. Jeśli zainstalowałeś Redux Devtools w swojej przeglądarce, powinieneś zobaczyć zmianę stanu aplikacji w miarę upływu czasu po kliknięciu przycisku.
 
-Congratulations, we finally made an app that does something! Okay it's not a *super* impressive from the outside, but we all know that it is powered by one badass stack under the hood.
+Gratulacje, w końcu stworzyliśmy aplikację, która coś robi! Okej, to nie jest *super* imponujące z zewnątrz, ale wszyscy wiemy, że jest zasilany przez jeden stos 'badassów' pod maską.
 
-## Extending our app with an asynchronous call
+## Rozszerzanie naszej aplikacji o połączenie asynchroniczne
 
-We are now going to add a second button to our app, which will trigger an AJAX call to retrieve a message from the server. For the sake of demonstration, this call will also send some data, the hard-coded number `1234`.
+Teraz dodamy drugi przycisk do naszej aplikacji, który uruchomi wywołanie AJAX w celu pobrania wiadomości z serwera. W celu zademonstrowania połączenie to wyśle również pewne dane, zakodowany numer „1234”.
 
-### The server endpoint
+### Punkt końcowy serwera
 
-- Create a `src/shared/routes.js` file containing:
+- Utwórz plik `src/shared/routes.js` zawierający:
 
 ```js
 // @flow
@@ -274,16 +274,16 @@ We are now going to add a second button to our app, which will trigger an AJAX c
 export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
 ```
 
-This function is a little helper to produce the following:
+Ta funkcja jest małym pomocnikiem w tworzeniu następujących:
 
 ```js
 helloEndpointRoute()     // -> '/ajax/hello/:num' (for Express)
 helloEndpointRoute(1234) // -> '/ajax/hello/1234' (for the actual call)
 ```
 
-Let's actually create a test real quick to make sure this thing works well.
+Stwórzmy test naprawdę szybko, aby upewnić się, że to działa dobrze.
 
-- Create a `src/shared/routes.test.js` containing:
+- Stwórz `src/shared/routes.test.js` zawierający:
 
 ```js
 import { helloEndpointRoute } from './routes'
@@ -294,9 +294,9 @@ test('helloEndpointRoute', () => {
 })
 ```
 
-- Run `yarn test` and it should pass successfully.
+- Uruchom `yarn test` i powinno przejść pomyślnie.
 
-- In `src/server/index.js`, add the following:
+- W `src/server/index.js`, dodaj następująco:
 
 ```js
 import { helloEndpointRoute } from '../shared/routes'
@@ -308,9 +308,9 @@ app.get(helloEndpointRoute(), (req, res) => {
 })
 ```
 
-### New containers
+### Nowe kontenery
 
-- Create a `src/client/container/hello-async-button.js` file containing:
+- Stwórz plik `src/client/container/hello-async-button.js` zawierający:
 
 ```js
 // @flow
@@ -331,9 +331,9 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Button)
 ```
 
-In order to demonstrate how you would pass a parameter to your asynchronous call and to keep things simple, I am hard-coding a `1234` value here. This value would typically come from a form field filled by the user.
+Aby zademonstrować, jak przekazać parametr do wywołania asynchronicznego i dla uproszczenia, tutaj mocno wpisuję wartość `1234`. Ta wartość zazwyczaj pochodzi z pola formularza wypełnionego przez użytkownika.
 
-- Create a `src/client/container/message-async.js` file containing:
+- Stwórz plik `src/client/container/message-async.js` zawierający:
 
 ```js
 // @flow
@@ -349,21 +349,21 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(MessageAsync)
 ```
 
-You can see that in this container, we are referring to a `messageAsync` property, which we're going to add to our reducer soon.
+Możesz zobaczyć, że w tym kontenerze mamy na myśli właściwość `messageAsync`, którą wkrótce dodamy do naszego reduktora.
 
-What we need now is to create the `sayHelloAsync` action.
+Teraz potrzebujemy stworzyć akcję `sayHelloAsync`.
 
 ### Fetch
 
-> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** is a standardized JavaScript function to make asynchronous calls inspired by jQuery's AJAX methods.
+> 💡 **[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)** jest znormalizowaną funkcją JavaScript do wykonywania wywołań asynchronicznych inspirowanych metodami AJAX jQuery.
 
-We are going to use `fetch` to make calls to the server from the client. `fetch` is not supported by all browsers yet, so we are going to need a polyfill. `isomorphic-fetch` is a polyfill that makes it work cross-browsers and in Node too!
+Będziemy używać `fetch` do wykonywania połączeń z serwerem od klienta. `fetch` nie jest jeszcze obsługiwany przez wszystkie przeglądarki, więc będziemy potrzebować wielokrotnego wypełniania. `isomorphic-fetch` jest polifillem, który sprawia, że działa w różnych przeglądarkach, a także w Node!
 
-- Run `yarn add isomorphic-fetch`
+- Uruchom `yarn add isomorphic-fetch`
 
-Since we're using `eslint-plugin-compat`, we need to indicate that we are using a polyfill for `fetch` to not get warnings from using it.
+Od kiedy używamy `eslint-plugin-compat`, musimy wskazać, że używamy polyfill dla `fetch`, aby nie otrzymywać ostrzeżeń przed jego użyciem.
 
-- Add the following to your `.eslintrc.json` file:
+- Dodaj w następujący sposób linijki do pliku `.eslintrc.json`:
 
 ```json
 "settings": {
@@ -371,11 +371,11 @@ Since we're using `eslint-plugin-compat`, we need to indicate that we are using 
 },
 ```
 
-### 3 asynchronous actions
+### 3 asynchroniczne akcje
 
-`sayHelloAsync` is not going to be a regular action. Asynchronous actions are usually split into 3 actions, which trigger 3 different states: a *request* action (or "loading"), a *success* action, and a *failure* action.
+`sayHelloAsync` nie będzie regularną akcją. Działania asynchroniczne są zwykle podzielone na 3 działania, które wyzwalają 3 różne stany: działanie *żądanie* (lub 'ładowanie'), działanie *sukces* i działanie *niepowodzenie*.
 
-- Edit `src/client/action/hello.js` like so:
+- Edytuj `src/client/action/hello.js` tak:
 
 ```js
 // @flow
@@ -412,11 +412,11 @@ export const sayHelloAsync = (num: number) => (dispatch: Function) => {
 }
 ```
 
-Instead of returning an action, `sayHelloAsync` returns a function which launches the `fetch` call. `fetch` returns a `Promise`, which we use to *dispatch* different actions depending on the current state of our asynchronous call.
+Zamiast zwracać akcję, `sayHelloAsync` zwraca funkcję, która uruchamia wywołanie` fetch`. `fetch` zwraca obietnicę, której używamy do *wysyłania* różnych akcji w zależności od aktualnego stanu naszego asynchronicznego wywołania.
 
-### 3 asynchronous action handlers
+### 3 procedury obsługi akcji asynchronicznych
 
-Let's handle these different actions in `src/client/reducer/hello.js`:
+Zajmijmy się tymi różnymi działaniami w `src/client/reducer/hello.js`:
 
 ```js
 // @flow
@@ -454,15 +454,15 @@ const helloReducer = (state: Immut = initialState, action: { type: string, paylo
 export default helloReducer
 ```
 
-We added a new field to our store, `messageAsync`, and we update it with different messages depending on the action we receive. During `SAY_HELLO_ASYNC_REQUEST`, we show `Loading...`. `SAY_HELLO_ASYNC_SUCCESS` updates `messageAsync` similarly to how `SAY_HELLO` updates `message`. `SAY_HELLO_ASYNC_FAILURE` gives an error message.
+Dodaliśmy nowe pole do naszego sklepu, `messageAsync`, i aktualizujemy je o różne wiadomości w zależności od otrzymywanego działania. Podczas `SAY_HELLO_ASYNC_REQUEST` pokazujemy 'Ładowanie ...'. `SAY_HELLO_ASYNC_SUCCESS` aktualizuje `messageAsync` podobnie jak `SAY_HELLO` aktualizuje `message`. `SAY_HELLO_ASYNC_FAILURE` wyświetla komunikat o błędzie.
 
 ### Redux-thunk
 
-In `src/client/action/hello.js`, we made `sayHelloAsync`, an action creator that returns a function. This is actually not a feature that is natively supported by Redux. In order to perform these async actions, we need to extend Redux's functionality with the `redux-thunk` *middleware*.
+W `src/client/action/hello.js`, stworzyliśmy `sayHelloAsync`, twórca akcji, który zwraca funkcję. W rzeczywistości nie jest to funkcja natywnie obsługiwana przez Redux. Aby wykonać te działania asynchroniczne, musimy rozszerzyć funkcjonalność Redux o *middleware* `redux-thunk`.
 
-- Run `yarn add redux-thunk`
+- Uruchom `yarn add redux-thunk`
 
-- Update your `src/client/index.jsx` file like so:
+- Zaktualizuj swój plik `src/client/index.jsx` tak:
 
 ```js
 // @flow
@@ -508,9 +508,9 @@ if (module.hot) {
 }
 ```
 
-Here we pass `redux-thunk` to Redux's `applyMiddleware` function. In order for the Redux Devtools to keep working, we also need to use Redux's `compose` function. Don't worry too much about this part, just remember that we enhance Redux with `redux-thunk`.
+Tutaj przekazujemy `redux-thunk` do Redux-owej funkcji `applyMiddleware`. Aby narzędzia Redux Devtools mogły dalej działać, musimy również użyć funkcji 'compose' Reduxa. Nie przejmuj się zbytnio tą częścią, pamiętaj tylko, że ulepszamy Redux z `redux-thunk`.
 
-- Update `src/client/app.jsx` like so:
+- Zaktualizuj `src/client/app.jsx` tak oto:
 
 ```js
 // @flow
@@ -534,19 +534,19 @@ const App = () =>
 export default App
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds` and you should now be able to click the "Say hello asynchronously and send 1234" button and retrieve a corresponding message from the server! Since you're working locally, the call is instantaneous, but if you open the Redux Devtools, you will notice that each click triggers both `SAY_HELLO_ASYNC_REQUEST` and `SAY_HELLO_ASYNC_SUCCESS`, making the message go through the intermediate `Loading...` state as expected.
+🏁 Uruchom `yarn start` i `yarn dev:wds` i powinieneś być teraz w stanie kliknąć przycisk 'Przywitaj się asynchronicznie i wyślij 1234' i pobierz odpowiednią wiadomość z serwera! Ponieważ pracujesz lokalnie, połączenie jest natychmiastowe, ale jeśli otworzysz Redux Devtools, zauważysz, że każde kliknięcie wyzwala oba `SAY_HELLO_ASYNC_REQUEST` oraz `SAY_HELLO_ASYNC_SUCCESS`, sprawiając, że wiadomość przechodzi przez `Loading...` stan jak oczekiwano.
 
-You can congratulate yourself, that was an intense section! Let's wrap it up with some testing.
+Możesz pogratulować sobie, to była intensywna sekcja! Zakończmy to testami.
 
-## Testing
+## Testowanie
 
-In this section, we are going to test our actions and reducer. Let's start with the actions.
+W tej sekcji będziemy testować nasze działania i reduktor. Zacznijmy od działań.
 
-In order to isolate the logic that is specific to `action/hello.js` we are going to need to *mock* things that don't concern it, and also mock that AJAX `fetch` request which should not trigger an actual AJAX in our tests.
+Aby wyizolować logikę, która jest specyficzna dla `action/hello.js` będziemy musieli *mockować* rzeczy, które go nie dotyczą, a także mockować to żądanie pobierania AJAX, które nie powinno wyzwalać rzeczywistego AJAX w naszych testach.
 
-- Run `yarn add --dev redux-mock-store fetch-mock`
+- Uruchom `yarn add --dev redux-mock-store fetch-mock`
 
-- Create a `src/client/action/hello.test.js` file containing:
+- Stwórz plik `src/client/action/hello.test.js` zawierający:
 
 ```js
 import fetchMock from 'fetch-mock'
@@ -605,11 +605,11 @@ test('sayHelloAsync data error', () => {
 })
 ```
 
-Alright, Let's look at what's happening here. First we mock the Redux store using `const mockStore = configureMockStore([thunkMiddleware])`. By doing this we can dispatch actions without them triggering any reducer logic. For each test, we mock `fetch` using `fetchMock.get()` and make it return whatever we want. What we actually test using `expect()` is which series of actions have been dispatched by the store, thanks to the `store.getActions()` function from `redux-mock-store`. After each test we restore the normal behavior of `fetch` with `fetchMock.restore()`.
+Dobra, spójrzmy na to, co się tutaj dzieje. Najpierw mockujemy Redux store za pomocą`const mockStore = configureMockStore([thunkMiddleware])`. W ten sposób możemy wywoływać działania bez wyzwalania jakiejkolwiek logiki reduktora. Do każdego testu mockujemy `fetch` używając `fetchMock.get()` i sprawi, że zwróci wszystko, czego chcemy. Co faktycznie testujemy przy użyciu `expect()`, która seria akcji została wysłana przez store, dzięki funkcji `store.getActions()` z `redux-mock-store`. Po każdym teście przywracamy normalne zachowanie `fetch` z `fetchMock.restore()`.
 
-Let's now test our reducer, which is much easier.
+Przetestujmy teraz nasz reduktor, co jest znacznie łatwiejsze.
 
-- Create a `src/client/reducer/hello.test.js` file containing:
+- Utwórz plik `src/client/reducer/hello.test.js` zawierający:
 
 ```js
 import {
@@ -653,10 +653,10 @@ test('handle SAY_HELLO_ASYNC_FAILURE', () => {
 })
 ```
 
-Before each test, we initialize `helloState` with the default result of our reducer (the `default` case of our `switch` statement in the reducer, which returns `initialState`). The tests are then very explicit, we just make sure the reducer updates `message` and `messageAsync` correctly depending on which action it received.
+Przed każdym testem inicjujemy `helloState` z domyślnym wynikiem naszego reduktora (`default` naszego `switch` instrukcja w reduktorze, która zwraca `initialState`). Testy są wtedy bardzo wyraźne, upewniamy się tylko, że reduktor poprawnie aktualizuje `message` i` messageAsync` w zależności od tego, jakie działanie otrzymał.
 
-🏁 Run `yarn test`. It should be all green.
+🏁 Uruchom `yarn test`. Wszystko powinno być na zielono.
 
-Next section: [06 - React Router, Server-Side Rendering, Helmet](06-react-router-ssr-helmet.md#readme)
+Następna sekcja: [06 - React Router, Server-Side Rendering, Helmet](06-react-router-ssr-helmet.md#readme)
 
-Back to the [previous section](04-webpack-react-hmr.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Powrót do [poprzedniej sekcji](04-webpack-react-hmr.md#readme) albo [spisu treści](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
