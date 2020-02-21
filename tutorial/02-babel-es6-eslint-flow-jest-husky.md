@@ -150,21 +150,21 @@ Polecam przeczytać [dokumentację ESLint odnośnie średników](http://eslint.o
 
 🏁 Uruchom `yarn test`, i powinien teraz przejść pomyślnie. Spróbuj dodać gdzieś niepotrzebny średnik, aby upewnić się, że reguła jest poprawnie skonfigurowana.
 
-I am aware that some of you will want to keep using semicolons, which will make the code provided in this tutorial inconvenient. If you are using this tutorial just for learning, I'm sure it will remain bearable to learn without semicolons, until going back to using them on your real projects. If you want to use the code provided in this tutorial as a boilerplate though, it will require a bit of rewriting, which should be pretty quick with ESLint set to enforce semicolons to guide you through the process. I apologize if you're in such case.
+Wiem, że niektórzy z was będą chcieli nadal używać średników, co sprawi, że kod podany w tym samouczku będzie niewygodny. Jeśli używasz tego samouczka tylko do nauki, jestem pewien, że nauka bez średników pozostanie do zniesienia, dopóki nie wrócisz do używania ich w prawdziwych projektach. Jeśli chcesz użyć kodu podanego w tym samouczku jako schematu, będzie to wymagało trochę przepisania, co powinno być dość szybkie, gdy ESLint ustawia wymuszanie średników, aby poprowadzić cię przez ten proces. Przepraszam, jeśli jesteś w takiej sytuacji.
 
 ### Compat
 
-[Compat](https://github.com/amilajack/eslint-plugin-compat) is a neat ESLint plugin that warns you if you use some JavaScript APIs that are not available in the browsers you need to support. It uses [Browserslist](https://github.com/ai/browserslist), which relies on [Can I Use](http://caniuse.com/).
+[Compat](https://github.com/amilajack/eslint-plugin-compat) to fajna wtyczka ESLint, która ostrzega, jeśli korzystasz z niektórych interfejsów API JavaScript, które nie są dostępne w przeglądarkach, a które musisz obsługiwać. Używa [Browserslist](https://github.com/ai/browserslist), która polega na [Can I Use](http://caniuse.com/).
 
-- Run `yarn add --dev eslint-plugin-compat`
+- Uruchom `yarn add --dev eslint-plugin-compat`
 
-- Add the following to your `package.json`, to indicate that we want to support browsers that have more than 1% market share:
+- Dodaj poniższe do swojego `package.json`, wskazując, że chcemy wspierać przeglądarki, które mają ponad 1% udziału w rynku:
 
 ```json
 "browserslist": ["> 1%"],
 ```
 
-- Edit your `.eslintrc.json` file like so:
+- Edytuj swój plik `.eslintrc.json` tak:
 
 ```json
 {
@@ -180,23 +180,23 @@ I am aware that some of you will want to keep using semicolons, which will make 
 }
 ```
 
-You can try the plugin by using `navigator.serviceWorker` or `fetch` in your code for instance, which should raise an ESLint warning.
+Możesz wypróbować wtyczkę, używając `navigator.serviceWorker` lub `fetch` na przykład w kodzie, który powinien wywołać ostrzeżenie ESLint.
 
-### ESLint in your editor
+### ESLint w Twoim edytorze
 
-This chapter set you up with ESLint in the terminal, which is great for catching errors at build time / before pushing, but you also probably want it integrated to your IDE for immediate feedback. Do NOT use your IDE's native ES6 linting. Configure it so the binary it uses for linting is the one in your `node_modules` folder instead. This way it can use all of your project's config, the Airbnb preset, etc. Otherwise you will just get some generic ES6 linting.
+W tym rozdziale omówiono ESLint w terminalu, który doskonale nadaje się do wychwytywania błędów w czasie kompilacji / przed wypychaniem, ale prawdopodobnie również chcesz go zintegrować z IDE w celu uzyskania natychmiastowej informacji zwrotnej. NIE używaj swojego natywnego ES6 linting z IDE. Skonfiguruj go tak, aby plik binarny, którego używa do czyszczenia, był tym, który znajduje się w folderze `node_modules`. W ten sposób może korzystać ze wszystkich konfiguracji projektu, ustawienia wstępnego Airbnb itp. W przeciwnym razie otrzymasz tylko trochę ogólne linting ES6.
 
 ## Flow
 
-> 💡 **[Flow](https://flowtype.org/)**: A static type checker by Facebook. It detects inconsistent types in your code. For instance, it will give you an error if you try to use a string where should be using a number.
+> 💡 **[Flow](https://flowtype.org/)**: Sprawdzanie typu statycznego przez Facebook. Wykrywa niespójne typy w kodzie. Na przykład da ci błąd, jeśli spróbujesz użyć stringa tam, gdzie powinna być używana liczba.
 
-Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScript to give us some insights, but in order to use its full power, we need to add type annotations in our code, which will make it non-standard. We need to teach Babel and ESLint what those type annotations are in order for these tools to not freak out when parsing our files.
+W tej chwili nasz kod JavaScript jest prawidłowym kodem ES6. Flow może analizować zwykły JavaScript, aby dać nam pewne spostrzeżenia, ale aby wykorzystać jego pełną moc, musimy dodać annotacje typu w naszym kodzie, co spowoduje, że będzie on niestandardowy. Musimy nauczyć Babel i ESLint, jakie są te adnotacje typu, aby te narzędzia nie wystraszyły się podczas analizowania naszych plików.
 
-- Run `yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype`
+- Uruchom `yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype`
 
-`flow-bin` is the binary to run Flow in our `scripts` tasks, `babel-preset-flow` is the preset for Babel to understand Flow annotations, `babel-eslint` is a package to enable ESLint *to rely on Babel's parser* instead of its own, and `eslint-plugin-flowtype` is an ESLint plugin to lint Flow annotations. Phew.
+`flow-bin` to plik binarny do uruchomienia Flow w naszych zadaniach `scripts`, `babel-preset-flow` jest ustawieniem wstępnym dla Babel do zrozumienia adnotacji Flow, `babel-eslint` to pakiet do włączenia ESLint *polegać na parserze Babela* zamiast własnego, i `eslint-plugin-flowtype` to wtyczka ESLint do adnotacji Flow. Phew.
 
-- Update your `.babelrc` file like so:
+- Zaktualizuj swój plik `.babelrc` następująco:
 
 ```json
 {
@@ -207,7 +207,7 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
 }
 ```
 
-- And update `.eslintrc.json` as well:
+- Oraz zaktualizuj `.eslintrc.json` tak właśnie:
 
 ```json
 {
@@ -227,11 +227,11 @@ Right now, our JavaScript code is valid ES6 code. Flow can analyze plain JavaScr
 }
 ```
 
-**Note**: The `plugin:flowtype/recommended` contains the instruction for ESLint to use Babel's parser. If you want to be more explicit, feel free to add `"parser": "babel-eslint"` in `.eslintrc.json`.
+**Uwaga**: `plugin:flowtype/recommended` zawiera instrukcję dotyczącą użycia parsera Babel przez ESLint. Jeśli chcesz być bardziej precyzyjny, możesz dodać `"parser": "babel-eslint"` w `.eslintrc.json`.
 
-I know this is a lot to take in, so take a minute to think about it. I'm still amazed that it is even possible for ESLint to use Babel's parser to understand Flow annotations. These 2 tools are really incredible for being so modular.
+Wiem, że to dużo do zrobienia, więc poświęć chwilę, aby się nad tym zastanowić. Nadal jestem zdumiony, że ESLint może nawet użyć parsera Babel do zrozumienia adnotacji Flow. Te 2 narzędzia są naprawdę niesamowite, ponieważ są tak modułowe.
 
-- Chain `flow` to your `test` task:
+- Połącz `flow` ze swoim zadaniem `test`:
 
 ```json
 "scripts": {
@@ -240,23 +240,23 @@ I know this is a lot to take in, so take a minute to think about it. I'm still a
 },
 ```
 
-- Create a `.flowconfig` file at the root of your project containing:
+- Stwórz plik `.flowconfig` w katalogu głównym twojego projektu zawierającego:
 
 ```flowconfig
 [options]
 suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
 ```
 
-This is a little utility that we set up to make Flow ignore any warning detected on the next line. You would use it like this, similarly to `eslint-disable`:
+Jest to małe narzędzie, które skonfigurowaliśmy, aby Flow ignorował wszelkie ostrzeżenia wykryte w następnym wierszu. Użyłbyś tego w ten sposób, podobnie jak `eslint-disable`:
 
 ```js
 // flow-disable-next-line
 something.flow(doesnt.like).for.instance()
 ```
 
-Alright, we should be all set for the configuration part.
+W porządku, wszyscy powinniśmy być przygotowani na część konfiguracyjną.
 
-- Add Flow annotations to `src/dog.js` like so:
+- Dodaj adnotację Flow do `src/dog.js` w ten sposób:
 
 ```js
 // @flow
@@ -276,31 +276,31 @@ class Dog {
 export default Dog
 ```
 
-The `// @flow` comment tells Flow that we want this file to be type-checked. For the rest, Flow annotations are typically a colon after a function parameter or a function name. Check out the [documentation](https://flowtype.org/docs/quick-reference.html) for more details.
+Komentarz `// @flow` informuje Flow, że chcemy, aby ten plik był sprawdzany pod względem typu. Poza tym adnotacje Flow są zwykle dwukropkiem po parametrze funkcji lub nazwie funkcji. Sprawdź [dokumentację](https://flowtype.org/docs/quick-reference.html), aby uzyskać więcej szczegółów.
 
-- Add `// @flow` at the top of `index.js` as well.
+- Dodaj `// @flow` na początku `index.js`.
 
-`yarn test` should now both lint and type-check your code fine.
+`yarn test` powinien teraz zarówno lintować, jak i sprawdzać poprawność kodu.
 
-There are 2 things that I want you to try:
+Są dwie rzeczy, które chcę, abyś spróbował:
 
-- In `dog.js`, replace `constructor(name: string)` by `constructor(name: number)`, and run `yarn test`. You should get a **Flow** error telling you that those types are incompatible. That means Flow is set up correctly.
+- W `dog.js`, zamień `constructor(name: string)` poprzez `constructor(name: number)`, i uruchom `yarn test`. Powinieneś otrzymać błąd **Flow** mówiący ci, że te typy są niekompatybilne. To oznacza, że Flow jest ustawiony prawidłowo.
 
-- Now replace `constructor(name: string)` by `constructor(name:string)`, and run `yarn test`. You should get an **ESLint** error telling you that Flow annotations should have a space after the colon. That means the Flow plugin for ESLint is set up correctly.
+- Teraz zamień `constructor(name: string)` poprzez `constructor(name:string)`, i uruchom `yarn test`. Powinieneś otrzymać błąd **ESLint** mówiący ci że, annotacje Flow powinny mieć spację po dwukropku. Oznacza to, że wtyczka Flow dla ESLint jest poprawnie skonfigurowana.
 
-🏁 If you got the 2 different errors working, you are all set with Flow and ESLint! Remember to put the missing space back in the Flow annotation.
+🏁 Jeśli otrzymałeś 2 różne błędy, działa, wszystko jest ustawione na Flow i ESLint! Pamiętaj, aby ponownie wstawić brakującą spację do adnotacji Flow.
 
-### Flow in your editor
+### Flow w twoim edytorze
 
-Just like with ESLint, you should spend some time configuring your editor / IDE to give you immediate feedback when Flow detects issues in your code.
+Podobnie jak w przypadku ESLint, powinieneś poświęcić trochę czasu na konfigurację edytora / IDE, aby uzyskać natychmiastową informację zwrotną, gdy Flow wykryje problemy w kodzie.
 
 ## Jest
 
-> 💡 **[Jest](https://facebook.github.io/jest/)**: A JavaScript testing library by Facebook. It is very simple to set up and provides everything you would need from a testing library right out of the box. It can also test React components.
+> 💡 **[Jest](https://facebook.github.io/jest/)**: Biblioteka testująca JavaScript na Facebooku. Jest bardzo prosta w konfiguracji i zapewnia wszystko, czego potrzebujesz od biblioteki testowej od razu po wyjęciu z pudełka. Może także testować komponenty React.
 
-- Run `yarn add --dev jest babel-jest` to install Jest and the package to make it use Babel.
+- Uruchom `yarn add --dev jest babel-jest` aby zainstalować Jest oraz pakiet umożliwiający korzystanie z Babel.
 
-- Add the following to your `.eslintrc.json` at the root of the object to allow the use of Jest's functions without having to import them in every test file:
+- Dodaj następujące elementy do swojego `.eslintrc.json` w katalogu głównym obiektu, aby umożliwić korzystanie z funkcji Jest bez konieczności importowania ich do każdego pliku testowego:
 
 ```json
 "env": {
@@ -308,7 +308,7 @@ Just like with ESLint, you should spend some time configuring your editor / IDE 
 }
 ```
 
-- Create a `src/dog.test.js` file containing:
+- Stwórz plik `src/dog.test.js` zawierający:
 
 ```js
 import Dog from './dog'
@@ -319,7 +319,7 @@ test('Dog.bark', () => {
 })
 ```
 
-- Add `jest` to your `test` script:
+- Dodaj `jest` do swojego `test` skryptu:
 
 ```json
 "scripts": {
@@ -328,23 +328,23 @@ test('Dog.bark', () => {
 },
 ```
 
-The `--coverage` flag makes Jest generate coverage data for your tests automatically. This is useful to see which parts of your codebase lack testing. It writes this data into a `coverage` folder.
+Flaga `--coverage` sprawia, że Jest automatycznie generuje dane pokrycia dla twoich testów. Jest to przydatne, aby sprawdzić, które części twojej bazy kodu nie są testowane. Zapisuje te dane w folderze 'zasięg'.
 
-- Add `/coverage/` to your `.gitignore`
+- Dodaj `/coverage/` do swojego `.gitignore`
 
-🏁 Run `yarn test`. After linting and type checking, it should run Jest tests and show a coverage table. Everything should be green!
+🏁 Uruchom `yarn test`. Po linting i sprawdzeniu typu powinien uruchomić testy Jest i pokazać tabelę zasięgu. Wszystko powinno być zielone!
 
-## Git Hooks with Husky
+## Git Hooks z Husky
 
-> 💡 **[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)**: Scripts that are run when certain actions like a commit or a push occur.
+> 💡 **[Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)**: Skrypty uruchamiane w przypadku wystąpienia określonych działań, takich jak zatwierdzenie lub wypchnięcie.
 
-Okay so we now have this neat `test` task that tells us if our code looks good or not. We're going to set up Git Hooks to automatically run this task before every `git commit` and `git push`, which will prevent us from pushing bad code to the repository if it doesn't pass the `test` task.
+Ok, więc mamy teraz to miłe zadanie `test`, które mówi nam, czy nasz kod wygląda dobrze, czy nie. Zamierzamy skonfigurować Git Hooks, aby automatycznie uruchamiały to zadanie przed każdym `git commit` i` git push`, co uniemożliwi nam wypychanie złego kodu do repozytorium, jeśli nie przejdzie zadania `test`.
 
-[Husky](https://github.com/typicode/husky) is a package that makes this very easy to set up Git Hooks.
+[Husky](https://github.com/typicode/husky) to pakiet, który sprawia, że bardzo łatwo jest skonfigurować Git Hooks.
 
-- Run `yarn add --dev husky`
+- Uruchom `yarn add --dev husky`
 
-All we have to do is to create two new tasks in `scripts`, `precommit` and `prepush`:
+Wszystko, co musimy zrobić, to stworzyć dwa nowe zadania w `scripts`, `precommit` i `prepush`:
 
 ```json
 "scripts": {
@@ -355,12 +355,12 @@ All we have to do is to create two new tasks in `scripts`, `precommit` and `prep
 },
 ```
 
-🏁 If you now try to commit or push your code, it should automatically run the `test` task.
+🏁 Jeśli teraz spróbujesz zatwierdzić lub wypchnąć kod, powinien on automatycznie uruchomić zadanie `test`.
 
-If it does not work, it is possible that `yarn add --dev husky` did not install the Git Hooks properly. I have never encountered this issue but it happens for some people. If that's your case, run `yarn add --dev husky --force`, and maybe post a note describing your situation in [this issue](https://github.com/typicode/husky/issues/84).
+Jeśli to nie działa, możliwe jest, że `yarn add --dev husky` nie zainstalował poprawnie Git Hooks. Nigdy nie spotkałem się z tym problemem, ale zdarza się to u niektórych osób. Jeśli ty tak miałeś, uruchom `yarn add --dev husky --force`, i może opublikuj notatkę opisującą twoją sytuację [ten issue](https://github.com/typicode/husky/issues/84).
 
-**Note**: If you are pushing right after a commit, you can use `git push --no-verify` to avoid running all the tests again.
+**Uwaga**: Jeśli pushujesz zaraz po commitcie, możesz użyć `git push --no-verify` aby uniknąć ponownego uruchomienia wszystkich testów.
 
-Next section: [03 - Express, Nodemon, PM2](03-express-nodemon-pm2.md#readme)
+Następna sekcja: [03 - Express, Nodemon, PM2](03-express-nodemon-pm2.md#readme)
 
-Back to the [previous section](01-node-yarn-package-json.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Powrót do [poprzedniej sekcji](01-node-yarn-package-json.md#readme) lub do [spisu treści](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
