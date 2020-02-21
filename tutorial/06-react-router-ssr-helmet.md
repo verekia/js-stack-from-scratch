@@ -1,18 +1,18 @@
 # 06 - React Router, Server-Side Rendering, and Helmet
 
-Code for this chapter available [here](https://github.com/verekia/js-stack-walkthrough/tree/master/06-react-router-ssr-helmet).
+Kod dla tego rozdziału dostępny jest [tutaj](https://github.com/verekia/js-stack-walkthrough/tree/master/06-react-router-ssr-helmet).
 
-In this chapter we are going to create different pages for our app and make it possible to navigate between them.
+W tym rozdziale utworzymy różne strony dla naszej aplikacji i umożliwimy nawigację między nimi.
 
 ## React Router
 
-> 💡 **[React Router](https://reacttraining.com/react-router/)** is a library to navigate between pages in your React app. It can be used on both the client and the server.
+> 💡 **[React Router](https://reacttraining.com/react-router/)** to biblioteka do nawigacji między stronami w aplikacji React. Można go używać zarówno na kliencie, jak i na serwerze.
 
-- Run `yarn add react-router react-router-dom`
+- Uruchom `yarn add react-router react-router-dom`
 
-On the client side, we first need to wrap our app inside a `BrowserRouter` component.
+Po stronie klienta musimy najpierw owinąć naszą aplikację wewnątrz `BrowserRouter` komponentu.
 
-- Update your `src/client/index.jsx` like so:
+- Zaktualizuj swój `src/client/index.jsx` w ten sposób:
 
 ```js
 // [...]
@@ -28,16 +28,16 @@ const wrapApp = (AppComponent, reduxStore) =>
   </Provider>
 ```
 
-## Pages
+## Strony
 
-Our app will have 4 pages:
+Nasza aplikacja będzie miała 4 strony:
 
-- A Home page.
-- A Hello page showing a button and message for the synchronous action.
-- A Hello Async page showing a button and message for the asynchronous action.
-- A 404 "Not Found" page.
+- Strona główna.
+- Strona Hello wyświetlająca przycisk i komunikat dla akcji synchronicznej.
+- Strona Hello Async pokazująca przycisk i komunikat dla akcji asynchronicznej.
+- Strona 404 'Nie znaleziono'.
 
-- Create a `src/client/component/page/home.jsx` file containing:
+- Stwórz plik `src/client/component/page/home.jsx` zawierający:
 
 ```js
 // @flow
@@ -49,7 +49,7 @@ const HomePage = () => <p>Home</p>
 export default HomePage
 ```
 
-- Create a `src/client/component/page/hello.jsx` file containing:
+- Stwórz plik `src/client/component/page/hello.jsx` zawierający:
 
 ```js
 // @flow
@@ -69,7 +69,7 @@ export default HelloPage
 
 ```
 
-- Create a `src/client/component/page/hello-async.jsx` file containing:
+- Stwórz plik `src/client/component/page/hello-async.jsx` zawierający:
 
 ```js
 // @flow
@@ -88,7 +88,7 @@ const HelloAsyncPage = () =>
 export default HelloAsyncPage
 ```
 
-- Create a `src/client/component/page/not-found.jsx` file containing:
+- Stwórz plik `src/client/component/page/not-found.jsx` zawierający:
 
 ```js
 // @flow
@@ -100,11 +100,11 @@ const NotFoundPage = () => <p>Page not found</p>
 export default NotFoundPage
 ```
 
-## Navigation
+## Nawigacja
 
-Let's add some routes in the shared config file.
+Dodajmy trasy w udostępnionym pliku konfiguracyjnym.
 
-- Edit your `src/shared/routes.js` like so:
+- Edytuj swój `src/shared/routes.js` tak:
 
 ```js
 // @flow
@@ -117,9 +117,9 @@ export const NOT_FOUND_DEMO_PAGE_ROUTE = '/404'
 export const helloEndpointRoute = (num: ?number) => `/ajax/hello/${num || ':num'}`
 ```
 
-The `/404` route is just going to be used in a navigation link for the sake of demonstrating what happens when you click on a broken link.
+Trasa `/404` zostanie po prostu użyta w linku nawigacyjnym w celu zademonstrowania, co się stanie, gdy klikniesz uszkodzony link.
 
-- Create a `src/client/component/nav.jsx` file containing:
+- Stwórz plik `src/client/component/nav.jsx` zawierający:
 
 ```js
 // @flow
@@ -152,9 +152,9 @@ const Nav = () =>
 export default Nav
 ```
 
-Here we simply create a bunch of `NavLink`s that use the previously declared routes.
+Tutaj po prostu tworzymy kilka `NavLink` korzystające z wcześniej zadeklarowanych tras.
 
-- Finally, edit `src/client/app.jsx` like so:
+- Końcowo, edytuj `src/client/app.jsx` w ten sposób:
 
 ```js
 // @flow
@@ -189,33 +189,33 @@ const App = () =>
 export default App
 ```
 
-🏁 Run `yarn start` and `yarn dev:wds`. Open `http://localhost:8000`, and click on the links to navigate between our different pages. You should see the URL changing dynamically. Switch between different pages and use the back button of your browser to see that the browsing history is working as expected.
+🏁 Uruchom `yarn start` i `yarn dev:wds`. Otwórz `http://localhost:8000`, i klikaj łącza, aby nawigować między naszymi różnymi stronami. Powinieneś zobaczyć adres URL zmieniający się dynamicznie. Przełączaj się między różnymi stronami i użyj przycisku Wstecz przeglądarki, aby sprawdzić, czy historia przeglądania działa zgodnie z oczekiwaniami.
 
-Now, let's say you navigated to `http://localhost:8000/hello` this way. Hit the refresh button. You now get a 404, because our Express server only responds to `/`. As you navigated between pages, you were actually only doing it on the client-side. Let's add server-side rendering to the mix to get the expected behavior.
+Powiedzmy, że nawigujesz do `http://localhost:8000/hello` tą drogą. Naciśnij przycisk odświeżania. Otrzymujesz teraz 404, ponieważ nasz serwer Express odpowiada tylko na `/`. Gdy nawigowałeś między stronami, robiłeś to tylko po stronie klienta. Dodajmy renderowanie po stronie serwera do miksu, aby uzyskać oczekiwane zachowanie.
 
 ## Server-Side Rendering
 
-> 💡 **Server-Side Rendering** means rendering your app at the initial load of the page instead of relying on JavaScript to render it in the client's browser.
+> 💡 **Server-Side Rendering** oznacza renderowanie aplikacji przy początkowym załadowaniu strony zamiast polegania na JavaScript do renderowania jej w przeglądarce klienta.
 
-SSR is essential for SEO and provides a better user experience by showing the app to your users right away.
+SSR jest niezbędny dla SEO (search engine optimization, przyp. tłum.) i zapewnia lepsze wrażenia użytkownika, wyświetlając aplikację użytkownikom.
 
-The first thing we're going to do here is to migrate most of our client code to the shared / isomorphic / universal part of our codebase, since the server is now going to render our React app too.
+Pierwszą rzeczą, którą tutaj zrobimy, jest migracja większości naszego kodu klienta do wspólnej / izomorficznej / uniwersalnej części naszej bazy kodów, ponieważ serwer będzie teraz renderował również naszą aplikację React.
 
-### The big migration to `shared`
+### Duża migracja do `shared`
 
-- Move all the files located under `client` to `shared`, except `src/client/index.jsx`.
+- Przenieś wszystkie pliki znajdujące się pod `client` do `shared`, z wyjątkiem `src/client/index.jsx`.
 
-We have to adjust a whole bunch of imports:
+Musimy dostosować całą masę importu:
 
-- In `src/client/index.jsx`, replace the 3 occurrences of `'./app'` by `'../shared/app'`, and `'./reducer/hello'` by `'../shared/reducer/hello'`
+- W `src/client/index.jsx`, zamień 3 wystąpienia `'./app'` przez `'../shared/app'`, i `'./reducer/hello'` przez `'../shared/reducer/hello'`
 
-- In `src/shared/app.jsx`, replace `'../shared/routes'` by `'./routes'` and `'../shared/config'` by `'./config'`
+- W `src/shared/app.jsx`, zamień `'../shared/routes'` przez `'./routes'` i `'../shared/config'` przez `'./config'`
 
-- In `src/shared/component/nav.jsx`, replace `'../../shared/routes'` by `'../routes'`
+- W `src/shared/component/nav.jsx`, zamień `'../../shared/routes'` przez `'../routes'`
 
-### Server changes
+### Zmiany serwera
 
-- Create a `src/server/routing.js` file containing:
+- Stwórz plik `src/server/routing.js` zawierający:
 
 ```js
 // @flow
@@ -270,11 +270,11 @@ export default (app: Object) => {
 }
 ```
 
-This file is where we deal with requests and responses. The calls to business logic are externalized to a different `controller` module.
+W tym pliku mamy do czynienia z żądaniami i odpowiedziami. Połączenia z logiką biznesową są uzewnętrzniane na inny moduł `controller`.
 
-**Note**: You will find a lot of React Router examples using `*` as the route on the server, leaving the entire routing handling to React Router. Since all requests go through the same function, that makes it inconvenient to implement MVC-style pages. Instead of doing that, we're here explicitly declaring the routes and their dedicated responses, to be able to fetch data from the database and pass it to a given page easily.
+**Uwaga**: Znajdziesz wiele przykładów React Routera, używając `*` jako trasy na serwerze, pozostawiając całą obsługę routingu React Routerowi. Ponieważ wszystkie żądania przechodzą przez tę samą funkcję, utrudnia to implementację stron w stylu MVC. Zamiast tego, tutaj wyraźnie deklarujemy trasy i ich dedykowane odpowiedzi, aby móc łatwo pobrać dane z bazy danych i przekazać je na daną stronę.
 
-- Create a `src/server/controller.js` file containing:
+- Stwórz plik `src/server/controller.js` zawierający:
 
 ```js
 // @flow
@@ -294,9 +294,9 @@ export const helloEndpoint = (num: number) => ({
 })
 ```
 
-Here is our controller. It would typically make business logic and database calls, but in our case we just hard-code some results. Those results are passed back to the `routing` module to be used to initialize our server-side Redux store.
+Oto nasz kontroler. Zwykle wykonuje logikę biznesową i połączenia z bazą danych, ale w naszym przypadku po prostu zapisujemy niektóre wyniki. Wyniki te są przekazywane z powrotem do modułu `routing`, który służy do inicjalizacji naszego sklepu Redux po stronie serwera.
 
-- Create a `src/server/init-store.js` file containing:
+- Stwórz plik `src/server/init-store.js` zawierający:
 
 ```js
 // @flow
@@ -323,9 +323,9 @@ const initStore = (plainPartialState: ?Object) => {
 export default initStore
 ```
 
-The only thing we do here, besides calling `createStore` and applying middleware, is to merge the plain JS object we received from the `controller` into a default Redux state containing Immutable objects.
+Jedyne, co tu robimy, oprócz wywoływania `createStore` i zastosowania oprogramowania pośredniego polega na scaleniu prostego obiektu JS, który otrzymaliśmy z kontrolera, do domyślnego stanu Redux zawierającego niezmienne obiekty.
 
-- Edit `src/server/index.js` like so:
+- Edytuj `src/server/index.js` tak jak poniżej:
 
 ```js
 // @flow
@@ -352,9 +352,9 @@ app.listen(WEB_PORT, () => {
 })
 ```
 
-Nothing special here, we just call `routing(app)` instead of implementing routing in this file.
+Nic specjalnego tutaj, po prostu wywołujemy `routing(app)` zamiast implementować routing w tym pliku.
 
-- Rename `src/server/render-app.js` to `src/server/render-app.jsx` and edit it like so:
+- Zmień nazwę `src/server/render-app.js` na `src/server/render-app.jsx` i zedytuj tak:
 
 ```js
 // @flow
@@ -399,11 +399,11 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
 export default renderApp
 ```
 
-`ReactDOMServer.renderToString` is where the magic happens. React will evaluate our entire `shared` `App`, and return a plain string of HTML elements. `Provider` works the same as on the client, but on the server, we wrap our app inside `StaticRouter` instead of `BrowserRouter`. In order to pass the Redux store from the server to the client, we pass it to `window.__PRELOADED_STATE__` which is just some arbitrary variable name.
+`ReactDOMServer.renderToString` jest tam, gdzie dzieje się magia. Reakcja oceni naszą całość `shared`` App` i zwróci zwykły ciąg elementów HTML. `Provider` działa tak samo jak na kliencie, ale na serwerze opakowujemy naszą aplikację w `StaticRouter` zamiast `BrowserRouter`. Aby przekazać sklep Redux z serwera do klienta, przekazujemy go do `window .__ PRELOADED_STATE__`, który jest tylko nazwą dowolnej zmiennej.
 
-**Note**: Immutable objects implement the `toJSON()` method which means you can use `JSON.stringify` to turn them into plain JSON strings.
+**Uwaga**: Niezmienne obiekty implementują metodę `toJSON ()`, co oznacza, że możesz użyć `JSON.stringify`, aby przekształcić je w zwykłe ciągi JSON.
 
-- Edit `src/client/index.jsx` to use that preloaded state:
+- Edytuj `src/client/index.jsx` aby użyć tego stanu wstępnie załadowanego:
 
 ```js
 import Immutable from 'immutable'
@@ -420,19 +420,19 @@ const store = createStore(combineReducers(
   composeEnhancers(applyMiddleware(thunkMiddleware)))
 ```
 
-Here with feed our client-side store with the `preloadedState` that was received from the server.
+Tutaj z kanałem do naszego sklepu po stronie klienta z 'preloadedState', który został otrzymany z serwera.
 
-🏁 You can now run `yarn start` and `yarn dev:wds` and navigate between pages. Refreshing the page on `/hello`, `/hello-async`, and `/404` (or any other URI), should now work correctly. Notice how the `message` and `messageAsync` vary depending on if you navigated to that page from the client or if it comes from server-side rendering.
+🏁 Możesz teraz uruchomić `yarn start` oraz `yarn dev:wds` i nawigować pomiędzy stronami. Odświeżenie strony `/hello`, `/hello-async`, i `/404` (lub każdego innego URI), nie powinno działać prawidłowo. Zauważ jak `message` i `messageAsync` różnią się w zależności od tego, czy użytkownik przeszedł do tej strony z klienta, czy pochodzi z renderowania po stronie serwera.
 
 ### React Helmet
 
-> 💡 **[React Helmet](https://github.com/nfl/react-helmet)**: A library to inject content to the `head` of a React app, on both the client and the server.
+> 💡 **[React Helmet](https://github.com/nfl/react-helmet)**: Biblioteka do wstrzykiwania treści do `head` aplikacji React, zarówno na kliencie, jak i na serwerze.
 
-I purposely made you write `FIX ME` in the title to highlight the fact that even though we are doing server-side rendering, we currently do not fill the `title` tag properly (or any of the tags in `head` that vary depending on the page you're on).
+Celowo kazałem ci pisać `FIX ME` w tytule, aby podkreślić fakt, że chociaż wykonujemy rendering po stronie serwera, obecnie nie wypełniamy go tagiem `title`  oprawnie (lub dowolny z tagów w `head`, które różnią się w zależności od strony, na której jesteś).
 
-- Run `yarn add react-helmet`
+- Uruchom `yarn add react-helmet`
 
-- Edit `src/server/render-app.jsx` like so:
+- Edytuj `src/server/render-app.jsx` w ten sposób:
 
 ```js
 import Helmet from 'react-helmet'
@@ -456,9 +456,9 @@ const renderApp = (/* [...] */) => {
 }
 ```
 
-React Helmet uses [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind` to pull out some data from the rendering of our app, which will soon contain some `<Helmet />` components. Those `<Helmet />` components are where we set the `title` and other `head` details for each page. Note that `Helmet.rewind()` *must* come after `ReactDOMServer.renderToString()`.
+React Helmet używa [react-side-effect](https://github.com/gaearon/react-side-effect)'s `rewind` aby usunąć niektóre dane z renderowania naszej aplikacji, które wkrótce będą zawierać niektóre komponenty `<Helmet />`. Te komponenty `<Helmet />`  są tam, gdzie ustawiamy `title` i inne szczegóły `head` dla każdej strony. Zauważ jak `Helmet.rewind()` *musi* pojawić się po `ReactDOMServer.renderToString()`.
 
-- Edit `src/shared/app.jsx` like so:
+- Edytuj `src/shared/app.jsx` tak:
 
 ```js
 import Helmet from 'react-helmet'
@@ -470,7 +470,7 @@ const App = () =>
     // [...]
 ```
 
-- Edit `src/shared/component/page/home.jsx` like so:
+- Edytuj `src/shared/component/page/home.jsx` tak:
 
 ```js
 // @flow
@@ -495,7 +495,7 @@ export default HomePage
 
 ```
 
-- Edit `src/shared/component/page/hello.jsx` like so:
+- Edytuj `src/shared/component/page/hello.jsx` tak:
 
 ```js
 // @flow
@@ -525,7 +525,7 @@ const HelloPage = () =>
 export default HelloPage
 ```
 
-- Edit `src/shared/component/page/hello-async.jsx` like so:
+- Edytuj `src/shared/component/page/hello-async.jsx` tak:
 
 ```js
 // @flow
@@ -556,7 +556,7 @@ export default HelloAsyncPage
 
 ```
 
-- Edit `src/shared/component/page/not-found.jsx` like so:
+- Edytuj `src/shared/component/page/not-found.jsx` tak:
 
 ```js
 // @flow
@@ -581,10 +581,10 @@ const NotFoundPage = () =>
 export default NotFoundPage
 ```
 
-The `<Helmet>` component doesn't actually render anything, it just injects content in the `head` of your document and exposes the same data to the server.
+Komponent `<Helmet>` tak naprawdę nic nie renderuje, po prostu wstrzykuje zawartość do `head` twojego dokumentu i udostępnia te same dane serwerowi.
 
-🏁 Run `yarn start` and `yarn dev:wds` and navigate between pages. The title on your tab should change when you navigate, and it should also stay the same when you refresh the page. Show the source of the page to see how React Helmet sets the `title` and `meta` tags even for server-side rendering.
+🏁 Uruchom `yarn start` oraz `yarn dev:wds` i przełączaj się pomiędzy stronami. Tytuł na karcie powinien się zmieniać podczas nawigacji, a także powinien pozostać niezmieniony podczas odświeżania strony. Pokaż źródło strony, aby zobaczyć, jak React Helmet ustawia tagi `title` i `meta` nawet do renderowania po stronie serwera.
 
-Next section: [07 - Socket.IO](07-socket-io.md#readme)
+Następna sekcja: [07 - Socket.IO](07-socket-io.md#readme)
 
-Back to the [previous section](05-redux-immutable-fetch.md#readme) or the [table of contents](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
+Powrót do [poprzedniej sekcji](05-redux-immutable-fetch.md#readme) lub do [spisu treści](https://github.com/verekia/js-stack-from-scratch#table-of-contents).
