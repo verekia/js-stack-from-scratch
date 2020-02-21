@@ -68,16 +68,17 @@ Jeśli chcesz dodać swoje tłumaczenie, przeczytaj [rekomendacje dotyczące tł
 - [chiński (uproszczony)](https://github.com/yepbug/js-stack-from-scratch/) od [@yepbug](https://github.com/yepbug)
 - [francuski](https://github.com/naomihauret/js-stack-from-scratch/) od [Naomi Hauret](https://twitter.com/naomihauret)
 - [włoski](https://github.com/fbertone/guida-javascript-moderno) od [Fabrizio Bertone](https://github.com/fbertone) - [fbertone.it](http://fbertone.it)
+- [polski](https://github.com/mbiesiad/js-stack-from-scratch) od [mbiesiad](https://github.com/mbiesiad)
 
 Sprawdź [bieżące tłumaczenia](https://github.com/verekia/js-stack-from-scratch/issues/147).
 
 ### V1
 
-- [chiński (uproszczony)](https://github.com/pd4d10/js-stack-from-scratch) od [@pd4d10](http://github.com/pd4d10)
-- [włoski](https://github.com/fbertone/js-stack-from-scratch) od [Fabrizio Bertone](https://github.com/fbertone)
-- [japoński](https://github.com/takahashim/js-stack-from-scratch) od [@takahashim](https://github.com/takahashim)
-- [rosyjski](https://github.com/UsulPro/js-stack-from-scratch) od [React Theming](https://github.com/sm-react/react-theming)
-- [tajski](https://github.com/MicroBenz/js-stack-from-scratch) od [MicroBenz](https://github.com/MicroBenz)
+- [中文](https://github.com/pd4d10/js-stack-from-scratch) od [@pd4d10](http://github.com/pd4d10)
+- [Italiano](https://github.com/fbertone/js-stack-from-scratch) od [Fabrizio Bertone](https://github.com/fbertone)
+- [日本語](https://github.com/takahashim/js-stack-from-scratch) od [@takahashim](https://github.com/takahashim)
+- [Русский](https://github.com/UsulPro/js-stack-from-scratch) od [React Theming](https://github.com/sm-react/react-theming)
+- [ไทย](https://github.com/MicroBenz/js-stack-from-scratch) od [MicroBenz](https://github.com/MicroBenz)
 
 ## Zasługi
 
