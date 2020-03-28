@@ -147,7 +147,7 @@ Teraz powinieneś już być gotowy do korzystania z wdrożeń Heroku Pipeline.
 
 🏁 Utwórz nową gałąź gita, wprowadź zmiany i otwórz GitHub Pull Request, aby utworzyć instancję Review App. Sprawdź zmiany w adresie URL Review App, i jeśli wszystko wygląda dobrze, scal Pull Request z `master` na GitHub. Kilka minut później aplikacja do testowania powinna zostać automatycznie wdrożona. Sprawdź zmiany w adresie URL aplikacji, a jeśli wszystko nadal wygląda dobrze, dodaj na produkcję.
 
-Gotowe! Gratulacje, jeśli ukończyłeś cały samouczek od scratch.
+Gotowe! Gratulacje, jeśli ukończyłeś cały samouczek od podstaw.
 
 Zasługujesz na ten medal emoji: 🏅
 
