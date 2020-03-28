@@ -1,4 +1,4 @@
-# JavaScript Stack od Scratch
+# JavaScript Stack from Scratch
 
 [![Build Status](https://travis-ci.org/verekia/js-stack-from-scratch.svg?branch=master)](https://travis-ci.org/verekia/js-stack-from-scratch)
 [![Release](https://img.shields.io/github/release/verekia/js-stack-from-scratch.svg?style=flat-square)](https://github.com/verekia/js-stack-from-scratch/releases)
@@ -16,7 +16,7 @@
 [![Webpack](/img/webpack-padded-90.png)](https://webpack.github.io/)
 [![Bootstrap](/img/bootstrap-padded-90.png)](http://getbootstrap.com/)
 
-Witaj w moim nowoczesnym samouczku stosu JavaScript: **JavaScript Stack od Scratch**.
+Witaj w moim nowoczesnym samouczku stosu JavaScript: **JavaScript Stack from Scratch**.
 
 > 🎉 **To jest wersja V2 tego samouczka, główne zmiany nastąpiły od wydania 2016. Sprawdź [Change Log](/CHANGELOG.md)!**
 
