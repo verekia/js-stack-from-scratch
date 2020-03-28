@@ -79,6 +79,7 @@ Sprawdź [bieżące tłumaczenia](https://github.com/verekia/js-stack-from-scrat
 - [日本語](https://github.com/takahashim/js-stack-from-scratch) od [@takahashim](https://github.com/takahashim)
 - [Русский](https://github.com/UsulPro/js-stack-from-scratch) od [React Theming](https://github.com/sm-react/react-theming)
 - [ไทย](https://github.com/MicroBenz/js-stack-from-scratch) od [MicroBenz](https://github.com/MicroBenz)
+- [English](https://github.com/verekia/js-stack-from-scratch) od [Verekia](https://github.com/verekia)
 
 ## Zasługi
 
