@@ -16,7 +16,7 @@
 [![Webpack](/img/webpack-padded-90.png)](https://webpack.github.io/)
 [![Bootstrap](/img/bootstrap-padded-90.png)](http://getbootstrap.com/)
 
-Witaj w moim nowoczesnym samouczku stosu JavaScript: **JavaScript Stack from Scratch**.
+Witaj w moim samouczku nowoczesnego stosu JavaScript: **JavaScript Stack from Scratch**.
 
 > 🎉 **To jest wersja V2 tego samouczka, główne zmiany nastąpiły od wydania 2016. Sprawdź [Change Log](/CHANGELOG.md)!**
 
