@@ -74,7 +74,7 @@ This file exposes an *action*, `SAY_HELLO`, and its *action creator*, `sayHello`
 // @flow
 
 import Immutable from 'immutable'
-import type { fromJS as Immut } from 'immutable'
+import { fromJS as Immut } from 'immutable'
 
 import { SAY_HELLO } from '../action/hello'
 
