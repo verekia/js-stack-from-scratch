@@ -147,6 +147,110 @@ You should now be all set to use Heroku Pipeline deployments.
 
 🏁 Create a new git branch, make changes and open a Github Pull Request to instantiate a Review App. Check your changes on the Review App URL, and if everything looks good, merge your Pull Request with `master` on Github. A few minutes later, your staging app should have been automatically deployed. Check your changes on the staging app URL, and if everything still looks good, promote staging to production.
 
+## AWS Elastic Beanstalk
+
+> 💡 **[AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/)** is a [PaaS](https://en.wikipedia.org/wiki/Platform_as_a_service) to deploy to. It is similar to [Heroku](https://www.heroku.com/) in that it takes care of infrastructure details, so you can focus on developing your app without worrying about what happens behind the scenes.
+
+This tutorial is not sponsored in any way by Amazon, but AWS being one of the largest and most used platforms out there, I am going to show you how to deploy your app to it.
+
+### Web setup
+
+- If that's not done yet, install the [Elastic Beanstalk CLI](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html) and log in.
+
+
+
+PM2 can be used on Elastic Beanstalk see the PM2 docs here http://pm2.keymetrics.io/docs/tutorials/use-pm2-with-aws-elastic-beanstalk/
+
+- Add `yarn prod:build` to `yarn prod:start`
+
+```
+"prod:start": "yarn prod:build && cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
+```
+
+- Yarn is not supported by Elastic Beanstalk yet so we need to add it.  Add this to `.ebextensions/yarn.config`.  We are going to let Elastic Beanstalk take care of transpiling our ES6/Flow code with Babel, and generate client bundles with Webpack. But since these are `devDependencies`, Yarn won't install them in a production environment like Elastic Beanstalk. We remove the `--production` flag so dev dependancies are include like webpack and bable so they can be built on the server.
+
+```
+files:
+# Runs right before `npm install` in '.../50npm.sh'
+"/opt/elasticbeanstalk/hooks/appdeploy/pre/49yarn.sh" :
+    mode: "000775"
+    owner: root
+    group: users
+    content: |
+        #!/bin/bash
+
+        app="$(/opt/elasticbeanstalk/bin/get-config container -k app_staging_dir)";
+
+        # install yarn
+        wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo;
+        curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -;
+        yum -y install yarn;
+
+        # npm install
+        cd "${app}";
+        yarn;
+```
+
+- We also need to tell Elastic Beanstalk not to use `npm start` to run the app but `yarn prod:start`.  Add a file to `.ebextensions/node-settings`
+
+```
+option_settings:
+  aws:elasticbeanstalk:container:nodejs:
+    NodeCommand: "yarn prod:start"
+    GzipCompression: true
+  aws:elasticbeanstalk:container:nodejs:staticfiles:
+    /public: public
+    /dist: dist
+```
+
+- Add `.elasticbeanstalk` directory to your `.gitignore` if it is not already added by `eb init`
+
+- Initialize your project to run in Elastic Beanstalk, this will walk you through some basic setup
+
+```
+eb init
+```
+
+- Create an environment running a sample application with the eb create command.
+
+```
+eb create production
+```
+
+- Ensure you have commited everything to git, then deploy your app
+
+```
+git commit -a -m "Production Deploy"
+eb deploy
+```
+
+- When environment creation completes, use the eb open command to open the environment's URL in the default browser.
+
+```
+eb open
+```
+
+Alright, let's prepare our project for a deployment to Heroku.
+
+### Running in production mode locally
+
+- Create a `.env` file containing:
+
+```.env
+NODE_ENV='production'
+PORT='8000'
+```
+
+That's in this file that you should put your local-only variables and secret variables. Don't commit it to a public repository if your project is private.
+
+- Add `/.env` to your `.gitignore`
+
+- Create a `Procfile` file containing:
+
+```Procfile
+web: node lib/server
+```
+
 You are done! Congratulations if you finished this entire tutorial starting from scratch.
 
 You deserve this emoji medal: 🏅
