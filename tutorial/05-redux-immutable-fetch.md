@@ -44,7 +44,7 @@ console.log(immutablePerson)
  */
 ```
 
-- Run `yarn add immutable@4.0.0-rc.2`
+- Run `yarn add immutable@4.0.0-rc.9`
 
 ## Redux
 
