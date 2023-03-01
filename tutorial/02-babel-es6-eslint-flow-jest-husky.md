@@ -243,11 +243,15 @@ I know this is a lot to take in, so take a minute to think about it. I'm still a
 - Create a `.flowconfig` file at the root of your project containing:
 
 ```flowconfig
+[ignore]
+<PROJECT_ROOT>/node_modules/
 [options]
 suppress_comment= \\(.\\|\n\\)*\\flow-disable-next-line
 ```
 
-This is a little utility that we set up to make Flow ignore any warning detected on the next line. You would use it like this, similarly to `eslint-disable`:
+The first two lines tell `flow` not to check the libraries you've downloaded in node_modules. Otherwise, `flow` might fail on code you didn't even write!
+
+The `suppress_comment` option is a little utility that we set up to make Flow ignore any warning detected on the next line. You would use it like this, similarly to `eslint-disable`:
 
 ```js
 // flow-disable-next-line
