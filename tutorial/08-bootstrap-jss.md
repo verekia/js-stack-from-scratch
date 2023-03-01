@@ -373,7 +373,7 @@ export const JSS_SSR_SELECTOR = `.${JSS_SSR_CLASS}`
 - Edit `src/server/render-app.jsx` like so:
 
 ```js
-import { SheetsRegistry, SheetsRegistryProvider } from 'react-jss'
+import { SheetsRegistry, JssProvider } from 'react-jss'
 // [...]
 import { APP_CONTAINER_CLASS, JSS_SSR_CLASS, STATIC_PATH, WDS_PORT } from '../shared/config'
 // [...]
@@ -383,9 +383,9 @@ const renderApp = (location: string, plainPartialState: ?Object, routerContext: 
   const appHtml = ReactDOMServer.renderToString(
     <Provider store={store}>
       <StaticRouter location={location} context={routerContext}>
-        <SheetsRegistryProvider registry={sheets}>
+        <JssProvider registry={sheets}>
           <App />
-        </SheetsRegistryProvider>
+        </JssProvider>
       </StaticRouter>
     </Provider>)
   // [...]
