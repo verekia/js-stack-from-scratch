@@ -111,7 +111,7 @@ It should install everything you need and add `eslint-config-airbnb`, `eslint-pl
 
 We'll create an NPM/Yarn script to run ESLint. Let's install the `eslint` package to be able to use the `eslint` CLI:
 
-- Run `yarn add --dev eslint`
+- Run `yarn add --dev eslint@3`
 
 Update the `scripts` of your `package.json` to include a new `test` task:
 
